@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#",
+    "#"
+  ],
+  "key": {
+    "#": {
+      "item": "clayworks:cyan_terracotta_brick_slab"
+    }
+  },
+  "result": {
+    "item": "clayworks:chiseled_cyan_terracotta_bricks"
+  }
+}

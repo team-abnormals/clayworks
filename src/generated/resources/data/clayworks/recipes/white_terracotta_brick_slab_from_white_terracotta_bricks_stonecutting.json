@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "clayworks:white_terracotta_bricks"
+  },
+  "result": "clayworks:white_terracotta_brick_slab",
+  "count": 2
+}

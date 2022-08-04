@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "clayworks:chiseled_bricks"
+  },
+  "result": "minecraft:bricks",
+  "count": 1
+}

@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "clayworks:red_terracotta_bricks"
+    }
+  },
+  "result": {
+    "item": "clayworks:red_terracotta_brick_slab",
+    "count": 6
+  }
+}

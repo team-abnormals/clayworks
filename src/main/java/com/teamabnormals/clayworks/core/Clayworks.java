@@ -5,10 +5,13 @@ import com.teamabnormals.blueprint.core.util.registry.RegistryHelper;
 import com.teamabnormals.clayworks.core.data.client.ClayworksBlockStateProvider;
 import com.teamabnormals.clayworks.core.data.client.ClayworksLanguageProvider;
 import com.teamabnormals.clayworks.core.data.server.ClayworksLootTableProvider;
+import com.teamabnormals.clayworks.core.data.server.ClayworksRecipeProvider;
 import com.teamabnormals.clayworks.core.data.server.tags.ClayworksBlockTagsProvider;
 import com.teamabnormals.clayworks.core.data.server.tags.ClayworksItemTagsProvider;
 import com.teamabnormals.clayworks.core.registry.ClayworksMenuTypes;
 import com.teamabnormals.clayworks.core.registry.ClayworksParticleTypes;
+import com.teamabnormals.clayworks.core.registry.ClayworksRecipes.ClayworksRecipeSerializers;
+import com.teamabnormals.clayworks.core.registry.ClayworksRecipes.ClayworksRecipeTypes;
 import com.teamabnormals.clayworks.core.registry.ClayworksVillagerProfessions;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.common.MinecraftForge;
@@ -25,11 +28,17 @@ public class Clayworks {
 	public static final String MOD_ID = "clayworks";
 	public static final RegistryHelper REGISTRY_HELPER = new RegistryHelper(MOD_ID);
 
+	//TODO: Generate additional Loot Tables
+	//TODO: Generate Kiln recipes
+	//TODO: Rebuild houses
 	public Clayworks() {
 		IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
 		MinecraftForge.EVENT_BUS.register(this);
 
 		REGISTRY_HELPER.register(bus);
+		ClayworksMenuTypes.MENU_TYPES.register(bus);
+		ClayworksRecipeSerializers.RECIPE_SERIALIZERS.register(bus);
+		ClayworksRecipeTypes.RECIPE_TYPES.register(bus);
 		ClayworksParticleTypes.PARTICLE_TYPES.register(bus);
 		ClayworksVillagerProfessions.POI_TYPES.register(bus);
 		ClayworksVillagerProfessions.PROFESSIONS.register(bus);
@@ -61,6 +70,7 @@ public class Clayworks {
 			generator.addProvider(blockTags);
 			generator.addProvider(new ClayworksItemTagsProvider(generator, blockTags, fileHelper));
 			generator.addProvider(new ClayworksLootTableProvider(generator));
+			generator.addProvider(new ClayworksRecipeProvider(generator));
 		}
 
 		if (event.includeClient()) {

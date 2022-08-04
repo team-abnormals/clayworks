@@ -27,7 +27,6 @@ minecraft {
             property "forge.logging.console.level", "debug"
             property "mixin.env.remapRefMap", "true"
             property "mixin.env.refMapRemappingFile", "${projectDir}/build/createSrgToMcp/output.srg"
-            arg "-mixin.config=" + project.modId + ".mixins.json"
             mods {
                 clayworks {
                     source sourceSets.main
@@ -40,7 +39,6 @@ minecraft {
             property "forge.logging.console.level", "debug"
             property "mixin.env.remapRefMap", "true"
             property "mixin.env.refMapRemappingFile", "${projectDir}/build/createSrgToMcp/output.srg"
-            arg "-mixin.config=" + project.modId + ".mixins.json"
             mods {
                 clayworks {
                     source sourceSets.main

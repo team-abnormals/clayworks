@@ -9,11 +9,13 @@ import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.RecipeBookType;
 
 public class KilnMenu extends AbstractFurnaceMenu {
+
+	//TODO: Kiln RecipeBookType
 	public KilnMenu(int windowId, Inventory playerInventory) {
-		super(ClayworksMenuTypes.KILN.get(), ClayworksRecipeTypes.BAKING.get(), RecipeBookType.FURNACE, windowId, playerInventory);
+		super(ClayworksMenuTypes.KILN.get(), ClayworksRecipeTypes.BAKING.get(), RecipeBookType.SMOKER, windowId, playerInventory);
 	}
 
 	public KilnMenu(int windowId, Inventory playerInventory, Container kilnInventory, ContainerData furnaceData) {
-		super(ClayworksMenuTypes.KILN.get(), ClayworksRecipeTypes.BAKING.get(), RecipeBookType.FURNACE, windowId, playerInventory, kilnInventory, furnaceData);
+		super(ClayworksMenuTypes.KILN.get(), ClayworksRecipeTypes.BAKING.get(), RecipeBookType.SMOKER, windowId, playerInventory, kilnInventory, furnaceData);
 	}
 }

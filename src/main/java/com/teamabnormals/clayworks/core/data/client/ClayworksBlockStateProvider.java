@@ -13,6 +13,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.StairBlock;
 import net.minecraft.world.level.block.WallBlock;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelFile;
@@ -30,10 +31,9 @@ public class ClayworksBlockStateProvider extends BlockStateProvider {
 
 	@Override
 	protected void registerStatesAndModels() {
+		this.furnace(KILN.get());
 		this.block(CHISELED_BRICKS.get());
-
 		this.blockFamily(ClayworksBlockFamilies.TERRACOTTA_BRICKS, TERRACOTTA_BRICK_VERTICAL_SLAB.get());
-
 		this.blockFamily(ClayworksBlockFamilies.WHITE_TERRACOTTA_BRICKS, WHITE_TERRACOTTA_BRICK_VERTICAL_SLAB.get());
 		this.blockFamily(ClayworksBlockFamilies.ORANGE_TERRACOTTA_BRICKS, ORANGE_TERRACOTTA_BRICK_VERTICAL_SLAB.get());
 		this.blockFamily(ClayworksBlockFamilies.MAGENTA_TERRACOTTA_BRICKS, MAGENTA_TERRACOTTA_BRICK_VERTICAL_SLAB.get());
@@ -58,6 +58,13 @@ public class ClayworksBlockStateProvider extends BlockStateProvider {
 
 	public void block(Block block) {
 		simpleBlock(block, cubeAll(block));
+		blockItem(block);
+	}
+
+	public void furnace(Block block) {
+		ModelFile furnace = models().orientableWithBottom(name(block), suffix(blockTexture(block), "_side"), suffix(blockTexture(block), "_front"), suffix(blockTexture(block), "_bottom"), suffix(blockTexture(block), "_top")).texture("particle", suffix(blockTexture(block), "_side"));
+		ModelFile furnaceOn = models().orientableWithBottom(name(block) + "_on", suffix(blockTexture(block), "_side"), suffix(blockTexture(block), "_front_on"), suffix(blockTexture(block), "_bottom"), suffix(blockTexture(block), "_top")).texture("particle", suffix(blockTexture(block), "_side"));
+		this.horizontalBlock(block, (state -> state.getValue(BlockStateProperties.LIT) ? furnaceOn : furnace));
 		blockItem(block);
 	}
 

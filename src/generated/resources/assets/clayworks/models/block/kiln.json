@@ -1,0 +1,10 @@
+{
+  "parent": "minecraft:block/orientable_with_bottom",
+  "textures": {
+    "side": "clayworks:block/kiln_side",
+    "front": "clayworks:block/kiln_front",
+    "bottom": "clayworks:block/kiln_bottom",
+    "top": "clayworks:block/kiln_top",
+    "particle": "clayworks:block/kiln_side"
+  }
+}

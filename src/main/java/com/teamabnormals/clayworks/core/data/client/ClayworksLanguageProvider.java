@@ -1,9 +1,12 @@
 package com.teamabnormals.clayworks.core.data.client;
 
+import com.teamabnormals.clayworks.common.block.entity.KilnBlockEntity;
 import com.teamabnormals.clayworks.core.Clayworks;
 import com.teamabnormals.clayworks.core.registry.ClayworksBlocks;
+import com.teamabnormals.clayworks.integration.jei.BakingRecipeCategory;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.data.LanguageProvider;
 import org.apache.commons.lang3.text.WordUtils;
@@ -18,6 +21,9 @@ public class ClayworksLanguageProvider extends LanguageProvider {
 
 	@Override
 	public void addTranslations() {
+		this.add(KilnBlockEntity.TRANSLATION.getKey(), "Kiln");
+		this.add(BakingRecipeCategory.TRANSLATION.getKey(), "Baking");
+		this.add(EntityType.VILLAGER.getDescriptionId() + "." + Clayworks.MOD_ID + ".ceramist", "Ceramist");
 		ClayworksBlocks.HELPER.getDeferredRegister().getEntries().forEach((registryObject -> {
 			this.add(registryObject.get());
 		}));

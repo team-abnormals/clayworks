@@ -1,0 +1,28 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "flag": "vertical_slabs",
+          "type": "blueprint:quark_flag"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          "###"
+        ],
+        "key": {
+          "#": {
+            "item": "clayworks:orange_terracotta_bricks"
+          }
+        },
+        "result": {
+          "item": "clayworks:orange_terracotta_brick_vertical_slab",
+          "count": 6
+        }
+      }
+    }
+  ]
+}

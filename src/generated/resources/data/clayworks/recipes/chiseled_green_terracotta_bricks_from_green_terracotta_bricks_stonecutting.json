@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "clayworks:green_terracotta_bricks"
+  },
+  "result": "clayworks:chiseled_green_terracotta_bricks",
+  "count": 1
+}

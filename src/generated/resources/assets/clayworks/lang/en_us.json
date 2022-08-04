@@ -102,5 +102,8 @@
   "block.clayworks.yellow_terracotta_brick_stairs": "Yellow Terracotta Brick Stairs",
   "block.clayworks.yellow_terracotta_brick_vertical_slab": "Yellow Terracotta Brick Vertical Slab",
   "block.clayworks.yellow_terracotta_brick_wall": "Yellow Terracotta Brick Wall",
-  "block.clayworks.yellow_terracotta_bricks": "Yellow Terracotta Bricks"
+  "block.clayworks.yellow_terracotta_bricks": "Yellow Terracotta Bricks",
+  "container.clayworks.kiln": "Kiln",
+  "entity.minecraft.villager.clayworks.ceramist": "Ceramist",
+  "gui.clayworks.category.baking": "Baking"
 }
