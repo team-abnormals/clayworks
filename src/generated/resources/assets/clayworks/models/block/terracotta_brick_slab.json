@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab",
+  "textures": {
+    "side": "clayworks:block/terracotta_bricks",
+    "bottom": "clayworks:block/terracotta_bricks",
+    "top": "clayworks:block/terracotta_bricks"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/wall_inventory",
+  "textures": {
+    "wall": "clayworks:block/light_gray_terracotta_bricks"
+  }
+}

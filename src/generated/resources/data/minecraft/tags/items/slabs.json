@@ -1,0 +1,22 @@
+{
+  "replace": false,
+  "values": [
+    "clayworks:terracotta_brick_slab",
+    "clayworks:white_terracotta_brick_slab",
+    "clayworks:orange_terracotta_brick_slab",
+    "clayworks:magenta_terracotta_brick_slab",
+    "clayworks:light_blue_terracotta_brick_slab",
+    "clayworks:yellow_terracotta_brick_slab",
+    "clayworks:lime_terracotta_brick_slab",
+    "clayworks:pink_terracotta_brick_slab",
+    "clayworks:gray_terracotta_brick_slab",
+    "clayworks:light_gray_terracotta_brick_slab",
+    "clayworks:cyan_terracotta_brick_slab",
+    "clayworks:purple_terracotta_brick_slab",
+    "clayworks:blue_terracotta_brick_slab",
+    "clayworks:brown_terracotta_brick_slab",
+    "clayworks:green_terracotta_brick_slab",
+    "clayworks:red_terracotta_brick_slab",
+    "clayworks:black_terracotta_brick_slab"
+  ]
+}

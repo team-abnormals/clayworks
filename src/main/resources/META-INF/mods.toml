@@ -1,0 +1,39 @@
+modLoader = "javafml"
+loaderVersion = "[32,)"
+issueTrackerURL = "https://github.com/team-abnormals/clayworks/issues"
+license = "https://github.com/team-abnormals/clayworks/blob/main/LICENSE.txt"
+
+[[mods]]
+    modId = "clayworks"
+    version = "${file.jarVersion}"
+    logoFile = "logo.png"
+    itemIcon = "clayworks:kiln"
+    configBackground = "clayworks:textures/block/terracotta_bricks.png"
+    authors = "Team Abnormals"
+    credits = "bageldotjpg"
+    displayURL = "https://www.teamabnormals.com/mods/clayworks"
+    displayName = "Clayworks"
+    description = '''
+    Template description.
+    '''
+
+[[dependencies.clayworks]]
+    modId = "minecraft"
+    mandatory = true
+    versionRange = "[1.18.2,1.19)"
+    ordering = "NONE"
+    side = "BOTH"
+
+[[dependencies.clayworks]]
+    modId = "forge"
+    mandatory = true
+    versionRange = "[40.1.0,)"
+    ordering = "NONE"
+    side = "BOTH"
+
+[[dependencies.clayworks]]
+    modId = "blueprint"
+    mandatory = true
+    versionRange = "[5.4.1,)"
+    ordering = "AFTER"
+    side = "BOTH"

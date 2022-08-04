@@ -1,0 +1,22 @@
+{
+  "replace": false,
+  "values": [
+    "clayworks:terracotta_brick_stairs",
+    "clayworks:white_terracotta_brick_stairs",
+    "clayworks:orange_terracotta_brick_stairs",
+    "clayworks:magenta_terracotta_brick_stairs",
+    "clayworks:yellow_terracotta_brick_stairs",
+    "clayworks:light_blue_terracotta_brick_stairs",
+    "clayworks:lime_terracotta_brick_stairs",
+    "clayworks:pink_terracotta_brick_stairs",
+    "clayworks:gray_terracotta_brick_stairs",
+    "clayworks:light_gray_terracotta_brick_stairs",
+    "clayworks:cyan_terracotta_brick_stairs",
+    "clayworks:purple_terracotta_brick_stairs",
+    "clayworks:blue_terracotta_brick_stairs",
+    "clayworks:brown_terracotta_brick_stairs",
+    "clayworks:green_terracotta_brick_stairs",
+    "clayworks:red_terracotta_brick_stairs",
+    "clayworks:black_terracotta_brick_stairs"
+  ]
+}
