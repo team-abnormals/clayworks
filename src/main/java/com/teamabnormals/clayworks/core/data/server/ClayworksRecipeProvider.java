@@ -59,7 +59,7 @@ public class ClayworksRecipeProvider extends RecipeProvider {
 	private static void terracottaBricksRecipes(Consumer<FinishedRecipe> consumer, Block terracotta, BlockFamily family, Block verticalSlab, @Nullable Item dye) {
 		ShapedRecipeBuilder.shaped(family.getBaseBlock(), 4).define('#', terracotta).pattern("##").pattern("##").unlockedBy(getHasName(terracotta), has(terracotta)).save(consumer);
 		generateRecipes(consumer, family);
-		conditionalRecipe(consumer, VERTICAL_SLABS, slabBuilder(verticalSlab, Ingredient.of(family.getBaseBlock())).unlockedBy(getHasName(family.getBaseBlock()), has(family.getBaseBlock())));
+		conditionalRecipe(consumer, VERTICAL_SLABS, verticalSlabBuilder(verticalSlab, Ingredient.of(family.getBaseBlock())).unlockedBy(getHasName(family.getBaseBlock()), has(family.getBaseBlock())));
 		stonecutterResultFromBase(consumer, family.get(Variant.SLAB), family.getBaseBlock(), 2);
 		stonecutterResultFromBase(consumer, family.get(Variant.STAIRS), family.getBaseBlock());
 		stonecutterResultFromBase(consumer, family.get(Variant.WALL), family.getBaseBlock());
@@ -74,6 +74,10 @@ public class ClayworksRecipeProvider extends RecipeProvider {
 		if (dye != null) {
 			ShapedRecipeBuilder.shaped(family.getBaseBlock(), 8).define('#', TERRACOTTA_BRICKS.get()).define('X', dye).pattern("###").pattern("#X#").pattern("###").group("stained_terracotta_bricks").unlockedBy(getHasName(Blocks.TERRACOTTA), has(Blocks.TERRACOTTA)).save(consumer, new ResourceLocation(Clayworks.MOD_ID, getConversionRecipeName(family.getBaseBlock(), dye)));
 		}
+	}
+
+	protected static RecipeBuilder verticalSlabBuilder(ItemLike item, Ingredient ingredient) {
+		return ShapedRecipeBuilder.shaped(item, 6).define('#', ingredient).pattern("#").pattern("#").pattern("#");
 	}
 
 	public static void stonecutterResultFromBase(Consumer<FinishedRecipe> consumer, ItemLike output, ItemLike input) {
