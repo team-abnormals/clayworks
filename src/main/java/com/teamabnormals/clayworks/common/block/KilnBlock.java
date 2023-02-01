@@ -3,9 +3,9 @@ package com.teamabnormals.clayworks.common.block;
 import com.teamabnormals.clayworks.common.block.entity.KilnBlockEntity;
 import com.teamabnormals.clayworks.core.registry.ClayworksBlockEntityTypes;
 import com.teamabnormals.clayworks.core.registry.ClayworksParticleTypes;
+import com.teamabnormals.clayworks.core.registry.ClayworksSoundEvents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.SimpleParticleType;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.MenuProvider;
@@ -53,7 +53,7 @@ public class KilnBlock extends AbstractFurnaceBlock {
 			double d1 = pos.getY();
 			double d2 = pos.getZ() + 0.5D;
 			if (rand.nextDouble() < 0.1D) {
-				worldIn.playLocalSound(d0, d1, d2, SoundEvents.SMOKER_SMOKE, SoundSource.BLOCKS, 1.0F, 1.0F, false);
+				worldIn.playLocalSound(d0, d1, d2, ClayworksSoundEvents.KILN_SMOKE.get(), SoundSource.BLOCKS, 1.0F, 1.0F, false);
 			}
 			SimpleParticleType particleType = ClayworksParticleTypes.KILN_SMOKE.get();
 			worldIn.addAlwaysVisibleParticle(particleType, true, pos.getX() + 0.5D + rand.nextDouble() / 3.0D * (rand.nextBoolean() ? 1 : -1), pos.getY() + rand.nextDouble() + rand.nextDouble(), pos.getZ() + 0.5D + rand.nextDouble() / 3.0D * (rand.nextBoolean() ? 1 : -1), 0.0D, 0.07D, 0.0D);

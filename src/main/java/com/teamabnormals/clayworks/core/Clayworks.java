@@ -1,7 +1,8 @@
 package com.teamabnormals.clayworks.core;
 
-import com.teamabnormals.blueprint.core.util.DataUtil;
+import com.teamabnormals.blueprint.common.world.modification.structure.StructureRepalleterManager;
 import com.teamabnormals.blueprint.core.util.registry.RegistryHelper;
+import com.teamabnormals.clayworks.common.modification.OppositeFacingStructureRepaletter;
 import com.teamabnormals.clayworks.core.data.client.ClayworksBlockStateProvider;
 import com.teamabnormals.clayworks.core.data.client.ClayworksLanguageProvider;
 import com.teamabnormals.clayworks.core.data.server.ClayworksLootTableProvider;
@@ -13,10 +14,9 @@ import com.teamabnormals.clayworks.core.registry.ClayworksParticleTypes;
 import com.teamabnormals.clayworks.core.registry.ClayworksRecipes.ClayworksRecipeCategories;
 import com.teamabnormals.clayworks.core.registry.ClayworksRecipes.ClayworksRecipeSerializers;
 import com.teamabnormals.clayworks.core.registry.ClayworksRecipes.ClayworksRecipeTypes;
-import com.teamabnormals.clayworks.core.registry.ClayworksVillagerProfessions;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.RecipeBookType;
-import net.minecraftforge.client.RecipeBookRegistry;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -33,8 +33,6 @@ public class Clayworks {
 
 	public static final RecipeBookType RECIPE_TYPE_BAKING = RecipeBookType.create("BAKING");
 
-	//TODO: Generate additional Loot Tables
-	//TODO: Rebuild houses
 	public Clayworks() {
 		IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
 		MinecraftForge.EVENT_BUS.register(this);
@@ -44,8 +42,8 @@ public class Clayworks {
 		ClayworksRecipeSerializers.RECIPE_SERIALIZERS.register(bus);
 		ClayworksRecipeTypes.RECIPE_TYPES.register(bus);
 		ClayworksParticleTypes.PARTICLE_TYPES.register(bus);
-		ClayworksVillagerProfessions.POI_TYPES.register(bus);
-		ClayworksVillagerProfessions.PROFESSIONS.register(bus);
+
+//		StructureRepalleterManager.registerSerializer(new ResourceLocation(MOD_ID, "opposite_facing"), OppositeFacingStructureRepaletter.CODEC);
 
 		bus.addListener(this::commonSetup);
 		bus.addListener(this::clientSetup);
@@ -54,8 +52,8 @@ public class Clayworks {
 
 	private void commonSetup(FMLCommonSetupEvent event) {
 		event.enqueueWork(() -> {
-			ClayworksVillagerProfessions.setupVillagerHouses();
-			DataUtil.registerVillagerGift(ClayworksVillagerProfessions.CERAMIST.get());
+//			ObfuscationReflectionHelper.setPrivateValue(PoiType.class, PoiType.MASON, ImmutableSet.copyOf(PoiType.getBlockStates(ClayworksBlocks.KILN.get())), "f_27325_");
+//			ObfuscationReflectionHelper.setPrivateValue(VillagerProfession.class, VillagerProfession.MASON, ClayworksSoundEvents.VILLAGER_WORK_MASON.get(), "f_35604_");
 		});
 	}
 
@@ -76,6 +74,7 @@ public class Clayworks {
 			generator.addProvider(new ClayworksItemTagsProvider(generator, blockTags, fileHelper));
 			generator.addProvider(new ClayworksLootTableProvider(generator));
 			generator.addProvider(new ClayworksRecipeProvider(generator));
+//			generator.addProvider(new ClayworksStructureRepaletterProvider(generator));
 		}
 
 		if (event.includeClient()) {
