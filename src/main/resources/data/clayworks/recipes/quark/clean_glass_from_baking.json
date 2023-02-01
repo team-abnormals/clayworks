@@ -1,15 +1,15 @@
 {
-  "type": "environmental:baking",
+  "type": "clayworks:baking",
   "ingredient": {
-    "item": "quark:biotite_block"
+    "item": "quark:dirty_glass"
   },
-  "result": "quark:smooth_biotite",
+  "result": "minecraft:glass",
   "experience": 0.1,
   "cookingtime": 100,
   "conditions": [
     {
       "type": "blueprint:quark_flag",
-      "flag": "biotite"
+      "flag": "glass_shard"
     }
   ]
 }

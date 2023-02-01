@@ -1,5 +1,5 @@
 {
-  "type": "environmental:baking",
+  "type": "clayworks:baking",
   "ingredient": {
     "item": "nether_extension:ashen_nether_bricks"
   },

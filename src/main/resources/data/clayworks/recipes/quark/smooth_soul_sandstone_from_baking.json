@@ -1,5 +1,5 @@
 {
-  "type": "environmental:baking",
+  "type": "clayworks:baking",
   "ingredient": {
     "item": "quark:soul_sandstone"
   },

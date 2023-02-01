@@ -1,9 +1,9 @@
 {
-  "type": "environmental:baking",
+  "type": "clayworks:baking",
   "ingredient": {
-    "item": "atmospheric:red_arid_sandstone"
+    "item": "atmospheric:arid_sandstone"
   },
-  "result": "atmospheric:smooth_red_arid_sandstone",
+  "result": "atmospheric:smooth_arid_sandstone",
   "experience": 0.1,
   "cookingtime": 100,
   "conditions": [
