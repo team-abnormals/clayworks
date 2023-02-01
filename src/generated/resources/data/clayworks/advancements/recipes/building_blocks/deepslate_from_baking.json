@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "clayworks:deepslate_from_baking"
+    ]
+  },
+  "criteria": {
+    "has_cobbled_deepslate": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:cobbled_deepslate"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "clayworks:deepslate_from_baking"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_cobbled_deepslate",
+      "has_the_recipe"
+    ]
+  ]
+}

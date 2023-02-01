@@ -10,10 +10,13 @@ import com.teamabnormals.clayworks.core.data.server.tags.ClayworksBlockTagsProvi
 import com.teamabnormals.clayworks.core.data.server.tags.ClayworksItemTagsProvider;
 import com.teamabnormals.clayworks.core.registry.ClayworksMenuTypes;
 import com.teamabnormals.clayworks.core.registry.ClayworksParticleTypes;
+import com.teamabnormals.clayworks.core.registry.ClayworksRecipes.ClayworksRecipeCategories;
 import com.teamabnormals.clayworks.core.registry.ClayworksRecipes.ClayworksRecipeSerializers;
 import com.teamabnormals.clayworks.core.registry.ClayworksRecipes.ClayworksRecipeTypes;
 import com.teamabnormals.clayworks.core.registry.ClayworksVillagerProfessions;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.world.inventory.RecipeBookType;
+import net.minecraftforge.client.RecipeBookRegistry;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -28,8 +31,9 @@ public class Clayworks {
 	public static final String MOD_ID = "clayworks";
 	public static final RegistryHelper REGISTRY_HELPER = new RegistryHelper(MOD_ID);
 
+	public static final RecipeBookType RECIPE_TYPE_BAKING = RecipeBookType.create("BAKING");
+
 	//TODO: Generate additional Loot Tables
-	//TODO: Generate Kiln recipes
 	//TODO: Rebuild houses
 	public Clayworks() {
 		IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -58,6 +62,7 @@ public class Clayworks {
 	private void clientSetup(FMLClientSetupEvent event) {
 		event.enqueueWork(() -> {
 			ClayworksMenuTypes.registerScreenFactories();
+			ClayworksRecipeCategories.registerCategories();
 		});
 	}
 

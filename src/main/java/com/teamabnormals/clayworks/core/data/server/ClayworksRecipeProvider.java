@@ -4,20 +4,24 @@ import com.teamabnormals.blueprint.core.Blueprint;
 import com.teamabnormals.blueprint.core.api.conditions.QuarkFlagRecipeCondition;
 import com.teamabnormals.clayworks.core.Clayworks;
 import com.teamabnormals.clayworks.core.other.ClayworksBlockFamilies;
+import com.teamabnormals.clayworks.core.registry.ClayworksRecipes.ClayworksRecipeSerializers;
 import net.minecraft.data.BlockFamily;
 import net.minecraft.data.BlockFamily.Variant;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.SimpleCookingSerializer;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.crafting.ConditionalRecipe;
 import net.minecraftforge.common.crafting.conditions.ICondition;
+import org.lwjgl.system.CallbackI.B;
 
 import javax.annotation.Nullable;
 import java.util.function.Consumer;
@@ -34,6 +38,7 @@ public class ClayworksRecipeProvider extends RecipeProvider {
 	@Override
 	public void buildCraftingRecipes(Consumer<FinishedRecipe> consumer) {
 		ShapedRecipeBuilder.shaped(KILN.get()).define('#', ItemTags.STONE_CRAFTING_MATERIALS).define('X', Blocks.FURNACE).define('B', TERRACOTTA_BRICKS.get()).pattern("BBB").pattern("BXB").pattern("###").unlockedBy("has_cobblestone", has(ItemTags.STONE_CRAFTING_MATERIALS)).save(consumer);
+		kilnRecipes(consumer);
 		chiseled(consumer, CHISELED_BRICKS.get(), Blocks.BRICK_SLAB);
 		stonecutterResultFromBase(consumer, Blocks.BRICKS, CHISELED_BRICKS.get());
 
@@ -54,6 +59,56 @@ public class ClayworksRecipeProvider extends RecipeProvider {
 		terracottaBricksRecipes(consumer, Blocks.GREEN_TERRACOTTA, ClayworksBlockFamilies.GREEN_TERRACOTTA_BRICKS, GREEN_TERRACOTTA_BRICK_VERTICAL_SLAB.get(), Items.GREEN_DYE);
 		terracottaBricksRecipes(consumer, Blocks.BLACK_TERRACOTTA, ClayworksBlockFamilies.RED_TERRACOTTA_BRICKS, RED_TERRACOTTA_BRICK_VERTICAL_SLAB.get(), Items.RED_DYE);
 		terracottaBricksRecipes(consumer, Blocks.TERRACOTTA, ClayworksBlockFamilies.BLACK_TERRACOTTA_BRICKS, BLACK_TERRACOTTA_BRICK_VERTICAL_SLAB.get(), Items.BLACK_DYE);
+	}
+
+	public static void kilnRecipes(Consumer<FinishedRecipe> consumer) {
+		SimpleCookingRecipeBuilder.cooking(Ingredient.of(ItemTags.SAND), Blocks.GLASS, 0.1F, 100, ClayworksRecipeSerializers.BAKING.get()).unlockedBy("has_sand", has(ItemTags.SAND)).save(consumer, new ResourceLocation(Clayworks.MOD_ID, "glass_from_baking"));
+		SimpleCookingRecipeBuilder.cooking(Ingredient.of(ItemTags.LOGS_THAT_BURN), Items.CHARCOAL, 0.15F, 100, ClayworksRecipeSerializers.BAKING.get()).unlockedBy("has_log", has(ItemTags.LOGS_THAT_BURN)).save(consumer, new ResourceLocation(Clayworks.MOD_ID, "charcoal_from_baking"));
+		baking(consumer, Blocks.WET_SPONGE, Blocks.SPONGE, 0.15F, 100);
+		baking(consumer, Blocks.SEA_PICKLE, Items.LIME_DYE, 0.1F, 100);
+		baking(consumer, Blocks.CACTUS, Items.GREEN_DYE, 0.1F, 100);
+		baking(consumer, Items.CHORUS_FRUIT, Items.POPPED_CHORUS_FRUIT, 0.1F, 100);
+
+		baking(consumer, Items.CLAY_BALL, Items.BRICK, 0.3F, 100);
+		baking(consumer, Blocks.CLAY, Blocks.TERRACOTTA, 0.35F, 100);
+		baking(consumer, Blocks.NETHERRACK, Items.NETHER_BRICK, 0.1F, 100);
+		baking(consumer, Blocks.COBBLESTONE, Blocks.STONE, 0.1F, 100);
+		baking(consumer, Blocks.COBBLED_DEEPSLATE, Blocks.DEEPSLATE, 0.1F, 100);
+		baking(consumer, Blocks.STONE, Blocks.SMOOTH_STONE, 0.1F, 100);
+		baking(consumer, Blocks.SANDSTONE, Blocks.SMOOTH_SANDSTONE, 0.1F, 100);
+		baking(consumer, Blocks.RED_SANDSTONE, Blocks.SMOOTH_RED_SANDSTONE, 0.1F, 100);
+		baking(consumer, Blocks.QUARTZ_BLOCK, Blocks.SMOOTH_QUARTZ, 0.1F, 100);
+		baking(consumer, Blocks.BASALT, Blocks.SMOOTH_BASALT, 0.1F, 100);
+		baking(consumer, Blocks.STONE_BRICKS, Blocks.CRACKED_STONE_BRICKS, 0.1F, 100);
+		baking(consumer, Blocks.POLISHED_BLACKSTONE_BRICKS, Blocks.CRACKED_POLISHED_BLACKSTONE_BRICKS, 0.1F, 100);
+		baking(consumer, Blocks.NETHER_BRICKS, Blocks.CRACKED_NETHER_BRICKS, 0.1F, 100);
+		baking(consumer, Blocks.DEEPSLATE_BRICK_SLAB, Blocks.CRACKED_DEEPSLATE_BRICKS, 0.1F, 100);
+		baking(consumer, Blocks.DEEPSLATE_TILES, Blocks.CRACKED_DEEPSLATE_TILES, 0.1F, 100);
+
+		baking(consumer, Blocks.BLACK_TERRACOTTA, Blocks.BLACK_GLAZED_TERRACOTTA, 0.1F, 100);
+		baking(consumer, Blocks.BLUE_TERRACOTTA, Blocks.BLUE_GLAZED_TERRACOTTA, 0.1F, 100);
+		baking(consumer, Blocks.BROWN_TERRACOTTA, Blocks.BROWN_GLAZED_TERRACOTTA, 0.1F, 100);
+		baking(consumer, Blocks.CYAN_TERRACOTTA, Blocks.CYAN_GLAZED_TERRACOTTA, 0.1F, 100);
+		baking(consumer, Blocks.GRAY_TERRACOTTA, Blocks.GRAY_GLAZED_TERRACOTTA, 0.1F, 100);
+		baking(consumer, Blocks.GREEN_TERRACOTTA, Blocks.GREEN_GLAZED_TERRACOTTA, 0.1F, 100);
+		baking(consumer, Blocks.LIGHT_BLUE_TERRACOTTA, Blocks.LIGHT_BLUE_GLAZED_TERRACOTTA, 0.1F, 100);
+		baking(consumer, Blocks.LIGHT_GRAY_TERRACOTTA, Blocks.LIGHT_GRAY_GLAZED_TERRACOTTA, 0.1F, 100);
+		baking(consumer, Blocks.LIME_TERRACOTTA, Blocks.LIME_GLAZED_TERRACOTTA, 0.1F, 100);
+		baking(consumer, Blocks.MAGENTA_TERRACOTTA, Blocks.MAGENTA_GLAZED_TERRACOTTA, 0.1F, 100);
+		baking(consumer, Blocks.ORANGE_TERRACOTTA, Blocks.ORANGE_GLAZED_TERRACOTTA, 0.1F, 100);
+		baking(consumer, Blocks.PINK_TERRACOTTA, Blocks.PINK_GLAZED_TERRACOTTA, 0.1F, 100);
+		baking(consumer, Blocks.PURPLE_TERRACOTTA, Blocks.PURPLE_GLAZED_TERRACOTTA, 0.1F, 100);
+		baking(consumer, Blocks.RED_TERRACOTTA, Blocks.RED_GLAZED_TERRACOTTA, 0.1F, 100);
+		baking(consumer, Blocks.WHITE_TERRACOTTA, Blocks.WHITE_GLAZED_TERRACOTTA, 0.1F, 100);
+		baking(consumer, Blocks.YELLOW_TERRACOTTA, Blocks.YELLOW_GLAZED_TERRACOTTA, 0.1F, 100);
+	}
+
+	public static void baking(Consumer<FinishedRecipe> consumer, ItemLike ingredient, ItemLike result, float experience, int cookingTime) {
+		simpleCookingRecipe(consumer, "baking", ClayworksRecipeSerializers.BAKING.get(), cookingTime, ingredient, result, experience);
+	}
+
+	protected static void simpleCookingRecipe(Consumer<FinishedRecipe> consumer, String type, SimpleCookingSerializer<?> recipeSerializer, int cookingTime, ItemLike ingredient, ItemLike result, float experience) {
+		SimpleCookingRecipeBuilder.cooking(Ingredient.of(ingredient), result, experience, cookingTime, recipeSerializer).unlockedBy(getHasName(ingredient), has(ingredient)).save(consumer, new ResourceLocation(Clayworks.MOD_ID, getItemName(result) + "_from_" + type));
 	}
 
 	private static void terracottaBricksRecipes(Consumer<FinishedRecipe> consumer, Block terracotta, BlockFamily family, Block verticalSlab, @Nullable Item dye) {
