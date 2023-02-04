@@ -2,12 +2,30 @@ package com.teamabnormals.clayworks.core.other;
 
 import com.teamabnormals.clayworks.core.registry.ClayworksBlocks;
 import net.minecraft.data.BlockFamily;
+import net.minecraft.world.level.block.Blocks;
 
 import static com.teamabnormals.clayworks.core.registry.ClayworksBlocks.*;
 
 public class ClayworksBlockFamilies {
-	public static final BlockFamily TERRACOTTA_BRICKS = new BlockFamily.Builder(ClayworksBlocks.TERRACOTTA_BRICKS.get()).slab(TERRACOTTA_BRICK_SLAB.get()).stairs(TERRACOTTA_BRICK_STAIRS.get()).wall(TERRACOTTA_BRICK_WALL.get()).chiseled(CHISELED_TERRACOTTA_BRICKS.get()).getFamily();
+	public static final BlockFamily TERRACOTTA = new BlockFamily.Builder(Blocks.TERRACOTTA).slab(TERRACOTTA_SLAB.get()).stairs(TERRACOTTA_STAIRS.get()).wall(TERRACOTTA_WALL.get()).getFamily();
+	public static final BlockFamily WHITE_TERRACOTTA = new BlockFamily.Builder(Blocks.WHITE_TERRACOTTA).slab(WHITE_TERRACOTTA_SLAB.get()).stairs(WHITE_TERRACOTTA_STAIRS.get()).wall(WHITE_TERRACOTTA_WALL.get()).getFamily();
+	public static final BlockFamily ORANGE_TERRACOTTA = new BlockFamily.Builder(Blocks.ORANGE_TERRACOTTA).slab(ORANGE_TERRACOTTA_SLAB.get()).stairs(ORANGE_TERRACOTTA_STAIRS.get()).wall(ORANGE_TERRACOTTA_WALL.get()).getFamily();
+	public static final BlockFamily MAGENTA_TERRACOTTA = new BlockFamily.Builder(Blocks.MAGENTA_TERRACOTTA).slab(MAGENTA_TERRACOTTA_SLAB.get()).stairs(MAGENTA_TERRACOTTA_STAIRS.get()).wall(MAGENTA_TERRACOTTA_WALL.get()).getFamily();
+	public static final BlockFamily LIGHT_BLUE_TERRACOTTA = new BlockFamily.Builder(Blocks.LIGHT_BLUE_TERRACOTTA).slab(LIGHT_BLUE_TERRACOTTA_SLAB.get()).stairs(LIGHT_BLUE_TERRACOTTA_STAIRS.get()).wall(LIGHT_BLUE_TERRACOTTA_WALL.get()).getFamily();
+	public static final BlockFamily YELLOW_TERRACOTTA = new BlockFamily.Builder(Blocks.YELLOW_TERRACOTTA).slab(YELLOW_TERRACOTTA_SLAB.get()).stairs(YELLOW_TERRACOTTA_STAIRS.get()).wall(YELLOW_TERRACOTTA_WALL.get()).getFamily();
+	public static final BlockFamily LIME_TERRACOTTA = new BlockFamily.Builder(Blocks.LIME_TERRACOTTA).slab(LIME_TERRACOTTA_SLAB.get()).stairs(LIME_TERRACOTTA_STAIRS.get()).wall(LIME_TERRACOTTA_WALL.get()).getFamily();
+	public static final BlockFamily PINK_TERRACOTTA = new BlockFamily.Builder(Blocks.PINK_TERRACOTTA).slab(PINK_TERRACOTTA_SLAB.get()).stairs(PINK_TERRACOTTA_STAIRS.get()).wall(PINK_TERRACOTTA_WALL.get()).getFamily();
+	public static final BlockFamily GRAY_TERRACOTTA = new BlockFamily.Builder(Blocks.GRAY_TERRACOTTA).slab(GRAY_TERRACOTTA_SLAB.get()).stairs(GRAY_TERRACOTTA_STAIRS.get()).wall(GRAY_TERRACOTTA_WALL.get()).getFamily();
+	public static final BlockFamily LIGHT_GRAY_TERRACOTTA = new BlockFamily.Builder(Blocks.LIGHT_GRAY_TERRACOTTA).slab(LIGHT_GRAY_TERRACOTTA_SLAB.get()).stairs(LIGHT_GRAY_TERRACOTTA_STAIRS.get()).wall(LIGHT_GRAY_TERRACOTTA_WALL.get()).getFamily();
+	public static final BlockFamily CYAN_TERRACOTTA = new BlockFamily.Builder(Blocks.CYAN_TERRACOTTA).slab(CYAN_TERRACOTTA_SLAB.get()).stairs(CYAN_TERRACOTTA_STAIRS.get()).wall(CYAN_TERRACOTTA_WALL.get()).getFamily();
+	public static final BlockFamily PURPLE_TERRACOTTA = new BlockFamily.Builder(Blocks.PURPLE_TERRACOTTA).slab(PURPLE_TERRACOTTA_SLAB.get()).stairs(PURPLE_TERRACOTTA_STAIRS.get()).wall(PURPLE_TERRACOTTA_WALL.get()).getFamily();
+	public static final BlockFamily BLUE_TERRACOTTA = new BlockFamily.Builder(Blocks.BLUE_TERRACOTTA).slab(BLUE_TERRACOTTA_SLAB.get()).stairs(BLUE_TERRACOTTA_STAIRS.get()).wall(BLUE_TERRACOTTA_WALL.get()).getFamily();
+	public static final BlockFamily BROWN_TERRACOTTA = new BlockFamily.Builder(Blocks.BROWN_TERRACOTTA).slab(BROWN_TERRACOTTA_SLAB.get()).stairs(BROWN_TERRACOTTA_STAIRS.get()).wall(BROWN_TERRACOTTA_WALL.get()).getFamily();
+	public static final BlockFamily GREEN_TERRACOTTA = new BlockFamily.Builder(Blocks.GREEN_TERRACOTTA).slab(GREEN_TERRACOTTA_SLAB.get()).stairs(GREEN_TERRACOTTA_STAIRS.get()).wall(GREEN_TERRACOTTA_WALL.get()).getFamily();
+	public static final BlockFamily RED_TERRACOTTA = new BlockFamily.Builder(Blocks.RED_TERRACOTTA).slab(RED_TERRACOTTA_SLAB.get()).stairs(RED_TERRACOTTA_STAIRS.get()).wall(RED_TERRACOTTA_WALL.get()).getFamily();
+	public static final BlockFamily BLACK_TERRACOTTA = new BlockFamily.Builder(Blocks.BLACK_TERRACOTTA).slab(BLACK_TERRACOTTA_SLAB.get()).stairs(BLACK_TERRACOTTA_STAIRS.get()).wall(BLACK_TERRACOTTA_WALL.get()).getFamily();
 
+	public static final BlockFamily TERRACOTTA_BRICKS = new BlockFamily.Builder(ClayworksBlocks.TERRACOTTA_BRICKS.get()).slab(TERRACOTTA_BRICK_SLAB.get()).stairs(TERRACOTTA_BRICK_STAIRS.get()).wall(TERRACOTTA_BRICK_WALL.get()).chiseled(CHISELED_TERRACOTTA_BRICKS.get()).getFamily();
 	public static final BlockFamily WHITE_TERRACOTTA_BRICKS = new BlockFamily.Builder(ClayworksBlocks.WHITE_TERRACOTTA_BRICKS.get()).slab(WHITE_TERRACOTTA_BRICK_SLAB.get()).stairs(WHITE_TERRACOTTA_BRICK_STAIRS.get()).wall(WHITE_TERRACOTTA_BRICK_WALL.get()).chiseled(CHISELED_WHITE_TERRACOTTA_BRICKS.get()).getFamily();
 	public static final BlockFamily ORANGE_TERRACOTTA_BRICKS = new BlockFamily.Builder(ClayworksBlocks.ORANGE_TERRACOTTA_BRICKS.get()).slab(ORANGE_TERRACOTTA_BRICK_SLAB.get()).stairs(ORANGE_TERRACOTTA_BRICK_STAIRS.get()).wall(ORANGE_TERRACOTTA_BRICK_WALL.get()).chiseled(CHISELED_ORANGE_TERRACOTTA_BRICKS.get()).getFamily();
 	public static final BlockFamily MAGENTA_TERRACOTTA_BRICKS = new BlockFamily.Builder(ClayworksBlocks.MAGENTA_TERRACOTTA_BRICKS.get()).slab(MAGENTA_TERRACOTTA_BRICK_SLAB.get()).stairs(MAGENTA_TERRACOTTA_BRICK_STAIRS.get()).wall(MAGENTA_TERRACOTTA_BRICK_WALL.get()).chiseled(CHISELED_MAGENTA_TERRACOTTA_BRICKS.get()).getFamily();

@@ -1,0 +1,30 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "flag": "vertical_slabs",
+          "type": "blueprint:quark_flag"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          "#",
+          "#",
+          "#"
+        ],
+        "key": {
+          "#": {
+            "item": "minecraft:lime_terracotta"
+          }
+        },
+        "result": {
+          "item": "clayworks:lime_terracotta_vertical_slab",
+          "count": 6
+        }
+      }
+    }
+  ]
+}

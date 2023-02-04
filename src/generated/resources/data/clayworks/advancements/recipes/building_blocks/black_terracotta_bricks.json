@@ -6,13 +6,13 @@
     ]
   },
   "criteria": {
-    "has_terracotta": {
+    "has_black_terracotta": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "minecraft:terracotta"
+              "minecraft:black_terracotta"
             ]
           }
         ]
@@ -27,7 +27,7 @@
   },
   "requirements": [
     [
-      "has_terracotta",
+      "has_black_terracotta",
       "has_the_recipe"
     ]
   ]
