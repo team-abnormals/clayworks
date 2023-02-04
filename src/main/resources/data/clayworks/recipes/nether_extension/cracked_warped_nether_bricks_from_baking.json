@@ -6,10 +6,10 @@
   "result": "nether_extension:cracked_warped_nether_bricks",
   "experience": 0.1,
   "cookingtime": 100,
-  "conditions":[
+  "conditions": [
     {
-      "type":"forge:mod_loaded",
-      "modid":"nether_extension"
+      "type": "forge:mod_loaded",
+      "modid": "nether_extension"
     }
   ]
 }

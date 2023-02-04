@@ -5,5 +5,11 @@
   },
   "result": "environmental:mud_brick",
   "experience": 0.3,
-  "cookingtime": 100
+  "cookingtime": 100,
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "environmental"
+    }
+  ]
 }
