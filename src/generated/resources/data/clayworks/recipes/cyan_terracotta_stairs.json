@@ -1,17 +1,30 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "#  ",
-    "## ",
-    "###"
-  ],
-  "key": {
-    "#": {
-      "item": "minecraft:cyan_terracotta"
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "value": "terracotta_variants",
+          "type": "clayworks:config"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          "#  ",
+          "## ",
+          "###"
+        ],
+        "key": {
+          "#": {
+            "item": "minecraft:cyan_terracotta"
+          }
+        },
+        "result": {
+          "item": "clayworks:cyan_terracotta_stairs",
+          "count": 4
+        }
+      }
     }
-  },
-  "result": {
-    "item": "clayworks:cyan_terracotta_stairs",
-    "count": 4
-  }
+  ]
 }

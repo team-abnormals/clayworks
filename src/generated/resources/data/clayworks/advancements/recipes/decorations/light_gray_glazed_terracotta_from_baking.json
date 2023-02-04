@@ -1,34 +1,46 @@
 {
-  "parent": "minecraft:recipes/root",
-  "rewards": {
-    "recipes": [
-      "clayworks:light_gray_glazed_terracotta_from_baking"
-    ]
-  },
-  "criteria": {
-    "has_light_gray_terracotta": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "items": [
-              "minecraft:light_gray_terracotta"
-            ]
+  "advancements": [
+    {
+      "conditions": [
+        {
+          "value": "kiln",
+          "type": "clayworks:config"
+        }
+      ],
+      "advancement": {
+        "parent": "minecraft:recipes/root",
+        "rewards": {
+          "recipes": [
+            "clayworks:light_gray_glazed_terracotta_from_baking"
+          ]
+        },
+        "criteria": {
+          "has_light_gray_terracotta": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+              "items": [
+                {
+                  "items": [
+                    "minecraft:light_gray_terracotta"
+                  ]
+                }
+              ]
+            }
+          },
+          "has_the_recipe": {
+            "trigger": "minecraft:recipe_unlocked",
+            "conditions": {
+              "recipe": "clayworks:light_gray_glazed_terracotta_from_baking"
+            }
           }
+        },
+        "requirements": [
+          [
+            "has_light_gray_terracotta",
+            "has_the_recipe"
+          ]
         ]
       }
-    },
-    "has_the_recipe": {
-      "trigger": "minecraft:recipe_unlocked",
-      "conditions": {
-        "recipe": "clayworks:light_gray_glazed_terracotta_from_baking"
-      }
     }
-  },
-  "requirements": [
-    [
-      "has_light_gray_terracotta",
-      "has_the_recipe"
-    ]
   ]
 }

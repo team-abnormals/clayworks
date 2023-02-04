@@ -1,34 +1,46 @@
 {
-  "parent": "minecraft:recipes/root",
-  "rewards": {
-    "recipes": [
-      "clayworks:lime_terracotta_brick_slab_from_lime_terracotta_bricks_stonecutting"
-    ]
-  },
-  "criteria": {
-    "has_lime_terracotta_bricks": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "items": [
-              "clayworks:lime_terracotta_bricks"
-            ]
+  "advancements": [
+    {
+      "conditions": [
+        {
+          "value": "terracotta_bricks",
+          "type": "clayworks:config"
+        }
+      ],
+      "advancement": {
+        "parent": "minecraft:recipes/root",
+        "rewards": {
+          "recipes": [
+            "clayworks:lime_terracotta_brick_slab_from_lime_terracotta_bricks_stonecutting"
+          ]
+        },
+        "criteria": {
+          "has_lime_terracotta_bricks": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+              "items": [
+                {
+                  "items": [
+                    "clayworks:lime_terracotta_bricks"
+                  ]
+                }
+              ]
+            }
+          },
+          "has_the_recipe": {
+            "trigger": "minecraft:recipe_unlocked",
+            "conditions": {
+              "recipe": "clayworks:lime_terracotta_brick_slab_from_lime_terracotta_bricks_stonecutting"
+            }
           }
+        },
+        "requirements": [
+          [
+            "has_lime_terracotta_bricks",
+            "has_the_recipe"
+          ]
         ]
       }
-    },
-    "has_the_recipe": {
-      "trigger": "minecraft:recipe_unlocked",
-      "conditions": {
-        "recipe": "clayworks:lime_terracotta_brick_slab_from_lime_terracotta_bricks_stonecutting"
-      }
     }
-  },
-  "requirements": [
-    [
-      "has_lime_terracotta_bricks",
-      "has_the_recipe"
-    ]
   ]
 }

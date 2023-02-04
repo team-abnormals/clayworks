@@ -4,8 +4,17 @@
     {
       "conditions": [
         {
-          "flag": "vertical_slabs",
-          "type": "blueprint:quark_flag"
+          "values": [
+            {
+              "value": "terracotta_bricks",
+              "type": "clayworks:config"
+            },
+            {
+              "flag": "vertical_slabs",
+              "type": "blueprint:quark_flag"
+            }
+          ],
+          "type": "forge:and"
         }
       ],
       "recipe": {

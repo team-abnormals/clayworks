@@ -1,15 +1,28 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "###"
-  ],
-  "key": {
-    "#": {
-      "item": "minecraft:pink_terracotta"
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "value": "terracotta_variants",
+          "type": "clayworks:config"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          "###"
+        ],
+        "key": {
+          "#": {
+            "item": "minecraft:pink_terracotta"
+          }
+        },
+        "result": {
+          "item": "clayworks:pink_terracotta_slab",
+          "count": 6
+        }
+      }
     }
-  },
-  "result": {
-    "item": "clayworks:pink_terracotta_slab",
-    "count": 6
-  }
+  ]
 }

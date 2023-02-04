@@ -1,9 +1,22 @@
 {
-  "type": "clayworks:baking",
-  "ingredient": {
-    "item": "minecraft:clay_ball"
-  },
-  "result": "minecraft:brick",
-  "experience": 0.3,
-  "cookingtime": 100
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "value": "kiln",
+          "type": "clayworks:config"
+        }
+      ],
+      "recipe": {
+        "type": "clayworks:baking",
+        "ingredient": {
+          "item": "minecraft:clay_ball"
+        },
+        "result": "minecraft:brick",
+        "experience": 0.3,
+        "cookingtime": 100
+      }
+    }
+  ]
 }

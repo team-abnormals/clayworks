@@ -1,34 +1,46 @@
 {
-  "parent": "minecraft:recipes/root",
-  "rewards": {
-    "recipes": [
-      "clayworks:smooth_basalt_from_baking"
-    ]
-  },
-  "criteria": {
-    "has_basalt": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "items": [
-              "minecraft:basalt"
-            ]
+  "advancements": [
+    {
+      "conditions": [
+        {
+          "value": "kiln",
+          "type": "clayworks:config"
+        }
+      ],
+      "advancement": {
+        "parent": "minecraft:recipes/root",
+        "rewards": {
+          "recipes": [
+            "clayworks:smooth_basalt_from_baking"
+          ]
+        },
+        "criteria": {
+          "has_basalt": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+              "items": [
+                {
+                  "items": [
+                    "minecraft:basalt"
+                  ]
+                }
+              ]
+            }
+          },
+          "has_the_recipe": {
+            "trigger": "minecraft:recipe_unlocked",
+            "conditions": {
+              "recipe": "clayworks:smooth_basalt_from_baking"
+            }
           }
+        },
+        "requirements": [
+          [
+            "has_basalt",
+            "has_the_recipe"
+          ]
         ]
       }
-    },
-    "has_the_recipe": {
-      "trigger": "minecraft:recipe_unlocked",
-      "conditions": {
-        "recipe": "clayworks:smooth_basalt_from_baking"
-      }
     }
-  },
-  "requirements": [
-    [
-      "has_basalt",
-      "has_the_recipe"
-    ]
   ]
 }

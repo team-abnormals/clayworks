@@ -1,0 +1,21 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "value": "chiseled_bricks",
+          "type": "clayworks:config"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:stonecutting",
+        "ingredient": {
+          "item": "minecraft:bricks"
+        },
+        "result": "clayworks:chiseled_bricks",
+        "count": 1
+      }
+    }
+  ]
+}

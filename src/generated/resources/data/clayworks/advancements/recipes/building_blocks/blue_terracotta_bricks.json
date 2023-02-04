@@ -1,34 +1,46 @@
 {
-  "parent": "minecraft:recipes/root",
-  "rewards": {
-    "recipes": [
-      "clayworks:blue_terracotta_bricks"
-    ]
-  },
-  "criteria": {
-    "has_blue_terracotta": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "items": [
-              "minecraft:blue_terracotta"
-            ]
+  "advancements": [
+    {
+      "conditions": [
+        {
+          "value": "terracotta_bricks",
+          "type": "clayworks:config"
+        }
+      ],
+      "advancement": {
+        "parent": "minecraft:recipes/root",
+        "rewards": {
+          "recipes": [
+            "clayworks:blue_terracotta_bricks"
+          ]
+        },
+        "criteria": {
+          "has_blue_terracotta": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+              "items": [
+                {
+                  "items": [
+                    "minecraft:blue_terracotta"
+                  ]
+                }
+              ]
+            }
+          },
+          "has_the_recipe": {
+            "trigger": "minecraft:recipe_unlocked",
+            "conditions": {
+              "recipe": "clayworks:blue_terracotta_bricks"
+            }
           }
+        },
+        "requirements": [
+          [
+            "has_blue_terracotta",
+            "has_the_recipe"
+          ]
         ]
       }
-    },
-    "has_the_recipe": {
-      "trigger": "minecraft:recipe_unlocked",
-      "conditions": {
-        "recipe": "clayworks:blue_terracotta_bricks"
-      }
     }
-  },
-  "requirements": [
-    [
-      "has_blue_terracotta",
-      "has_the_recipe"
-    ]
   ]
 }

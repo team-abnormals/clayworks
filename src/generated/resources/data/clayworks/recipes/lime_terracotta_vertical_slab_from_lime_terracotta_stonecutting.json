@@ -1,0 +1,30 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "values": [
+            {
+              "value": "terracotta_variants",
+              "type": "clayworks:config"
+            },
+            {
+              "flag": "vertical_slabs",
+              "type": "blueprint:quark_flag"
+            }
+          ],
+          "type": "forge:and"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:stonecutting",
+        "ingredient": {
+          "item": "minecraft:lime_terracotta"
+        },
+        "result": "clayworks:lime_terracotta_vertical_slab",
+        "count": 2
+      }
+    }
+  ]
+}

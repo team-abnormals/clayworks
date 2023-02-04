@@ -1,6 +1,8 @@
 package com.teamabnormals.clayworks.core.data.server;
 
+import com.google.common.collect.Maps;
 import com.teamabnormals.blueprint.core.Blueprint;
+import com.teamabnormals.blueprint.core.api.conditions.ConfigValueCondition;
 import com.teamabnormals.blueprint.core.api.conditions.QuarkFlagRecipeCondition;
 import com.teamabnormals.clayworks.core.Clayworks;
 import com.teamabnormals.clayworks.core.other.ClayworksBlockFamilies;
@@ -14,20 +16,28 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.SimpleCookingSerializer;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.crafting.ConditionalRecipe;
+import net.minecraftforge.common.crafting.conditions.AndCondition;
 import net.minecraftforge.common.crafting.conditions.ICondition;
 
 import javax.annotation.Nullable;
+import java.util.function.BiFunction;
 import java.util.function.Consumer;
 
+import static com.teamabnormals.clayworks.core.ClayworksConfig.COMMON;
 import static com.teamabnormals.clayworks.core.registry.ClayworksBlocks.*;
 
 public class ClayworksRecipeProvider extends RecipeProvider {
-	public static final QuarkFlagRecipeCondition VERTICAL_SLABS = new QuarkFlagRecipeCondition(new ResourceLocation(Blueprint.MOD_ID, "quark_flag"), "vertical_slabs");
+	public static final QuarkFlagRecipeCondition VERTICAL_SLABS_CONFIG = new QuarkFlagRecipeCondition(new ResourceLocation(Blueprint.MOD_ID, "quark_flag"), "vertical_slabs");
+
+	public static final ConfigValueCondition KILN_CONFIG = config(COMMON.kiln, "kiln");
+	public static final ConfigValueCondition CHISELED_BRICKS_CONFIG = config(COMMON.chiseledBricks, "chiseled_bricks");
+	public static final ConfigValueCondition TERRACOTTA_VARIANTS_CONFIG = config(COMMON.terracottaVariants, "terracotta_variants");
+	public static final ConfigValueCondition TERRACOTTA_BRICKS_CONFIG = config(COMMON.terracottaBricks, "terracotta_bricks");
 
 	public ClayworksRecipeProvider(DataGenerator generator) {
 		super(generator);
@@ -35,11 +45,11 @@ public class ClayworksRecipeProvider extends RecipeProvider {
 
 	@Override
 	public void buildCraftingRecipes(Consumer<FinishedRecipe> consumer) {
-		ShapedRecipeBuilder.shaped(KILN.get()).define('#', ItemTags.STONE_CRAFTING_MATERIALS).define('X', Blocks.FURNACE).define('B', Blocks.BRICKS).pattern("###").pattern("#X#").pattern("BBB").unlockedBy("has_cobblestone", has(ItemTags.STONE_CRAFTING_MATERIALS)).save(consumer);
-		kilnRecipes(consumer);
+		conditionalRecipe(consumer, KILN_CONFIG, ShapedRecipeBuilder.shaped(KILN.get()).define('#', ItemTags.STONE_CRAFTING_MATERIALS).define('X', Blocks.FURNACE).define('B', Blocks.BRICKS).pattern("###").pattern("#X#").pattern("BBB").unlockedBy("has_cobblestone", has(ItemTags.STONE_CRAFTING_MATERIALS)));
+		generateKilnRecipes(consumer);
 
-		chiseled(consumer, CHISELED_BRICKS.get(), Blocks.BRICK_SLAB);
-		stonecutterResultFromBase(consumer, Blocks.BRICKS, CHISELED_BRICKS.get());
+		conditionalRecipe(consumer, CHISELED_BRICKS_CONFIG, chiseledBuilder(CHISELED_BRICKS.get(), Ingredient.of(Blocks.BRICK_SLAB)).unlockedBy(getHasName(Blocks.BRICK_SLAB), has(Blocks.BRICK_SLAB)));
+		conditionalStonecuttingRecipe(consumer, CHISELED_BRICKS_CONFIG, CHISELED_BRICKS.get(), Blocks.BRICKS);
 
 		terracottaBricksRecipes(consumer, Blocks.TERRACOTTA, ClayworksBlockFamilies.TERRACOTTA, TERRACOTTA_VERTICAL_SLAB.get(), ClayworksBlockFamilies.TERRACOTTA_BRICKS, TERRACOTTA_BRICK_VERTICAL_SLAB.get(), null);
 		terracottaBricksRecipes(consumer, Blocks.WHITE_TERRACOTTA, ClayworksBlockFamilies.WHITE_TERRACOTTA, WHITE_TERRACOTTA_VERTICAL_SLAB.get(), ClayworksBlockFamilies.WHITE_TERRACOTTA_BRICKS, WHITE_TERRACOTTA_BRICK_VERTICAL_SLAB.get(), Items.WHITE_DYE);
@@ -60,9 +70,9 @@ public class ClayworksRecipeProvider extends RecipeProvider {
 		terracottaBricksRecipes(consumer, Blocks.BLACK_TERRACOTTA, ClayworksBlockFamilies.BLACK_TERRACOTTA, BLACK_TERRACOTTA_VERTICAL_SLAB.get(), ClayworksBlockFamilies.BLACK_TERRACOTTA_BRICKS, BLACK_TERRACOTTA_BRICK_VERTICAL_SLAB.get(), Items.BLACK_DYE);
 	}
 
-	public static void kilnRecipes(Consumer<FinishedRecipe> consumer) {
-		SimpleCookingRecipeBuilder.cooking(Ingredient.of(ItemTags.SAND), Blocks.GLASS, 0.1F, 100, ClayworksRecipeSerializers.BAKING.get()).unlockedBy("has_sand", has(ItemTags.SAND)).save(consumer, new ResourceLocation(Clayworks.MOD_ID, "glass_from_baking"));
-		SimpleCookingRecipeBuilder.cooking(Ingredient.of(ItemTags.LOGS_THAT_BURN), Items.CHARCOAL, 0.15F, 100, ClayworksRecipeSerializers.BAKING.get()).unlockedBy("has_log", has(ItemTags.LOGS_THAT_BURN)).save(consumer, new ResourceLocation(Clayworks.MOD_ID, "charcoal_from_baking"));
+	public static void generateKilnRecipes(Consumer<FinishedRecipe> consumer) {
+		conditionalRecipe(consumer, KILN_CONFIG, SimpleCookingRecipeBuilder.cooking(Ingredient.of(ItemTags.SAND), Blocks.GLASS, 0.1F, 100, ClayworksRecipeSerializers.BAKING.get()).unlockedBy("has_sand", has(ItemTags.SAND)), new ResourceLocation(Clayworks.MOD_ID, "glass_from_baking"));
+		conditionalRecipe(consumer, KILN_CONFIG, SimpleCookingRecipeBuilder.cooking(Ingredient.of(ItemTags.LOGS_THAT_BURN), Items.CHARCOAL, 0.15F, 100, ClayworksRecipeSerializers.BAKING.get()).unlockedBy("has_log", has(ItemTags.LOGS_THAT_BURN)), new ResourceLocation(Clayworks.MOD_ID, "charcoal_from_baking"));
 		baking(consumer, Blocks.WET_SPONGE, Blocks.SPONGE, 0.15F, 100);
 		baking(consumer, Blocks.SEA_PICKLE, Items.LIME_DYE, 0.1F, 100);
 		baking(consumer, Blocks.CACTUS, Items.GREEN_DYE, 0.1F, 100);
@@ -102,49 +112,57 @@ public class ClayworksRecipeProvider extends RecipeProvider {
 		baking(consumer, Blocks.YELLOW_TERRACOTTA, Blocks.YELLOW_GLAZED_TERRACOTTA, 0.1F, 100);
 	}
 
-	public static void baking(Consumer<FinishedRecipe> consumer, ItemLike ingredient, ItemLike result, float experience, int cookingTime) {
-		simpleCookingRecipe(consumer, "baking", ClayworksRecipeSerializers.BAKING.get(), cookingTime, ingredient, result, experience);
-	}
-
-	protected static void simpleCookingRecipe(Consumer<FinishedRecipe> consumer, String type, SimpleCookingSerializer<?> recipeSerializer, int cookingTime, ItemLike ingredient, ItemLike result, float experience) {
-		SimpleCookingRecipeBuilder.cooking(Ingredient.of(ingredient), result, experience, cookingTime, recipeSerializer).unlockedBy(getHasName(ingredient), has(ingredient)).save(consumer, new ResourceLocation(Clayworks.MOD_ID, getItemName(result) + "_from_" + type));
-	}
-
 	private static void terracottaBricksRecipes(Consumer<FinishedRecipe> consumer, Block terracotta, BlockFamily family, Block verticalSlab, BlockFamily bricksFamily, Block bricksVerticalSlab, @Nullable Item dye) {
-		ShapedRecipeBuilder.shaped(bricksFamily.getBaseBlock(), 4).define('#', terracotta).pattern("##").pattern("##").unlockedBy(getHasName(terracotta), has(terracotta)).save(consumer);
-		generateRecipes(consumer, family);
-		conditionalRecipe(consumer, VERTICAL_SLABS, verticalSlabBuilder(verticalSlab, Ingredient.of(family.getBaseBlock())).unlockedBy(getHasName(family.getBaseBlock()), has(family.getBaseBlock())));
-		stonecutterResultFromBase(consumer, family.get(Variant.SLAB), family.getBaseBlock(), 2);
-		stonecutterResultFromBase(consumer, family.get(Variant.STAIRS), family.getBaseBlock());
-		stonecutterResultFromBase(consumer, family.get(Variant.WALL), family.getBaseBlock());
-		generateRecipes(consumer, bricksFamily);
-		conditionalRecipe(consumer, VERTICAL_SLABS, verticalSlabBuilder(bricksVerticalSlab, Ingredient.of(bricksFamily.getBaseBlock())).unlockedBy(getHasName(bricksFamily.getBaseBlock()), has(bricksFamily.getBaseBlock())));
-		stonecutterResultFromBase(consumer, bricksFamily.get(Variant.SLAB), bricksFamily.getBaseBlock(), 2);
-		stonecutterResultFromBase(consumer, bricksFamily.get(Variant.STAIRS), bricksFamily.getBaseBlock());
-		stonecutterResultFromBase(consumer, bricksFamily.get(Variant.WALL), bricksFamily.getBaseBlock());
-		stonecutterResultFromBase(consumer, bricksFamily.get(Variant.CHISELED), bricksFamily.getBaseBlock());
-		conditionalStonecuttingRecipe(consumer, VERTICAL_SLABS, bricksVerticalSlab, bricksFamily.getBaseBlock(), 2);
-		stonecutterResultFromBase(consumer, bricksFamily.getBaseBlock(), terracotta);
-		stonecutterResultFromBase(consumer, bricksFamily.get(Variant.SLAB), terracotta, 2);
-		stonecutterResultFromBase(consumer, bricksFamily.get(Variant.STAIRS), terracotta);
-		stonecutterResultFromBase(consumer, bricksFamily.get(Variant.WALL), terracotta);
-		stonecutterResultFromBase(consumer, bricksFamily.get(Variant.CHISELED), terracotta);
-		conditionalStonecuttingRecipe(consumer, VERTICAL_SLABS, bricksVerticalSlab, terracotta, 2);
+		generateConditionalRecipes(consumer, family, TERRACOTTA_VARIANTS_CONFIG);
+		conditionalRecipe(consumer, new AndCondition(TERRACOTTA_VARIANTS_CONFIG, VERTICAL_SLABS_CONFIG), verticalSlabBuilder(verticalSlab, Ingredient.of(family.getBaseBlock())).unlockedBy(getHasName(family.getBaseBlock()), has(family.getBaseBlock())));
+		conditionalStonecuttingRecipe(consumer, TERRACOTTA_VARIANTS_CONFIG, family.get(Variant.SLAB), family.getBaseBlock(), 2);
+		conditionalStonecuttingRecipe(consumer, TERRACOTTA_VARIANTS_CONFIG, family.get(Variant.STAIRS), family.getBaseBlock());
+		conditionalStonecuttingRecipe(consumer, TERRACOTTA_VARIANTS_CONFIG, family.get(Variant.WALL), family.getBaseBlock());
+		conditionalStonecuttingRecipe(consumer, new AndCondition(TERRACOTTA_VARIANTS_CONFIG, VERTICAL_SLABS_CONFIG), verticalSlab, family.getBaseBlock(), 2);
+
+		conditionalRecipe(consumer, TERRACOTTA_BRICKS_CONFIG, ShapedRecipeBuilder.shaped(bricksFamily.getBaseBlock(), 4).define('#', terracotta).pattern("##").pattern("##").unlockedBy(getHasName(terracotta), has(terracotta)));
+		generateConditionalRecipes(consumer, bricksFamily, TERRACOTTA_BRICKS_CONFIG);
+		conditionalRecipe(consumer, new AndCondition(TERRACOTTA_BRICKS_CONFIG, VERTICAL_SLABS_CONFIG), verticalSlabBuilder(bricksVerticalSlab, Ingredient.of(bricksFamily.getBaseBlock())).unlockedBy(getHasName(bricksFamily.getBaseBlock()), has(bricksFamily.getBaseBlock())));
+		conditionalStonecuttingRecipe(consumer, TERRACOTTA_BRICKS_CONFIG, bricksFamily.get(Variant.SLAB), bricksFamily.getBaseBlock(), 2);
+		conditionalStonecuttingRecipe(consumer, TERRACOTTA_BRICKS_CONFIG, bricksFamily.get(Variant.STAIRS), bricksFamily.getBaseBlock());
+		conditionalStonecuttingRecipe(consumer, TERRACOTTA_BRICKS_CONFIG, bricksFamily.get(Variant.WALL), bricksFamily.getBaseBlock());
+		conditionalStonecuttingRecipe(consumer, TERRACOTTA_BRICKS_CONFIG, bricksFamily.get(Variant.CHISELED), bricksFamily.getBaseBlock());
+		conditionalStonecuttingRecipe(consumer, new AndCondition(TERRACOTTA_BRICKS_CONFIG, VERTICAL_SLABS_CONFIG), bricksVerticalSlab, bricksFamily.getBaseBlock(), 2);
+		conditionalStonecuttingRecipe(consumer, TERRACOTTA_BRICKS_CONFIG, bricksFamily.getBaseBlock(), terracotta);
+		conditionalStonecuttingRecipe(consumer, TERRACOTTA_BRICKS_CONFIG, bricksFamily.get(Variant.SLAB), terracotta, 2);
+		conditionalStonecuttingRecipe(consumer, TERRACOTTA_BRICKS_CONFIG, bricksFamily.get(Variant.STAIRS), terracotta);
+		conditionalStonecuttingRecipe(consumer, TERRACOTTA_BRICKS_CONFIG, bricksFamily.get(Variant.WALL), terracotta);
+		conditionalStonecuttingRecipe(consumer, TERRACOTTA_BRICKS_CONFIG, bricksFamily.get(Variant.CHISELED), terracotta);
+		conditionalStonecuttingRecipe(consumer, new AndCondition(TERRACOTTA_BRICKS_CONFIG, VERTICAL_SLABS_CONFIG), bricksVerticalSlab, terracotta, 2);
 		if (dye != null) {
-			ShapedRecipeBuilder.shaped(bricksFamily.getBaseBlock(), 8).define('#', TERRACOTTA_BRICKS.get()).define('X', dye).pattern("###").pattern("#X#").pattern("###").group("stained_terracotta_bricks").unlockedBy(getHasName(Blocks.TERRACOTTA), has(Blocks.TERRACOTTA)).save(consumer, new ResourceLocation(Clayworks.MOD_ID, getConversionRecipeName(bricksFamily.getBaseBlock(), dye)));
+			conditionalRecipe(consumer, TERRACOTTA_BRICKS_CONFIG, ShapedRecipeBuilder.shaped(bricksFamily.getBaseBlock(), 8).define('#', TERRACOTTA_BRICKS.get()).define('X', dye).pattern("###").pattern("#X#").pattern("###").group("stained_terracotta_bricks").unlockedBy(getHasName(Blocks.TERRACOTTA), has(Blocks.TERRACOTTA)), new ResourceLocation(Clayworks.MOD_ID, getConversionRecipeName(bricksFamily.getBaseBlock(), dye)));
 		}
+	}
+
+	protected static void baking(Consumer<FinishedRecipe> consumer, ItemLike ingredient, ItemLike result, float experience, int cookingTime) {
+		conditionalRecipe(consumer, KILN_CONFIG, SimpleCookingRecipeBuilder.cooking(Ingredient.of(ingredient), result, experience, cookingTime, ClayworksRecipeSerializers.BAKING.get()).unlockedBy(getHasName(ingredient), has(ingredient)), new ResourceLocation(Clayworks.MOD_ID, getItemName(result) + "_from_baking"));
 	}
 
 	protected static RecipeBuilder verticalSlabBuilder(ItemLike item, Ingredient ingredient) {
 		return ShapedRecipeBuilder.shaped(item, 6).define('#', ingredient).pattern("#").pattern("#").pattern("#");
 	}
 
-	public static void stonecutterResultFromBase(Consumer<FinishedRecipe> consumer, ItemLike output, ItemLike input) {
-		stonecutterResultFromBase(consumer, output, input, 1);
-	}
+	protected static void generateConditionalRecipes(Consumer<FinishedRecipe> consumer, BlockFamily family, ICondition condition) {
+		family.getVariants().forEach((variant, output) -> {
+			BiFunction<ItemLike, ItemLike, RecipeBuilder> function = shapeBuilders.get(variant);
+			ItemLike block = getBaseBlock(family, variant);
+			if (function != null) {
+				RecipeBuilder recipebuilder = function.apply(output, block);
+				family.getRecipeGroupPrefix().ifPresent((p_176601_) -> recipebuilder.group(p_176601_ + (variant == Variant.CUT ? "" : "_" + variant.getName())));
+				recipebuilder.unlockedBy(family.getRecipeUnlockedBy().orElseGet(() -> getHasName(block)), has(block));
+				conditionalRecipe(consumer, condition, recipebuilder);
+			}
 
-	public static void stonecutterResultFromBase(Consumer<FinishedRecipe> consumer, ItemLike output, ItemLike input, int count) {
-		SingleItemRecipeBuilder.stonecutting(Ingredient.of(input), output, count).unlockedBy(getHasName(input), has(input)).save(consumer, new ResourceLocation(Clayworks.MOD_ID, getConversionRecipeName(output, input) + "_stonecutting"));
+			if (variant == BlockFamily.Variant.CRACKED) {
+				smeltingResultFromBase(consumer, output, block);
+				conditionalRecipe(consumer, condition, SimpleCookingRecipeBuilder.smelting(Ingredient.of(block), output, 0.1F, 200).unlockedBy(getHasName(block), has(block)));
+			}
+		});
 	}
 
 	public static void conditionalRecipe(Consumer<FinishedRecipe> consumer, ICondition condition, RecipeBuilder recipe) {
@@ -155,7 +173,19 @@ public class ClayworksRecipeProvider extends RecipeProvider {
 		conditionalRecipe(consumer, condition, SingleItemRecipeBuilder.stonecutting(Ingredient.of(input), output, count).unlockedBy(getHasName(input), has(input)), new ResourceLocation(Clayworks.MOD_ID, getConversionRecipeName(output, input) + "_stonecutting"));
 	}
 
+	public static void conditionalStonecuttingRecipe(Consumer<FinishedRecipe> consumer, ICondition condition, ItemLike output, ItemLike input) {
+		conditionalStonecuttingRecipe(consumer, condition, output, input, 1);
+	}
+
 	public static void conditionalRecipe(Consumer<FinishedRecipe> consumer, ICondition condition, RecipeBuilder recipe, ResourceLocation id) {
 		ConditionalRecipe.builder().addCondition(condition).addRecipe(consumer1 -> recipe.save(consumer1, id)).generateAdvancement(new ResourceLocation(id.getNamespace(), "recipes/" + recipe.getResult().getItemCategory().getRecipeFolderName() + "/" + id.getPath())).build(consumer, id);
+	}
+
+	public static ConfigValueCondition config(ForgeConfigSpec.ConfigValue<?> value, String key, boolean inverted) {
+		return new ConfigValueCondition(new ResourceLocation(Clayworks.MOD_ID, "config"), value, key, Maps.newHashMap(), inverted);
+	}
+
+	public static ConfigValueCondition config(ForgeConfigSpec.ConfigValue<?> value, String key) {
+		return config(value, key, false);
 	}
 }

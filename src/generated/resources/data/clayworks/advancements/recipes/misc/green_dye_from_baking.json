@@ -1,34 +1,46 @@
 {
-  "parent": "minecraft:recipes/root",
-  "rewards": {
-    "recipes": [
-      "clayworks:green_dye_from_baking"
-    ]
-  },
-  "criteria": {
-    "has_cactus": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "items": [
-              "minecraft:cactus"
-            ]
+  "advancements": [
+    {
+      "conditions": [
+        {
+          "value": "kiln",
+          "type": "clayworks:config"
+        }
+      ],
+      "advancement": {
+        "parent": "minecraft:recipes/root",
+        "rewards": {
+          "recipes": [
+            "clayworks:green_dye_from_baking"
+          ]
+        },
+        "criteria": {
+          "has_cactus": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+              "items": [
+                {
+                  "items": [
+                    "minecraft:cactus"
+                  ]
+                }
+              ]
+            }
+          },
+          "has_the_recipe": {
+            "trigger": "minecraft:recipe_unlocked",
+            "conditions": {
+              "recipe": "clayworks:green_dye_from_baking"
+            }
           }
+        },
+        "requirements": [
+          [
+            "has_cactus",
+            "has_the_recipe"
+          ]
         ]
       }
-    },
-    "has_the_recipe": {
-      "trigger": "minecraft:recipe_unlocked",
-      "conditions": {
-        "recipe": "clayworks:green_dye_from_baking"
-      }
     }
-  },
-  "requirements": [
-    [
-      "has_cactus",
-      "has_the_recipe"
-    ]
   ]
 }

@@ -1,8 +1,21 @@
 {
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "minecraft:light_blue_terracotta"
-  },
-  "result": "clayworks:chiseled_light_blue_terracotta_bricks",
-  "count": 1
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "value": "terracotta_bricks",
+          "type": "clayworks:config"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:stonecutting",
+        "ingredient": {
+          "item": "minecraft:light_blue_terracotta"
+        },
+        "result": "clayworks:chiseled_light_blue_terracotta_bricks",
+        "count": 1
+      }
+    }
+  ]
 }

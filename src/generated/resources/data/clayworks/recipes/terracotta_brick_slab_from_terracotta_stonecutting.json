@@ -1,8 +1,21 @@
 {
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "minecraft:terracotta"
-  },
-  "result": "clayworks:terracotta_brick_slab",
-  "count": 2
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "value": "terracotta_bricks",
+          "type": "clayworks:config"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:stonecutting",
+        "ingredient": {
+          "item": "minecraft:terracotta"
+        },
+        "result": "clayworks:terracotta_brick_slab",
+        "count": 2
+      }
+    }
+  ]
 }

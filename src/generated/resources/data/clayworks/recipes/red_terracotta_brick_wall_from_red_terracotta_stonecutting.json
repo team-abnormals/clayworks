@@ -1,8 +1,21 @@
 {
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "minecraft:red_terracotta"
-  },
-  "result": "clayworks:red_terracotta_brick_wall",
-  "count": 1
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "value": "terracotta_bricks",
+          "type": "clayworks:config"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:stonecutting",
+        "ingredient": {
+          "item": "minecraft:red_terracotta"
+        },
+        "result": "clayworks:red_terracotta_brick_wall",
+        "count": 1
+      }
+    }
+  ]
 }

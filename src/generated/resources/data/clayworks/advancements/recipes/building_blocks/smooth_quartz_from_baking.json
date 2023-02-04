@@ -1,34 +1,46 @@
 {
-  "parent": "minecraft:recipes/root",
-  "rewards": {
-    "recipes": [
-      "clayworks:smooth_quartz_from_baking"
-    ]
-  },
-  "criteria": {
-    "has_quartz_block": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "items": [
-              "minecraft:quartz_block"
-            ]
+  "advancements": [
+    {
+      "conditions": [
+        {
+          "value": "kiln",
+          "type": "clayworks:config"
+        }
+      ],
+      "advancement": {
+        "parent": "minecraft:recipes/root",
+        "rewards": {
+          "recipes": [
+            "clayworks:smooth_quartz_from_baking"
+          ]
+        },
+        "criteria": {
+          "has_quartz_block": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+              "items": [
+                {
+                  "items": [
+                    "minecraft:quartz_block"
+                  ]
+                }
+              ]
+            }
+          },
+          "has_the_recipe": {
+            "trigger": "minecraft:recipe_unlocked",
+            "conditions": {
+              "recipe": "clayworks:smooth_quartz_from_baking"
+            }
           }
+        },
+        "requirements": [
+          [
+            "has_quartz_block",
+            "has_the_recipe"
+          ]
         ]
       }
-    },
-    "has_the_recipe": {
-      "trigger": "minecraft:recipe_unlocked",
-      "conditions": {
-        "recipe": "clayworks:smooth_quartz_from_baking"
-      }
     }
-  },
-  "requirements": [
-    [
-      "has_quartz_block",
-      "has_the_recipe"
-    ]
   ]
 }

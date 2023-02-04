@@ -1,34 +1,46 @@
 {
-  "parent": "minecraft:recipes/root",
-  "rewards": {
-    "recipes": [
-      "clayworks:pink_terracotta_wall"
-    ]
-  },
-  "criteria": {
-    "has_pink_terracotta": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "items": [
-              "minecraft:pink_terracotta"
-            ]
+  "advancements": [
+    {
+      "conditions": [
+        {
+          "value": "terracotta_variants",
+          "type": "clayworks:config"
+        }
+      ],
+      "advancement": {
+        "parent": "minecraft:recipes/root",
+        "rewards": {
+          "recipes": [
+            "clayworks:pink_terracotta_wall"
+          ]
+        },
+        "criteria": {
+          "has_pink_terracotta": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+              "items": [
+                {
+                  "items": [
+                    "minecraft:pink_terracotta"
+                  ]
+                }
+              ]
+            }
+          },
+          "has_the_recipe": {
+            "trigger": "minecraft:recipe_unlocked",
+            "conditions": {
+              "recipe": "clayworks:pink_terracotta_wall"
+            }
           }
+        },
+        "requirements": [
+          [
+            "has_pink_terracotta",
+            "has_the_recipe"
+          ]
         ]
       }
-    },
-    "has_the_recipe": {
-      "trigger": "minecraft:recipe_unlocked",
-      "conditions": {
-        "recipe": "clayworks:pink_terracotta_wall"
-      }
     }
-  },
-  "requirements": [
-    [
-      "has_pink_terracotta",
-      "has_the_recipe"
-    ]
   ]
 }

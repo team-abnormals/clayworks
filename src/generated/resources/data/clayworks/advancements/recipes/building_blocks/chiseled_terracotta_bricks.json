@@ -1,34 +1,46 @@
 {
-  "parent": "minecraft:recipes/root",
-  "rewards": {
-    "recipes": [
-      "clayworks:chiseled_terracotta_bricks"
-    ]
-  },
-  "criteria": {
-    "has_terracotta_brick_slab": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "items": [
-              "clayworks:terracotta_brick_slab"
-            ]
+  "advancements": [
+    {
+      "conditions": [
+        {
+          "value": "terracotta_bricks",
+          "type": "clayworks:config"
+        }
+      ],
+      "advancement": {
+        "parent": "minecraft:recipes/root",
+        "rewards": {
+          "recipes": [
+            "clayworks:chiseled_terracotta_bricks"
+          ]
+        },
+        "criteria": {
+          "has_terracotta_brick_slab": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+              "items": [
+                {
+                  "items": [
+                    "clayworks:terracotta_brick_slab"
+                  ]
+                }
+              ]
+            }
+          },
+          "has_the_recipe": {
+            "trigger": "minecraft:recipe_unlocked",
+            "conditions": {
+              "recipe": "clayworks:chiseled_terracotta_bricks"
+            }
           }
+        },
+        "requirements": [
+          [
+            "has_terracotta_brick_slab",
+            "has_the_recipe"
+          ]
         ]
       }
-    },
-    "has_the_recipe": {
-      "trigger": "minecraft:recipe_unlocked",
-      "conditions": {
-        "recipe": "clayworks:chiseled_terracotta_bricks"
-      }
     }
-  },
-  "requirements": [
-    [
-      "has_terracotta_brick_slab",
-      "has_the_recipe"
-    ]
   ]
 }

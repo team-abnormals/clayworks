@@ -1,16 +1,29 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "###",
-    "###"
-  ],
-  "key": {
-    "#": {
-      "item": "clayworks:terracotta_bricks"
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "value": "terracotta_bricks",
+          "type": "clayworks:config"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          "###",
+          "###"
+        ],
+        "key": {
+          "#": {
+            "item": "clayworks:terracotta_bricks"
+          }
+        },
+        "result": {
+          "item": "clayworks:terracotta_brick_wall",
+          "count": 6
+        }
+      }
     }
-  },
-  "result": {
-    "item": "clayworks:terracotta_brick_wall",
-    "count": 6
-  }
+  ]
 }

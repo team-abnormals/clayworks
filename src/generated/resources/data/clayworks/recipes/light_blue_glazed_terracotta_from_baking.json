@@ -1,9 +1,22 @@
 {
-  "type": "clayworks:baking",
-  "ingredient": {
-    "item": "minecraft:light_blue_terracotta"
-  },
-  "result": "minecraft:light_blue_glazed_terracotta",
-  "experience": 0.1,
-  "cookingtime": 100
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "value": "kiln",
+          "type": "clayworks:config"
+        }
+      ],
+      "recipe": {
+        "type": "clayworks:baking",
+        "ingredient": {
+          "item": "minecraft:light_blue_terracotta"
+        },
+        "result": "minecraft:light_blue_glazed_terracotta",
+        "experience": 0.1,
+        "cookingtime": 100
+      }
+    }
+  ]
 }

@@ -1,34 +1,46 @@
 {
-  "parent": "minecraft:recipes/root",
-  "rewards": {
-    "recipes": [
-      "clayworks:lime_glazed_terracotta_from_baking"
-    ]
-  },
-  "criteria": {
-    "has_lime_terracotta": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "items": [
-              "minecraft:lime_terracotta"
-            ]
+  "advancements": [
+    {
+      "conditions": [
+        {
+          "value": "kiln",
+          "type": "clayworks:config"
+        }
+      ],
+      "advancement": {
+        "parent": "minecraft:recipes/root",
+        "rewards": {
+          "recipes": [
+            "clayworks:lime_glazed_terracotta_from_baking"
+          ]
+        },
+        "criteria": {
+          "has_lime_terracotta": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+              "items": [
+                {
+                  "items": [
+                    "minecraft:lime_terracotta"
+                  ]
+                }
+              ]
+            }
+          },
+          "has_the_recipe": {
+            "trigger": "minecraft:recipe_unlocked",
+            "conditions": {
+              "recipe": "clayworks:lime_glazed_terracotta_from_baking"
+            }
           }
+        },
+        "requirements": [
+          [
+            "has_lime_terracotta",
+            "has_the_recipe"
+          ]
         ]
       }
-    },
-    "has_the_recipe": {
-      "trigger": "minecraft:recipe_unlocked",
-      "conditions": {
-        "recipe": "clayworks:lime_glazed_terracotta_from_baking"
-      }
     }
-  },
-  "requirements": [
-    [
-      "has_lime_terracotta",
-      "has_the_recipe"
-    ]
   ]
 }

@@ -1,16 +1,29 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "###",
-    "###"
-  ],
-  "key": {
-    "#": {
-      "item": "minecraft:gray_terracotta"
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "value": "terracotta_variants",
+          "type": "clayworks:config"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          "###",
+          "###"
+        ],
+        "key": {
+          "#": {
+            "item": "minecraft:gray_terracotta"
+          }
+        },
+        "result": {
+          "item": "clayworks:gray_terracotta_wall",
+          "count": 6
+        }
+      }
     }
-  },
-  "result": {
-    "item": "clayworks:gray_terracotta_wall",
-    "count": 6
-  }
+  ]
 }

@@ -1,34 +1,46 @@
 {
-  "parent": "minecraft:recipes/root",
-  "rewards": {
-    "recipes": [
-      "clayworks:cyan_terracotta_stairs_from_cyan_terracotta_stonecutting"
-    ]
-  },
-  "criteria": {
-    "has_cyan_terracotta": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "items": [
-              "minecraft:cyan_terracotta"
-            ]
+  "advancements": [
+    {
+      "conditions": [
+        {
+          "value": "terracotta_variants",
+          "type": "clayworks:config"
+        }
+      ],
+      "advancement": {
+        "parent": "minecraft:recipes/root",
+        "rewards": {
+          "recipes": [
+            "clayworks:cyan_terracotta_stairs_from_cyan_terracotta_stonecutting"
+          ]
+        },
+        "criteria": {
+          "has_cyan_terracotta": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+              "items": [
+                {
+                  "items": [
+                    "minecraft:cyan_terracotta"
+                  ]
+                }
+              ]
+            }
+          },
+          "has_the_recipe": {
+            "trigger": "minecraft:recipe_unlocked",
+            "conditions": {
+              "recipe": "clayworks:cyan_terracotta_stairs_from_cyan_terracotta_stonecutting"
+            }
           }
+        },
+        "requirements": [
+          [
+            "has_cyan_terracotta",
+            "has_the_recipe"
+          ]
         ]
       }
-    },
-    "has_the_recipe": {
-      "trigger": "minecraft:recipe_unlocked",
-      "conditions": {
-        "recipe": "clayworks:cyan_terracotta_stairs_from_cyan_terracotta_stonecutting"
-      }
     }
-  },
-  "requirements": [
-    [
-      "has_cyan_terracotta",
-      "has_the_recipe"
-    ]
   ]
 }

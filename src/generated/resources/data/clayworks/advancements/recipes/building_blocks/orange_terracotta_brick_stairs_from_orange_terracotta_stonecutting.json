@@ -1,34 +1,46 @@
 {
-  "parent": "minecraft:recipes/root",
-  "rewards": {
-    "recipes": [
-      "clayworks:orange_terracotta_brick_stairs_from_orange_terracotta_stonecutting"
-    ]
-  },
-  "criteria": {
-    "has_orange_terracotta": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "items": [
-              "minecraft:orange_terracotta"
-            ]
+  "advancements": [
+    {
+      "conditions": [
+        {
+          "value": "terracotta_bricks",
+          "type": "clayworks:config"
+        }
+      ],
+      "advancement": {
+        "parent": "minecraft:recipes/root",
+        "rewards": {
+          "recipes": [
+            "clayworks:orange_terracotta_brick_stairs_from_orange_terracotta_stonecutting"
+          ]
+        },
+        "criteria": {
+          "has_orange_terracotta": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+              "items": [
+                {
+                  "items": [
+                    "minecraft:orange_terracotta"
+                  ]
+                }
+              ]
+            }
+          },
+          "has_the_recipe": {
+            "trigger": "minecraft:recipe_unlocked",
+            "conditions": {
+              "recipe": "clayworks:orange_terracotta_brick_stairs_from_orange_terracotta_stonecutting"
+            }
           }
+        },
+        "requirements": [
+          [
+            "has_orange_terracotta",
+            "has_the_recipe"
+          ]
         ]
       }
-    },
-    "has_the_recipe": {
-      "trigger": "minecraft:recipe_unlocked",
-      "conditions": {
-        "recipe": "clayworks:orange_terracotta_brick_stairs_from_orange_terracotta_stonecutting"
-      }
     }
-  },
-  "requirements": [
-    [
-      "has_orange_terracotta",
-      "has_the_recipe"
-    ]
   ]
 }

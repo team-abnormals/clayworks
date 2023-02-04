@@ -1,34 +1,46 @@
 {
-  "parent": "minecraft:recipes/root",
-  "rewards": {
-    "recipes": [
-      "clayworks:light_blue_terracotta_slab_from_light_blue_terracotta_stonecutting"
-    ]
-  },
-  "criteria": {
-    "has_light_blue_terracotta": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "items": [
-              "minecraft:light_blue_terracotta"
-            ]
+  "advancements": [
+    {
+      "conditions": [
+        {
+          "value": "terracotta_variants",
+          "type": "clayworks:config"
+        }
+      ],
+      "advancement": {
+        "parent": "minecraft:recipes/root",
+        "rewards": {
+          "recipes": [
+            "clayworks:light_blue_terracotta_slab_from_light_blue_terracotta_stonecutting"
+          ]
+        },
+        "criteria": {
+          "has_light_blue_terracotta": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+              "items": [
+                {
+                  "items": [
+                    "minecraft:light_blue_terracotta"
+                  ]
+                }
+              ]
+            }
+          },
+          "has_the_recipe": {
+            "trigger": "minecraft:recipe_unlocked",
+            "conditions": {
+              "recipe": "clayworks:light_blue_terracotta_slab_from_light_blue_terracotta_stonecutting"
+            }
           }
+        },
+        "requirements": [
+          [
+            "has_light_blue_terracotta",
+            "has_the_recipe"
+          ]
         ]
       }
-    },
-    "has_the_recipe": {
-      "trigger": "minecraft:recipe_unlocked",
-      "conditions": {
-        "recipe": "clayworks:light_blue_terracotta_slab_from_light_blue_terracotta_stonecutting"
-      }
     }
-  },
-  "requirements": [
-    [
-      "has_light_blue_terracotta",
-      "has_the_recipe"
-    ]
   ]
 }

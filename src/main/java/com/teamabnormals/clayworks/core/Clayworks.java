@@ -1,8 +1,7 @@
 package com.teamabnormals.clayworks.core;
 
-import com.teamabnormals.blueprint.common.world.modification.structure.StructureRepalleterManager;
+import com.teamabnormals.blueprint.core.util.DataUtil;
 import com.teamabnormals.blueprint.core.util.registry.RegistryHelper;
-import com.teamabnormals.clayworks.common.modification.OppositeFacingStructureRepaletter;
 import com.teamabnormals.clayworks.core.data.client.ClayworksBlockStateProvider;
 import com.teamabnormals.clayworks.core.data.client.ClayworksLanguageProvider;
 import com.teamabnormals.clayworks.core.data.server.ClayworksLootTableProvider;
@@ -15,12 +14,15 @@ import com.teamabnormals.clayworks.core.registry.ClayworksRecipes.ClayworksRecip
 import com.teamabnormals.clayworks.core.registry.ClayworksRecipes.ClayworksRecipeSerializers;
 import com.teamabnormals.clayworks.core.registry.ClayworksRecipes.ClayworksRecipeTypes;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.RecipeBookType;
+import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -35,6 +37,7 @@ public class Clayworks {
 
 	public Clayworks() {
 		IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
+		ModLoadingContext context = ModLoadingContext.get();
 		MinecraftForge.EVENT_BUS.register(this);
 
 		REGISTRY_HELPER.register(bus);
@@ -48,6 +51,14 @@ public class Clayworks {
 		bus.addListener(this::commonSetup);
 		bus.addListener(this::clientSetup);
 		bus.addListener(this::dataSetup);
+
+		bus.addGenericListener(Block.class, this::registerConfigConditions);
+
+		context.registerConfig(ModConfig.Type.COMMON, ClayworksConfig.COMMON_SPEC);
+	}
+
+	private void registerConfigConditions(RegistryEvent.Register<Block> event) {
+		DataUtil.registerConfigCondition(MOD_ID, ClayworksConfig.COMMON);
 	}
 
 	private void commonSetup(FMLCommonSetupEvent event) {

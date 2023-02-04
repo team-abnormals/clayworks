@@ -1,8 +1,21 @@
 {
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "clayworks:gray_terracotta_bricks"
-  },
-  "result": "clayworks:gray_terracotta_brick_wall",
-  "count": 1
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "value": "terracotta_bricks",
+          "type": "clayworks:config"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:stonecutting",
+        "ingredient": {
+          "item": "clayworks:gray_terracotta_bricks"
+        },
+        "result": "clayworks:gray_terracotta_brick_wall",
+        "count": 1
+      }
+    }
+  ]
 }

@@ -1,16 +1,29 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "##",
-    "##"
-  ],
-  "key": {
-    "#": {
-      "item": "minecraft:brown_terracotta"
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "value": "terracotta_bricks",
+          "type": "clayworks:config"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          "##",
+          "##"
+        ],
+        "key": {
+          "#": {
+            "item": "minecraft:brown_terracotta"
+          }
+        },
+        "result": {
+          "item": "clayworks:brown_terracotta_bricks",
+          "count": 4
+        }
+      }
     }
-  },
-  "result": {
-    "item": "clayworks:brown_terracotta_bricks",
-    "count": 4
-  }
+  ]
 }

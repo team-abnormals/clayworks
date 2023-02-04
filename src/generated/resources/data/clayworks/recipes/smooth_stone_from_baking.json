@@ -1,9 +1,22 @@
 {
-  "type": "clayworks:baking",
-  "ingredient": {
-    "item": "minecraft:stone"
-  },
-  "result": "minecraft:smooth_stone",
-  "experience": 0.1,
-  "cookingtime": 100
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "value": "kiln",
+          "type": "clayworks:config"
+        }
+      ],
+      "recipe": {
+        "type": "clayworks:baking",
+        "ingredient": {
+          "item": "minecraft:stone"
+        },
+        "result": "minecraft:smooth_stone",
+        "experience": 0.1,
+        "cookingtime": 100
+      }
+    }
+  ]
 }

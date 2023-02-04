@@ -1,34 +1,46 @@
 {
-  "parent": "minecraft:recipes/root",
-  "rewards": {
-    "recipes": [
-      "clayworks:white_terracotta_brick_stairs"
-    ]
-  },
-  "criteria": {
-    "has_white_terracotta_bricks": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "items": [
-              "clayworks:white_terracotta_bricks"
-            ]
+  "advancements": [
+    {
+      "conditions": [
+        {
+          "value": "terracotta_bricks",
+          "type": "clayworks:config"
+        }
+      ],
+      "advancement": {
+        "parent": "minecraft:recipes/root",
+        "rewards": {
+          "recipes": [
+            "clayworks:white_terracotta_brick_stairs"
+          ]
+        },
+        "criteria": {
+          "has_white_terracotta_bricks": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+              "items": [
+                {
+                  "items": [
+                    "clayworks:white_terracotta_bricks"
+                  ]
+                }
+              ]
+            }
+          },
+          "has_the_recipe": {
+            "trigger": "minecraft:recipe_unlocked",
+            "conditions": {
+              "recipe": "clayworks:white_terracotta_brick_stairs"
+            }
           }
+        },
+        "requirements": [
+          [
+            "has_white_terracotta_bricks",
+            "has_the_recipe"
+          ]
         ]
       }
-    },
-    "has_the_recipe": {
-      "trigger": "minecraft:recipe_unlocked",
-      "conditions": {
-        "recipe": "clayworks:white_terracotta_brick_stairs"
-      }
     }
-  },
-  "requirements": [
-    [
-      "has_white_terracotta_bricks",
-      "has_the_recipe"
-    ]
   ]
 }

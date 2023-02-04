@@ -1,8 +1,21 @@
 {
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "minecraft:magenta_terracotta"
-  },
-  "result": "clayworks:magenta_terracotta_wall",
-  "count": 1
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "value": "terracotta_variants",
+          "type": "clayworks:config"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:stonecutting",
+        "ingredient": {
+          "item": "minecraft:magenta_terracotta"
+        },
+        "result": "clayworks:magenta_terracotta_wall",
+        "count": 1
+      }
+    }
+  ]
 }

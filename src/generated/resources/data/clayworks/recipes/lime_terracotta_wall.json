@@ -1,16 +1,29 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "###",
-    "###"
-  ],
-  "key": {
-    "#": {
-      "item": "minecraft:lime_terracotta"
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "value": "terracotta_variants",
+          "type": "clayworks:config"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          "###",
+          "###"
+        ],
+        "key": {
+          "#": {
+            "item": "minecraft:lime_terracotta"
+          }
+        },
+        "result": {
+          "item": "clayworks:lime_terracotta_wall",
+          "count": 6
+        }
+      }
     }
-  },
-  "result": {
-    "item": "clayworks:lime_terracotta_wall",
-    "count": 6
-  }
+  ]
 }

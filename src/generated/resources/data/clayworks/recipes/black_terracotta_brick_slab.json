@@ -1,15 +1,28 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "###"
-  ],
-  "key": {
-    "#": {
-      "item": "clayworks:black_terracotta_bricks"
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "value": "terracotta_bricks",
+          "type": "clayworks:config"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          "###"
+        ],
+        "key": {
+          "#": {
+            "item": "clayworks:black_terracotta_bricks"
+          }
+        },
+        "result": {
+          "item": "clayworks:black_terracotta_brick_slab",
+          "count": 6
+        }
+      }
     }
-  },
-  "result": {
-    "item": "clayworks:black_terracotta_brick_slab",
-    "count": 6
-  }
+  ]
 }

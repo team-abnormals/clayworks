@@ -1,21 +1,34 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "group": "stained_terracotta_bricks",
-  "pattern": [
-    "###",
-    "#X#",
-    "###"
-  ],
-  "key": {
-    "#": {
-      "item": "clayworks:terracotta_bricks"
-    },
-    "X": {
-      "item": "minecraft:light_gray_dye"
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "value": "terracotta_bricks",
+          "type": "clayworks:config"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "group": "stained_terracotta_bricks",
+        "pattern": [
+          "###",
+          "#X#",
+          "###"
+        ],
+        "key": {
+          "#": {
+            "item": "clayworks:terracotta_bricks"
+          },
+          "X": {
+            "item": "minecraft:light_gray_dye"
+          }
+        },
+        "result": {
+          "item": "clayworks:light_gray_terracotta_bricks",
+          "count": 8
+        }
+      }
     }
-  },
-  "result": {
-    "item": "clayworks:light_gray_terracotta_bricks",
-    "count": 8
-  }
+  ]
 }

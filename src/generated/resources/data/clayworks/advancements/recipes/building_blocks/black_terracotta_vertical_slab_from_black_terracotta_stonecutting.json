@@ -1,0 +1,55 @@
+{
+  "advancements": [
+    {
+      "conditions": [
+        {
+          "values": [
+            {
+              "value": "terracotta_variants",
+              "type": "clayworks:config"
+            },
+            {
+              "flag": "vertical_slabs",
+              "type": "blueprint:quark_flag"
+            }
+          ],
+          "type": "forge:and"
+        }
+      ],
+      "advancement": {
+        "parent": "minecraft:recipes/root",
+        "rewards": {
+          "recipes": [
+            "clayworks:black_terracotta_vertical_slab_from_black_terracotta_stonecutting"
+          ]
+        },
+        "criteria": {
+          "has_black_terracotta": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+              "items": [
+                {
+                  "items": [
+                    "minecraft:black_terracotta"
+                  ]
+                }
+              ]
+            }
+          },
+          "has_the_recipe": {
+            "trigger": "minecraft:recipe_unlocked",
+            "conditions": {
+              "recipe": "clayworks:black_terracotta_vertical_slab_from_black_terracotta_stonecutting"
+            }
+          }
+        },
+        "requirements": [
+          [
+            "has_black_terracotta",
+            "has_the_recipe"
+          ]
+        ]
+      }
+    }
+  ]
+}

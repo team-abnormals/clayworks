@@ -1,34 +1,46 @@
 {
-  "parent": "minecraft:recipes/root",
-  "rewards": {
-    "recipes": [
-      "clayworks:lime_dye_from_baking"
-    ]
-  },
-  "criteria": {
-    "has_sea_pickle": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "items": [
-              "minecraft:sea_pickle"
-            ]
+  "advancements": [
+    {
+      "conditions": [
+        {
+          "value": "kiln",
+          "type": "clayworks:config"
+        }
+      ],
+      "advancement": {
+        "parent": "minecraft:recipes/root",
+        "rewards": {
+          "recipes": [
+            "clayworks:lime_dye_from_baking"
+          ]
+        },
+        "criteria": {
+          "has_sea_pickle": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+              "items": [
+                {
+                  "items": [
+                    "minecraft:sea_pickle"
+                  ]
+                }
+              ]
+            }
+          },
+          "has_the_recipe": {
+            "trigger": "minecraft:recipe_unlocked",
+            "conditions": {
+              "recipe": "clayworks:lime_dye_from_baking"
+            }
           }
+        },
+        "requirements": [
+          [
+            "has_sea_pickle",
+            "has_the_recipe"
+          ]
         ]
       }
-    },
-    "has_the_recipe": {
-      "trigger": "minecraft:recipe_unlocked",
-      "conditions": {
-        "recipe": "clayworks:lime_dye_from_baking"
-      }
     }
-  },
-  "requirements": [
-    [
-      "has_sea_pickle",
-      "has_the_recipe"
-    ]
   ]
 }
