@@ -1,9 +1,9 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "BBB",
-    "BXB",
-    "###"
+    "###",
+    "#X#",
+    "BBB"
   ],
   "key": {
     "#": {
@@ -13,7 +13,7 @@
       "item": "minecraft:furnace"
     },
     "B": {
-      "item": "clayworks:terracotta_bricks"
+      "item": "minecraft:bricks"
     }
   },
   "result": {

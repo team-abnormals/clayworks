@@ -35,7 +35,7 @@ public class ClayworksRecipeProvider extends RecipeProvider {
 
 	@Override
 	public void buildCraftingRecipes(Consumer<FinishedRecipe> consumer) {
-		ShapedRecipeBuilder.shaped(KILN.get()).define('#', ItemTags.STONE_CRAFTING_MATERIALS).define('X', Blocks.FURNACE).define('B', TERRACOTTA_BRICKS.get()).pattern("BBB").pattern("BXB").pattern("###").unlockedBy("has_cobblestone", has(ItemTags.STONE_CRAFTING_MATERIALS)).save(consumer);
+		ShapedRecipeBuilder.shaped(KILN.get()).define('#', ItemTags.STONE_CRAFTING_MATERIALS).define('X', Blocks.FURNACE).define('B', Blocks.BRICKS).pattern("###").pattern("#X#").pattern("BBB").unlockedBy("has_cobblestone", has(ItemTags.STONE_CRAFTING_MATERIALS)).save(consumer);
 		kilnRecipes(consumer);
 		chiseled(consumer, CHISELED_BRICKS.get(), Blocks.BRICK_SLAB);
 		stonecutterResultFromBase(consumer, Blocks.BRICKS, CHISELED_BRICKS.get());
