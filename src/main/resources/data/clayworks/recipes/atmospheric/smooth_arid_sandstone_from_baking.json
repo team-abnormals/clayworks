@@ -1,15 +1,31 @@
 {
-  "type": "clayworks:baking",
-  "ingredient": {
-    "item": "atmospheric:arid_sandstone"
-  },
-  "result": "atmospheric:smooth_arid_sandstone",
-  "experience": 0.1,
-  "cookingtime": 100,
-  "conditions": [
+  "type": "forge:conditional",
+  "recipes": [
     {
-      "type": "forge:mod_loaded",
-      "modid": "atmospheric"
+      "conditions": [
+        {
+          "values": [
+            {
+              "modid": "atmospheric",
+              "type": "forge:mod_loaded"
+            },
+            {
+              "value": "kiln",
+              "type": "clayworks:config"
+            }
+          ],
+          "type": "forge:and"
+        }
+      ],
+      "recipe": {
+        "type": "clayworks:baking",
+        "ingredient": {
+          "item": "atmospheric:arid_sandstone"
+        },
+        "result": "atmospheric:smooth_arid_sandstone",
+        "experience": 0.1,
+        "cookingtime": 100
+      }
     }
   ]
 }

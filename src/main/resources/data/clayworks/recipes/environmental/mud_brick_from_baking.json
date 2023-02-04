@@ -1,15 +1,31 @@
 {
-  "type": "clayworks:baking",
-  "ingredient": {
-    "item": "environmental:mud_ball"
-  },
-  "result": "environmental:mud_brick",
-  "experience": 0.3,
-  "cookingtime": 100,
-  "conditions": [
+  "type": "forge:conditional",
+  "recipes": [
     {
-      "type": "forge:mod_loaded",
-      "modid": "environmental"
+      "conditions": [
+        {
+          "values": [
+            {
+              "modid": "environmental",
+              "type": "forge:mod_loaded"
+            },
+            {
+              "value": "kiln",
+              "type": "clayworks:config"
+            }
+          ],
+          "type": "forge:and"
+        }
+      ],
+      "recipe": {
+        "type": "clayworks:baking",
+        "ingredient": {
+          "item": "environmental:mud_ball"
+        },
+        "result": "environmental:mud_brick",
+        "experience": 0.3,
+        "cookingtime": 100
+      }
     }
   ]
 }

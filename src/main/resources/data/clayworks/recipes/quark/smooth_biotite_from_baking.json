@@ -1,15 +1,31 @@
 {
-  "type": "clayworks:baking",
-  "ingredient": {
-    "item": "quark:biotite_block"
-  },
-  "result": "quark:smooth_biotite",
-  "experience": 0.1,
-  "cookingtime": 100,
-  "conditions": [
+  "type": "forge:conditional",
+  "recipes": [
     {
-      "type": "blueprint:quark_flag",
-      "flag": "biotite"
+      "conditions": [
+        {
+          "values": [
+            {
+              "flag": "glass_shard",
+              "type": "blueprint:biotite"
+            },
+            {
+              "value": "kiln",
+              "type": "clayworks:config"
+            }
+          ],
+          "type": "forge:and"
+        }
+      ],
+      "recipe": {
+        "type": "clayworks:baking",
+        "ingredient": {
+          "item": "quark:biotite_block"
+        },
+        "result": "quark:smooth_biotite",
+        "experience": 0.1,
+        "cookingtime": 100
+      }
     }
   ]
 }

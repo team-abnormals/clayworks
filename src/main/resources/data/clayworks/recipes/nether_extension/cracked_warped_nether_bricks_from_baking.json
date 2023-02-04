@@ -1,15 +1,31 @@
 {
-  "type": "clayworks:baking",
-  "ingredient": {
-    "item": "nether_extension:warped_nether_bricks"
-  },
-  "result": "nether_extension:cracked_warped_nether_bricks",
-  "experience": 0.1,
-  "cookingtime": 100,
-  "conditions": [
+  "type": "forge:conditional",
+  "recipes": [
     {
-      "type": "forge:mod_loaded",
-      "modid": "nether_extension"
+      "conditions": [
+        {
+          "values": [
+            {
+              "modid": "nether_extension",
+              "type": "forge:mod_loaded"
+            },
+            {
+              "value": "kiln",
+              "type": "clayworks:config"
+            }
+          ],
+          "type": "forge:and"
+        }
+      ],
+      "recipe": {
+        "type": "clayworks:baking",
+        "ingredient": {
+          "item": "nether_extension:warped_nether_bricks"
+        },
+        "result": "nether_extension:cracked_warped_nether_bricks",
+        "experience": 0.1,
+        "cookingtime": 100
+      }
     }
   ]
 }
