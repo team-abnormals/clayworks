@@ -56,7 +56,7 @@ public class KilnBlock extends AbstractFurnaceBlock {
 				worldIn.playLocalSound(d0, d1, d2, ClayworksSoundEvents.KILN_SMOKE.get(), SoundSource.BLOCKS, 1.0F, 1.0F, false);
 			}
 			SimpleParticleType particleType = ClayworksParticleTypes.KILN_SMOKE.get();
-			worldIn.addAlwaysVisibleParticle(particleType, true, pos.getX() + 0.5D + rand.nextDouble() / 3.0D * (rand.nextBoolean() ? 1 : -1), pos.getY() + rand.nextDouble() + rand.nextDouble(), pos.getZ() + 0.5D + rand.nextDouble() / 3.0D * (rand.nextBoolean() ? 1 : -1), 0.0D, 0.07D, 0.0D);
+			worldIn.addAlwaysVisibleParticle(particleType, true, d0 + rand.nextDouble() / 8.0D * (rand.nextBoolean() ? 1 : -1), d1 + rand.nextDouble() + rand.nextDouble() * 0.5D, d2 + rand.nextDouble() / 8.0D * (rand.nextBoolean() ? 1 : -1), 0.0D, 0.07D, 0.0D);
 		}
 	}
 }
