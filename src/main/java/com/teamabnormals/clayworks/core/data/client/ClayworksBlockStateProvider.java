@@ -62,8 +62,8 @@ public class ClayworksBlockStateProvider extends BlockStateProvider {
 	}
 
 	public void furnace(Block block) {
-		ModelFile furnace = models().orientableWithBottom(name(block), suffix(blockTexture(block), "_side"), suffix(blockTexture(block), "_front"), suffix(blockTexture(block), "_bottom"), suffix(blockTexture(block), "_top")).texture("particle", suffix(blockTexture(block), "_side"));
-		ModelFile furnaceOn = models().orientableWithBottom(name(block) + "_on", suffix(blockTexture(block), "_side"), suffix(blockTexture(block), "_front_on"), suffix(blockTexture(block), "_bottom"), suffix(blockTexture(block), "_top")).texture("particle", suffix(blockTexture(block), "_side"));
+		ModelFile furnace = models().cube(name(block), suffix(blockTexture(block), "_bottom"), suffix(blockTexture(block), "_top"), suffix(blockTexture(block), "_front"), suffix(blockTexture(block), "_back"), suffix(blockTexture(block), "_left"), suffix(blockTexture(block), "_right")).texture("particle", suffix(blockTexture(block), "_back"));
+		ModelFile furnaceOn = models().cube(name(block) + "_on", suffix(blockTexture(block), "_bottom"), suffix(blockTexture(block), "_top_on"), suffix(blockTexture(block), "_front_on"), suffix(blockTexture(block), "_back"), suffix(blockTexture(block), "_left"), suffix(blockTexture(block), "_right")).texture("particle", suffix(blockTexture(block), "_back"));
 		this.horizontalBlock(block, (state -> state.getValue(BlockStateProperties.LIT) ? furnaceOn : furnace));
 		blockItem(block);
 	}
