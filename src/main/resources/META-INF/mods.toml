@@ -10,11 +10,11 @@ license = "https://github.com/team-abnormals/clayworks/blob/main/LICENSE.txt"
     itemIcon = "clayworks:kiln"
     configBackground = "clayworks:textures/block/terracotta_bricks.png"
     authors = "Team Abnormals"
-    credits = "bageldotjpg"
+    credits = "bageldotjpg, hatsondogs, five"
     displayURL = "https://www.teamabnormals.com/mods/clayworks"
     displayName = "Clayworks"
     description = '''
-    Template description.
+    Introduces a new furnace type and several building blocks!
     '''
 
 [[dependencies.clayworks]]
