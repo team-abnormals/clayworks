@@ -45,7 +45,7 @@ public class ClayworksRecipeProvider extends RecipeProvider {
 
 	@Override
 	public void buildCraftingRecipes(Consumer<FinishedRecipe> consumer) {
-		conditionalRecipe(consumer, KILN_CONFIG, ShapedRecipeBuilder.shaped(KILN.get()).define('#', ItemTags.STONE_CRAFTING_MATERIALS).define('X', Blocks.FURNACE).define('B', Blocks.BRICKS).pattern("###").pattern("#X#").pattern("BBB").unlockedBy("has_cobblestone", has(ItemTags.STONE_CRAFTING_MATERIALS)));
+		conditionalRecipe(consumer, KILN_CONFIG, ShapedRecipeBuilder.shaped(KILN.get()).define('#', ItemTags.STONE_CRAFTING_MATERIALS).define('X', Blocks.FURNACE).define('B', Blocks.MUD_BRICKS).pattern("###").pattern("#X#").pattern("BBB").unlockedBy("has_cobblestone", has(ItemTags.STONE_CRAFTING_MATERIALS)));
 		generateKilnRecipes(consumer);
 
 		conditionalRecipe(consumer, CHISELED_BRICKS_CONFIG, chiseledBuilder(CHISELED_BRICKS.get(), Ingredient.of(Blocks.BRICK_SLAB)).unlockedBy(getHasName(Blocks.BRICK_SLAB), has(Blocks.BRICK_SLAB)));
