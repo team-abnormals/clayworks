@@ -13,7 +13,10 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.item.crafting.SimpleCookingSerializer;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraftforge.client.RecipeBookRegistry;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.RegisterRecipeBookCategoriesEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -39,15 +42,17 @@ public class ClayworksRecipes {
 		});
 	}
 
+	@EventBusSubscriber(modid = Clayworks.MOD_ID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 	public static class ClayworksRecipeCategories {
 		public static final Supplier<RecipeBookCategories> KILN_SEARCH = Suppliers.memoize(() -> RecipeBookCategories.create("KILN_SEARCH", new ItemStack(Items.COMPASS)));
 		public static final Supplier<RecipeBookCategories> KILN_BLOCKS = Suppliers.memoize(() -> RecipeBookCategories.create("KILN_BLOCKS", new ItemStack(Blocks.BRICKS)));
 		public static final Supplier<RecipeBookCategories> KILN_MISC = Suppliers.memoize(() -> RecipeBookCategories.create("KILN_MISC", new ItemStack(Items.BRICK)));
 
-		public static void registerCategories() {
-			RecipeBookRegistry.addCategoriesToType(Clayworks.RECIPE_TYPE_BAKING, ImmutableList.of(KILN_SEARCH.get(), KILN_BLOCKS.get(), KILN_MISC.get()));
-			RecipeBookRegistry.addAggregateCategories(KILN_SEARCH.get(), ImmutableList.of(KILN_BLOCKS.get(), KILN_MISC.get()));
-			RecipeBookRegistry.addCategoriesFinder(ClayworksRecipeTypes.BAKING.get(), recipe -> recipe.getResultItem().getItem() instanceof BlockItem ? KILN_BLOCKS.get() : KILN_MISC.get());
+		@SubscribeEvent
+		public static void registerCategories(RegisterRecipeBookCategoriesEvent event) {
+			event.registerBookCategories(Clayworks.RECIPE_TYPE_BAKING, ImmutableList.of(KILN_SEARCH.get(), KILN_BLOCKS.get(), KILN_MISC.get()));
+			event.registerAggregateCategory(KILN_SEARCH.get(), ImmutableList.of(KILN_BLOCKS.get(), KILN_MISC.get()));
+			event.registerRecipeCategoryFinder(ClayworksRecipeTypes.BAKING.get(), recipe -> recipe.getResultItem().getItem() instanceof BlockItem ? KILN_BLOCKS.get() : KILN_MISC.get());
 		}
 	}
 }

@@ -4,34 +4,34 @@
     {
       "conditions": [
         {
+          "type": "forge:and",
           "values": [
             {
-              "value": "terracotta_bricks",
-              "type": "clayworks:config"
+              "type": "clayworks:config",
+              "value": "terracotta_bricks"
             },
             {
-              "flag": "vertical_slabs",
-              "type": "blueprint:quark_flag"
+              "type": "blueprint:quark_flag",
+              "flag": "vertical_slabs"
             }
-          ],
-          "type": "forge:and"
+          ]
         }
       ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
-        "pattern": [
-          "#",
-          "#",
-          "#"
-        ],
         "key": {
           "#": {
             "item": "clayworks:red_terracotta_bricks"
           }
         },
+        "pattern": [
+          "#",
+          "#",
+          "#"
+        ],
         "result": {
-          "item": "clayworks:red_terracotta_brick_vertical_slab",
-          "count": 6
+          "count": 6,
+          "item": "clayworks:red_terracotta_brick_vertical_slab"
         }
       }
     }

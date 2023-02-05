@@ -4,17 +4,17 @@
     {
       "conditions": [
         {
-          "value": "terracotta_bricks",
-          "type": "clayworks:config"
+          "type": "clayworks:config",
+          "value": "terracotta_bricks"
         }
       ],
       "recipe": {
         "type": "minecraft:stonecutting",
+        "count": 1,
         "ingredient": {
           "item": "clayworks:lime_terracotta_bricks"
         },
-        "result": "clayworks:lime_terracotta_brick_stairs",
-        "count": 1
+        "result": "clayworks:lime_terracotta_brick_stairs"
       }
     }
   ]

@@ -5,6 +5,7 @@ import com.teamabnormals.clayworks.common.inventory.KilnMenu;
 import com.teamabnormals.clayworks.common.item.crafting.BakingRecipe;
 import com.teamabnormals.clayworks.core.Clayworks;
 import com.teamabnormals.clayworks.core.registry.ClayworksBlocks;
+import com.teamabnormals.clayworks.core.registry.ClayworksMenuTypes;
 import com.teamabnormals.clayworks.core.registry.ClayworksRecipes.ClayworksRecipeTypes;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
@@ -41,7 +42,7 @@ public class ClayworksPlugin implements IModPlugin {
 
 	@Override
 	public void registerRecipeTransferHandlers(IRecipeTransferRegistration registration) {
-		registration.addRecipeTransferHandler(KilnMenu.class, BAKING, 0, 1, 3, 36);
+		registration.addRecipeTransferHandler(KilnMenu.class, ClayworksMenuTypes.KILN.get(), BAKING, 0, 1, 3, 36);
 	}
 
 	@Override

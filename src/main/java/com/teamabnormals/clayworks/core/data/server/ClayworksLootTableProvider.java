@@ -73,7 +73,7 @@ public class ClayworksLootTableProvider extends LootTableProvider {
 
 		@Override
 		public Iterable<Block> getKnownBlocks() {
-			return ForgeRegistries.BLOCKS.getValues().stream().filter(block -> block.getRegistryName().getNamespace().equals(Clayworks.MOD_ID)).collect(Collectors.toSet());
+			return ForgeRegistries.BLOCKS.getValues().stream().filter(block -> ForgeRegistries.BLOCKS.getKey(block).getNamespace().equals(Clayworks.MOD_ID)).collect(Collectors.toSet());
 		}
 	}
 }

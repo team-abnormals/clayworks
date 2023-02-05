@@ -4,25 +4,25 @@
     {
       "conditions": [
         {
-          "value": "terracotta_variants",
-          "type": "clayworks:config"
+          "type": "clayworks:config",
+          "value": "terracotta_variants"
         }
       ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
-        "pattern": [
-          "#  ",
-          "## ",
-          "###"
-        ],
         "key": {
           "#": {
             "item": "minecraft:brown_terracotta"
           }
         },
+        "pattern": [
+          "#  ",
+          "## ",
+          "###"
+        ],
         "result": {
-          "item": "clayworks:brown_terracotta_stairs",
-          "count": 4
+          "count": 4,
+          "item": "clayworks:brown_terracotta_stairs"
         }
       }
     }

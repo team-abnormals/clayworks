@@ -4,23 +4,23 @@
     {
       "conditions": [
         {
-          "value": "terracotta_bricks",
-          "type": "clayworks:config"
+          "type": "clayworks:config",
+          "value": "terracotta_bricks"
         }
       ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
-        "pattern": [
-          "###"
-        ],
         "key": {
           "#": {
             "item": "clayworks:light_gray_terracotta_bricks"
           }
         },
+        "pattern": [
+          "###"
+        ],
         "result": {
-          "item": "clayworks:light_gray_terracotta_brick_slab",
-          "count": 6
+          "count": 6,
+          "item": "clayworks:light_gray_terracotta_brick_slab"
         }
       }
     }

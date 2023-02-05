@@ -2,12 +2,10 @@ package com.teamabnormals.clayworks.core.registry;
 
 import com.teamabnormals.clayworks.client.particle.KilnSmokeParticle;
 import com.teamabnormals.clayworks.core.Clayworks;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.particle.ParticleEngine;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.ParticleFactoryRegisterEvent;
+import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.registries.DeferredRegister;
@@ -21,8 +19,7 @@ public class ClayworksParticleTypes {
 	public static final RegistryObject<SimpleParticleType> KILN_SMOKE = PARTICLE_TYPES.register("kiln_smoke", () -> new SimpleParticleType(true));
 
 	@SubscribeEvent
-	public static void registerParticleFactorys(ParticleFactoryRegisterEvent event) {
-		ParticleEngine manager = Minecraft.getInstance().particleEngine;
-		manager.register(KILN_SMOKE.get(), KilnSmokeParticle.Factory::new);
+	public static void registerParticleFactorys(RegisterParticleProvidersEvent event) {
+		event.register(KILN_SMOKE.get(), KilnSmokeParticle.Factory::new);
 	}
 }

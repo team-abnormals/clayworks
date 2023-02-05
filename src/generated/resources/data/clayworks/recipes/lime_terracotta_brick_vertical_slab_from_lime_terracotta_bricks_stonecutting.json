@@ -4,26 +4,26 @@
     {
       "conditions": [
         {
+          "type": "forge:and",
           "values": [
             {
-              "value": "terracotta_bricks",
-              "type": "clayworks:config"
+              "type": "clayworks:config",
+              "value": "terracotta_bricks"
             },
             {
-              "flag": "vertical_slabs",
-              "type": "blueprint:quark_flag"
+              "type": "blueprint:quark_flag",
+              "flag": "vertical_slabs"
             }
-          ],
-          "type": "forge:and"
+          ]
         }
       ],
       "recipe": {
         "type": "minecraft:stonecutting",
+        "count": 2,
         "ingredient": {
           "item": "clayworks:lime_terracotta_bricks"
         },
-        "result": "clayworks:lime_terracotta_brick_vertical_slab",
-        "count": 2
+        "result": "clayworks:lime_terracotta_brick_vertical_slab"
       }
     }
   ]

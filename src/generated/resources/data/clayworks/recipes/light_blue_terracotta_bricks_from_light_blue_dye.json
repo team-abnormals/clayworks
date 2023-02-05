@@ -4,18 +4,13 @@
     {
       "conditions": [
         {
-          "value": "terracotta_bricks",
-          "type": "clayworks:config"
+          "type": "clayworks:config",
+          "value": "terracotta_bricks"
         }
       ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
         "group": "stained_terracotta_bricks",
-        "pattern": [
-          "###",
-          "#X#",
-          "###"
-        ],
         "key": {
           "#": {
             "item": "clayworks:terracotta_bricks"
@@ -24,9 +19,14 @@
             "item": "minecraft:light_blue_dye"
           }
         },
+        "pattern": [
+          "###",
+          "#X#",
+          "###"
+        ],
         "result": {
-          "item": "clayworks:light_blue_terracotta_bricks",
-          "count": 8
+          "count": 8,
+          "item": "clayworks:light_blue_terracotta_bricks"
         }
       }
     }

@@ -1,31 +1,16 @@
 {
   "advancements": [
     {
-      "conditions": [
-        {
-          "values": [
-            {
-              "value": "terracotta_variants",
-              "type": "clayworks:config"
-            },
-            {
-              "flag": "vertical_slabs",
-              "type": "blueprint:quark_flag"
-            }
-          ],
-          "type": "forge:and"
-        }
-      ],
       "advancement": {
         "parent": "minecraft:recipes/root",
-        "rewards": {
-          "recipes": [
-            "clayworks:yellow_terracotta_vertical_slab_from_yellow_terracotta_stonecutting"
-          ]
-        },
         "criteria": {
+          "has_the_recipe": {
+            "conditions": {
+              "recipe": "clayworks:yellow_terracotta_vertical_slab_from_yellow_terracotta_stonecutting"
+            },
+            "trigger": "minecraft:recipe_unlocked"
+          },
           "has_yellow_terracotta": {
-            "trigger": "minecraft:inventory_changed",
             "conditions": {
               "items": [
                 {
@@ -34,13 +19,8 @@
                   ]
                 }
               ]
-            }
-          },
-          "has_the_recipe": {
-            "trigger": "minecraft:recipe_unlocked",
-            "conditions": {
-              "recipe": "clayworks:yellow_terracotta_vertical_slab_from_yellow_terracotta_stonecutting"
-            }
+            },
+            "trigger": "minecraft:inventory_changed"
           }
         },
         "requirements": [
@@ -48,8 +28,28 @@
             "has_yellow_terracotta",
             "has_the_recipe"
           ]
-        ]
-      }
+        ],
+        "rewards": {
+          "recipes": [
+            "clayworks:yellow_terracotta_vertical_slab_from_yellow_terracotta_stonecutting"
+          ]
+        }
+      },
+      "conditions": [
+        {
+          "type": "forge:and",
+          "values": [
+            {
+              "type": "clayworks:config",
+              "value": "terracotta_variants"
+            },
+            {
+              "type": "blueprint:quark_flag",
+              "flag": "vertical_slabs"
+            }
+          ]
+        }
+      ]
     }
   ]
 }

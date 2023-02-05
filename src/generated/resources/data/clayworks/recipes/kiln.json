@@ -4,28 +4,28 @@
     {
       "conditions": [
         {
-          "value": "kiln",
-          "type": "clayworks:config"
+          "type": "clayworks:config",
+          "value": "kiln"
         }
       ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
+        "key": {
+          "#": {
+            "tag": "minecraft:stone_crafting_materials"
+          },
+          "B": {
+            "item": "minecraft:bricks"
+          },
+          "X": {
+            "item": "minecraft:furnace"
+          }
+        },
         "pattern": [
           "###",
           "#X#",
           "BBB"
         ],
-        "key": {
-          "#": {
-            "tag": "minecraft:stone_crafting_materials"
-          },
-          "X": {
-            "item": "minecraft:furnace"
-          },
-          "B": {
-            "item": "minecraft:bricks"
-          }
-        },
         "result": {
           "item": "clayworks:kiln"
         }

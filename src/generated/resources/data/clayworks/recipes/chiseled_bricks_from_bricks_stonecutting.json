@@ -4,17 +4,17 @@
     {
       "conditions": [
         {
-          "value": "chiseled_bricks",
-          "type": "clayworks:config"
+          "type": "clayworks:config",
+          "value": "chiseled_bricks"
         }
       ],
       "recipe": {
         "type": "minecraft:stonecutting",
+        "count": 1,
         "ingredient": {
           "item": "minecraft:bricks"
         },
-        "result": "clayworks:chiseled_bricks",
-        "count": 1
+        "result": "clayworks:chiseled_bricks"
       }
     }
   ]

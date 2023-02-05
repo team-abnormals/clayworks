@@ -10,30 +10,30 @@ license = "https://github.com/team-abnormals/clayworks/blob/main/LICENSE.txt"
     itemIcon = "clayworks:kiln"
     configBackground = "clayworks:textures/block/terracotta_bricks.png"
     authors = "Team Abnormals"
-    credits = "bageldotjpg"
+    credits = "bageldotjpg, hatsondogs, five"
     displayURL = "https://www.teamabnormals.com/mods/clayworks"
     displayName = "Clayworks"
     description = '''
-    Template description.
+    Introduces a new furnace type and several building blocks!
     '''
 
 [[dependencies.clayworks]]
     modId = "minecraft"
     mandatory = true
-    versionRange = "[1.18.2,1.19)"
+    versionRange = "[1.19.2,1.20)"
     ordering = "NONE"
     side = "BOTH"
 
 [[dependencies.clayworks]]
     modId = "forge"
     mandatory = true
-    versionRange = "[40.1.0,)"
+    versionRange = "[43.1.0,)"
     ordering = "NONE"
     side = "BOTH"
 
 [[dependencies.clayworks]]
     modId = "blueprint"
     mandatory = true
-    versionRange = "[5.4.1,)"
+    versionRange = "[6.1.0,)"
     ordering = "AFTER"
     side = "BOTH"

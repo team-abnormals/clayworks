@@ -4,18 +4,18 @@
     {
       "conditions": [
         {
-          "value": "kiln",
-          "type": "clayworks:config"
+          "type": "clayworks:config",
+          "value": "kiln"
         }
       ],
       "recipe": {
         "type": "clayworks:baking",
+        "cookingtime": 100,
+        "experience": 0.1,
         "ingredient": {
           "item": "minecraft:red_terracotta"
         },
-        "result": "minecraft:red_glazed_terracotta",
-        "experience": 0.1,
-        "cookingtime": 100
+        "result": "minecraft:red_glazed_terracotta"
       }
     }
   ]

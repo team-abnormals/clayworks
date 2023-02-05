@@ -4,17 +4,17 @@
     {
       "conditions": [
         {
-          "value": "terracotta_variants",
-          "type": "clayworks:config"
+          "type": "clayworks:config",
+          "value": "terracotta_variants"
         }
       ],
       "recipe": {
         "type": "minecraft:stonecutting",
+        "count": 1,
         "ingredient": {
           "item": "minecraft:blue_terracotta"
         },
-        "result": "clayworks:blue_terracotta_stairs",
-        "count": 1
+        "result": "clayworks:blue_terracotta_stairs"
       }
     }
   ]

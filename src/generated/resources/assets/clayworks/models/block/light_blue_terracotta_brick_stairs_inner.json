@@ -1,8 +1,8 @@
 {
   "parent": "minecraft:block/inner_stairs",
   "textures": {
-    "side": "clayworks:block/light_blue_terracotta_bricks",
     "bottom": "clayworks:block/light_blue_terracotta_bricks",
+    "side": "clayworks:block/light_blue_terracotta_bricks",
     "top": "clayworks:block/light_blue_terracotta_bricks"
   }
 }

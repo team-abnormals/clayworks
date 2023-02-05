@@ -2,11 +2,11 @@
   "parent": "minecraft:block/cube",
   "textures": {
     "down": "clayworks:block/kiln_bottom",
-    "up": "clayworks:block/kiln_top",
-    "north": "clayworks:block/kiln_front",
-    "south": "clayworks:block/kiln_back",
     "east": "clayworks:block/kiln_left",
-    "west": "clayworks:block/kiln_right",
-    "particle": "clayworks:block/kiln_back"
+    "north": "clayworks:block/kiln_front",
+    "particle": "clayworks:block/kiln_back",
+    "south": "clayworks:block/kiln_back",
+    "up": "clayworks:block/kiln_top",
+    "west": "clayworks:block/kiln_right"
   }
 }

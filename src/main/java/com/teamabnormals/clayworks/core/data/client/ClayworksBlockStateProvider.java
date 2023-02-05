@@ -20,6 +20,7 @@ import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.client.model.generators.ModelFile.ExistingModelFile;
 import net.minecraftforge.client.model.generators.ModelFile.UncheckedModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import static com.teamabnormals.clayworks.core.registry.ClayworksBlocks.*;
 
@@ -130,7 +131,7 @@ public class ClayworksBlockStateProvider extends BlockStateProvider {
 	}
 
 	private String name(Block block) {
-		return block.getRegistryName().getPath();
+		return ForgeRegistries.BLOCKS.getKey(block).getPath();
 	}
 
 	private ResourceLocation prefix(String prefix, ResourceLocation rl) {

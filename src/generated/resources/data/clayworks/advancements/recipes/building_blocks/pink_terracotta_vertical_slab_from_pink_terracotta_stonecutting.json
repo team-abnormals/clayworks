@@ -1,31 +1,10 @@
 {
   "advancements": [
     {
-      "conditions": [
-        {
-          "values": [
-            {
-              "value": "terracotta_variants",
-              "type": "clayworks:config"
-            },
-            {
-              "flag": "vertical_slabs",
-              "type": "blueprint:quark_flag"
-            }
-          ],
-          "type": "forge:and"
-        }
-      ],
       "advancement": {
         "parent": "minecraft:recipes/root",
-        "rewards": {
-          "recipes": [
-            "clayworks:pink_terracotta_vertical_slab_from_pink_terracotta_stonecutting"
-          ]
-        },
         "criteria": {
           "has_pink_terracotta": {
-            "trigger": "minecraft:inventory_changed",
             "conditions": {
               "items": [
                 {
@@ -34,13 +13,14 @@
                   ]
                 }
               ]
-            }
+            },
+            "trigger": "minecraft:inventory_changed"
           },
           "has_the_recipe": {
-            "trigger": "minecraft:recipe_unlocked",
             "conditions": {
               "recipe": "clayworks:pink_terracotta_vertical_slab_from_pink_terracotta_stonecutting"
-            }
+            },
+            "trigger": "minecraft:recipe_unlocked"
           }
         },
         "requirements": [
@@ -48,8 +28,28 @@
             "has_pink_terracotta",
             "has_the_recipe"
           ]
-        ]
-      }
+        ],
+        "rewards": {
+          "recipes": [
+            "clayworks:pink_terracotta_vertical_slab_from_pink_terracotta_stonecutting"
+          ]
+        }
+      },
+      "conditions": [
+        {
+          "type": "forge:and",
+          "values": [
+            {
+              "type": "clayworks:config",
+              "value": "terracotta_variants"
+            },
+            {
+              "type": "blueprint:quark_flag",
+              "flag": "vertical_slabs"
+            }
+          ]
+        }
+      ]
     }
   ]
 }

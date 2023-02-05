@@ -1,35 +1,24 @@
 {
   "advancements": [
     {
-      "conditions": [
-        {
-          "value": "kiln",
-          "type": "clayworks:config"
-        }
-      ],
       "advancement": {
         "parent": "minecraft:recipes/root",
-        "rewards": {
-          "recipes": [
-            "clayworks:kiln"
-          ]
-        },
         "criteria": {
           "has_cobblestone": {
-            "trigger": "minecraft:inventory_changed",
             "conditions": {
               "items": [
                 {
                   "tag": "minecraft:stone_crafting_materials"
                 }
               ]
-            }
+            },
+            "trigger": "minecraft:inventory_changed"
           },
           "has_the_recipe": {
-            "trigger": "minecraft:recipe_unlocked",
             "conditions": {
               "recipe": "clayworks:kiln"
-            }
+            },
+            "trigger": "minecraft:recipe_unlocked"
           }
         },
         "requirements": [
@@ -37,8 +26,19 @@
             "has_cobblestone",
             "has_the_recipe"
           ]
-        ]
-      }
+        ],
+        "rewards": {
+          "recipes": [
+            "clayworks:kiln"
+          ]
+        }
+      },
+      "conditions": [
+        {
+          "type": "clayworks:config",
+          "value": "kiln"
+        }
+      ]
     }
   ]
 }

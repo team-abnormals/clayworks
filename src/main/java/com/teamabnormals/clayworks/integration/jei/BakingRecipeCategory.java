@@ -15,11 +15,12 @@ import mezz.jei.api.gui.drawable.IDrawableStatic;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
+import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 
@@ -28,8 +29,7 @@ import static mezz.jei.api.recipe.RecipeIngredientRole.OUTPUT;
 
 public class BakingRecipeCategory implements IRecipeCategory<BakingRecipe> {
 	public static final ResourceLocation RECIPE_GUI_VANILLA = new ResourceLocation("jei", "textures/gui/gui_vanilla.png");
-	public static final ResourceLocation BAKING = new ResourceLocation(Clayworks.MOD_ID, "baking");
-	public static final TranslatableComponent TRANSLATION = new TranslatableComponent("gui." + Clayworks.MOD_ID + ".category.baking");
+	public static final MutableComponent TRANSLATION = Component.translatable("gui." + Clayworks.MOD_ID + ".category.baking");
 
 	private final IDrawable background;
 	private final int regularCookTime;
@@ -89,7 +89,7 @@ public class BakingRecipeCategory implements IRecipeCategory<BakingRecipe> {
 	protected void drawExperience(BakingRecipe recipe, PoseStack poseStack, int y) {
 		float experience = recipe.getExperience();
 		if (experience > 0) {
-			TranslatableComponent experienceString = new TranslatableComponent("gui.jei.category.smelting.experience", experience);
+			MutableComponent experienceString = Component.translatable("gui.jei.category.smelting.experience", experience);
 			Minecraft minecraft = Minecraft.getInstance();
 			Font fontRenderer = minecraft.font;
 			int stringWidth = fontRenderer.width(experienceString);
@@ -101,7 +101,7 @@ public class BakingRecipeCategory implements IRecipeCategory<BakingRecipe> {
 		int cookTime = recipe.getCookingTime();
 		if (cookTime > 0) {
 			int cookTimeSeconds = cookTime / 20;
-			TranslatableComponent timeString = new TranslatableComponent("gui.jei.category.smelting.time.seconds", cookTimeSeconds);
+			MutableComponent timeString = Component.translatable("gui.jei.category.smelting.time.seconds", cookTimeSeconds);
 			Minecraft minecraft = Minecraft.getInstance();
 			Font fontRenderer = minecraft.font;
 			int stringWidth = fontRenderer.width(timeString);
@@ -122,13 +122,8 @@ public class BakingRecipeCategory implements IRecipeCategory<BakingRecipe> {
 	}
 
 	@Override
-	public ResourceLocation getUid() {
-		return BAKING;
-	}
-
-	@Override
-	public Class<? extends BakingRecipe> getRecipeClass() {
-		return BakingRecipe.class;
+	public RecipeType<BakingRecipe> getRecipeType() {
+		return ClayworksPlugin.BAKING;
 	}
 
 	@Override

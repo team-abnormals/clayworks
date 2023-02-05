@@ -1,22 +1,10 @@
 {
   "advancements": [
     {
-      "conditions": [
-        {
-          "value": "terracotta_bricks",
-          "type": "clayworks:config"
-        }
-      ],
       "advancement": {
         "parent": "minecraft:recipes/root",
-        "rewards": {
-          "recipes": [
-            "clayworks:lime_terracotta_brick_wall"
-          ]
-        },
         "criteria": {
           "has_lime_terracotta_bricks": {
-            "trigger": "minecraft:inventory_changed",
             "conditions": {
               "items": [
                 {
@@ -25,13 +13,14 @@
                   ]
                 }
               ]
-            }
+            },
+            "trigger": "minecraft:inventory_changed"
           },
           "has_the_recipe": {
-            "trigger": "minecraft:recipe_unlocked",
             "conditions": {
               "recipe": "clayworks:lime_terracotta_brick_wall"
-            }
+            },
+            "trigger": "minecraft:recipe_unlocked"
           }
         },
         "requirements": [
@@ -39,8 +28,19 @@
             "has_lime_terracotta_bricks",
             "has_the_recipe"
           ]
-        ]
-      }
+        ],
+        "rewards": {
+          "recipes": [
+            "clayworks:lime_terracotta_brick_wall"
+          ]
+        }
+      },
+      "conditions": [
+        {
+          "type": "clayworks:config",
+          "value": "terracotta_bricks"
+        }
+      ]
     }
   ]
 }

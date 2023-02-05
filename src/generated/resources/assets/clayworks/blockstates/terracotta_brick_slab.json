@@ -1,13 +1,13 @@
 {
   "variants": {
-    "type=top": {
-      "model": "clayworks:block/terracotta_brick_slab_top"
-    },
     "type=bottom": {
       "model": "clayworks:block/terracotta_brick_slab"
     },
     "type=double": {
       "model": "clayworks:block/terracotta_bricks"
+    },
+    "type=top": {
+      "model": "clayworks:block/terracotta_brick_slab_top"
     }
   }
 }

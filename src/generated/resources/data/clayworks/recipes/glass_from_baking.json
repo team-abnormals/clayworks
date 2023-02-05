@@ -4,18 +4,18 @@
     {
       "conditions": [
         {
-          "value": "kiln",
-          "type": "clayworks:config"
+          "type": "clayworks:config",
+          "value": "kiln"
         }
       ],
       "recipe": {
         "type": "clayworks:baking",
+        "cookingtime": 100,
+        "experience": 0.1,
         "ingredient": {
           "tag": "minecraft:sand"
         },
-        "result": "minecraft:glass",
-        "experience": 0.1,
-        "cookingtime": 100
+        "result": "minecraft:glass"
       }
     }
   ]

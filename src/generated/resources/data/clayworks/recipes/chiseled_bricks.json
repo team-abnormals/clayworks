@@ -4,21 +4,21 @@
     {
       "conditions": [
         {
-          "value": "chiseled_bricks",
-          "type": "clayworks:config"
+          "type": "clayworks:config",
+          "value": "chiseled_bricks"
         }
       ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
-        "pattern": [
-          "#",
-          "#"
-        ],
         "key": {
           "#": {
             "item": "minecraft:brick_slab"
           }
         },
+        "pattern": [
+          "#",
+          "#"
+        ],
         "result": {
           "item": "clayworks:chiseled_bricks"
         }
