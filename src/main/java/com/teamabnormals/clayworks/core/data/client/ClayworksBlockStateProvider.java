@@ -88,7 +88,8 @@ public class ClayworksBlockStateProvider extends BlockStateProvider {
 
 	public void blockFamily(BlockFamily family, Block verticalSlab) {
 		Block parent = family.getBaseBlock();
-		this.block(parent);
+		if (!ForgeRegistries.BLOCKS.getKey(parent).getNamespace().equals("minecraft"))
+			this.block(parent);
 
 		if (family.getVariants().containsKey(Variant.CHISELED)) {
 			this.block(family.get(Variant.CHISELED));
