@@ -8,15 +8,5 @@
       "block/smoker/smoker5"
     ],
     "subtitle": "subtitles.clayworks.block.kiln.smoke"
-  },
-  "entity.villager.work_mason": {
-    "sounds": [
-      "block/smoker/smoker1",
-      "block/smoker/smoker2",
-      "block/smoker/smoker3",
-      "block/smoker/smoker4",
-      "block/smoker/smoker5"
-    ],
-    "subtitle": "subtitles.entity.villager.work_mason"
   }
 }

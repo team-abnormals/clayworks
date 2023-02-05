@@ -46,8 +46,6 @@ public class Clayworks {
 		ClayworksRecipeTypes.RECIPE_TYPES.register(bus);
 		ClayworksParticleTypes.PARTICLE_TYPES.register(bus);
 
-//		StructureRepalleterManager.registerSerializer(new ResourceLocation(MOD_ID, "opposite_facing"), OppositeFacingStructureRepaletter.CODEC);
-
 		bus.addListener(this::commonSetup);
 		bus.addListener(this::clientSetup);
 		bus.addListener(this::dataSetup);
@@ -62,10 +60,6 @@ public class Clayworks {
 	}
 
 	private void commonSetup(FMLCommonSetupEvent event) {
-		event.enqueueWork(() -> {
-//			ObfuscationReflectionHelper.setPrivateValue(PoiType.class, PoiType.MASON, ImmutableSet.copyOf(PoiType.getBlockStates(ClayworksBlocks.KILN.get())), "f_27325_");
-//			ObfuscationReflectionHelper.setPrivateValue(VillagerProfession.class, VillagerProfession.MASON, ClayworksSoundEvents.VILLAGER_WORK_MASON.get(), "f_35604_");
-		});
 	}
 
 	private void clientSetup(FMLClientSetupEvent event) {
@@ -85,7 +79,6 @@ public class Clayworks {
 			generator.addProvider(new ClayworksItemTagsProvider(generator, blockTags, fileHelper));
 			generator.addProvider(new ClayworksLootTableProvider(generator));
 			generator.addProvider(new ClayworksRecipeProvider(generator));
-//			generator.addProvider(new ClayworksStructureRepaletterProvider(generator));
 		}
 
 		if (event.includeClient()) {
