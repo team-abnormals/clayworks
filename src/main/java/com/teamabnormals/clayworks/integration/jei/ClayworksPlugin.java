@@ -9,25 +9,14 @@ import com.teamabnormals.clayworks.core.registry.ClayworksRecipes.ClayworksRecip
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.constants.RecipeTypes;
-import mezz.jei.api.helpers.IGuiHelper;
-import mezz.jei.api.helpers.IJeiHelpers;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.registration.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.item.crafting.RecipeManager;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
 
 @JeiPlugin
 public class ClayworksPlugin implements IModPlugin {
-	public static final ResourceLocation RECIPE_GUI_VANILLA = new ResourceLocation("jei", "textures/gui/gui_vanilla.png");
 	public static final RecipeType<BakingRecipe> BAKING = RecipeType.create(Clayworks.MOD_ID, "baking", BakingRecipe.class);
 
 	@Override
@@ -37,17 +26,12 @@ public class ClayworksPlugin implements IModPlugin {
 
 	@Override
 	public void registerCategories(IRecipeCategoryRegistration registration) {
-		IJeiHelpers jeiHelpers = registration.getJeiHelpers();
-		IGuiHelper guiHelper = jeiHelpers.getGuiHelper();
-
-		registration.addRecipeCategories(new BakingRecipeCategory(guiHelper));
+		registration.addRecipeCategories(new BakingRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
 	}
 
 	@Override
 	public void registerRecipes(IRecipeRegistration registration) {
-		List<BakingRecipe> bakingRecipes = new ArrayList<>();
-		bakingRecipes.addAll(getRecipes(Minecraft.getInstance().level.getRecipeManager(), ClayworksRecipeTypes.BAKING.get()));
-		registration.addRecipes(BAKING, bakingRecipes);
+		registration.addRecipes(BAKING, Minecraft.getInstance().level.getRecipeManager().getAllRecipesFor(ClayworksRecipeTypes.BAKING.get()));
 	}
 
 	@Override
@@ -64,11 +48,4 @@ public class ClayworksPlugin implements IModPlugin {
 	public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
 		registration.addRecipeCatalyst(new ItemStack(ClayworksBlocks.KILN.get()), BAKING, RecipeTypes.FUELING);
 	}
-
-	@SuppressWarnings("unchecked")
-	private static <C extends Container, T extends Recipe<C>> Collection<T> getRecipes(RecipeManager recipeManager, net.minecraft.world.item.crafting.RecipeType<T> recipeType) {
-		Map<ResourceLocation, Recipe<C>> recipesMap = recipeManager.byType(recipeType);
-		return (Collection<T>) recipesMap.values();
-	}
-
 }

@@ -27,6 +27,7 @@ import static mezz.jei.api.recipe.RecipeIngredientRole.INPUT;
 import static mezz.jei.api.recipe.RecipeIngredientRole.OUTPUT;
 
 public class BakingRecipeCategory implements IRecipeCategory<BakingRecipe> {
+	public static final ResourceLocation RECIPE_GUI_VANILLA = new ResourceLocation("jei", "textures/gui/gui_vanilla.png");
 	public static final ResourceLocation BAKING = new ResourceLocation(Clayworks.MOD_ID, "baking");
 	public static final TranslatableComponent TRANSLATION = new TranslatableComponent("gui." + Clayworks.MOD_ID + ".category.baking");
 
@@ -39,7 +40,7 @@ public class BakingRecipeCategory implements IRecipeCategory<BakingRecipe> {
 	protected final IDrawableAnimated animatedFlame;
 
 	public BakingRecipeCategory(IGuiHelper guiHelper) {
-		this.background = guiHelper.createDrawable(ClayworksPlugin.RECIPE_GUI_VANILLA, 0, 114, 82, 54);
+		this.background = guiHelper.createDrawable(RECIPE_GUI_VANILLA, 0, 114, 82, 54);
 		this.regularCookTime = 100;
 		this.icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(ClayworksBlocks.KILN.get()));
 		this.localizedName = TRANSLATION;
@@ -48,11 +49,11 @@ public class BakingRecipeCategory implements IRecipeCategory<BakingRecipe> {
 				.build(new CacheLoader<>() {
 					@Override
 					public IDrawableAnimated load(Integer cookTime) {
-						return guiHelper.drawableBuilder(ClayworksPlugin.RECIPE_GUI_VANILLA, 82, 128, 24, 17)
+						return guiHelper.drawableBuilder(RECIPE_GUI_VANILLA, 82, 128, 24, 17)
 								.buildAnimated(cookTime, IDrawableAnimated.StartDirection.LEFT, false);
 					}
 				});
-		staticFlame = guiHelper.createDrawable(ClayworksPlugin.RECIPE_GUI_VANILLA, 82, 114, 14, 14);
+		staticFlame = guiHelper.createDrawable(RECIPE_GUI_VANILLA, 82, 114, 14, 14);
 		animatedFlame = guiHelper.createAnimatedDrawable(staticFlame, 300, IDrawableAnimated.StartDirection.TOP, true);
 	}
 
