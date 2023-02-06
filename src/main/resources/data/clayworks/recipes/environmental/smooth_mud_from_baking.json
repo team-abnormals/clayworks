@@ -20,10 +20,10 @@
       "recipe": {
         "type": "clayworks:baking",
         "ingredient": {
-          "item": "environmental:mud_ball"
+          "item": "minecraft:packed_mud"
         },
-        "result": "environmental:mud_brick",
-        "experience": 0.3,
+        "result": "environmental:smooth_mud",
+        "experience": 0.1,
         "cookingtime": 100
       }
     }

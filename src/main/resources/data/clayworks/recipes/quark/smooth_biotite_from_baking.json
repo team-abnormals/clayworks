@@ -6,8 +6,8 @@
         {
           "values": [
             {
-              "flag": "glass_shard",
-              "type": "blueprint:biotite"
+              "flag": "biotite",
+              "type": "blueprint:quark_flag"
             },
             {
               "value": "kiln",
