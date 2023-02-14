@@ -1,0 +1,31 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "values": [
+            {
+              "modid": "endergetic",
+              "type": "forge:mod_loaded"
+            },
+            {
+              "value": "kiln",
+              "type": "clayworks:config"
+            }
+          ],
+          "type": "forge:and"
+        }
+      ],
+      "recipe": {
+        "type": "clayworks:baking",
+        "ingredient": {
+          "item": "minecraft:end_stone_bricks"
+        },
+        "result": "endergetic:cracked_end_stone_bricks",
+        "experience": 0.1,
+        "cookingtime": 100
+      }
+    }
+  ]
+}
