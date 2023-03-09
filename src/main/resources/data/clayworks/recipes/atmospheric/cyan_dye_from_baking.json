@@ -1,0 +1,26 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "modid": "atmospheric",
+          "type": "forge:mod_loaded"
+        },
+        {
+          "type": "clayworks:config",
+          "value": "kiln"
+        }
+      ],
+      "recipe": {
+        "type": "clayworks:baking",
+        "cookingtime": 100,
+        "experience": 1.0,
+        "ingredient": {
+          "item": "atmospheric:agave"
+        },
+        "result": "minecraft:cyan_dye"
+      }
+    }
+  ]
+}
