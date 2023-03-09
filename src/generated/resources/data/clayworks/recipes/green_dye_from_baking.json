@@ -11,7 +11,7 @@
       "recipe": {
         "type": "clayworks:baking",
         "cookingtime": 100,
-        "experience": 0.1,
+        "experience": 1.0,
         "ingredient": {
           "item": "minecraft:cactus"
         },

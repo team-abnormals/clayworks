@@ -75,7 +75,7 @@ public class ClayworksRecipeProvider extends RecipeProvider {
 		conditionalRecipe(consumer, KILN_CONFIG, SimpleCookingRecipeBuilder.cooking(Ingredient.of(ItemTags.LOGS_THAT_BURN), Items.CHARCOAL, 0.15F, 100, ClayworksRecipeSerializers.BAKING.get()).unlockedBy("has_log", has(ItemTags.LOGS_THAT_BURN)), new ResourceLocation(Clayworks.MOD_ID, "charcoal_from_baking"));
 		baking(consumer, Blocks.WET_SPONGE, Blocks.SPONGE, 0.15F, 100);
 		baking(consumer, Blocks.SEA_PICKLE, Items.LIME_DYE, 0.1F, 100);
-		baking(consumer, Blocks.CACTUS, Items.GREEN_DYE, 0.1F, 100);
+		baking(consumer, Blocks.CACTUS, Items.GREEN_DYE, 1.0F, 100);
 		baking(consumer, Items.CHORUS_FRUIT, Items.POPPED_CHORUS_FRUIT, 0.1F, 100);
 
 		baking(consumer, Items.CLAY_BALL, Items.BRICK, 0.3F, 100);
