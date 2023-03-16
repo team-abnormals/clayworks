@@ -7,8 +7,10 @@ import com.teamabnormals.clayworks.core.data.server.ClayworksLootTableProvider;
 import com.teamabnormals.clayworks.core.data.server.ClayworksRecipeProvider;
 import com.teamabnormals.clayworks.core.data.server.tags.ClayworksBlockTagsProvider;
 import com.teamabnormals.clayworks.core.data.server.tags.ClayworksItemTagsProvider;
+import com.teamabnormals.clayworks.core.data.server.tags.ClayworksPaintingVariantTagsProvider;
 import com.teamabnormals.clayworks.core.registry.ClayworksLootConditions;
 import com.teamabnormals.clayworks.core.registry.ClayworksMenuTypes;
+import com.teamabnormals.clayworks.core.registry.ClayworksPaintingVariants;
 import com.teamabnormals.clayworks.core.registry.ClayworksParticleTypes;
 import com.teamabnormals.clayworks.core.registry.ClayworksRecipes.ClayworksRecipeSerializers;
 import com.teamabnormals.clayworks.core.registry.ClayworksRecipes.ClayworksRecipeTypes;
@@ -43,6 +45,7 @@ public class Clayworks {
 		ClayworksRecipeSerializers.RECIPE_SERIALIZERS.register(bus);
 		ClayworksRecipeTypes.RECIPE_TYPES.register(bus);
 		ClayworksParticleTypes.PARTICLE_TYPES.register(bus);
+		ClayworksPaintingVariants.PAINTING_VARIANTS.register(bus);
 
 		bus.addListener(this::commonSetup);
 		bus.addListener(this::clientSetup);
@@ -62,17 +65,18 @@ public class Clayworks {
 
 	private void dataSetup(GatherDataEvent event) {
 		DataGenerator generator = event.getGenerator();
-		ExistingFileHelper fileHelper = event.getExistingFileHelper();
+		ExistingFileHelper helper = event.getExistingFileHelper();
 
 		boolean includeServer = event.includeServer();
-		ClayworksBlockTagsProvider blockTags = new ClayworksBlockTagsProvider(generator, fileHelper);
+		ClayworksBlockTagsProvider blockTags = new ClayworksBlockTagsProvider(generator, helper);
 		generator.addProvider(includeServer, blockTags);
-		generator.addProvider(includeServer, new ClayworksItemTagsProvider(generator, blockTags, fileHelper));
+		generator.addProvider(includeServer, new ClayworksItemTagsProvider(generator, blockTags, helper));
 		generator.addProvider(includeServer, new ClayworksLootTableProvider(generator));
 		generator.addProvider(includeServer, new ClayworksRecipeProvider(generator));
+		generator.addProvider(includeServer, new ClayworksPaintingVariantTagsProvider(generator, helper));
 
 		boolean includeClient = event.includeServer();
-		generator.addProvider(includeClient, new ClayworksBlockStateProvider(generator, fileHelper));
+		generator.addProvider(includeClient, new ClayworksBlockStateProvider(generator, helper));
 		generator.addProvider(includeClient, new ClayworksLanguageProvider(generator));
 	}
 }
