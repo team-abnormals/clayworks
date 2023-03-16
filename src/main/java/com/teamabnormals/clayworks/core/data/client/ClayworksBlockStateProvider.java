@@ -34,6 +34,7 @@ public class ClayworksBlockStateProvider extends BlockStateProvider {
 	protected void registerStatesAndModels() {
 		this.furnace(KILN.get());
 		this.block(CHISELED_BRICKS.get());
+		this.glazedTerracotta(GLAZED_TERRACOTTA.get());
 		this.blockFamily(ClayworksBlockFamilies.TERRACOTTA, TERRACOTTA_VERTICAL_SLAB.get());
 		this.blockFamily(ClayworksBlockFamilies.WHITE_TERRACOTTA, WHITE_TERRACOTTA_VERTICAL_SLAB.get());
 		this.blockFamily(ClayworksBlockFamilies.ORANGE_TERRACOTTA, ORANGE_TERRACOTTA_VERTICAL_SLAB.get());
@@ -76,6 +77,11 @@ public class ClayworksBlockStateProvider extends BlockStateProvider {
 
 	public void block(Block block) {
 		simpleBlock(block, cubeAll(block));
+		blockItem(block);
+	}
+
+	public void glazedTerracotta(Block block) {
+		this.horizontalBlock(block, models().withExistingParent(name(block), "template_glazed_terracotta").texture("pattern", blockTexture(block)), 0);
 		blockItem(block);
 	}
 

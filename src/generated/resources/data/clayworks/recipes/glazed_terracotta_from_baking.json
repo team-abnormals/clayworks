@@ -1,0 +1,31 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:and",
+          "values": [
+            {
+              "type": "clayworks:config",
+              "value": "kiln"
+            },
+            {
+              "type": "clayworks:config",
+              "value": "glazed_terracotta"
+            }
+          ]
+        }
+      ],
+      "recipe": {
+        "type": "clayworks:baking",
+        "cookingtime": 100,
+        "experience": 0.1,
+        "ingredient": {
+          "item": "minecraft:terracotta"
+        },
+        "result": "clayworks:glazed_terracotta"
+      }
+    }
+  ]
+}

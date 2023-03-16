@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "clayworks:block/glazed_terracotta",
+      "y": 270
+    },
+    "facing=north": {
+      "model": "clayworks:block/glazed_terracotta",
+      "y": 180
+    },
+    "facing=south": {
+      "model": "clayworks:block/glazed_terracotta"
+    },
+    "facing=west": {
+      "model": "clayworks:block/glazed_terracotta",
+      "y": 90
+    }
+  }
+}

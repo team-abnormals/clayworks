@@ -6,6 +6,7 @@ import com.teamabnormals.blueprint.core.api.conditions.ConfigValueCondition;
 import com.teamabnormals.blueprint.core.api.conditions.QuarkFlagRecipeCondition;
 import com.teamabnormals.clayworks.core.Clayworks;
 import com.teamabnormals.clayworks.core.other.ClayworksBlockFamilies;
+import com.teamabnormals.clayworks.core.registry.ClayworksBlocks;
 import com.teamabnormals.clayworks.core.registry.ClayworksRecipes.ClayworksRecipeSerializers;
 import net.minecraft.data.BlockFamily;
 import net.minecraft.data.BlockFamily.Variant;
@@ -36,6 +37,7 @@ public class ClayworksRecipeProvider extends RecipeProvider {
 
 	public static final ConfigValueCondition KILN_CONFIG = config(COMMON.kiln, "kiln");
 	public static final ConfigValueCondition CHISELED_BRICKS_CONFIG = config(COMMON.chiseledBricks, "chiseled_bricks");
+	public static final ConfigValueCondition GLAZED_TERRACOTTA_CONFIG = config(COMMON.glazedTerracotta, "glazed_terracotta");
 	public static final ConfigValueCondition TERRACOTTA_VARIANTS_CONFIG = config(COMMON.terracottaVariants, "terracotta_variants");
 	public static final ConfigValueCondition TERRACOTTA_BRICKS_CONFIG = config(COMMON.terracottaBricks, "terracotta_bricks");
 
@@ -50,6 +52,7 @@ public class ClayworksRecipeProvider extends RecipeProvider {
 
 		conditionalRecipe(consumer, CHISELED_BRICKS_CONFIG, chiseledBuilder(CHISELED_BRICKS.get(), Ingredient.of(Blocks.BRICK_SLAB)).unlockedBy(getHasName(Blocks.BRICK_SLAB), has(Blocks.BRICK_SLAB)));
 		conditionalStonecuttingRecipe(consumer, CHISELED_BRICKS_CONFIG, CHISELED_BRICKS.get(), Blocks.BRICKS);
+		conditionalRecipe(consumer, GLAZED_TERRACOTTA_CONFIG, SimpleCookingRecipeBuilder.smelting(Ingredient.of(Blocks.TERRACOTTA), GLAZED_TERRACOTTA.get().asItem(), 0.1F, 200).unlockedBy("has_terracotta", has(Blocks.TERRACOTTA)));
 
 		terracottaBricksRecipes(consumer, Blocks.TERRACOTTA, ClayworksBlockFamilies.TERRACOTTA, TERRACOTTA_VERTICAL_SLAB.get(), ClayworksBlockFamilies.TERRACOTTA_BRICKS, TERRACOTTA_BRICK_VERTICAL_SLAB.get(), null);
 		terracottaBricksRecipes(consumer, Blocks.WHITE_TERRACOTTA, ClayworksBlockFamilies.WHITE_TERRACOTTA, WHITE_TERRACOTTA_VERTICAL_SLAB.get(), ClayworksBlockFamilies.WHITE_TERRACOTTA_BRICKS, WHITE_TERRACOTTA_BRICK_VERTICAL_SLAB.get(), Items.WHITE_DYE);
@@ -94,6 +97,7 @@ public class ClayworksRecipeProvider extends RecipeProvider {
 		baking(consumer, Blocks.DEEPSLATE_BRICKS, Blocks.CRACKED_DEEPSLATE_BRICKS, 0.1F, 100);
 		baking(consumer, Blocks.DEEPSLATE_TILES, Blocks.CRACKED_DEEPSLATE_TILES, 0.1F, 100);
 
+		conditionalRecipe(consumer, new AndCondition(KILN_CONFIG, GLAZED_TERRACOTTA_CONFIG), SimpleCookingRecipeBuilder.cooking(Ingredient.of(Blocks.TERRACOTTA), GLAZED_TERRACOTTA.get(), 0.1F, 100, ClayworksRecipeSerializers.BAKING.get()).unlockedBy(getHasName(Blocks.TERRACOTTA), has(Blocks.TERRACOTTA)), new ResourceLocation(Clayworks.MOD_ID, getItemName(GLAZED_TERRACOTTA.get()) + "_from_baking"));
 		baking(consumer, Blocks.BLACK_TERRACOTTA, Blocks.BLACK_GLAZED_TERRACOTTA, 0.1F, 100);
 		baking(consumer, Blocks.BLUE_TERRACOTTA, Blocks.BLUE_GLAZED_TERRACOTTA, 0.1F, 100);
 		baking(consumer, Blocks.BROWN_TERRACOTTA, Blocks.BROWN_GLAZED_TERRACOTTA, 0.1F, 100);

@@ -1,0 +1,46 @@
+{
+  "advancements": [
+    {
+      "advancement": {
+        "parent": "minecraft:recipes/root",
+        "criteria": {
+          "has_terracotta": {
+            "conditions": {
+              "items": [
+                {
+                  "items": [
+                    "minecraft:terracotta"
+                  ]
+                }
+              ]
+            },
+            "trigger": "minecraft:inventory_changed"
+          },
+          "has_the_recipe": {
+            "conditions": {
+              "recipe": "clayworks:glazed_terracotta"
+            },
+            "trigger": "minecraft:recipe_unlocked"
+          }
+        },
+        "requirements": [
+          [
+            "has_terracotta",
+            "has_the_recipe"
+          ]
+        ],
+        "rewards": {
+          "recipes": [
+            "clayworks:glazed_terracotta"
+          ]
+        }
+      },
+      "conditions": [
+        {
+          "type": "clayworks:config",
+          "value": "glazed_terracotta"
+        }
+      ]
+    }
+  ]
+}

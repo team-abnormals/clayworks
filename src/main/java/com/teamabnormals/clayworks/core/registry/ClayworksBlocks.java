@@ -6,23 +6,19 @@ import com.teamabnormals.clayworks.common.block.KilnBlock;
 import com.teamabnormals.clayworks.core.Clayworks;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.registries.RegistryObject;
 
-import java.util.function.ToIntFunction;
-
 @EventBusSubscriber(modid = Clayworks.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
 public class ClayworksBlocks {
 	public static final BlockSubRegistryHelper HELPER = Clayworks.REGISTRY_HELPER.getBlockSubHelper();
 
-	public static final RegistryObject<Block> KILN = HELPER.createBlock("kiln", () -> new KilnBlock(Properties.copy(Blocks.SMOKER)), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> KILN = HELPER.createBlock("kiln", () -> new KilnBlock(ClayworksBlockProperties.KILN), CreativeModeTab.TAB_DECORATIONS);
 	public static final RegistryObject<Block> CHISELED_BRICKS = HELPER.createBlock("chiseled_bricks", () -> new Block(ClayworksBlockProperties.BRICKS), CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> GLAZED_TERRACOTTA = HELPER.createBlock("glazed_terracotta", () -> new GlazedTerracottaBlock(ClayworksBlockProperties.GLAZED_TERRACOTTA), CreativeModeTab.TAB_BUILDING_BLOCKS);
 
 	public static final RegistryObject<Block> TERRACOTTA_STAIRS = HELPER.createBlock("terracotta_stairs", () -> new StairBlock(() -> Blocks.TERRACOTTA.defaultBlockState(), ClayworksBlockProperties.TERRACOTTA), CreativeModeTab.TAB_BUILDING_BLOCKS);
 	public static final RegistryObject<Block> WHITE_TERRACOTTA_STAIRS = HELPER.createBlock("white_terracotta_stairs", () -> new StairBlock(() -> Blocks.WHITE_TERRACOTTA.defaultBlockState(), ClayworksBlockProperties.WHITE_TERRACOTTA), CreativeModeTab.TAB_BUILDING_BLOCKS);
@@ -95,7 +91,7 @@ public class ClayworksBlocks {
 	public static final RegistryObject<Block> GREEN_TERRACOTTA_VERTICAL_SLAB = HELPER.createCompatBlock("quark", "green_terracotta_vertical_slab", () -> new VerticalSlabBlock(ClayworksBlockProperties.GREEN_TERRACOTTA), CreativeModeTab.TAB_BUILDING_BLOCKS);
 	public static final RegistryObject<Block> RED_TERRACOTTA_VERTICAL_SLAB = HELPER.createCompatBlock("quark", "red_terracotta_vertical_slab", () -> new VerticalSlabBlock(ClayworksBlockProperties.RED_TERRACOTTA), CreativeModeTab.TAB_BUILDING_BLOCKS);
 	public static final RegistryObject<Block> BLACK_TERRACOTTA_VERTICAL_SLAB = HELPER.createCompatBlock("quark", "black_terracotta_vertical_slab", () -> new VerticalSlabBlock(ClayworksBlockProperties.BLACK_TERRACOTTA), CreativeModeTab.TAB_BUILDING_BLOCKS);
-	
+
 	public static final RegistryObject<Block> TERRACOTTA_BRICKS = HELPER.createBlock("terracotta_bricks", () -> new Block(ClayworksBlockProperties.TERRACOTTA), CreativeModeTab.TAB_BUILDING_BLOCKS);
 	public static final RegistryObject<Block> WHITE_TERRACOTTA_BRICKS = HELPER.createBlock("white_terracotta_bricks", () -> new Block(ClayworksBlockProperties.WHITE_TERRACOTTA), CreativeModeTab.TAB_BUILDING_BLOCKS);
 	public static final RegistryObject<Block> ORANGE_TERRACOTTA_BRICKS = HELPER.createBlock("orange_terracotta_bricks", () -> new Block(ClayworksBlockProperties.ORANGE_TERRACOTTA), CreativeModeTab.TAB_BUILDING_BLOCKS);
@@ -205,29 +201,30 @@ public class ClayworksBlocks {
 	public static final RegistryObject<Block> CHISELED_BLACK_TERRACOTTA_BRICKS = HELPER.createBlock("chiseled_black_terracotta_bricks", () -> new Block(ClayworksBlockProperties.BLACK_TERRACOTTA), CreativeModeTab.TAB_BUILDING_BLOCKS);
 
 	public static final class ClayworksBlockProperties {
-		public static final BlockBehaviour.Properties KILN = BlockBehaviour.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(3.5F).lightLevel(litBlockEmission(13));
-		public static final BlockBehaviour.Properties BRICKS = BlockBehaviour.Properties.of(Material.STONE, MaterialColor.COLOR_RED).requiresCorrectToolForDrops().strength(2.0F, 6.0F);
+		public static final Block.Properties KILN = Block.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(3.5F).lightLevel(state -> state.getValue(BlockStateProperties.LIT) ? 13 : 0);
+		public static final Block.Properties BRICKS = Block.Properties.of(Material.STONE, MaterialColor.COLOR_RED).requiresCorrectToolForDrops().strength(2.0F, 6.0F);
+		public static final Block.Properties GLAZED_TERRACOTTA = Block.Properties.of(Material.STONE, MaterialColor.COLOR_RED).requiresCorrectToolForDrops().strength(1.4F);
 
-		public static final BlockBehaviour.Properties TERRACOTTA = BlockBehaviour.Properties.of(Material.STONE, MaterialColor.COLOR_ORANGE).requiresCorrectToolForDrops().strength(1.25F, 4.2F);
-		public static final BlockBehaviour.Properties WHITE_TERRACOTTA = BlockBehaviour.Properties.of(Material.STONE, MaterialColor.TERRACOTTA_WHITE).requiresCorrectToolForDrops().strength(1.25F, 4.2F);
-		public static final BlockBehaviour.Properties ORANGE_TERRACOTTA = BlockBehaviour.Properties.of(Material.STONE, MaterialColor.TERRACOTTA_ORANGE).requiresCorrectToolForDrops().strength(1.25F, 4.2F);
-		public static final BlockBehaviour.Properties MAGENTA_TERRACOTTA = BlockBehaviour.Properties.of(Material.STONE, MaterialColor.TERRACOTTA_MAGENTA).requiresCorrectToolForDrops().strength(1.25F, 4.2F);
-		public static final BlockBehaviour.Properties LIGHT_BLUE_TERRACOTTA = BlockBehaviour.Properties.of(Material.STONE, MaterialColor.TERRACOTTA_LIGHT_BLUE).requiresCorrectToolForDrops().strength(1.25F, 4.2F);
-		public static final BlockBehaviour.Properties YELLOW_TERRACOTTA = BlockBehaviour.Properties.of(Material.STONE, MaterialColor.TERRACOTTA_YELLOW).requiresCorrectToolForDrops().strength(1.25F, 4.2F);
-		public static final BlockBehaviour.Properties LIME_TERRACOTTA = BlockBehaviour.Properties.of(Material.STONE, MaterialColor.TERRACOTTA_LIGHT_GREEN).requiresCorrectToolForDrops().strength(1.25F, 4.2F);
-		public static final BlockBehaviour.Properties PINK_TERRACOTTA = BlockBehaviour.Properties.of(Material.STONE, MaterialColor.TERRACOTTA_PINK).requiresCorrectToolForDrops().strength(1.25F, 4.2F);
-		public static final BlockBehaviour.Properties GRAY_TERRACOTTA = BlockBehaviour.Properties.of(Material.STONE, MaterialColor.TERRACOTTA_GRAY).requiresCorrectToolForDrops().strength(1.25F, 4.2F);
-		public static final BlockBehaviour.Properties LIGHT_GRAY_TERRACOTTA = BlockBehaviour.Properties.of(Material.STONE, MaterialColor.TERRACOTTA_LIGHT_GRAY).requiresCorrectToolForDrops().strength(1.25F, 4.2F);
-		public static final BlockBehaviour.Properties CYAN_TERRACOTTA = BlockBehaviour.Properties.of(Material.STONE, MaterialColor.TERRACOTTA_CYAN).requiresCorrectToolForDrops().strength(1.25F, 4.2F);
-		public static final BlockBehaviour.Properties PURPLE_TERRACOTTA = BlockBehaviour.Properties.of(Material.STONE, MaterialColor.TERRACOTTA_PURPLE).requiresCorrectToolForDrops().strength(1.25F, 4.2F);
-		public static final BlockBehaviour.Properties BLUE_TERRACOTTA = BlockBehaviour.Properties.of(Material.STONE, MaterialColor.TERRACOTTA_BLUE).requiresCorrectToolForDrops().strength(1.25F, 4.2F);
-		public static final BlockBehaviour.Properties BROWN_TERRACOTTA = BlockBehaviour.Properties.of(Material.STONE, MaterialColor.TERRACOTTA_BROWN).requiresCorrectToolForDrops().strength(1.25F, 4.2F);
-		public static final BlockBehaviour.Properties GREEN_TERRACOTTA = BlockBehaviour.Properties.of(Material.STONE, MaterialColor.TERRACOTTA_GREEN).requiresCorrectToolForDrops().strength(1.25F, 4.2F);
-		public static final BlockBehaviour.Properties RED_TERRACOTTA = BlockBehaviour.Properties.of(Material.STONE, MaterialColor.TERRACOTTA_RED).requiresCorrectToolForDrops().strength(1.25F, 4.2F);
-		public static final BlockBehaviour.Properties BLACK_TERRACOTTA = BlockBehaviour.Properties.of(Material.STONE, MaterialColor.TERRACOTTA_BLACK).requiresCorrectToolForDrops().strength(1.25F, 4.2F);
+		public static final Block.Properties TERRACOTTA = terracotta(MaterialColor.COLOR_ORANGE);
+		public static final Block.Properties WHITE_TERRACOTTA = terracotta(MaterialColor.TERRACOTTA_WHITE);
+		public static final Block.Properties ORANGE_TERRACOTTA = terracotta(MaterialColor.TERRACOTTA_ORANGE);
+		public static final Block.Properties MAGENTA_TERRACOTTA = terracotta(MaterialColor.TERRACOTTA_MAGENTA);
+		public static final Block.Properties LIGHT_BLUE_TERRACOTTA = terracotta(MaterialColor.TERRACOTTA_LIGHT_BLUE);
+		public static final Block.Properties YELLOW_TERRACOTTA = terracotta(MaterialColor.TERRACOTTA_YELLOW);
+		public static final Block.Properties LIME_TERRACOTTA = terracotta(MaterialColor.TERRACOTTA_LIGHT_GREEN);
+		public static final Block.Properties PINK_TERRACOTTA = terracotta(MaterialColor.TERRACOTTA_PINK);
+		public static final Block.Properties GRAY_TERRACOTTA = terracotta(MaterialColor.TERRACOTTA_GRAY);
+		public static final Block.Properties LIGHT_GRAY_TERRACOTTA = terracotta(MaterialColor.TERRACOTTA_LIGHT_GRAY);
+		public static final Block.Properties CYAN_TERRACOTTA = terracotta(MaterialColor.TERRACOTTA_CYAN);
+		public static final Block.Properties PURPLE_TERRACOTTA = terracotta(MaterialColor.TERRACOTTA_PURPLE);
+		public static final Block.Properties BLUE_TERRACOTTA = terracotta(MaterialColor.TERRACOTTA_BLUE);
+		public static final Block.Properties BROWN_TERRACOTTA = terracotta(MaterialColor.TERRACOTTA_BROWN);
+		public static final Block.Properties GREEN_TERRACOTTA = terracotta(MaterialColor.TERRACOTTA_GREEN);
+		public static final Block.Properties RED_TERRACOTTA = terracotta(MaterialColor.TERRACOTTA_RED);
+		public static final Block.Properties BLACK_TERRACOTTA = terracotta(MaterialColor.TERRACOTTA_BLACK);
 
-		private static ToIntFunction<BlockState> litBlockEmission(int lightLevel) {
-			return (state) -> state.getValue(BlockStateProperties.LIT) ? lightLevel : 0;
+		public static Block.Properties terracotta(MaterialColor color) {
+			return Block.Properties.of(Material.STONE, color).requiresCorrectToolForDrops().strength(1.25F, 4.2F);
 		}
 	}
 }

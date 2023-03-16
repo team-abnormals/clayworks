@@ -1,0 +1,22 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "clayworks:config",
+          "value": "glazed_terracotta"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:smelting",
+        "cookingtime": 200,
+        "experience": 0.1,
+        "ingredient": {
+          "item": "minecraft:terracotta"
+        },
+        "result": "clayworks:glazed_terracotta"
+      }
+    }
+  ]
+}
