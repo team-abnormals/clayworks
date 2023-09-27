@@ -6,7 +6,6 @@ import com.teamabnormals.blueprint.core.api.conditions.ConfigValueCondition;
 import com.teamabnormals.blueprint.core.api.conditions.QuarkFlagRecipeCondition;
 import com.teamabnormals.clayworks.core.Clayworks;
 import com.teamabnormals.clayworks.core.other.ClayworksBlockFamilies;
-import com.teamabnormals.clayworks.core.registry.ClayworksBlocks;
 import com.teamabnormals.clayworks.core.registry.ClayworksRecipes.ClayworksRecipeSerializers;
 import net.minecraft.data.BlockFamily;
 import net.minecraft.data.BlockFamily.Variant;
