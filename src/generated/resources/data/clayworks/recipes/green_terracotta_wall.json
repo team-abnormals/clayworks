@@ -10,6 +10,7 @@
       ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
+        "category": "misc",
         "key": {
           "#": {
             "item": "minecraft:green_terracotta"
@@ -22,7 +23,8 @@
         "result": {
           "count": 6,
           "item": "clayworks:green_terracotta_wall"
-        }
+        },
+        "show_notification": true
       }
     }
   ]

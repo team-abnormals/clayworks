@@ -33,7 +33,8 @@
           "recipes": [
             "clayworks:magenta_terracotta_brick_slab_from_magenta_terracotta_bricks_stonecutting"
           ]
-        }
+        },
+        "sends_telemetry_event": false
       },
       "conditions": [
         {

@@ -4,11 +4,15 @@ import com.google.common.base.Suppliers;
 import com.google.common.collect.ImmutableList;
 import com.teamabnormals.clayworks.common.item.crafting.BakingRecipe;
 import com.teamabnormals.clayworks.core.Clayworks;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.RecipeBookCategories;
-import net.minecraft.core.Registry;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.core.RegistryAccess;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.item.crafting.SimpleCookingSerializer;
@@ -28,11 +32,11 @@ public class ClayworksRecipes {
 	public static class ClayworksRecipeSerializers {
 		public static final DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZERS = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, Clayworks.MOD_ID);
 
-		public static final RegistryObject<SimpleCookingSerializer<BakingRecipe>> BAKING = RECIPE_SERIALIZERS.register("baking", () -> new SimpleCookingSerializer<>(BakingRecipe::new, 100));
+		public static final RegistryObject<SimpleCookingSerializer<BakingRecipe>> BAKING_RECIPE = RECIPE_SERIALIZERS.register("baking", () -> new SimpleCookingSerializer<>(BakingRecipe::new, 100));
 	}
 
 	public static class ClayworksRecipeTypes {
-		public static final DeferredRegister<RecipeType<?>> RECIPE_TYPES = DeferredRegister.create(Registry.RECIPE_TYPE_REGISTRY, Clayworks.MOD_ID);
+		public static final DeferredRegister<RecipeType<?>> RECIPE_TYPES = DeferredRegister.create(Registries.RECIPE_TYPE, Clayworks.MOD_ID);
 
 		public static final RegistryObject<RecipeType<BakingRecipe>> BAKING = RECIPE_TYPES.register("baking", () -> new RecipeType<>() {
 			@Override
@@ -40,6 +44,16 @@ public class ClayworksRecipes {
 				return Clayworks.MOD_ID + ":baking";
 			}
 		});
+	}
+
+	public static ItemStack getResultItem(Recipe<?> recipe) {
+		Minecraft minecraft = Minecraft.getInstance();
+		ClientLevel level = minecraft.level;
+		if (level == null) {
+			throw new NullPointerException("level must not be null.");
+		}
+		RegistryAccess registryAccess = level.registryAccess();
+		return recipe.getResultItem(registryAccess);
 	}
 
 	@EventBusSubscriber(modid = Clayworks.MOD_ID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
@@ -52,7 +66,7 @@ public class ClayworksRecipes {
 		public static void registerCategories(RegisterRecipeBookCategoriesEvent event) {
 			event.registerBookCategories(Clayworks.RECIPE_TYPE_BAKING, ImmutableList.of(KILN_SEARCH.get(), KILN_BLOCKS.get(), KILN_MISC.get()));
 			event.registerAggregateCategory(KILN_SEARCH.get(), ImmutableList.of(KILN_BLOCKS.get(), KILN_MISC.get()));
-			event.registerRecipeCategoryFinder(ClayworksRecipeTypes.BAKING.get(), recipe -> recipe.getResultItem().getItem() instanceof BlockItem ? KILN_BLOCKS.get() : KILN_MISC.get());
+			event.registerRecipeCategoryFinder(ClayworksRecipeTypes.BAKING.get(), recipe -> ClayworksRecipes.getResultItem(recipe).getItem() instanceof BlockItem ? KILN_BLOCKS.get() : KILN_MISC.get());
 		}
 	}
 }

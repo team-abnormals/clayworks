@@ -33,7 +33,8 @@
           "recipes": [
             "clayworks:white_terracotta_brick_wall_from_white_terracotta_bricks_stonecutting"
           ]
-        }
+        },
+        "sends_telemetry_event": false
       },
       "conditions": [
         {

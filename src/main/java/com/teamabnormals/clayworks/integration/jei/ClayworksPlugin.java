@@ -27,7 +27,7 @@ public class ClayworksPlugin implements IModPlugin {
 
 	@Override
 	public void registerCategories(IRecipeCategoryRegistration registration) {
-		registration.addRecipeCategories(new BakingRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
+		registration.addRecipeCategories(new BakingCategory(registration.getJeiHelpers().getGuiHelper()));
 	}
 
 	@Override

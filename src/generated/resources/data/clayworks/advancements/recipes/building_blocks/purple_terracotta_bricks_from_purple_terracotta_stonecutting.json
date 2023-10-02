@@ -33,7 +33,8 @@
           "recipes": [
             "clayworks:purple_terracotta_bricks_from_purple_terracotta_stonecutting"
           ]
-        }
+        },
+        "sends_telemetry_event": false
       },
       "conditions": [
         {

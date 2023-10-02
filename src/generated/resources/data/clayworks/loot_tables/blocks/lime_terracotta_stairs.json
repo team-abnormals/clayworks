@@ -16,5 +16,6 @@
       ],
       "rolls": 1.0
     }
-  ]
+  ],
+  "random_sequence": "clayworks:blocks/lime_terracotta_stairs"
 }

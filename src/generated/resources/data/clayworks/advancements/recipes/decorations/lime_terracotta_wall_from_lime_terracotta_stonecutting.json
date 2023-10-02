@@ -33,7 +33,8 @@
           "recipes": [
             "clayworks:lime_terracotta_wall_from_lime_terracotta_stonecutting"
           ]
-        }
+        },
+        "sends_telemetry_event": false
       },
       "conditions": [
         {

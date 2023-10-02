@@ -33,7 +33,8 @@
           "recipes": [
             "clayworks:stone_from_baking"
           ]
-        }
+        },
+        "sends_telemetry_event": false
       },
       "conditions": [
         {

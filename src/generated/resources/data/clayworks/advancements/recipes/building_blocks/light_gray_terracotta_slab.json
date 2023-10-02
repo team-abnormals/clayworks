@@ -33,7 +33,8 @@
           "recipes": [
             "clayworks:light_gray_terracotta_slab"
           ]
-        }
+        },
+        "sends_telemetry_event": false
       },
       "conditions": [
         {

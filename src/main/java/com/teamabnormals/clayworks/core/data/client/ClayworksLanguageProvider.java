@@ -3,8 +3,8 @@ package com.teamabnormals.clayworks.core.data.client;
 import com.teamabnormals.clayworks.common.block.entity.KilnBlockEntity;
 import com.teamabnormals.clayworks.core.Clayworks;
 import com.teamabnormals.clayworks.core.registry.ClayworksBlocks;
-import com.teamabnormals.clayworks.integration.jei.BakingRecipeCategory;
-import net.minecraft.data.DataGenerator;
+import com.teamabnormals.clayworks.integration.jei.BakingCategory;
+import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.data.LanguageProvider;
@@ -15,14 +15,14 @@ import java.util.List;
 
 public class ClayworksLanguageProvider extends LanguageProvider {
 
-	public ClayworksLanguageProvider(DataGenerator gen) {
-		super(gen, Clayworks.MOD_ID, "en_us");
+	public ClayworksLanguageProvider(PackOutput output) {
+		super(output, Clayworks.MOD_ID, "en_us");
 	}
 
 	@Override
 	public void addTranslations() {
 		this.add(KilnBlockEntity.TRANSLATION.getString(), "Kiln");
-		this.add(BakingRecipeCategory.TRANSLATION.getString(), "Baking");
+		this.add(BakingCategory.TRANSLATION.getString(), "Baking");
 		this.add("subtitles." + Clayworks.MOD_ID + ".block.kiln.smoke", "Kiln smokes");
 		ClayworksBlocks.HELPER.getDeferredRegister().getEntries().forEach((registryObject -> this.add(registryObject.get())));
 	}

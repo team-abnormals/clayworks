@@ -30,5 +30,6 @@
       ],
       "rolls": 1.0
     }
-  ]
+  ],
+  "random_sequence": "clayworks:blocks/purple_terracotta_brick_vertical_slab"
 }

@@ -10,6 +10,7 @@
       ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
+        "category": "building",
         "key": {
           "#": {
             "item": "minecraft:cyan_terracotta"
@@ -23,7 +24,8 @@
         "result": {
           "count": 4,
           "item": "clayworks:cyan_terracotta_stairs"
-        }
+        },
+        "show_notification": true
       }
     }
   ]

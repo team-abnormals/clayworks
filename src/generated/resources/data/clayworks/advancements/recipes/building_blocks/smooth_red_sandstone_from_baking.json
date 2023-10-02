@@ -33,7 +33,8 @@
           "recipes": [
             "clayworks:smooth_red_sandstone_from_baking"
           ]
-        }
+        },
+        "sends_telemetry_event": false
       },
       "conditions": [
         {

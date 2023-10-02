@@ -33,7 +33,8 @@
           "recipes": [
             "clayworks:cyan_terracotta_brick_stairs_from_cyan_terracotta_stonecutting"
           ]
-        }
+        },
+        "sends_telemetry_event": false
       },
       "conditions": [
         {

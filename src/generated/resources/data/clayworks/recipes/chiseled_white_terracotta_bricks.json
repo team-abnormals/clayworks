@@ -10,6 +10,7 @@
       ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
+        "category": "building",
         "key": {
           "#": {
             "item": "clayworks:white_terracotta_brick_slab"
@@ -21,7 +22,8 @@
         ],
         "result": {
           "item": "clayworks:chiseled_white_terracotta_bricks"
-        }
+        },
+        "show_notification": true
       }
     }
   ]

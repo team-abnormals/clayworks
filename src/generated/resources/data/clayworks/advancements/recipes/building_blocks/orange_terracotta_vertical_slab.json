@@ -33,7 +33,8 @@
           "recipes": [
             "clayworks:orange_terracotta_vertical_slab"
           ]
-        }
+        },
+        "sends_telemetry_event": false
       },
       "conditions": [
         {

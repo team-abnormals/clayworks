@@ -33,7 +33,8 @@
           "recipes": [
             "clayworks:sponge_from_baking"
           ]
-        }
+        },
+        "sends_telemetry_event": false
       },
       "conditions": [
         {

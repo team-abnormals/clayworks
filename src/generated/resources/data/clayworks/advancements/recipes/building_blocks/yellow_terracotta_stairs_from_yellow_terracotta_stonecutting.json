@@ -33,7 +33,8 @@
           "recipes": [
             "clayworks:yellow_terracotta_stairs_from_yellow_terracotta_stonecutting"
           ]
-        }
+        },
+        "sends_telemetry_event": false
       },
       "conditions": [
         {

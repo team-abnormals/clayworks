@@ -33,7 +33,8 @@
           "recipes": [
             "clayworks:gray_glazed_terracotta_from_baking"
           ]
-        }
+        },
+        "sends_telemetry_event": false
       },
       "conditions": [
         {

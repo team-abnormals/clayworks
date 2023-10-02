@@ -31,7 +31,8 @@
           "recipes": [
             "clayworks:kiln"
           ]
-        }
+        },
+        "sends_telemetry_event": false
       },
       "conditions": [
         {

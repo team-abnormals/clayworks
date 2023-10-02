@@ -3,10 +3,10 @@ package com.teamabnormals.clayworks.integration.jei;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
-import com.mojang.blaze3d.vertex.PoseStack;
 import com.teamabnormals.clayworks.common.item.crafting.BakingRecipe;
 import com.teamabnormals.clayworks.core.Clayworks;
 import com.teamabnormals.clayworks.core.registry.ClayworksBlocks;
+import com.teamabnormals.clayworks.core.registry.ClayworksRecipes;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -19,6 +19,7 @@ import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
@@ -27,7 +28,7 @@ import net.minecraft.world.item.ItemStack;
 import static mezz.jei.api.recipe.RecipeIngredientRole.INPUT;
 import static mezz.jei.api.recipe.RecipeIngredientRole.OUTPUT;
 
-public class BakingRecipeCategory implements IRecipeCategory<BakingRecipe> {
+public class BakingCategory implements IRecipeCategory<BakingRecipe> {
 	public static final ResourceLocation RECIPE_GUI_VANILLA = new ResourceLocation("jei", "textures/gui/gui_vanilla.png");
 	public static final MutableComponent TRANSLATION = Component.translatable("gui." + Clayworks.MOD_ID + ".category.baking");
 
@@ -39,7 +40,7 @@ public class BakingRecipeCategory implements IRecipeCategory<BakingRecipe> {
 	protected final IDrawableStatic staticFlame;
 	protected final IDrawableAnimated animatedFlame;
 
-	public BakingRecipeCategory(IGuiHelper guiHelper) {
+	public BakingCategory(IGuiHelper guiHelper) {
 		this.background = guiHelper.createDrawable(RECIPE_GUI_VANILLA, 0, 114, 82, 54);
 		this.regularCookTime = 100;
 		this.icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(ClayworksBlocks.KILN.get()));
@@ -76,28 +77,28 @@ public class BakingRecipeCategory implements IRecipeCategory<BakingRecipe> {
 	}
 
 	@Override
-	public void draw(BakingRecipe recipe, IRecipeSlotsView recipeSlotsView, PoseStack poseStack, double mouseX, double mouseY) {
-		animatedFlame.draw(poseStack, 1, 20);
+	public void draw(BakingRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
+		animatedFlame.draw(guiGraphics, 1, 20);
 
 		IDrawableAnimated arrow = getArrow(recipe);
-		arrow.draw(poseStack, 24, 18);
+		arrow.draw(guiGraphics, 24, 18);
 
-		drawExperience(recipe, poseStack, 0);
-		drawCookTime(recipe, poseStack, 45);
+		drawExperience(recipe, guiGraphics, 0);
+		drawCookTime(recipe, guiGraphics, 45);
 	}
 
-	protected void drawExperience(BakingRecipe recipe, PoseStack poseStack, int y) {
+	protected void drawExperience(BakingRecipe recipe, GuiGraphics guiGraphics, int y) {
 		float experience = recipe.getExperience();
 		if (experience > 0) {
 			MutableComponent experienceString = Component.translatable("gui.jei.category.smelting.experience", experience);
 			Minecraft minecraft = Minecraft.getInstance();
 			Font fontRenderer = minecraft.font;
 			int stringWidth = fontRenderer.width(experienceString);
-			fontRenderer.draw(poseStack, experienceString, background.getWidth() - stringWidth, y, 0xFF808080);
+			guiGraphics.drawString(fontRenderer, experienceString, background.getWidth() - stringWidth, y, 0xFF808080);
 		}
 	}
 
-	protected void drawCookTime(BakingRecipe recipe, PoseStack poseStack, int y) {
+	protected void drawCookTime(BakingRecipe recipe, GuiGraphics guiGraphics, int y) {
 		int cookTime = recipe.getCookingTime();
 		if (cookTime > 0) {
 			int cookTimeSeconds = cookTime / 20;
@@ -105,7 +106,7 @@ public class BakingRecipeCategory implements IRecipeCategory<BakingRecipe> {
 			Minecraft minecraft = Minecraft.getInstance();
 			Font fontRenderer = minecraft.font;
 			int stringWidth = fontRenderer.width(timeString);
-			fontRenderer.draw(poseStack, timeString, background.getWidth() - stringWidth, y, 0xFF808080);
+			guiGraphics.drawString(fontRenderer, timeString, background.getWidth() - stringWidth, y, 0xFF808080);
 		}
 	}
 
@@ -113,7 +114,7 @@ public class BakingRecipeCategory implements IRecipeCategory<BakingRecipe> {
 	@Override
 	public void setRecipe(IRecipeLayoutBuilder builder, BakingRecipe recipe, IFocusGroup focuses) {
 		builder.addSlot(INPUT, 1, 1).addIngredients(recipe.getIngredients().get(0));
-		builder.addSlot(OUTPUT, 61, 19).addItemStack(recipe.getResultItem());
+		builder.addSlot(OUTPUT, 61, 19).addItemStack(ClayworksRecipes.getResultItem(recipe));
 	}
 
 	@Override

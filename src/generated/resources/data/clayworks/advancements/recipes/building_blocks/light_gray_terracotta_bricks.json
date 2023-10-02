@@ -33,7 +33,8 @@
           "recipes": [
             "clayworks:light_gray_terracotta_bricks"
           ]
-        }
+        },
+        "sends_telemetry_event": false
       },
       "conditions": [
         {

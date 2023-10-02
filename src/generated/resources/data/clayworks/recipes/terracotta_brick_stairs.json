@@ -10,6 +10,7 @@
       ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
+        "category": "building",
         "key": {
           "#": {
             "item": "clayworks:terracotta_bricks"
@@ -23,7 +24,8 @@
         "result": {
           "count": 4,
           "item": "clayworks:terracotta_brick_stairs"
-        }
+        },
+        "show_notification": true
       }
     }
   ]

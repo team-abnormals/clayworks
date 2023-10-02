@@ -33,7 +33,8 @@
           "recipes": [
             "clayworks:terracotta_wall"
           ]
-        }
+        },
+        "sends_telemetry_event": false
       },
       "conditions": [
         {

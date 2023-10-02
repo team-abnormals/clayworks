@@ -33,7 +33,8 @@
           "recipes": [
             "clayworks:chiseled_red_terracotta_bricks_from_red_terracotta_stonecutting"
           ]
-        }
+        },
+        "sends_telemetry_event": false
       },
       "conditions": [
         {

@@ -33,7 +33,8 @@
           "recipes": [
             "clayworks:light_blue_terracotta_brick_stairs_from_light_blue_terracotta_bricks_stonecutting"
           ]
-        }
+        },
+        "sends_telemetry_event": false
       },
       "conditions": [
         {

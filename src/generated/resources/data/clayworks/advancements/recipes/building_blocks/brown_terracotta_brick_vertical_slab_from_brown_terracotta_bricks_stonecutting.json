@@ -33,7 +33,8 @@
           "recipes": [
             "clayworks:brown_terracotta_brick_vertical_slab_from_brown_terracotta_bricks_stonecutting"
           ]
-        }
+        },
+        "sends_telemetry_event": false
       },
       "conditions": [
         {

@@ -33,7 +33,8 @@
           "recipes": [
             "clayworks:cracked_stone_bricks_from_baking"
           ]
-        }
+        },
+        "sends_telemetry_event": false
       },
       "conditions": [
         {

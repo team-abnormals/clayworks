@@ -33,7 +33,8 @@
           "recipes": [
             "clayworks:popped_chorus_fruit_from_baking"
           ]
-        }
+        },
+        "sends_telemetry_event": false
       },
       "conditions": [
         {

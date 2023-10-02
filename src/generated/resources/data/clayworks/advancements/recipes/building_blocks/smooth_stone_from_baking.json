@@ -33,7 +33,8 @@
           "recipes": [
             "clayworks:smooth_stone_from_baking"
           ]
-        }
+        },
+        "sends_telemetry_event": false
       },
       "conditions": [
         {

@@ -20,6 +20,6 @@ public class ClayworksParticleTypes {
 
 	@SubscribeEvent
 	public static void registerParticleFactorys(RegisterParticleProvidersEvent event) {
-		event.register(KILN_SMOKE.get(), KilnSmokeParticle.Factory::new);
+		event.registerSpriteSet(KILN_SMOKE.get(), KilnSmokeParticle.Factory::new);
 	}
 }

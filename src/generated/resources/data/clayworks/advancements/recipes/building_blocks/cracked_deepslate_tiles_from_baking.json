@@ -33,7 +33,8 @@
           "recipes": [
             "clayworks:cracked_deepslate_tiles_from_baking"
           ]
-        }
+        },
+        "sends_telemetry_event": false
       },
       "conditions": [
         {

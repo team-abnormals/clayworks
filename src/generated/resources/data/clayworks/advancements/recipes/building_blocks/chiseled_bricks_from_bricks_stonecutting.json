@@ -33,7 +33,8 @@
           "recipes": [
             "clayworks:chiseled_bricks_from_bricks_stonecutting"
           ]
-        }
+        },
+        "sends_telemetry_event": false
       },
       "conditions": [
         {

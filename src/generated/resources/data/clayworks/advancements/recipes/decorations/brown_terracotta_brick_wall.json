@@ -33,7 +33,8 @@
           "recipes": [
             "clayworks:brown_terracotta_brick_wall"
           ]
-        }
+        },
+        "sends_telemetry_event": false
       },
       "conditions": [
         {

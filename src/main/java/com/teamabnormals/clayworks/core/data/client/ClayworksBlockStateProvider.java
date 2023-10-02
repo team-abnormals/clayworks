@@ -1,13 +1,13 @@
 package com.teamabnormals.clayworks.core.data.client;
 
-import com.teamabnormals.blueprint.common.block.VerticalSlabBlock;
-import com.teamabnormals.blueprint.common.block.VerticalSlabBlock.VerticalSlabType;
+import com.teamabnormals.blueprint.common.block.quark.VerticalSlabBlock;
+import com.teamabnormals.blueprint.common.block.quark.VerticalSlabBlock.VerticalSlabType;
 import com.teamabnormals.blueprint.core.Blueprint;
 import com.teamabnormals.clayworks.core.Clayworks;
 import com.teamabnormals.clayworks.core.other.ClayworksBlockFamilies;
 import net.minecraft.data.BlockFamily;
 import net.minecraft.data.BlockFamily.Variant;
-import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SlabBlock;
@@ -26,8 +26,8 @@ import static com.teamabnormals.clayworks.core.registry.ClayworksBlocks.*;
 
 public class ClayworksBlockStateProvider extends BlockStateProvider {
 
-	public ClayworksBlockStateProvider(DataGenerator generator, ExistingFileHelper existingFileHelper) {
-		super(generator, Clayworks.MOD_ID, existingFileHelper);
+	public ClayworksBlockStateProvider(PackOutput output, ExistingFileHelper fileHelper) {
+		super(output, Clayworks.MOD_ID, fileHelper);
 	}
 
 	@Override

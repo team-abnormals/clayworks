@@ -33,7 +33,8 @@
           "recipes": [
             "clayworks:black_terracotta_slab_from_black_terracotta_stonecutting"
           ]
-        }
+        },
+        "sends_telemetry_event": false
       },
       "conditions": [
         {

@@ -33,7 +33,8 @@
           "recipes": [
             "clayworks:chiseled_brown_terracotta_bricks"
           ]
-        }
+        },
+        "sends_telemetry_event": false
       },
       "conditions": [
         {

@@ -10,6 +10,7 @@
       ],
       "recipe": {
         "type": "clayworks:baking",
+        "category": "misc",
         "cookingtime": 100,
         "experience": 1.0,
         "ingredient": {

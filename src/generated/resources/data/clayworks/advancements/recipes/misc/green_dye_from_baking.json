@@ -33,7 +33,8 @@
           "recipes": [
             "clayworks:green_dye_from_baking"
           ]
-        }
+        },
+        "sends_telemetry_event": false
       },
       "conditions": [
         {

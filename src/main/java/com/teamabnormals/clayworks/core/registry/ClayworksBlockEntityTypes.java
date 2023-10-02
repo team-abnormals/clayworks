@@ -1,9 +1,9 @@
 package com.teamabnormals.clayworks.core.registry;
 
+import com.google.common.collect.ImmutableSet;
 import com.teamabnormals.blueprint.core.util.registry.BlockEntitySubRegistryHelper;
 import com.teamabnormals.clayworks.common.block.entity.KilnBlockEntity;
 import com.teamabnormals.clayworks.core.Clayworks;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.registries.RegistryObject;
@@ -12,5 +12,5 @@ import net.minecraftforge.registries.RegistryObject;
 public class ClayworksBlockEntityTypes {
 	public static final BlockEntitySubRegistryHelper HELPER = Clayworks.REGISTRY_HELPER.getBlockEntitySubHelper();
 
-	public static final RegistryObject<BlockEntityType<KilnBlockEntity>> KILN = HELPER.createBlockEntity("kiln", KilnBlockEntity::new, () -> new Block[]{ClayworksBlocks.KILN.get()});
+	public static final RegistryObject<BlockEntityType<KilnBlockEntity>> KILN = HELPER.createBlockEntity("kiln", KilnBlockEntity::new, () -> ImmutableSet.of(ClayworksBlocks.KILN.get()));
 }
