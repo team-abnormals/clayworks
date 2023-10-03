@@ -29,7 +29,7 @@ import static mezz.jei.api.recipe.RecipeIngredientRole.INPUT;
 import static mezz.jei.api.recipe.RecipeIngredientRole.OUTPUT;
 
 public class BakingCategory implements IRecipeCategory<BakingRecipe> {
-	public static final ResourceLocation RECIPE_GUI_VANILLA = new ResourceLocation("jei", "textures/gui/gui_vanilla.png");
+	public static final ResourceLocation RECIPE_GUI_VANILLA = new ResourceLocation("jei", "textures/jei/gui/gui_vanilla.png");
 	public static final MutableComponent TRANSLATION = Component.translatable("gui." + Clayworks.MOD_ID + ".category.baking");
 
 	private final IDrawable background;

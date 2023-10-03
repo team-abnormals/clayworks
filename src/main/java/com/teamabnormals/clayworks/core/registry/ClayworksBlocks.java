@@ -255,7 +255,6 @@ public class ClayworksBlocks {
 				.predicate(event -> ClayworksConfig.COMMON.glazedTerracotta.get())
 				.addItemsBefore(of(Items.WHITE_GLAZED_TERRACOTTA), GLAZED_TERRACOTTA)
 				.tab(FUNCTIONAL_BLOCKS).predicate(event -> ClayworksConfig.COMMON.kiln.get())
-				.addItemsAfter(of(Items.SMOKER), KILN)
-		;
+				.addItemsAfter(of(Items.SMOKER), KILN);
 	}
 }
