@@ -1,7 +1,5 @@
 package com.teamabnormals.clayworks.core;
 
-import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.Sets;
 import com.teamabnormals.blueprint.core.util.registry.RegistryHelper;
 import com.teamabnormals.clayworks.core.data.client.ClayworksBlockStateProvider;
 import com.teamabnormals.clayworks.core.data.client.ClayworksLanguageProvider;
@@ -11,6 +9,7 @@ import com.teamabnormals.clayworks.core.data.server.modifiers.ClayworksLootModif
 import com.teamabnormals.clayworks.core.data.server.tags.ClayworksBlockTagsProvider;
 import com.teamabnormals.clayworks.core.data.server.tags.ClayworksItemTagsProvider;
 import com.teamabnormals.clayworks.core.data.server.tags.ClayworksPaintingVariantTagsProvider;
+import com.teamabnormals.clayworks.core.other.ClayworksCompat;
 import com.teamabnormals.clayworks.core.registry.*;
 import com.teamabnormals.clayworks.core.registry.ClayworksRecipes.ClayworksRecipeSerializers;
 import com.teamabnormals.clayworks.core.registry.ClayworksRecipes.ClayworksRecipeTypes;
@@ -19,9 +18,6 @@ import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.inventory.RecipeBookType;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.DecoratedPotBlock;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -35,9 +31,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
 
-import java.util.HashSet;
 import java.util.concurrent.CompletableFuture;
 
 @Mod(Clayworks.MOD_ID)
@@ -72,10 +66,9 @@ public class Clayworks {
 	}
 
 	private void commonSetup(FMLCommonSetupEvent event) {
-		HashSet<Block> blocks = Sets.newHashSet();
-		blocks.addAll(BlockEntityType.DECORATED_POT.validBlocks);
-		blocks.addAll(ClayworksBlocks.HELPER.getDeferredRegister().getEntries().stream().filter(registryObject -> registryObject.get() instanceof DecoratedPotBlock).map(RegistryObject::get).toList());
-		BlockEntityType.DECORATED_POT.validBlocks = ImmutableSet.copyOf(blocks);
+		event.enqueueWork(() -> {
+			ClayworksCompat.registerCompat();
+		});
 	}
 
 	private void clientSetup(FMLClientSetupEvent event) {
