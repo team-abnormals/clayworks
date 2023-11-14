@@ -8,10 +8,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.SlabBlock;
-import net.minecraft.world.level.block.StairBlock;
-import net.minecraft.world.level.block.WallBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
@@ -33,7 +30,9 @@ public class ClayworksBlockTagsProvider extends BlockTagsProvider {
 
 		ClayworksBlocks.HELPER.getDeferredRegister().getEntries().forEach((registryObject -> {
 			Block block = registryObject.get();
-			mineable.add(block);
+			if (!(block instanceof DecoratedPotBlock)) {
+				mineable.add(block);
+			}
 			if (block instanceof SlabBlock) {
 				slabs.add(block);
 			} else if (block instanceof VerticalSlabBlock) {

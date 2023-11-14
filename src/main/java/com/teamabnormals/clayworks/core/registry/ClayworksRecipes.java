@@ -3,6 +3,7 @@ package com.teamabnormals.clayworks.core.registry;
 import com.google.common.base.Suppliers;
 import com.google.common.collect.ImmutableList;
 import com.teamabnormals.clayworks.common.item.crafting.BakingRecipe;
+import com.teamabnormals.clayworks.common.item.crafting.DecoratedPotColoring;
 import com.teamabnormals.clayworks.core.Clayworks;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.RecipeBookCategories;
@@ -12,10 +13,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraft.world.item.crafting.SimpleCookingSerializer;
+import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RegisterRecipeBookCategoriesEvent;
@@ -33,6 +31,7 @@ public class ClayworksRecipes {
 		public static final DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZERS = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, Clayworks.MOD_ID);
 
 		public static final RegistryObject<SimpleCookingSerializer<BakingRecipe>> BAKING_RECIPE = RECIPE_SERIALIZERS.register("baking", () -> new SimpleCookingSerializer<>(BakingRecipe::new, 100));
+		public static final RegistryObject<SimpleCraftingRecipeSerializer<DecoratedPotColoring>> DECORATED_POT_COLORING = RECIPE_SERIALIZERS.register("crafting_special_decoratedpotcoloring", () -> new SimpleCraftingRecipeSerializer<>(DecoratedPotColoring::new));
 	}
 
 	public static class ClayworksRecipeTypes {

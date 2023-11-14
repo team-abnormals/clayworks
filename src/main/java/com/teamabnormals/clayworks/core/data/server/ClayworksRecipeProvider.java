@@ -51,6 +51,7 @@ public class ClayworksRecipeProvider extends RecipeProvider {
 	public void buildRecipes(Consumer<FinishedRecipe> consumer) {
 		conditionalRecipe(consumer, RecipeCategory.DECORATIONS, KILN_CONFIG, ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, KILN.get()).define('#', ItemTags.STONE_CRAFTING_MATERIALS).define('X', Blocks.FURNACE).define('B', Blocks.MUD_BRICKS).pattern("###").pattern("#X#").pattern("BBB").unlockedBy("has_cobblestone", has(ItemTags.STONE_CRAFTING_MATERIALS)));
 		generateKilnRecipes(consumer);
+		SpecialRecipeBuilder.special(ClayworksRecipeSerializers.DECORATED_POT_COLORING.get()).save(consumer,Clayworks.MOD_ID + ":decorated_pot_coloring");
 
 		conditionalRecipe(consumer, RecipeCategory.BUILDING_BLOCKS, CHISELED_BRICKS_CONFIG, chiseledBuilder(RecipeCategory.BUILDING_BLOCKS, CHISELED_BRICKS.get(), Ingredient.of(Blocks.BRICK_SLAB)).unlockedBy(getHasName(Blocks.BRICK_SLAB), has(Blocks.BRICK_SLAB)));
 		conditionalStonecuttingRecipe(consumer, RecipeCategory.BUILDING_BLOCKS, CHISELED_BRICKS_CONFIG, CHISELED_BRICKS.get(), Blocks.BRICKS);

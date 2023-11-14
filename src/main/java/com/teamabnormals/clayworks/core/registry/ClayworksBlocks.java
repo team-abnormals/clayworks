@@ -2,10 +2,11 @@ package com.teamabnormals.clayworks.core.registry;
 
 import com.teamabnormals.blueprint.common.block.quark.VerticalSlabBlock;
 import com.teamabnormals.blueprint.core.util.item.CreativeModeTabContentsPopulator;
-import com.teamabnormals.blueprint.core.util.registry.BlockSubRegistryHelper;
 import com.teamabnormals.clayworks.common.block.KilnBlock;
 import com.teamabnormals.clayworks.core.Clayworks;
 import com.teamabnormals.clayworks.core.ClayworksConfig;
+import com.teamabnormals.clayworks.core.registry.helper.ClayworksBlockSubRegistryHelper;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -15,12 +16,14 @@ import net.minecraft.world.level.material.PushReaction;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.registries.RegistryObject;
 
+import javax.annotation.Nullable;
+
 import static net.minecraft.world.item.CreativeModeTabs.*;
 import static net.minecraft.world.item.crafting.Ingredient.of;
 
 @EventBusSubscriber(modid = Clayworks.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
 public class ClayworksBlocks {
-	public static final BlockSubRegistryHelper HELPER = Clayworks.REGISTRY_HELPER.getBlockSubHelper();
+	public static final ClayworksBlockSubRegistryHelper HELPER = Clayworks.REGISTRY_HELPER.getBlockSubHelper();
 
 	public static final RegistryObject<Block> KILN = HELPER.createBlock("kiln", () -> new KilnBlock(ClayworksBlockProperties.KILN));
 	public static final RegistryObject<Block> CHISELED_BRICKS = HELPER.createBlock("chiseled_bricks", () -> new Block(ClayworksBlockProperties.BRICKS));
@@ -206,6 +209,69 @@ public class ClayworksBlocks {
 	public static final RegistryObject<Block> CHISELED_RED_TERRACOTTA_BRICKS = HELPER.createBlock("chiseled_red_terracotta_bricks", () -> new Block(ClayworksBlockProperties.RED_TERRACOTTA));
 	public static final RegistryObject<Block> CHISELED_BLACK_TERRACOTTA_BRICKS = HELPER.createBlock("chiseled_black_terracotta_bricks", () -> new Block(ClayworksBlockProperties.BLACK_TERRACOTTA));
 
+	public static final RegistryObject<Block> WHITE_DECORATED_POT = HELPER.createdDecoratedPotBlock("white_decorated_pot", () -> new DecoratedPotBlock(ClayworksBlockProperties.decoratedPot(MapColor.TERRACOTTA_WHITE)));
+	public static final RegistryObject<Block> ORANGE_DECORATED_POT = HELPER.createdDecoratedPotBlock("orange_decorated_pot", () -> new DecoratedPotBlock(ClayworksBlockProperties.decoratedPot(MapColor.TERRACOTTA_ORANGE)));
+	public static final RegistryObject<Block> MAGENTA_DECORATED_POT = HELPER.createdDecoratedPotBlock("magenta_decorated_pot", () -> new DecoratedPotBlock(ClayworksBlockProperties.decoratedPot(MapColor.TERRACOTTA_MAGENTA)));
+	public static final RegistryObject<Block> LIGHT_BLUE_DECORATED_POT = HELPER.createdDecoratedPotBlock("light_blue_decorated_pot", () -> new DecoratedPotBlock(ClayworksBlockProperties.decoratedPot(MapColor.TERRACOTTA_LIGHT_BLUE)));
+	public static final RegistryObject<Block> YELLOW_DECORATED_POT = HELPER.createdDecoratedPotBlock("yellow_decorated_pot", () -> new DecoratedPotBlock(ClayworksBlockProperties.decoratedPot(MapColor.TERRACOTTA_YELLOW)));
+	public static final RegistryObject<Block> LIME_DECORATED_POT = HELPER.createdDecoratedPotBlock("lime_decorated_pot", () -> new DecoratedPotBlock(ClayworksBlockProperties.decoratedPot(MapColor.TERRACOTTA_LIGHT_GREEN)));
+	public static final RegistryObject<Block> PINK_DECORATED_POT = HELPER.createdDecoratedPotBlock("pink_decorated_pot", () -> new DecoratedPotBlock(ClayworksBlockProperties.decoratedPot(MapColor.TERRACOTTA_PINK)));
+	public static final RegistryObject<Block> GRAY_DECORATED_POT = HELPER.createdDecoratedPotBlock("gray_decorated_pot", () -> new DecoratedPotBlock(ClayworksBlockProperties.decoratedPot(MapColor.TERRACOTTA_GRAY)));
+	public static final RegistryObject<Block> LIGHT_GRAY_DECORATED_POT = HELPER.createdDecoratedPotBlock("light_gray_decorated_pot", () -> new DecoratedPotBlock(ClayworksBlockProperties.decoratedPot(MapColor.TERRACOTTA_LIGHT_GRAY)));
+	public static final RegistryObject<Block> CYAN_DECORATED_POT = HELPER.createdDecoratedPotBlock("cyan_decorated_pot", () -> new DecoratedPotBlock(ClayworksBlockProperties.decoratedPot(MapColor.TERRACOTTA_CYAN)));
+	public static final RegistryObject<Block> PURPLE_DECORATED_POT = HELPER.createdDecoratedPotBlock("purple_decorated_pot", () -> new DecoratedPotBlock(ClayworksBlockProperties.decoratedPot(MapColor.TERRACOTTA_PURPLE)));
+	public static final RegistryObject<Block> BLUE_DECORATED_POT = HELPER.createdDecoratedPotBlock("blue_decorated_pot", () -> new DecoratedPotBlock(ClayworksBlockProperties.decoratedPot(MapColor.TERRACOTTA_BLUE)));
+	public static final RegistryObject<Block> BROWN_DECORATED_POT = HELPER.createdDecoratedPotBlock("brown_decorated_pot", () -> new DecoratedPotBlock(ClayworksBlockProperties.decoratedPot(MapColor.TERRACOTTA_BROWN)));
+	public static final RegistryObject<Block> GREEN_DECORATED_POT = HELPER.createdDecoratedPotBlock("green_decorated_pot", () -> new DecoratedPotBlock(ClayworksBlockProperties.decoratedPot(MapColor.TERRACOTTA_GREEN)));
+	public static final RegistryObject<Block> RED_DECORATED_POT = HELPER.createdDecoratedPotBlock("red_decorated_pot", () -> new DecoratedPotBlock(ClayworksBlockProperties.decoratedPot(MapColor.TERRACOTTA_RED)));
+	public static final RegistryObject<Block> BLACK_DECORATED_POT = HELPER.createdDecoratedPotBlock("black_decorated_pot", () -> new DecoratedPotBlock(ClayworksBlockProperties.decoratedPot(MapColor.TERRACOTTA_BLACK)));
+
+	@Nullable
+	public static DyeColor getDyeColorFromPot(Block block) {
+		if (block == WHITE_DECORATED_POT.get()) return DyeColor.WHITE;
+		if (block == ORANGE_DECORATED_POT.get()) return DyeColor.ORANGE;
+		if (block == MAGENTA_DECORATED_POT.get()) return DyeColor.MAGENTA;
+		if (block == LIGHT_BLUE_DECORATED_POT.get()) return DyeColor.LIGHT_BLUE;
+		if (block == YELLOW_DECORATED_POT.get()) return DyeColor.YELLOW;
+		if (block == LIME_DECORATED_POT.get()) return DyeColor.LIME;
+		if (block == PINK_DECORATED_POT.get()) return DyeColor.PINK;
+		if (block == GRAY_DECORATED_POT.get()) return DyeColor.GRAY;
+		if (block == LIGHT_GRAY_DECORATED_POT.get()) return DyeColor.LIGHT_GRAY;
+		if (block == CYAN_DECORATED_POT.get()) return DyeColor.CYAN;
+		if (block == PURPLE_DECORATED_POT.get()) return DyeColor.PURPLE;
+		if (block == BLUE_DECORATED_POT.get()) return DyeColor.BLUE;
+		if (block == BROWN_DECORATED_POT.get()) return DyeColor.BROWN;
+		if (block == GREEN_DECORATED_POT.get()) return DyeColor.GREEN;
+		if (block == RED_DECORATED_POT.get()) return DyeColor.RED;
+		if (block == BLACK_DECORATED_POT.get()) return DyeColor.BLACK;
+		return null;
+	}
+
+	public static Block getPotFromDyeColor(@Nullable DyeColor color) {
+		if (color == null) {
+			return Blocks.DECORATED_POT;
+		} else {
+			return switch (color) {
+				case WHITE -> WHITE_DECORATED_POT.get();
+				case ORANGE -> ORANGE_DECORATED_POT.get();
+				case MAGENTA -> MAGENTA_DECORATED_POT.get();
+				case LIGHT_BLUE -> LIGHT_BLUE_DECORATED_POT.get();
+				case YELLOW -> YELLOW_DECORATED_POT.get();
+				case LIME -> LIME_DECORATED_POT.get();
+				case PINK -> PINK_DECORATED_POT.get();
+				case GRAY -> GRAY_DECORATED_POT.get();
+				case LIGHT_GRAY -> LIGHT_GRAY_DECORATED_POT.get();
+				case CYAN -> CYAN_DECORATED_POT.get();
+				case PURPLE -> PURPLE_DECORATED_POT.get();
+				case BLUE -> BLUE_DECORATED_POT.get();
+				case BROWN -> BROWN_DECORATED_POT.get();
+				case GREEN -> GREEN_DECORATED_POT.get();
+				case RED -> RED_DECORATED_POT.get();
+				case BLACK -> BLACK_DECORATED_POT.get();
+			};
+		}
+	}
+
 	public static final class ClayworksBlockProperties {
 		public static final Block.Properties KILN = Block.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(3.5F).lightLevel(state -> state.getValue(BlockStateProperties.LIT) ? 13 : 0);
 		public static final Block.Properties BRICKS = Block.Properties.of().mapColor(MapColor.COLOR_RED).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(2.0F, 6.0F);
@@ -232,6 +298,10 @@ public class ClayworksBlocks {
 		public static Block.Properties terracotta(MapColor color) {
 			return Block.Properties.of().mapColor(color).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(1.25F, 4.2F);
 		}
+
+		public static Block.Properties decoratedPot(MapColor color) {
+			return Block.Properties.of().mapColor(color).strength(0.0F, 0.0F).pushReaction(PushReaction.DESTROY).noOcclusion();
+		}
 	}
 
 	public static void setupTabEditors() {
@@ -254,6 +324,8 @@ public class ClayworksBlocks {
 				)
 				.predicate(event -> event.getTabKey() == COLORED_BLOCKS && ClayworksConfig.COMMON.glazedTerracotta.get())
 				.addItemsBefore(of(Items.WHITE_GLAZED_TERRACOTTA), GLAZED_TERRACOTTA)
+				.predicate(event -> event.getTabKey() == COLORED_BLOCKS)
+				.addItems(() -> Items.DECORATED_POT, WHITE_DECORATED_POT, LIGHT_GRAY_DECORATED_POT, GRAY_DECORATED_POT, BLACK_DECORATED_POT, BROWN_DECORATED_POT, RED_DECORATED_POT, ORANGE_DECORATED_POT, YELLOW_DECORATED_POT, LIME_DECORATED_POT, GREEN_DECORATED_POT, CYAN_DECORATED_POT, LIGHT_BLUE_DECORATED_POT, BLUE_DECORATED_POT, PURPLE_DECORATED_POT, MAGENTA_DECORATED_POT, PINK_DECORATED_POT)
 				.predicate(event -> event.getTabKey() == FUNCTIONAL_BLOCKS && ClayworksConfig.COMMON.kiln.get())
 				.addItemsAfter(of(Items.SMOKER), KILN);
 	}

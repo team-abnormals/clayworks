@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "package": "com.teamabnormals.clayworks.core.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "minVersion": "0.8",
+  "refmap": "clayworks.refmap.json",
+  "mixins": [],
+  "client": [
+    "DecoratedPotRendererMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

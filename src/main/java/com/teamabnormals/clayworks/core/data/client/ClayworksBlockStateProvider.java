@@ -9,10 +9,8 @@ import net.minecraft.data.BlockFamily;
 import net.minecraft.data.BlockFamily.Variant;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.SlabBlock;
-import net.minecraft.world.level.block.StairBlock;
-import net.minecraft.world.level.block.WallBlock;
+import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
@@ -35,6 +33,7 @@ public class ClayworksBlockStateProvider extends BlockStateProvider {
 		this.furnace(KILN.get());
 		this.block(CHISELED_BRICKS.get());
 		this.glazedTerracotta(GLAZED_TERRACOTTA.get());
+
 		this.blockFamily(ClayworksBlockFamilies.TERRACOTTA, TERRACOTTA_VERTICAL_SLAB.get());
 		this.blockFamily(ClayworksBlockFamilies.WHITE_TERRACOTTA, WHITE_TERRACOTTA_VERTICAL_SLAB.get());
 		this.blockFamily(ClayworksBlockFamilies.ORANGE_TERRACOTTA, ORANGE_TERRACOTTA_VERTICAL_SLAB.get());
@@ -52,6 +51,7 @@ public class ClayworksBlockStateProvider extends BlockStateProvider {
 		this.blockFamily(ClayworksBlockFamilies.GREEN_TERRACOTTA, GREEN_TERRACOTTA_VERTICAL_SLAB.get());
 		this.blockFamily(ClayworksBlockFamilies.RED_TERRACOTTA, RED_TERRACOTTA_VERTICAL_SLAB.get());
 		this.blockFamily(ClayworksBlockFamilies.BLACK_TERRACOTTA, BLACK_TERRACOTTA_VERTICAL_SLAB.get());
+
 		this.blockFamily(ClayworksBlockFamilies.TERRACOTTA_BRICKS, TERRACOTTA_BRICK_VERTICAL_SLAB.get());
 		this.blockFamily(ClayworksBlockFamilies.WHITE_TERRACOTTA_BRICKS, WHITE_TERRACOTTA_BRICK_VERTICAL_SLAB.get());
 		this.blockFamily(ClayworksBlockFamilies.ORANGE_TERRACOTTA_BRICKS, ORANGE_TERRACOTTA_BRICK_VERTICAL_SLAB.get());
@@ -69,6 +69,28 @@ public class ClayworksBlockStateProvider extends BlockStateProvider {
 		this.blockFamily(ClayworksBlockFamilies.GREEN_TERRACOTTA_BRICKS, GREEN_TERRACOTTA_BRICK_VERTICAL_SLAB.get());
 		this.blockFamily(ClayworksBlockFamilies.RED_TERRACOTTA_BRICKS, RED_TERRACOTTA_BRICK_VERTICAL_SLAB.get());
 		this.blockFamily(ClayworksBlockFamilies.BLACK_TERRACOTTA_BRICKS, BLACK_TERRACOTTA_BRICK_VERTICAL_SLAB.get());
+
+		this.decoratedPot(WHITE_DECORATED_POT.get(), Blocks.WHITE_TERRACOTTA);
+		this.decoratedPot(ORANGE_DECORATED_POT.get(), Blocks.ORANGE_TERRACOTTA);
+		this.decoratedPot(MAGENTA_DECORATED_POT.get(), Blocks.MAGENTA_TERRACOTTA);
+		this.decoratedPot(LIGHT_BLUE_DECORATED_POT.get(), Blocks.LIGHT_BLUE_TERRACOTTA);
+		this.decoratedPot(YELLOW_DECORATED_POT.get(), Blocks.YELLOW_TERRACOTTA);
+		this.decoratedPot(LIME_DECORATED_POT.get(), Blocks.LIME_TERRACOTTA);
+		this.decoratedPot(PINK_DECORATED_POT.get(), Blocks.PINK_TERRACOTTA);
+		this.decoratedPot(GRAY_DECORATED_POT.get(), Blocks.GRAY_TERRACOTTA);
+		this.decoratedPot(LIGHT_GRAY_DECORATED_POT.get(), Blocks.LIGHT_GRAY_TERRACOTTA);
+		this.decoratedPot(CYAN_DECORATED_POT.get(), Blocks.CYAN_TERRACOTTA);
+		this.decoratedPot(PURPLE_DECORATED_POT.get(), Blocks.PURPLE_TERRACOTTA);
+		this.decoratedPot(BLUE_DECORATED_POT.get(), Blocks.BLUE_TERRACOTTA);
+		this.decoratedPot(BROWN_DECORATED_POT.get(), Blocks.BROWN_TERRACOTTA);
+		this.decoratedPot(GREEN_DECORATED_POT.get(), Blocks.GREEN_TERRACOTTA);
+		this.decoratedPot(RED_DECORATED_POT.get(), Blocks.RED_TERRACOTTA);
+		this.decoratedPot(BLACK_DECORATED_POT.get(), Blocks.BLACK_TERRACOTTA);
+	}
+
+	public void decoratedPot(Block block, Block parent) {
+		this.simpleBlock(block, this.models().getBuilder(name(block)).texture("particle", blockTexture(parent)));
+		this.itemModels().getBuilder(name(block)).parent(new ExistingModelFile(new ResourceLocation("item/decorated_pot"), this.models().existingFileHelper));
 	}
 
 	public void blockItem(Block block) {
