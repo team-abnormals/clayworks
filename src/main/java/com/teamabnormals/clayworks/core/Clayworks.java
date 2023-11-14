@@ -7,6 +7,7 @@ import com.teamabnormals.clayworks.core.data.client.ClayworksBlockStateProvider;
 import com.teamabnormals.clayworks.core.data.client.ClayworksLanguageProvider;
 import com.teamabnormals.clayworks.core.data.server.ClayworksLootTableProvider;
 import com.teamabnormals.clayworks.core.data.server.ClayworksRecipeProvider;
+import com.teamabnormals.clayworks.core.data.server.modifiers.ClayworksLootModifierProvider;
 import com.teamabnormals.clayworks.core.data.server.tags.ClayworksBlockTagsProvider;
 import com.teamabnormals.clayworks.core.data.server.tags.ClayworksItemTagsProvider;
 import com.teamabnormals.clayworks.core.data.server.tags.ClayworksPaintingVariantTagsProvider;
@@ -96,6 +97,7 @@ public class Clayworks {
 		generator.addProvider(includeServer, new ClayworksLootTableProvider(output));
 		generator.addProvider(includeServer, new ClayworksRecipeProvider(output));
 		generator.addProvider(includeServer, new ClayworksPaintingVariantTagsProvider(output, lookupProvider, helper));
+		generator.addProvider(includeServer, new ClayworksLootModifierProvider(output, lookupProvider));
 
 		boolean includeClient = event.includeServer();
 		generator.addProvider(includeClient, new ClayworksBlockStateProvider(output, helper));

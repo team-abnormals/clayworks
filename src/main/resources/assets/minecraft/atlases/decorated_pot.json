@@ -29,7 +29,8 @@
         "entity/decorated_pot/sheaf_pottery_pattern",
         "entity/decorated_pot/shelter_pottery_pattern",
         "entity/decorated_pot/skull_pottery_pattern",
-        "entity/decorated_pot/snort_pottery_pattern"
+        "entity/decorated_pot/snort_pottery_pattern",
+        "clayworks:entity/decorated_pot/trims/decorated_pot_base"
       ],
       "palette_key": "clayworks:entity/decorated_pot/color_palettes/decorated_pot_palette",
       "permutations": {

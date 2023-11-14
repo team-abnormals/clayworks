@@ -6,6 +6,7 @@ import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.resources.model.Material;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.DyeColor;
 
 import javax.annotation.Nullable;
@@ -26,6 +27,10 @@ public class ClayworksMaterials {
 
 	private static Material createDecoratedPotMaterial(ResourceKey<String> name, DyeColor color) {
 		return new Material(Sheets.DECORATED_POT_SHEET, name.location().withPrefix("entity/decorated_pot/").withSuffix("_" + color.getName()));
+	}
+
+	public static Material createTrimMaterial(ResourceLocation location, @Nullable DyeColor color) {
+		return new Material(Sheets.DECORATED_POT_SHEET, location.withPrefix("entity/decorated_pot/").withSuffix(color != null ? "_" + color.getName() : ""));
 	}
 
 	@Nullable

@@ -82,8 +82,18 @@ public class ClayworksLootTableProvider extends LootTableProvider {
 			}));
 		}
 
+		public static final ResourceLocation TRIM_DYNAMIC_DROP_ID = new ResourceLocation(Clayworks.MOD_ID, "trim");
+
 		private LootTable.Builder createDecoratedPotTable(Block block) {
-			return LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(DynamicLoot.dynamicEntry(DecoratedPotBlock.SHERDS_DYNAMIC_DROP_ID).when(MatchTool.toolMatches(ItemPredicate.Builder.item().of(ItemTags.BREAKS_DECORATED_POTS))).when(HAS_NO_SILK_TOUCH).otherwise(LootItem.lootTableItem(block).apply(CopyNbtFunction.copyData(ContextNbtProvider.BLOCK_ENTITY).copy("sherds", "BlockEntityTag.sherds")))));
+			return LootTable.lootTable().withPool(createDynamicTrimDropPool()).withPool(createDecoratedPotPool(block));
+		}
+
+		public static LootPool.Builder createDynamicTrimDropPool() {
+			return LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(DynamicLoot.dynamicEntry(TRIM_DYNAMIC_DROP_ID).when(MatchTool.toolMatches(ItemPredicate.Builder.item().of(ItemTags.BREAKS_DECORATED_POTS))).when(HAS_NO_SILK_TOUCH));
+		}
+
+		public static LootPool.Builder createDecoratedPotPool(Block block) {
+			return LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(DynamicLoot.dynamicEntry(DecoratedPotBlock.SHERDS_DYNAMIC_DROP_ID).when(MatchTool.toolMatches(ItemPredicate.Builder.item().of(ItemTags.BREAKS_DECORATED_POTS))).when(HAS_NO_SILK_TOUCH).otherwise(LootItem.lootTableItem(block).apply(CopyNbtFunction.copyData(ContextNbtProvider.BLOCK_ENTITY).copy("sherds", "BlockEntityTag.sherds").copy("trim", "BlockEntityTag.trim"))));
 		}
 
 		protected LootTable.Builder createVerticalSlabItemTable(Block block) {

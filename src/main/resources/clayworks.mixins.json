@@ -4,7 +4,10 @@
   "compatibilityLevel": "JAVA_17",
   "minVersion": "0.8",
   "refmap": "clayworks.refmap.json",
-  "mixins": [],
+  "mixins": [
+    "DecoratedPotBlockEntityMixin",
+    "DecoratedPotBlockMixin"
+  ],
   "client": [
     "DecoratedPotRendererMixin"
   ],

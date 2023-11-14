@@ -5,6 +5,40 @@
       "bonus_rolls": 0.0,
       "entries": [
         {
+          "type": "minecraft:dynamic",
+          "conditions": [
+            {
+              "condition": "minecraft:match_tool",
+              "predicate": {
+                "tag": "minecraft:breaks_decorated_pots"
+              }
+            },
+            {
+              "condition": "minecraft:inverted",
+              "term": {
+                "condition": "minecraft:match_tool",
+                "predicate": {
+                  "enchantments": [
+                    {
+                      "enchantment": "minecraft:silk_touch",
+                      "levels": {
+                        "min": 1
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          ],
+          "name": "clayworks:trim"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
           "type": "minecraft:alternatives",
           "children": [
             {
@@ -45,6 +79,11 @@
                       "op": "replace",
                       "source": "sherds",
                       "target": "BlockEntityTag.sherds"
+                    },
+                    {
+                      "op": "replace",
+                      "source": "trim",
+                      "target": "BlockEntityTag.trim"
                     }
                   ],
                   "source": "block_entity"
