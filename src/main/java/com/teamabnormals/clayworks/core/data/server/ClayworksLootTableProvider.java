@@ -1,15 +1,12 @@
 package com.teamabnormals.clayworks.core.data.server;
 
 import com.google.common.collect.ImmutableList;
-import com.teamabnormals.blueprint.common.block.quark.VerticalSlabBlock;
-import com.teamabnormals.blueprint.common.block.quark.VerticalSlabBlock.VerticalSlabType;
 import com.teamabnormals.clayworks.common.block.KilnBlock;
 import com.teamabnormals.clayworks.core.Clayworks;
 import com.teamabnormals.clayworks.core.registry.ClayworksBlocks;
 import net.minecraft.advancements.critereon.EnchantmentPredicate;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.advancements.critereon.MinMaxBounds;
-import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.data.loot.LootTableProvider;
@@ -30,9 +27,7 @@ import net.minecraft.world.level.storage.loot.ValidationContext;
 import net.minecraft.world.level.storage.loot.entries.DynamicLoot;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.CopyNbtFunction;
-import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
-import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.level.storage.loot.predicates.MatchTool;
 import net.minecraft.world.level.storage.loot.providers.nbt.ContextNbtProvider;
@@ -74,8 +69,6 @@ public class ClayworksLootTableProvider extends LootTableProvider {
 					this.add(block, this::createDecoratedPotTable);
 				} else if (block instanceof SlabBlock) {
 					this.add(block, this::createSlabItemTable);
-				} else if (block instanceof VerticalSlabBlock) {
-					this.add(block, this::createVerticalSlabItemTable);
 				} else {
 					this.dropSelf(block);
 				}
@@ -94,10 +87,6 @@ public class ClayworksLootTableProvider extends LootTableProvider {
 
 		public static LootPool.Builder createDecoratedPotPool(Block block) {
 			return LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(DynamicLoot.dynamicEntry(DecoratedPotBlock.SHERDS_DYNAMIC_DROP_ID).when(MatchTool.toolMatches(ItemPredicate.Builder.item().of(ItemTags.BREAKS_DECORATED_POTS))).when(HAS_NO_SILK_TOUCH).otherwise(LootItem.lootTableItem(block).apply(CopyNbtFunction.copyData(ContextNbtProvider.BLOCK_ENTITY).copy("sherds", "BlockEntityTag.sherds").copy("trim", "BlockEntityTag.trim"))));
-		}
-
-		protected LootTable.Builder createVerticalSlabItemTable(Block block) {
-			return LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(applyExplosionDecay(block, LootItem.lootTableItem(block).apply(SetItemCountFunction.setCount(ConstantValue.exactly(2.0F)).when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(VerticalSlabBlock.TYPE, VerticalSlabType.DOUBLE)))))));
 		}
 
 		@Override

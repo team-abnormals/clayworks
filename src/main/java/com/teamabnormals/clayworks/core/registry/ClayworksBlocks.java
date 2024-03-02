@@ -1,6 +1,5 @@
 package com.teamabnormals.clayworks.core.registry;
 
-import com.teamabnormals.blueprint.common.block.quark.VerticalSlabBlock;
 import com.teamabnormals.blueprint.core.util.item.CreativeModeTabContentsPopulator;
 import com.teamabnormals.clayworks.common.block.KilnBlock;
 import com.teamabnormals.clayworks.core.Clayworks;
@@ -83,24 +82,6 @@ public class ClayworksBlocks {
 	public static final RegistryObject<Block> RED_TERRACOTTA_WALL = HELPER.createBlock("red_terracotta_wall", () -> new WallBlock(ClayworksBlockProperties.RED_TERRACOTTA));
 	public static final RegistryObject<Block> BLACK_TERRACOTTA_WALL = HELPER.createBlock("black_terracotta_wall", () -> new WallBlock(ClayworksBlockProperties.BLACK_TERRACOTTA));
 
-	public static final RegistryObject<Block> TERRACOTTA_VERTICAL_SLAB = HELPER.createBlock("terracotta_vertical_slab", () -> new VerticalSlabBlock(ClayworksBlockProperties.TERRACOTTA));
-	public static final RegistryObject<Block> WHITE_TERRACOTTA_VERTICAL_SLAB = HELPER.createBlock("white_terracotta_vertical_slab", () -> new VerticalSlabBlock(ClayworksBlockProperties.WHITE_TERRACOTTA));
-	public static final RegistryObject<Block> ORANGE_TERRACOTTA_VERTICAL_SLAB = HELPER.createBlock("orange_terracotta_vertical_slab", () -> new VerticalSlabBlock(ClayworksBlockProperties.ORANGE_TERRACOTTA));
-	public static final RegistryObject<Block> MAGENTA_TERRACOTTA_VERTICAL_SLAB = HELPER.createBlock("magenta_terracotta_vertical_slab", () -> new VerticalSlabBlock(ClayworksBlockProperties.MAGENTA_TERRACOTTA));
-	public static final RegistryObject<Block> LIGHT_BLUE_TERRACOTTA_VERTICAL_SLAB = HELPER.createBlock("light_blue_terracotta_vertical_slab", () -> new VerticalSlabBlock(ClayworksBlockProperties.LIGHT_BLUE_TERRACOTTA));
-	public static final RegistryObject<Block> YELLOW_TERRACOTTA_VERTICAL_SLAB = HELPER.createBlock("yellow_terracotta_vertical_slab", () -> new VerticalSlabBlock(ClayworksBlockProperties.YELLOW_TERRACOTTA));
-	public static final RegistryObject<Block> LIME_TERRACOTTA_VERTICAL_SLAB = HELPER.createBlock("lime_terracotta_vertical_slab", () -> new VerticalSlabBlock(ClayworksBlockProperties.LIME_TERRACOTTA));
-	public static final RegistryObject<Block> PINK_TERRACOTTA_VERTICAL_SLAB = HELPER.createBlock("pink_terracotta_vertical_slab", () -> new VerticalSlabBlock(ClayworksBlockProperties.PINK_TERRACOTTA));
-	public static final RegistryObject<Block> GRAY_TERRACOTTA_VERTICAL_SLAB = HELPER.createBlock("gray_terracotta_vertical_slab", () -> new VerticalSlabBlock(ClayworksBlockProperties.GRAY_TERRACOTTA));
-	public static final RegistryObject<Block> LIGHT_GRAY_TERRACOTTA_VERTICAL_SLAB = HELPER.createBlock("light_gray_terracotta_vertical_slab", () -> new VerticalSlabBlock(ClayworksBlockProperties.LIGHT_GRAY_TERRACOTTA));
-	public static final RegistryObject<Block> CYAN_TERRACOTTA_VERTICAL_SLAB = HELPER.createBlock("cyan_terracotta_vertical_slab", () -> new VerticalSlabBlock(ClayworksBlockProperties.CYAN_TERRACOTTA));
-	public static final RegistryObject<Block> PURPLE_TERRACOTTA_VERTICAL_SLAB = HELPER.createBlock("purple_terracotta_vertical_slab", () -> new VerticalSlabBlock(ClayworksBlockProperties.PURPLE_TERRACOTTA));
-	public static final RegistryObject<Block> BLUE_TERRACOTTA_VERTICAL_SLAB = HELPER.createBlock("blue_terracotta_vertical_slab", () -> new VerticalSlabBlock(ClayworksBlockProperties.BLUE_TERRACOTTA));
-	public static final RegistryObject<Block> BROWN_TERRACOTTA_VERTICAL_SLAB = HELPER.createBlock("brown_terracotta_vertical_slab", () -> new VerticalSlabBlock(ClayworksBlockProperties.BROWN_TERRACOTTA));
-	public static final RegistryObject<Block> GREEN_TERRACOTTA_VERTICAL_SLAB = HELPER.createBlock("green_terracotta_vertical_slab", () -> new VerticalSlabBlock(ClayworksBlockProperties.GREEN_TERRACOTTA));
-	public static final RegistryObject<Block> RED_TERRACOTTA_VERTICAL_SLAB = HELPER.createBlock("red_terracotta_vertical_slab", () -> new VerticalSlabBlock(ClayworksBlockProperties.RED_TERRACOTTA));
-	public static final RegistryObject<Block> BLACK_TERRACOTTA_VERTICAL_SLAB = HELPER.createBlock("black_terracotta_vertical_slab", () -> new VerticalSlabBlock(ClayworksBlockProperties.BLACK_TERRACOTTA));
-
 	public static final RegistryObject<Block> TERRACOTTA_BRICKS = HELPER.createBlock("terracotta_bricks", () -> new Block(ClayworksBlockProperties.TERRACOTTA));
 	public static final RegistryObject<Block> WHITE_TERRACOTTA_BRICKS = HELPER.createBlock("white_terracotta_bricks", () -> new Block(ClayworksBlockProperties.WHITE_TERRACOTTA));
 	public static final RegistryObject<Block> ORANGE_TERRACOTTA_BRICKS = HELPER.createBlock("orange_terracotta_bricks", () -> new Block(ClayworksBlockProperties.ORANGE_TERRACOTTA));
@@ -172,24 +153,6 @@ public class ClayworksBlocks {
 	public static final RegistryObject<Block> GREEN_TERRACOTTA_BRICK_WALL = HELPER.createBlock("green_terracotta_brick_wall", () -> new WallBlock(ClayworksBlockProperties.GREEN_TERRACOTTA));
 	public static final RegistryObject<Block> RED_TERRACOTTA_BRICK_WALL = HELPER.createBlock("red_terracotta_brick_wall", () -> new WallBlock(ClayworksBlockProperties.RED_TERRACOTTA));
 	public static final RegistryObject<Block> BLACK_TERRACOTTA_BRICK_WALL = HELPER.createBlock("black_terracotta_brick_wall", () -> new WallBlock(ClayworksBlockProperties.BLACK_TERRACOTTA));
-
-	public static final RegistryObject<Block> TERRACOTTA_BRICK_VERTICAL_SLAB = HELPER.createBlock("terracotta_brick_vertical_slab", () -> new VerticalSlabBlock(ClayworksBlockProperties.TERRACOTTA));
-	public static final RegistryObject<Block> WHITE_TERRACOTTA_BRICK_VERTICAL_SLAB = HELPER.createBlock("white_terracotta_brick_vertical_slab", () -> new VerticalSlabBlock(ClayworksBlockProperties.WHITE_TERRACOTTA));
-	public static final RegistryObject<Block> ORANGE_TERRACOTTA_BRICK_VERTICAL_SLAB = HELPER.createBlock("orange_terracotta_brick_vertical_slab", () -> new VerticalSlabBlock(ClayworksBlockProperties.ORANGE_TERRACOTTA));
-	public static final RegistryObject<Block> MAGENTA_TERRACOTTA_BRICK_VERTICAL_SLAB = HELPER.createBlock("magenta_terracotta_brick_vertical_slab", () -> new VerticalSlabBlock(ClayworksBlockProperties.MAGENTA_TERRACOTTA));
-	public static final RegistryObject<Block> LIGHT_BLUE_TERRACOTTA_BRICK_VERTICAL_SLAB = HELPER.createBlock("light_blue_terracotta_brick_vertical_slab", () -> new VerticalSlabBlock(ClayworksBlockProperties.LIGHT_BLUE_TERRACOTTA));
-	public static final RegistryObject<Block> YELLOW_TERRACOTTA_BRICK_VERTICAL_SLAB = HELPER.createBlock("yellow_terracotta_brick_vertical_slab", () -> new VerticalSlabBlock(ClayworksBlockProperties.YELLOW_TERRACOTTA));
-	public static final RegistryObject<Block> LIME_TERRACOTTA_BRICK_VERTICAL_SLAB = HELPER.createBlock("lime_terracotta_brick_vertical_slab", () -> new VerticalSlabBlock(ClayworksBlockProperties.LIME_TERRACOTTA));
-	public static final RegistryObject<Block> PINK_TERRACOTTA_BRICK_VERTICAL_SLAB = HELPER.createBlock("pink_terracotta_brick_vertical_slab", () -> new VerticalSlabBlock(ClayworksBlockProperties.PINK_TERRACOTTA));
-	public static final RegistryObject<Block> GRAY_TERRACOTTA_BRICK_VERTICAL_SLAB = HELPER.createBlock("gray_terracotta_brick_vertical_slab", () -> new VerticalSlabBlock(ClayworksBlockProperties.GRAY_TERRACOTTA));
-	public static final RegistryObject<Block> LIGHT_GRAY_TERRACOTTA_BRICK_VERTICAL_SLAB = HELPER.createBlock("light_gray_terracotta_brick_vertical_slab", () -> new VerticalSlabBlock(ClayworksBlockProperties.LIGHT_GRAY_TERRACOTTA));
-	public static final RegistryObject<Block> CYAN_TERRACOTTA_BRICK_VERTICAL_SLAB = HELPER.createBlock("cyan_terracotta_brick_vertical_slab", () -> new VerticalSlabBlock(ClayworksBlockProperties.CYAN_TERRACOTTA));
-	public static final RegistryObject<Block> PURPLE_TERRACOTTA_BRICK_VERTICAL_SLAB = HELPER.createBlock("purple_terracotta_brick_vertical_slab", () -> new VerticalSlabBlock(ClayworksBlockProperties.PURPLE_TERRACOTTA));
-	public static final RegistryObject<Block> BLUE_TERRACOTTA_BRICK_VERTICAL_SLAB = HELPER.createBlock("blue_terracotta_brick_vertical_slab", () -> new VerticalSlabBlock(ClayworksBlockProperties.BLUE_TERRACOTTA));
-	public static final RegistryObject<Block> BROWN_TERRACOTTA_BRICK_VERTICAL_SLAB = HELPER.createBlock("brown_terracotta_brick_vertical_slab", () -> new VerticalSlabBlock(ClayworksBlockProperties.BROWN_TERRACOTTA));
-	public static final RegistryObject<Block> GREEN_TERRACOTTA_BRICK_VERTICAL_SLAB = HELPER.createBlock("green_terracotta_brick_vertical_slab", () -> new VerticalSlabBlock(ClayworksBlockProperties.GREEN_TERRACOTTA));
-	public static final RegistryObject<Block> RED_TERRACOTTA_BRICK_VERTICAL_SLAB = HELPER.createBlock("red_terracotta_brick_vertical_slab", () -> new VerticalSlabBlock(ClayworksBlockProperties.RED_TERRACOTTA));
-	public static final RegistryObject<Block> BLACK_TERRACOTTA_BRICK_VERTICAL_SLAB = HELPER.createBlock("black_terracotta_brick_vertical_slab", () -> new VerticalSlabBlock(ClayworksBlockProperties.BLACK_TERRACOTTA));
 
 	public static final RegistryObject<Block> CHISELED_TERRACOTTA_BRICKS = HELPER.createBlock("chiseled_terracotta_bricks", () -> new Block(ClayworksBlockProperties.TERRACOTTA));
 	public static final RegistryObject<Block> CHISELED_WHITE_TERRACOTTA_BRICKS = HELPER.createBlock("chiseled_white_terracotta_bricks", () -> new Block(ClayworksBlockProperties.WHITE_TERRACOTTA));

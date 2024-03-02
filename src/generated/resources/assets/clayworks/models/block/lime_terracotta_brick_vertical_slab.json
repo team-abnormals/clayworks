@@ -1,8 +1,0 @@
-{
-  "parent": "blueprint:block/vertical_slab",
-  "textures": {
-    "bottom": "clayworks:block/lime_terracotta_bricks",
-    "side": "clayworks:block/lime_terracotta_bricks",
-    "top": "clayworks:block/lime_terracotta_bricks"
-  }
-}

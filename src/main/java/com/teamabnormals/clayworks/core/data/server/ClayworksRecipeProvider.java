@@ -1,9 +1,7 @@
 package com.teamabnormals.clayworks.core.data.server;
 
 import com.google.common.collect.Maps;
-import com.teamabnormals.blueprint.core.Blueprint;
 import com.teamabnormals.blueprint.core.api.conditions.ConfigValueCondition;
-import com.teamabnormals.blueprint.core.api.conditions.QuarkFlagRecipeCondition;
 import com.teamabnormals.clayworks.core.Clayworks;
 import com.teamabnormals.clayworks.core.other.ClayworksBlockFamilies;
 import com.teamabnormals.clayworks.core.registry.ClayworksRecipes.ClayworksRecipeSerializers;
@@ -18,7 +16,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.CookingBookCategory;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -35,8 +32,6 @@ import static com.teamabnormals.clayworks.core.ClayworksConfig.COMMON;
 import static com.teamabnormals.clayworks.core.registry.ClayworksBlocks.*;
 
 public class ClayworksRecipeProvider extends RecipeProvider {
-	public static final QuarkFlagRecipeCondition VERTICAL_SLABS_CONFIG = new QuarkFlagRecipeCondition(new ResourceLocation(Blueprint.MOD_ID, "quark_flag"), "vertical_slabs");
-
 	public static final ConfigValueCondition KILN_CONFIG = config(COMMON.kiln, "kiln");
 	public static final ConfigValueCondition CHISELED_BRICKS_CONFIG = config(COMMON.chiseledBricks, "chiseled_bricks");
 	public static final ConfigValueCondition GLAZED_TERRACOTTA_CONFIG = config(COMMON.glazedTerracotta, "glazed_terracotta");
@@ -51,29 +46,29 @@ public class ClayworksRecipeProvider extends RecipeProvider {
 	public void buildRecipes(Consumer<FinishedRecipe> consumer) {
 		conditionalRecipe(consumer, RecipeCategory.DECORATIONS, KILN_CONFIG, ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, KILN.get()).define('#', ItemTags.STONE_CRAFTING_MATERIALS).define('X', Blocks.FURNACE).define('B', Blocks.MUD_BRICKS).pattern("###").pattern("#X#").pattern("BBB").unlockedBy("has_cobblestone", has(ItemTags.STONE_CRAFTING_MATERIALS)));
 		generateKilnRecipes(consumer);
-		SpecialRecipeBuilder.special(ClayworksRecipeSerializers.DECORATED_POT_COLORING.get()).save(consumer,Clayworks.MOD_ID + ":decorated_pot_coloring");
+		SpecialRecipeBuilder.special(ClayworksRecipeSerializers.DECORATED_POT_COLORING.get()).save(consumer, Clayworks.MOD_ID + ":decorated_pot_coloring");
 
 		conditionalRecipe(consumer, RecipeCategory.BUILDING_BLOCKS, CHISELED_BRICKS_CONFIG, chiseledBuilder(RecipeCategory.BUILDING_BLOCKS, CHISELED_BRICKS.get(), Ingredient.of(Blocks.BRICK_SLAB)).unlockedBy(getHasName(Blocks.BRICK_SLAB), has(Blocks.BRICK_SLAB)));
 		conditionalStonecuttingRecipe(consumer, RecipeCategory.BUILDING_BLOCKS, CHISELED_BRICKS_CONFIG, CHISELED_BRICKS.get(), Blocks.BRICKS);
 		conditionalRecipe(consumer, RecipeCategory.DECORATIONS, GLAZED_TERRACOTTA_CONFIG, SimpleCookingRecipeBuilder.smelting(Ingredient.of(Blocks.TERRACOTTA), RecipeCategory.BUILDING_BLOCKS, GLAZED_TERRACOTTA.get().asItem(), 0.1F, 200).unlockedBy("has_terracotta", has(Blocks.TERRACOTTA)));
 
-		terracottaBricksRecipes(consumer, Blocks.TERRACOTTA, ClayworksBlockFamilies.TERRACOTTA, TERRACOTTA_VERTICAL_SLAB.get(), ClayworksBlockFamilies.TERRACOTTA_BRICKS, TERRACOTTA_BRICK_VERTICAL_SLAB.get(), null);
-		terracottaBricksRecipes(consumer, Blocks.WHITE_TERRACOTTA, ClayworksBlockFamilies.WHITE_TERRACOTTA, WHITE_TERRACOTTA_VERTICAL_SLAB.get(), ClayworksBlockFamilies.WHITE_TERRACOTTA_BRICKS, WHITE_TERRACOTTA_BRICK_VERTICAL_SLAB.get(), Items.WHITE_DYE);
-		terracottaBricksRecipes(consumer, Blocks.ORANGE_TERRACOTTA, ClayworksBlockFamilies.ORANGE_TERRACOTTA, ORANGE_TERRACOTTA_VERTICAL_SLAB.get(), ClayworksBlockFamilies.ORANGE_TERRACOTTA_BRICKS, ORANGE_TERRACOTTA_BRICK_VERTICAL_SLAB.get(), Items.ORANGE_DYE);
-		terracottaBricksRecipes(consumer, Blocks.MAGENTA_TERRACOTTA, ClayworksBlockFamilies.MAGENTA_TERRACOTTA, MAGENTA_TERRACOTTA_VERTICAL_SLAB.get(), ClayworksBlockFamilies.MAGENTA_TERRACOTTA_BRICKS, MAGENTA_TERRACOTTA_BRICK_VERTICAL_SLAB.get(), Items.MAGENTA_DYE);
-		terracottaBricksRecipes(consumer, Blocks.LIGHT_BLUE_TERRACOTTA, ClayworksBlockFamilies.LIGHT_BLUE_TERRACOTTA, LIGHT_BLUE_TERRACOTTA_VERTICAL_SLAB.get(), ClayworksBlockFamilies.LIGHT_BLUE_TERRACOTTA_BRICKS, LIGHT_BLUE_TERRACOTTA_BRICK_VERTICAL_SLAB.get(), Items.LIGHT_BLUE_DYE);
-		terracottaBricksRecipes(consumer, Blocks.YELLOW_TERRACOTTA, ClayworksBlockFamilies.YELLOW_TERRACOTTA, YELLOW_TERRACOTTA_VERTICAL_SLAB.get(), ClayworksBlockFamilies.YELLOW_TERRACOTTA_BRICKS, YELLOW_TERRACOTTA_BRICK_VERTICAL_SLAB.get(), Items.YELLOW_DYE);
-		terracottaBricksRecipes(consumer, Blocks.LIME_TERRACOTTA, ClayworksBlockFamilies.LIME_TERRACOTTA, LIME_TERRACOTTA_VERTICAL_SLAB.get(), ClayworksBlockFamilies.LIME_TERRACOTTA_BRICKS, LIME_TERRACOTTA_BRICK_VERTICAL_SLAB.get(), Items.LIME_DYE);
-		terracottaBricksRecipes(consumer, Blocks.PINK_TERRACOTTA, ClayworksBlockFamilies.PINK_TERRACOTTA, PINK_TERRACOTTA_VERTICAL_SLAB.get(), ClayworksBlockFamilies.PINK_TERRACOTTA_BRICKS, PINK_TERRACOTTA_BRICK_VERTICAL_SLAB.get(), Items.PINK_DYE);
-		terracottaBricksRecipes(consumer, Blocks.GRAY_TERRACOTTA, ClayworksBlockFamilies.GRAY_TERRACOTTA, GRAY_TERRACOTTA_VERTICAL_SLAB.get(), ClayworksBlockFamilies.GRAY_TERRACOTTA_BRICKS, GRAY_TERRACOTTA_BRICK_VERTICAL_SLAB.get(), Items.GRAY_DYE);
-		terracottaBricksRecipes(consumer, Blocks.LIGHT_GRAY_TERRACOTTA, ClayworksBlockFamilies.LIGHT_GRAY_TERRACOTTA, LIGHT_GRAY_TERRACOTTA_VERTICAL_SLAB.get(), ClayworksBlockFamilies.LIGHT_GRAY_TERRACOTTA_BRICKS, LIGHT_GRAY_TERRACOTTA_BRICK_VERTICAL_SLAB.get(), Items.LIGHT_GRAY_DYE);
-		terracottaBricksRecipes(consumer, Blocks.CYAN_TERRACOTTA, ClayworksBlockFamilies.CYAN_TERRACOTTA, CYAN_TERRACOTTA_VERTICAL_SLAB.get(), ClayworksBlockFamilies.CYAN_TERRACOTTA_BRICKS, CYAN_TERRACOTTA_BRICK_VERTICAL_SLAB.get(), Items.CYAN_DYE);
-		terracottaBricksRecipes(consumer, Blocks.PURPLE_TERRACOTTA, ClayworksBlockFamilies.PURPLE_TERRACOTTA, PURPLE_TERRACOTTA_VERTICAL_SLAB.get(), ClayworksBlockFamilies.PURPLE_TERRACOTTA_BRICKS, PURPLE_TERRACOTTA_BRICK_VERTICAL_SLAB.get(), Items.PURPLE_DYE);
-		terracottaBricksRecipes(consumer, Blocks.BLUE_TERRACOTTA, ClayworksBlockFamilies.BLUE_TERRACOTTA, BLUE_TERRACOTTA_VERTICAL_SLAB.get(), ClayworksBlockFamilies.BLUE_TERRACOTTA_BRICKS, BLUE_TERRACOTTA_BRICK_VERTICAL_SLAB.get(), Items.BLUE_DYE);
-		terracottaBricksRecipes(consumer, Blocks.BROWN_TERRACOTTA, ClayworksBlockFamilies.BROWN_TERRACOTTA, BROWN_TERRACOTTA_VERTICAL_SLAB.get(), ClayworksBlockFamilies.BROWN_TERRACOTTA_BRICKS, BROWN_TERRACOTTA_BRICK_VERTICAL_SLAB.get(), Items.BROWN_DYE);
-		terracottaBricksRecipes(consumer, Blocks.GREEN_TERRACOTTA, ClayworksBlockFamilies.GREEN_TERRACOTTA, GREEN_TERRACOTTA_VERTICAL_SLAB.get(), ClayworksBlockFamilies.GREEN_TERRACOTTA_BRICKS, GREEN_TERRACOTTA_BRICK_VERTICAL_SLAB.get(), Items.GREEN_DYE);
-		terracottaBricksRecipes(consumer, Blocks.RED_TERRACOTTA, ClayworksBlockFamilies.RED_TERRACOTTA, RED_TERRACOTTA_VERTICAL_SLAB.get(), ClayworksBlockFamilies.RED_TERRACOTTA_BRICKS, RED_TERRACOTTA_BRICK_VERTICAL_SLAB.get(), Items.RED_DYE);
-		terracottaBricksRecipes(consumer, Blocks.BLACK_TERRACOTTA, ClayworksBlockFamilies.BLACK_TERRACOTTA, BLACK_TERRACOTTA_VERTICAL_SLAB.get(), ClayworksBlockFamilies.BLACK_TERRACOTTA_BRICKS, BLACK_TERRACOTTA_BRICK_VERTICAL_SLAB.get(), Items.BLACK_DYE);
+		terracottaBricksRecipes(consumer, Blocks.TERRACOTTA, ClayworksBlockFamilies.TERRACOTTA, ClayworksBlockFamilies.TERRACOTTA_BRICKS, null);
+		terracottaBricksRecipes(consumer, Blocks.WHITE_TERRACOTTA, ClayworksBlockFamilies.WHITE_TERRACOTTA, ClayworksBlockFamilies.WHITE_TERRACOTTA_BRICKS, Items.WHITE_DYE);
+		terracottaBricksRecipes(consumer, Blocks.ORANGE_TERRACOTTA, ClayworksBlockFamilies.ORANGE_TERRACOTTA, ClayworksBlockFamilies.ORANGE_TERRACOTTA_BRICKS, Items.ORANGE_DYE);
+		terracottaBricksRecipes(consumer, Blocks.MAGENTA_TERRACOTTA, ClayworksBlockFamilies.MAGENTA_TERRACOTTA, ClayworksBlockFamilies.MAGENTA_TERRACOTTA_BRICKS, Items.MAGENTA_DYE);
+		terracottaBricksRecipes(consumer, Blocks.LIGHT_BLUE_TERRACOTTA, ClayworksBlockFamilies.LIGHT_BLUE_TERRACOTTA, ClayworksBlockFamilies.LIGHT_BLUE_TERRACOTTA_BRICKS, Items.LIGHT_BLUE_DYE);
+		terracottaBricksRecipes(consumer, Blocks.YELLOW_TERRACOTTA, ClayworksBlockFamilies.YELLOW_TERRACOTTA, ClayworksBlockFamilies.YELLOW_TERRACOTTA_BRICKS, Items.YELLOW_DYE);
+		terracottaBricksRecipes(consumer, Blocks.LIME_TERRACOTTA, ClayworksBlockFamilies.LIME_TERRACOTTA, ClayworksBlockFamilies.LIME_TERRACOTTA_BRICKS, Items.LIME_DYE);
+		terracottaBricksRecipes(consumer, Blocks.PINK_TERRACOTTA, ClayworksBlockFamilies.PINK_TERRACOTTA, ClayworksBlockFamilies.PINK_TERRACOTTA_BRICKS, Items.PINK_DYE);
+		terracottaBricksRecipes(consumer, Blocks.GRAY_TERRACOTTA, ClayworksBlockFamilies.GRAY_TERRACOTTA, ClayworksBlockFamilies.GRAY_TERRACOTTA_BRICKS, Items.GRAY_DYE);
+		terracottaBricksRecipes(consumer, Blocks.LIGHT_GRAY_TERRACOTTA, ClayworksBlockFamilies.LIGHT_GRAY_TERRACOTTA, ClayworksBlockFamilies.LIGHT_GRAY_TERRACOTTA_BRICKS, Items.LIGHT_GRAY_DYE);
+		terracottaBricksRecipes(consumer, Blocks.CYAN_TERRACOTTA, ClayworksBlockFamilies.CYAN_TERRACOTTA, ClayworksBlockFamilies.CYAN_TERRACOTTA_BRICKS, Items.CYAN_DYE);
+		terracottaBricksRecipes(consumer, Blocks.PURPLE_TERRACOTTA, ClayworksBlockFamilies.PURPLE_TERRACOTTA, ClayworksBlockFamilies.PURPLE_TERRACOTTA_BRICKS, Items.PURPLE_DYE);
+		terracottaBricksRecipes(consumer, Blocks.BLUE_TERRACOTTA, ClayworksBlockFamilies.BLUE_TERRACOTTA, ClayworksBlockFamilies.BLUE_TERRACOTTA_BRICKS, Items.BLUE_DYE);
+		terracottaBricksRecipes(consumer, Blocks.BROWN_TERRACOTTA, ClayworksBlockFamilies.BROWN_TERRACOTTA, ClayworksBlockFamilies.BROWN_TERRACOTTA_BRICKS, Items.BROWN_DYE);
+		terracottaBricksRecipes(consumer, Blocks.GREEN_TERRACOTTA, ClayworksBlockFamilies.GREEN_TERRACOTTA, ClayworksBlockFamilies.GREEN_TERRACOTTA_BRICKS, Items.GREEN_DYE);
+		terracottaBricksRecipes(consumer, Blocks.RED_TERRACOTTA, ClayworksBlockFamilies.RED_TERRACOTTA, ClayworksBlockFamilies.RED_TERRACOTTA_BRICKS, Items.RED_DYE);
+		terracottaBricksRecipes(consumer, Blocks.BLACK_TERRACOTTA, ClayworksBlockFamilies.BLACK_TERRACOTTA, ClayworksBlockFamilies.BLACK_TERRACOTTA_BRICKS, Items.BLACK_DYE);
 	}
 
 	public static void generateKilnRecipes(Consumer<FinishedRecipe> consumer) {
@@ -119,28 +114,23 @@ public class ClayworksRecipeProvider extends RecipeProvider {
 		baking(consumer, RecipeCategory.DECORATIONS, Blocks.YELLOW_TERRACOTTA, Blocks.YELLOW_GLAZED_TERRACOTTA, 0.1F, 100);
 	}
 
-	private static void terracottaBricksRecipes(Consumer<FinishedRecipe> consumer, Block terracotta, BlockFamily family, Block verticalSlab, BlockFamily bricksFamily, Block bricksVerticalSlab, @Nullable Item dye) {
+	private static void terracottaBricksRecipes(Consumer<FinishedRecipe> consumer, Block terracotta, BlockFamily family, BlockFamily bricksFamily, @Nullable Item dye) {
 		generateConditionalRecipes(consumer, family, TERRACOTTA_VARIANTS_CONFIG);
-		conditionalRecipe(consumer, RecipeCategory.BUILDING_BLOCKS, new AndCondition(TERRACOTTA_VARIANTS_CONFIG, VERTICAL_SLABS_CONFIG), verticalSlabBuilder(verticalSlab, Ingredient.of(family.getBaseBlock())).unlockedBy(getHasName(family.getBaseBlock()), has(family.getBaseBlock())));
 		conditionalStonecuttingRecipe(consumer, RecipeCategory.BUILDING_BLOCKS, TERRACOTTA_VARIANTS_CONFIG, family.get(Variant.SLAB), family.getBaseBlock(), 2);
 		conditionalStonecuttingRecipe(consumer, RecipeCategory.BUILDING_BLOCKS, TERRACOTTA_VARIANTS_CONFIG, family.get(Variant.STAIRS), family.getBaseBlock());
 		conditionalStonecuttingRecipe(consumer, RecipeCategory.DECORATIONS, TERRACOTTA_VARIANTS_CONFIG, family.get(Variant.WALL), family.getBaseBlock());
-		conditionalStonecuttingRecipe(consumer, RecipeCategory.BUILDING_BLOCKS, new AndCondition(TERRACOTTA_VARIANTS_CONFIG, VERTICAL_SLABS_CONFIG), verticalSlab, family.getBaseBlock(), 2);
 
 		conditionalRecipe(consumer, RecipeCategory.BUILDING_BLOCKS, TERRACOTTA_BRICKS_CONFIG, ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, bricksFamily.getBaseBlock(), 4).define('#', terracotta).pattern("##").pattern("##").unlockedBy(getHasName(terracotta), has(terracotta)));
 		generateConditionalRecipes(consumer, bricksFamily, TERRACOTTA_BRICKS_CONFIG);
-		conditionalRecipe(consumer, RecipeCategory.BUILDING_BLOCKS, new AndCondition(TERRACOTTA_BRICKS_CONFIG, VERTICAL_SLABS_CONFIG), verticalSlabBuilder(bricksVerticalSlab, Ingredient.of(bricksFamily.getBaseBlock())).unlockedBy(getHasName(bricksFamily.getBaseBlock()), has(bricksFamily.getBaseBlock())));
 		conditionalStonecuttingRecipe(consumer, RecipeCategory.BUILDING_BLOCKS, TERRACOTTA_BRICKS_CONFIG, bricksFamily.get(Variant.SLAB), bricksFamily.getBaseBlock(), 2);
 		conditionalStonecuttingRecipe(consumer, RecipeCategory.BUILDING_BLOCKS, TERRACOTTA_BRICKS_CONFIG, bricksFamily.get(Variant.STAIRS), bricksFamily.getBaseBlock());
 		conditionalStonecuttingRecipe(consumer, RecipeCategory.DECORATIONS, TERRACOTTA_BRICKS_CONFIG, bricksFamily.get(Variant.WALL), bricksFamily.getBaseBlock());
 		conditionalStonecuttingRecipe(consumer, RecipeCategory.BUILDING_BLOCKS, TERRACOTTA_BRICKS_CONFIG, bricksFamily.get(Variant.CHISELED), bricksFamily.getBaseBlock());
-		conditionalStonecuttingRecipe(consumer, RecipeCategory.BUILDING_BLOCKS, new AndCondition(TERRACOTTA_BRICKS_CONFIG, VERTICAL_SLABS_CONFIG), bricksVerticalSlab, bricksFamily.getBaseBlock(), 2);
 		conditionalStonecuttingRecipe(consumer, RecipeCategory.BUILDING_BLOCKS, TERRACOTTA_BRICKS_CONFIG, bricksFamily.getBaseBlock(), terracotta);
 		conditionalStonecuttingRecipe(consumer, RecipeCategory.BUILDING_BLOCKS, TERRACOTTA_BRICKS_CONFIG, bricksFamily.get(Variant.SLAB), terracotta, 2);
 		conditionalStonecuttingRecipe(consumer, RecipeCategory.BUILDING_BLOCKS, TERRACOTTA_BRICKS_CONFIG, bricksFamily.get(Variant.STAIRS), terracotta);
 		conditionalStonecuttingRecipe(consumer, RecipeCategory.DECORATIONS, TERRACOTTA_BRICKS_CONFIG, bricksFamily.get(Variant.WALL), terracotta);
 		conditionalStonecuttingRecipe(consumer, RecipeCategory.BUILDING_BLOCKS, TERRACOTTA_BRICKS_CONFIG, bricksFamily.get(Variant.CHISELED), terracotta);
-		conditionalStonecuttingRecipe(consumer, RecipeCategory.BUILDING_BLOCKS, new AndCondition(TERRACOTTA_BRICKS_CONFIG, VERTICAL_SLABS_CONFIG), bricksVerticalSlab, terracotta, 2);
 		if (dye != null) {
 			conditionalRecipe(consumer, RecipeCategory.BUILDING_BLOCKS, TERRACOTTA_BRICKS_CONFIG, ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, bricksFamily.getBaseBlock(), 8).define('#', TERRACOTTA_BRICKS.get()).define('X', dye).pattern("###").pattern("#X#").pattern("###").group("stained_terracotta_bricks").unlockedBy(getHasName(Blocks.TERRACOTTA), has(Blocks.TERRACOTTA)), new ResourceLocation(Clayworks.MOD_ID, getConversionRecipeName(bricksFamily.getBaseBlock(), dye)));
 		}

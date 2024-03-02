@@ -25,6 +25,5 @@ public class ClayworksItemTagsProvider extends ItemTagsProvider {
 		this.copy(BlockTags.STAIRS, ItemTags.STAIRS);
 		this.copy(BlockTags.WALLS, ItemTags.WALLS);
 		this.copy(BlockTags.SLABS, ItemTags.SLABS);
-		this.copy(BlueprintBlockTags.VERTICAL_SLABS, BlueprintItemTags.VERTICAL_SLABS);
 	}
 }
