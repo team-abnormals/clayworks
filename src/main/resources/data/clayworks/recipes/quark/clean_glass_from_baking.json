@@ -6,12 +6,17 @@
         {
           "values": [
             {
-              "modid": "quark",
-              "type": "forge:mod_loaded"
-            },
-            {
-              "flag": "glass_shard",
-              "type": "quark:flag"
+              "type": "blueprint:and",
+              "values": [
+                {
+                  "modid": "quark",
+                  "type": "forge:mod_loaded"
+                },
+                {
+                  "flag": "glass_shard",
+                  "type": "quark:flag"
+                }
+              ]
             },
             {
               "value": "kiln",

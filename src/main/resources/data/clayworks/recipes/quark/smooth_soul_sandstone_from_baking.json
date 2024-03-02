@@ -6,12 +6,17 @@
         {
           "values": [
             {
-              "modid": "quark",
-              "type": "forge:mod_loaded"
-            },
-            {
-              "flag": "soul_sandstone",
-              "type": "quark:flag"
+              "type": "blueprint:and",
+              "values": [
+                {
+                  "modid": "quark",
+                  "type": "forge:mod_loaded"
+                },
+                {
+                  "flag": "soul_sandstone",
+                  "type": "quark:flag"
+                }
+              ]
             },
             {
               "value": "kiln",
