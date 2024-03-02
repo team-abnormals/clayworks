@@ -9,6 +9,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.DyeColor;
@@ -61,7 +62,7 @@ public class ClayworksEvents {
 					event.setCancellationResult(InteractionResult.sidedSuccess(level.isClientSide()));
 					event.setCanceled(true);
 				}
-			} else if (stack.is(Tags.Items.NUGGETS)) {
+			} else if (stack.is(ItemTags.TRIM_MATERIALS)) {
 				BlockEntity blockEntity = level.getBlockEntity(pos);
 				if (blockEntity instanceof TrimmedPot trimmedPot) {
 					if (trimmedPot.getTrim().isEmpty()) {
