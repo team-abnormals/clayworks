@@ -1,6 +1,7 @@
 package com.teamabnormals.clayworks.core;
 
 import com.teamabnormals.blueprint.core.util.registry.RegistryHelper;
+import com.teamabnormals.clayworks.core.data.client.ClayworksAssetsRemolderProvider;
 import com.teamabnormals.clayworks.core.data.client.ClayworksBlockStateProvider;
 import com.teamabnormals.clayworks.core.data.client.ClayworksLanguageProvider;
 import com.teamabnormals.clayworks.core.data.server.ClayworksLootTableProvider;
@@ -92,8 +93,9 @@ public class Clayworks {
 		generator.addProvider(includeServer, new ClayworksPaintingVariantTagsProvider(output, lookupProvider, helper));
 		generator.addProvider(includeServer, new ClayworksLootModifierProvider(output, lookupProvider));
 
-		boolean includeClient = event.includeServer();
+		boolean includeClient = event.includeClient();
 		generator.addProvider(includeClient, new ClayworksBlockStateProvider(output, helper));
 		generator.addProvider(includeClient, new ClayworksLanguageProvider(output));
+		generator.addProvider(includeClient, new ClayworksAssetsRemolderProvider(output, lookupProvider));
 	}
 }
