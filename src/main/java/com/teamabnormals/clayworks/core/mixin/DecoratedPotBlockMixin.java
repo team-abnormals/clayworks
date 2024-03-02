@@ -1,6 +1,7 @@
 package com.teamabnormals.clayworks.core.mixin;
 
 import com.teamabnormals.clayworks.common.block.TrimmedPot;
+import com.teamabnormals.clayworks.core.ClayworksConfig;
 import com.teamabnormals.clayworks.core.data.server.ClayworksLootTableProvider.ClayworksBlockLoot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.DecoratedPotBlock;
@@ -20,11 +21,13 @@ public class DecoratedPotBlockMixin {
 
 	@Inject(method = "getDrops", at = @At("HEAD"))
 	private void getDrops(BlockState state, LootParams.Builder builder, CallbackInfoReturnable<List<ItemStack>> cir) {
-		BlockEntity blockentity = builder.getOptionalParameter(LootContextParams.BLOCK_ENTITY);
-		if (blockentity instanceof TrimmedPot trimmedPot && trimmedPot.getTrim().isPresent()) {
-			builder.withDynamicDrop(ClayworksBlockLoot.TRIM_DYNAMIC_DROP_ID, (stackConsumer) -> {
-				stackConsumer.accept(new ItemStack(trimmedPot.getTrim().get()));
-			});
+		if (ClayworksConfig.COMMON.decoratedPotTrims.get()) {
+			BlockEntity blockentity = builder.getOptionalParameter(LootContextParams.BLOCK_ENTITY);
+			if (blockentity instanceof TrimmedPot trimmedPot && trimmedPot.getTrim().isPresent()) {
+				builder.withDynamicDrop(ClayworksBlockLoot.TRIM_DYNAMIC_DROP_ID, (stackConsumer) -> {
+					stackConsumer.accept(new ItemStack(trimmedPot.getTrim().get()));
+				});
+			}
 		}
 	}
 }

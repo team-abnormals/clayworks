@@ -4,6 +4,7 @@ import com.teamabnormals.blueprint.core.other.tags.BlueprintItemTags;
 import com.teamabnormals.blueprint.core.util.BlockUtil;
 import com.teamabnormals.clayworks.common.block.TrimmedPot;
 import com.teamabnormals.clayworks.core.Clayworks;
+import com.teamabnormals.clayworks.core.ClayworksConfig;
 import com.teamabnormals.clayworks.core.registry.ClayworksBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -40,7 +41,7 @@ public class ClayworksEvents {
 		ItemStack stack = event.getItemStack();
 
 		if (state.getBlock() instanceof DecoratedPotBlock potBlock && !player.isSecondaryUseActive()) {
-			if (stack.getItem() instanceof DyeItem dyeItem) {
+			if (stack.getItem() instanceof DyeItem dyeItem && ClayworksConfig.COMMON.decoratedPotColors.get()) {
 				DyeColor itemColor = dyeItem.getDyeColor();
 				DyeColor blockColor = ClayworksBlocks.getDyeColorFromPot(potBlock);
 				if (itemColor != blockColor) {
@@ -62,7 +63,7 @@ public class ClayworksEvents {
 					event.setCancellationResult(InteractionResult.sidedSuccess(level.isClientSide()));
 					event.setCanceled(true);
 				}
-			} else if (stack.is(ItemTags.TRIM_MATERIALS)) {
+			} else if (stack.is(ItemTags.TRIM_MATERIALS) && ClayworksConfig.COMMON.decoratedPotTrims.get()) {
 				BlockEntity blockEntity = level.getBlockEntity(pos);
 				if (blockEntity instanceof TrimmedPot trimmedPot) {
 					if (trimmedPot.getTrim().isEmpty()) {
@@ -77,7 +78,7 @@ public class ClayworksEvents {
 						event.setCanceled(true);
 					}
 				}
-			} else if (stack.is(BlueprintItemTags.TOOLS_PICKAXES)) {
+			} else if (stack.is(BlueprintItemTags.TOOLS_PICKAXES) && ClayworksConfig.COMMON.decoratedPotTrims.get()) {
 				BlockEntity blockEntity = level.getBlockEntity(pos);
 				if (blockEntity instanceof TrimmedPot trimmedPot) {
 					if (trimmedPot.getTrim().isPresent()) {

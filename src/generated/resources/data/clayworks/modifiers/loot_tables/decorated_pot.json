@@ -107,5 +107,16 @@
     }
   ],
   "priority": "normal",
-  "selector": "minecraft:blocks/decorated_pot"
+  "selector": {
+    "type": "names",
+    "conditions": [
+      {
+        "type": "clayworks:config",
+        "value": "decorated_pot_trims"
+      }
+    ],
+    "config": [
+      "minecraft:blocks/decorated_pot"
+    ]
+  }
 }

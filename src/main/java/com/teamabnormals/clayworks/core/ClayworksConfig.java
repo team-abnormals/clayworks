@@ -18,6 +18,10 @@ public class ClayworksConfig {
 		public final BooleanValue terracottaVariants;
 		@ConfigKey("terracotta_bricks")
 		public final BooleanValue terracottaBricks;
+		@ConfigKey("decorated_pot_colors")
+		public final BooleanValue decoratedPotColors;
+		@ConfigKey("decorated_pot_trims")
+		public final BooleanValue decoratedPotTrims;
 
 		public Common(ForgeConfigSpec.Builder builder) {
 			builder.push("blocks");
@@ -26,6 +30,10 @@ public class ClayworksConfig {
 			this.glazedTerracotta = builder.define("Glazed terracotta", true);
 			this.terracottaVariants = builder.define("Terracotta slabs, stairs, and walls", true);
 			this.terracottaBricks = builder.define("Terracotta bricks", true);
+			builder.push("decorated_pot");
+			this.decoratedPotColors = builder.define("Decorated pot colors", true);
+			this.decoratedPotTrims = builder.define("Decorated pot trims", true);
+			builder.pop();
 			builder.pop();
 		}
 	}

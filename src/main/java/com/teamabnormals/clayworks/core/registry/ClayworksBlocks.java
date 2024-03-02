@@ -287,7 +287,7 @@ public class ClayworksBlocks {
 				)
 				.predicate(event -> event.getTabKey() == COLORED_BLOCKS && ClayworksConfig.COMMON.glazedTerracotta.get())
 				.addItemsBefore(of(Items.WHITE_GLAZED_TERRACOTTA), GLAZED_TERRACOTTA)
-				.predicate(event -> event.getTabKey() == COLORED_BLOCKS)
+				.predicate(event -> event.getTabKey() == COLORED_BLOCKS && ClayworksConfig.COMMON.decoratedPotColors.get())
 				.addItems(() -> Items.DECORATED_POT, WHITE_DECORATED_POT, LIGHT_GRAY_DECORATED_POT, GRAY_DECORATED_POT, BLACK_DECORATED_POT, BROWN_DECORATED_POT, RED_DECORATED_POT, ORANGE_DECORATED_POT, YELLOW_DECORATED_POT, LIME_DECORATED_POT, GREEN_DECORATED_POT, CYAN_DECORATED_POT, LIGHT_BLUE_DECORATED_POT, BLUE_DECORATED_POT, PURPLE_DECORATED_POT, MAGENTA_DECORATED_POT, PINK_DECORATED_POT)
 				.predicate(event -> event.getTabKey() == FUNCTIONAL_BLOCKS && ClayworksConfig.COMMON.kiln.get())
 				.addItemsAfter(of(Items.SMOKER), KILN);
