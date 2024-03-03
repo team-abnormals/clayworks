@@ -4,7 +4,7 @@
     "type": "add",
     "target": "sources[]",
     "value": {
-      "type": "minecraft:paletted_permutations",
+      "type": "clayworks:directory_paletted_permutations",
       "palette_key": "clayworks:entity/decorated_pot/color_palettes/decorated_pot_palette",
       "permutations": {
         "black": "clayworks:entity/decorated_pot/color_palettes/black",
@@ -24,31 +24,8 @@
         "white": "clayworks:entity/decorated_pot/color_palettes/white",
         "yellow": "clayworks:entity/decorated_pot/color_palettes/yellow"
       },
-      "textures": [
-        "minecraft:entity/decorated_pot/decorated_pot_base",
-        "minecraft:entity/decorated_pot/decorated_pot_side",
-        "minecraft:entity/decorated_pot/angler_pottery_pattern",
-        "minecraft:entity/decorated_pot/archer_pottery_pattern",
-        "minecraft:entity/decorated_pot/arms_up_pottery_pattern",
-        "minecraft:entity/decorated_pot/blade_pottery_pattern",
-        "minecraft:entity/decorated_pot/brewer_pottery_pattern",
-        "minecraft:entity/decorated_pot/burn_pottery_pattern",
-        "minecraft:entity/decorated_pot/danger_pottery_pattern",
-        "minecraft:entity/decorated_pot/explorer_pottery_pattern",
-        "minecraft:entity/decorated_pot/friend_pottery_pattern",
-        "minecraft:entity/decorated_pot/heart_pottery_pattern",
-        "minecraft:entity/decorated_pot/heartbreak_pottery_pattern",
-        "minecraft:entity/decorated_pot/howl_pottery_pattern",
-        "minecraft:entity/decorated_pot/miner_pottery_pattern",
-        "minecraft:entity/decorated_pot/mourner_pottery_pattern",
-        "minecraft:entity/decorated_pot/plenty_pottery_pattern",
-        "minecraft:entity/decorated_pot/prize_pottery_pattern",
-        "minecraft:entity/decorated_pot/sheaf_pottery_pattern",
-        "minecraft:entity/decorated_pot/shelter_pottery_pattern",
-        "minecraft:entity/decorated_pot/skull_pottery_pattern",
-        "minecraft:entity/decorated_pot/snort_pottery_pattern",
-        "clayworks:entity/decorated_pot/trims/decorated_pot_base"
-      ]
+      "prefix": "entity/decorated_pot/",
+      "source": "entity/decorated_pot"
     }
   },
   "selector": "minecraft:atlases/decorated_pot"

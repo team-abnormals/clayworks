@@ -1,6 +1,7 @@
 package com.teamabnormals.clayworks.core;
 
 import com.teamabnormals.blueprint.core.util.registry.RegistryHelper;
+import com.teamabnormals.clayworks.client.renderer.texture.atlas.sources.DirectoryPalettedPermutations;
 import com.teamabnormals.clayworks.core.data.client.ClayworksAssetsRemolderProvider;
 import com.teamabnormals.clayworks.core.data.client.ClayworksBlockStateProvider;
 import com.teamabnormals.clayworks.core.data.client.ClayworksLanguageProvider;
@@ -15,6 +16,8 @@ import com.teamabnormals.clayworks.core.registry.*;
 import com.teamabnormals.clayworks.core.registry.ClayworksRecipes.ClayworksRecipeSerializers;
 import com.teamabnormals.clayworks.core.registry.ClayworksRecipes.ClayworksRecipeTypes;
 import com.teamabnormals.clayworks.core.registry.helper.ClayworksBlockSubRegistryHelper;
+import net.minecraft.client.renderer.texture.atlas.SpriteSourceType;
+import net.minecraft.client.renderer.texture.atlas.SpriteSources;
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
@@ -41,6 +44,8 @@ public class Clayworks {
 	public static final RegistryHelper REGISTRY_HELPER = RegistryHelper.create(MOD_ID, helper -> helper.putSubHelper(ForgeRegistries.BLOCKS, new ClayworksBlockSubRegistryHelper(helper)));
 
 	public static final RecipeBookType RECIPE_TYPE_BAKING = RecipeBookType.create("BAKING");
+
+	public static final SpriteSourceType DIRECTORY_PALETTED_PERMUTATIONS = SpriteSources.register(Clayworks.MOD_ID + ":directory_paletted_permutations", DirectoryPalettedPermutations.CODEC);
 
 	public Clayworks() {
 		IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();

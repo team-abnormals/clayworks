@@ -3,9 +3,9 @@ package com.teamabnormals.clayworks.core.data.client;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.teamabnormals.blueprint.common.remolder.data.RemolderProvider;
+import com.teamabnormals.clayworks.client.renderer.texture.atlas.sources.DirectoryPalettedPermutations;
 import com.teamabnormals.clayworks.core.Clayworks;
 import net.minecraft.client.renderer.texture.atlas.SpriteSources;
-import net.minecraft.client.renderer.texture.atlas.sources.PalettedPermutations;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.data.PackOutput;
@@ -32,8 +32,8 @@ public final class ClayworksAssetsRemolderProvider extends RemolderProvider {
 				.path("minecraft:atlases/decorated_pot")
 				.remolder(add(
 						target("sources[]"),
-						value(new PalettedPermutations(
-								textures(),
+						value(new DirectoryPalettedPermutations(
+								"entity/decorated_pot", "entity/decorated_pot/",
 								new ResourceLocation(Clayworks.MOD_ID, "entity/decorated_pot/color_palettes/decorated_pot_palette"),
 								dyePaletteMappings()
 						), SpriteSources.CODEC)
