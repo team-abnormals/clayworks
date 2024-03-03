@@ -1,6 +1,5 @@
 package com.teamabnormals.clayworks.core.data.client;
 
-import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.teamabnormals.blueprint.common.remolder.data.RemolderProvider;
 import com.teamabnormals.clayworks.client.renderer.texture.atlas.sources.DirectoryPalettedPermutations;
@@ -28,7 +27,7 @@ public final class ClayworksAssetsRemolderProvider extends RemolderProvider {
 
 	@Override
 	protected void registerEntries(HolderLookup.Provider provider) {
-		this.entry("decorated_pot_atlas")
+		this.entry("decorated_pot_atlas_colors")
 				.path("minecraft:atlases/decorated_pot")
 				.remolder(add(
 						target("sources[]"),
@@ -38,43 +37,35 @@ public final class ClayworksAssetsRemolderProvider extends RemolderProvider {
 								dyePaletteMappings()
 						), SpriteSources.CODEC)
 				));
-	}
 
-	public static List<ResourceLocation> textures() {
-		List<String> patterns = List.of("entity/decorated_pot/decorated_pot_base",
-				"entity/decorated_pot/decorated_pot_side",
-				"entity/decorated_pot/angler_pottery_pattern",
-				"entity/decorated_pot/archer_pottery_pattern",
-				"entity/decorated_pot/arms_up_pottery_pattern",
-				"entity/decorated_pot/blade_pottery_pattern",
-				"entity/decorated_pot/brewer_pottery_pattern",
-				"entity/decorated_pot/burn_pottery_pattern",
-				"entity/decorated_pot/danger_pottery_pattern",
-				"entity/decorated_pot/explorer_pottery_pattern",
-				"entity/decorated_pot/friend_pottery_pattern",
-				"entity/decorated_pot/heart_pottery_pattern",
-				"entity/decorated_pot/heartbreak_pottery_pattern",
-				"entity/decorated_pot/howl_pottery_pattern",
-				"entity/decorated_pot/miner_pottery_pattern",
-				"entity/decorated_pot/mourner_pottery_pattern",
-				"entity/decorated_pot/plenty_pottery_pattern",
-				"entity/decorated_pot/prize_pottery_pattern",
-				"entity/decorated_pot/sheaf_pottery_pattern",
-				"entity/decorated_pot/shelter_pottery_pattern",
-				"entity/decorated_pot/skull_pottery_pattern",
-				"entity/decorated_pot/snort_pottery_pattern",
-				"clayworks:entity/decorated_pot/trims/decorated_pot_base");
-
-		List<ResourceLocation> locs = Lists.newArrayList();
-		patterns.forEach(pattern -> locs.add(new ResourceLocation(pattern)));
-
-		return locs;
+		this.entry("decorated_pot_atlas_trims")
+				.path("minecraft:atlases/decorated_pot")
+				.remolder(add(
+						target("sources[]"),
+						value(new DirectoryPalettedPermutations(
+								"entity/decorated_pot/trims", "entity/decorated_pot/trims/",
+								new ResourceLocation(Clayworks.MOD_ID, "entity/decorated_pot/trims/color_palettes/decorated_pot_trim_palette"),
+								trimPaletteMappings()
+						), SpriteSources.CODEC)
+				));
 	}
 
 	public static Map<String, ResourceLocation> dyePaletteMappings() {
 		Map<String, ResourceLocation> map = Maps.newHashMap();
 		for (DyeColor color : DyeColor.values()) {
 			map.put(color.getName(), new ResourceLocation(Clayworks.MOD_ID, "entity/decorated_pot/color_palettes/" + color.getName()));
+		}
+		return map;
+	}
+
+	public static Map<String, ResourceLocation> trimPaletteMappings() {
+		Map<String, ResourceLocation> map = Maps.newHashMap();
+		List<String> trimMaterials = List.of(
+				"amethyst_shard", "copper_ingot", "diamond", "emerald", "gold_ingot", "iron_ingot", "lapis_lazuli", "netherite_ingot", "quartz", "redstone",
+				"necromium_ingot", "sanguine_plating", "silver_ingot", "spinel"
+		);
+		for (String str : trimMaterials) {
+			map.put(str, new ResourceLocation(Clayworks.MOD_ID, "entity/decorated_pot/trims/color_palettes/" + str));
 		}
 		return map;
 	}

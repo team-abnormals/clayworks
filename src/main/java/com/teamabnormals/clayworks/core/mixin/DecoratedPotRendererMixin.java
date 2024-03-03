@@ -81,7 +81,7 @@ public abstract class DecoratedPotRendererMixin {
 	@Inject(method = "render(Lnet/minecraft/world/level/block/entity/DecoratedPotBlockEntity;FLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;II)V", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/vertex/PoseStack;popPose()V", shift = Shift.BEFORE))
 	private void render(DecoratedPotBlockEntity entity, float p_273103_, PoseStack poseStack, MultiBufferSource buffer, int p_273407_, int p_273059_, CallbackInfo ci) {
 		if (ClayworksConfig.COMMON.decoratedPotTrims.get()) {
-			Material material = ClayworksMaterials.createTrimMaterial(new ResourceLocation(Clayworks.MOD_ID, "trims/decorated_pot_base"), ClayworksBlocks.getDyeColorFromPot(entity.getBlockState().getBlock()));
+			Material material = ClayworksMaterials.createTrimMaterial(new ResourceLocation(Clayworks.MOD_ID, "decorated_pot_base"), ClayworksBlocks.getDyeColorFromPot(entity.getBlockState().getBlock()));
 			this.frontSide.render(poseStack, material.buffer(buffer, RenderType::entityCutout), p_273407_, p_273059_);
 			this.backSide.render(poseStack, material.buffer(buffer, RenderType::entityCutout), p_273407_, p_273059_);
 			this.leftSide.render(poseStack, material.buffer(buffer, RenderType::entityCutout), p_273407_, p_273059_);
@@ -90,12 +90,11 @@ public abstract class DecoratedPotRendererMixin {
 			if (entity instanceof TrimmedPot trimmedPot && trimmedPot.getTrim().isPresent()) {
 				ResourceLocation trimKey = ForgeRegistries.ITEMS.getKey(trimmedPot.getTrim().get());
 				if (trimKey != null) {
-					ResourceLocation trimTexture = new ResourceLocation(Clayworks.MOD_ID, "textures/entity/decorated_pot/trims/" + trimKey.getPath() + ".png");
-
-					this.frontSide.render(poseStack, buffer.getBuffer(RenderType.entityCutout(trimTexture)), p_273407_, p_273059_);
-					this.backSide.render(poseStack, buffer.getBuffer(RenderType.entityCutout(trimTexture)), p_273407_, p_273059_);
-					this.leftSide.render(poseStack, buffer.getBuffer(RenderType.entityCutout(trimTexture)), p_273407_, p_273059_);
-					this.rightSide.render(poseStack, buffer.getBuffer(RenderType.entityCutout(trimTexture)), p_273407_, p_273059_);
+					Material trimMaterial = ClayworksMaterials.createTrimMaterial(new ResourceLocation(Clayworks.MOD_ID, "base"), trimKey.getPath());
+					this.frontSide.render(poseStack, trimMaterial.buffer(buffer, RenderType::entityCutout), p_273407_, p_273059_);
+					this.backSide.render(poseStack, trimMaterial.buffer(buffer, RenderType::entityCutout), p_273407_, p_273059_);
+					this.leftSide.render(poseStack, trimMaterial.buffer(buffer, RenderType::entityCutout), p_273407_, p_273059_);
+					this.rightSide.render(poseStack, trimMaterial.buffer(buffer, RenderType::entityCutout), p_273407_, p_273059_);
 				}
 			}
 		}

@@ -30,7 +30,11 @@ public class ClayworksMaterials {
 	}
 
 	public static Material createTrimMaterial(ResourceLocation location, @Nullable DyeColor color) {
-		return new Material(Sheets.DECORATED_POT_SHEET, location.withPrefix("entity/decorated_pot/").withSuffix(color != null ? "_" + color.getName() : ""));
+		return new Material(Sheets.DECORATED_POT_SHEET, location.withPrefix("entity/decorated_pot/trims/").withSuffix(color != null ? "_" + color.getName() : ""));
+	}
+
+	public static Material createTrimMaterial(ResourceLocation location, String trimMaterial) {
+		return new Material(Sheets.DECORATED_POT_SHEET, location.withPrefix("entity/decorated_pot/trims/").withSuffix("_" + trimMaterial));
 	}
 
 	@Nullable
