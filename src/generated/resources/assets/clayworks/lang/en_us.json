@@ -156,5 +156,7 @@
   "block.clayworks.yellow_terracotta_wall": "Yellow Terracotta Wall",
   "container.clayworks.kiln": "Kiln",
   "gui.clayworks.category.baking": "Baking",
+  "painting.clayworks.baked.author": "five",
+  "painting.clayworks.baked.title": "Baked",
   "subtitles.clayworks.block.kiln.smoke": "Kiln smokes"
 }
