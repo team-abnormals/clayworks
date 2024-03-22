@@ -1,0 +1,60 @@
+{
+  "sources": [
+    {
+      "type": "blueprint:paletted_permutations",
+      "sources": [
+        {
+          "type": "minecraft:directory",
+          "prefix": "entity/decorated_pot/",
+          "source": "entity/decorated_pot"
+        }
+      ],
+      "palette_key": "clayworks:entity/decorated_pot_color_palettes/decorated_pot_palette",
+      "permutations": {
+        "white": "clayworks:entity/decorated_pot_color_palettes/white",
+        "light_gray": "clayworks:entity/decorated_pot_color_palettes/light_gray",
+        "gray": "clayworks:entity/decorated_pot_color_palettes/gray",
+        "black": "clayworks:entity/decorated_pot_color_palettes/black",
+        "brown": "clayworks:entity/decorated_pot_color_palettes/brown",
+        "red": "clayworks:entity/decorated_pot_color_palettes/red",
+        "orange": "clayworks:entity/decorated_pot_color_palettes/orange",
+        "yellow": "clayworks:entity/decorated_pot_color_palettes/yellow",
+        "lime": "clayworks:entity/decorated_pot_color_palettes/lime",
+        "green": "clayworks:entity/decorated_pot_color_palettes/green",
+        "cyan": "clayworks:entity/decorated_pot_color_palettes/cyan",
+        "light_blue": "clayworks:entity/decorated_pot_color_palettes/light_blue",
+        "blue": "clayworks:entity/decorated_pot_color_palettes/blue",
+        "purple": "clayworks:entity/decorated_pot_color_palettes/purple",
+        "magenta": "clayworks:entity/decorated_pot_color_palettes/magenta",
+        "pink": "clayworks:entity/decorated_pot_color_palettes/pink"
+      }
+    },
+    {
+      "type": "blueprint:paletted_permutations",
+      "sources": [
+        {
+          "type": "minecraft:directory",
+          "prefix": "entity/decorated_pot_trim_patterns/",
+          "source": "entity/decorated_pot_trim_patterns"
+        }
+      ],
+      "palette_key": "clayworks:entity/decorated_pot_trim_palettes/trim_palette",
+      "permutations": {
+        "minecraft/quartz": "minecraft:entity/decorated_pot_trim_palettes/quartz",
+        "minecraft/iron_ingot": "minecraft:entity/decorated_pot_trim_palettes/iron_ingot",
+        "minecraft/gold_ingot": "minecraft:entity/decorated_pot_trim_palettes/gold_ingot",
+        "minecraft/diamond": "minecraft:entity/decorated_pot_trim_palettes/diamond",
+        "minecraft/netherite_ingot": "minecraft:entity/decorated_pot_trim_palettes/netherite_ingot",
+        "minecraft/redstone": "minecraft:entity/decorated_pot_trim_palettes/redstone",
+        "minecraft/copper_ingot": "minecraft:entity/decorated_pot_trim_palettes/copper_ingot",
+        "minecraft/emerald": "minecraft:entity/decorated_pot_trim_palettes/emerald",
+        "minecraft/lapis_lazuli": "minecraft:entity/decorated_pot_trim_palettes/lapis_lazuli",
+        "minecraft/amethyst_shard": "minecraft:entity/decorated_pot_trim_palettes/amethyst_shard",
+        "caverns_and_chasms/necromium_ingot": "caverns_and_chasms:entity/decorated_pot_trim_palettes/necromium_ingot",
+        "caverns_and_chasms/sanguine_plating": "caverns_and_chasms:entity/decorated_pot_trim_palettes/sanguine_plating",
+        "caverns_and_chasms/silver_ingot": "caverns_and_chasms:entity/decorated_pot_trim_palettes/silver_ingot",
+        "caverns_and_chasms/spinel": "caverns_and_chasms:entity/decorated_pot_trim_palettes/spinel"
+      }
+    }
+  ]
+}

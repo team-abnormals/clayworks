@@ -1,7 +1,5 @@
 package com.teamabnormals.clayworks.core.data.server.tags;
 
-import com.teamabnormals.blueprint.core.other.tags.BlueprintBlockTags;
-import com.teamabnormals.blueprint.core.other.tags.BlueprintItemTags;
 import com.teamabnormals.clayworks.core.Clayworks;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.HolderLookup.Provider;

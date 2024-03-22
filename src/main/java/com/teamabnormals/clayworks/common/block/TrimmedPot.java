@@ -6,5 +6,6 @@ import java.util.Optional;
 
 public interface TrimmedPot {
 	Optional<Item> getTrim();
+
 	void setTrim(Item item);
 }
