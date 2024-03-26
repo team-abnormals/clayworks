@@ -1,8 +1,11 @@
 package com.teamabnormals.clayworks.core;
 
+import com.teamabnormals.blueprint.client.screen.splash.SplashSerializers;
 import com.teamabnormals.blueprint.core.util.registry.RegistryHelper;
+import com.teamabnormals.clayworks.client.splashes.WoodworksSplash;
 import com.teamabnormals.clayworks.core.data.client.ClayworksBlockStateProvider;
 import com.teamabnormals.clayworks.core.data.client.ClayworksLanguageProvider;
+import com.teamabnormals.clayworks.core.data.client.ClayworksSplashProvider;
 import com.teamabnormals.clayworks.core.data.server.ClayworksLootTableProvider;
 import com.teamabnormals.clayworks.core.data.server.ClayworksRecipeProvider;
 import com.teamabnormals.clayworks.core.data.server.modifiers.ClayworksLootModifierProvider;
@@ -17,6 +20,7 @@ import com.teamabnormals.clayworks.core.registry.helper.ClayworksBlockSubRegistr
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.RecipeBookType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
@@ -60,6 +64,7 @@ public class Clayworks {
 
 		DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
 			ClayworksBlocks.setupTabEditors();
+			SplashSerializers.register(new ResourceLocation(MOD_ID, "woodworks"), WoodworksSplash.CODEC);
 		});
 
 		context.registerConfig(ModConfig.Type.COMMON, ClayworksConfig.COMMON_SPEC);
@@ -93,6 +98,7 @@ public class Clayworks {
 		generator.addProvider(includeServer, new ClayworksLootModifierProvider(output, lookupProvider));
 
 		boolean includeClient = event.includeClient();
+		generator.addProvider(includeClient, new ClayworksSplashProvider(output));
 		generator.addProvider(includeClient, new ClayworksBlockStateProvider(output, helper));
 		generator.addProvider(includeClient, new ClayworksLanguageProvider(output));
 	}
