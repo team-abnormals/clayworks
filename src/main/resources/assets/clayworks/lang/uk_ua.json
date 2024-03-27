@@ -156,5 +156,7 @@
   "block.clayworks.yellow_terracotta_wall": "Стіна з жовтої кераміки",
   "container.clayworks.kiln": "Промислова піч",
   "gui.clayworks.category.baking": "Випікання",
+  "painting.clayworks.baked.author": "five",
+  "painting.clayworks.baked.title": "Запечений",
   "subtitles.clayworks.block.kiln.smoke": "Промислова піч димить"
 }
