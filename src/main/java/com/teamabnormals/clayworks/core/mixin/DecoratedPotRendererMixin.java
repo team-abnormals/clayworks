@@ -86,7 +86,7 @@ public abstract class DecoratedPotRendererMixin {
 			this.leftSide.render(poseStack, material.buffer(buffer, RenderType::entityCutout), p_273407_, p_273059_);
 			this.rightSide.render(poseStack, material.buffer(buffer, RenderType::entityCutout), p_273407_, p_273059_);
 
-			if (entity instanceof TrimmedPot trimmedPot && trimmedPot.getTrim() != null) {
+			if (entity instanceof TrimmedPot trimmedPot && trimmedPot.getTrim() != null && !trimmedPot.getTrim().equals(new ResourceLocation("air"))) {
 				ResourceLocation trimKey = trimmedPot.getTrim();
 				Material trimMaterial = ClayworksMaterials.createTrimMaterial(trimmedPot.getTrimPattern(), (trimKey.getNamespace() + "_" + trimKey.getPath()).replace("minecraft_", ""));
 				this.frontSide.render(poseStack, trimMaterial.buffer(buffer, RenderType::entityCutout), p_273407_, p_273059_);

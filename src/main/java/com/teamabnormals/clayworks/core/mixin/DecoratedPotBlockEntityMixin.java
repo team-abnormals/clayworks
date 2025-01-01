@@ -18,7 +18,7 @@ import javax.annotation.Nullable;
 @Mixin(DecoratedPotBlockEntity.class)
 public class DecoratedPotBlockEntityMixin implements TrimmedPot {
 	@Unique
-	private ResourceLocation clayworks$trim = null;
+	private ResourceLocation clayworks$trim = new ResourceLocation("air");
 
 	@Unique
 	private ResourceLocation clayworks$trimPattern = new ResourceLocation(Clayworks.MOD_ID, "base");
@@ -31,7 +31,7 @@ public class DecoratedPotBlockEntityMixin implements TrimmedPot {
 
 	@Override
 	public void setTrim(ResourceLocation name) {
-		this.clayworks$trim = name;
+		this.clayworks$trim = name != null ? name : new ResourceLocation("air");
 	}
 
 	@Override
@@ -42,22 +42,13 @@ public class DecoratedPotBlockEntityMixin implements TrimmedPot {
 
 	@Override
 	public void setTrimPattern(ResourceLocation name) {
-		if (name == null) {
-			this.clayworks$trimPattern = new ResourceLocation(Clayworks.MOD_ID, "base");
-		} else {
-			this.clayworks$trimPattern = name;
-		}
+		this.clayworks$trimPattern = name != null ? name : new ResourceLocation(Clayworks.MOD_ID, "base");
 	}
 
 	@Inject(method = "saveAdditional", at = @At("TAIL"))
 	private void saveAdditional(CompoundTag tag, CallbackInfo ci) {
-		if (this.clayworks$trim != null) {
-			tag.putString("trim", this.clayworks$trim.toString());
-		}
-
-		if (this.clayworks$trimPattern != null) {
-			tag.putString("trim_pattern", this.clayworks$trimPattern.toString());
-		}
+		tag.putString("trim", this.clayworks$trim.toString());
+		tag.putString("trim_pattern", this.clayworks$trimPattern.toString());
 	}
 
 	@Inject(method = "load", at = @At("TAIL"))
@@ -74,10 +65,14 @@ public class DecoratedPotBlockEntityMixin implements TrimmedPot {
 	private void setTag(CompoundTag tag) {
 		if (tag != null && tag.contains("trim")) {
 			this.setTrim(new ResourceLocation(tag.getString("trim")));
+		} else {
+			this.setTrim(null);
 		}
 
 		if (tag != null && tag.contains("trim_pattern")) {
 			this.setTrimPattern(new ResourceLocation(tag.getString("trim_pattern")));
+		} else {
+			this.setTrimPattern(null);
 		}
 	}
 }
