@@ -20,7 +20,7 @@ public class ClayworksLanguageProvider extends BlueprintLanguageProvider {
 	@Override
 	public void addTranslations() {
 		this.add(KilnBlockEntity.TRANSLATION.getString(), "Kiln");
-		this.add(BakingCategory.TRANSLATION.getString(), "Baking");
+		this.add(BakingCategory.TRANSLATION, "Baking");
 		this.add("subtitles." + Clayworks.MOD_ID + ".block.kiln.smoke", "Kiln smokes");
 		this.add(ClayworksPaintingVariants.BAKED, "Baked", "five");
 		ClayworksBlocks.HELPER.getDeferredRegister().getEntries().forEach(block -> this.add(block.get()));
