@@ -25,8 +25,11 @@ public class ClayworksBlocks {
 	public static final ClayworksBlockSubRegistryHelper HELPER = Clayworks.REGISTRY_HELPER.getBlockSubHelper();
 
 	public static final RegistryObject<Block> KILN = HELPER.createBlock("kiln", () -> new KilnBlock(ClayworksBlockProperties.KILN));
+
 	public static final RegistryObject<Block> CHISELED_BRICKS = HELPER.createBlock("chiseled_bricks", () -> new Block(ClayworksBlockProperties.BRICKS));
 	public static final RegistryObject<Block> GLAZED_TERRACOTTA = HELPER.createBlock("glazed_terracotta", () -> new GlazedTerracottaBlock(ClayworksBlockProperties.GLAZED_TERRACOTTA));
+	public static final RegistryObject<Block> CONCRETE = HELPER.createBlock("concrete", () -> new GlazedTerracottaBlock(ClayworksBlockProperties.CONCRETE));
+	public static final RegistryObject<Block> CONCRETE_POWDER = HELPER.createBlock("concrete_powder", () -> new ConcretePowderBlock(CONCRETE.get(), ClayworksBlockProperties.CONCRETE_POWDER));
 
 	public static final RegistryObject<Block> TERRACOTTA_STAIRS = HELPER.createBlock("terracotta_stairs", () -> new StairBlock(() -> Blocks.TERRACOTTA.defaultBlockState(), ClayworksBlockProperties.TERRACOTTA));
 	public static final RegistryObject<Block> WHITE_TERRACOTTA_STAIRS = HELPER.createBlock("white_terracotta_stairs", () -> new StairBlock(() -> Blocks.WHITE_TERRACOTTA.defaultBlockState(), ClayworksBlockProperties.WHITE_TERRACOTTA));
@@ -239,6 +242,8 @@ public class ClayworksBlocks {
 		public static final Block.Properties KILN = Block.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(3.5F).lightLevel(state -> state.getValue(BlockStateProperties.LIT) ? 13 : 0);
 		public static final Block.Properties BRICKS = Block.Properties.of().mapColor(MapColor.COLOR_RED).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(2.0F, 6.0F);
 		public static final Block.Properties GLAZED_TERRACOTTA = Block.Properties.of().mapColor(MapColor.COLOR_RED).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(1.4F).pushReaction(PushReaction.PUSH_ONLY);
+		public static final Block.Properties CONCRETE = Block.Properties.of().mapColor(DyeColor.WHITE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(1.8F);
+		public static final Block.Properties CONCRETE_POWDER = Block.Properties.of().mapColor(DyeColor.WHITE).instrument(NoteBlockInstrument.SNARE).strength(0.5F).sound(SoundType.SAND);
 
 		public static final Block.Properties TERRACOTTA = terracotta(MapColor.COLOR_ORANGE);
 		public static final Block.Properties WHITE_TERRACOTTA = terracotta(MapColor.TERRACOTTA_WHITE);
@@ -287,6 +292,9 @@ public class ClayworksBlocks {
 				)
 				.predicate(event -> event.getTabKey() == COLORED_BLOCKS && ClayworksConfig.COMMON.glazedTerracotta.get())
 				.addItemsBefore(of(Items.WHITE_GLAZED_TERRACOTTA), GLAZED_TERRACOTTA)
+				.predicate(event -> event.getTabKey() == COLORED_BLOCKS && ClayworksConfig.COMMON.concrete.get())
+				.addItemsBefore(of(Items.WHITE_CONCRETE), CONCRETE)
+				.addItemsBefore(of(Items.WHITE_CONCRETE_POWDER), CONCRETE_POWDER)
 				.predicate(event -> event.getTabKey() == COLORED_BLOCKS && ClayworksConfig.COMMON.decoratedPotColors.get())
 				.addItems(() -> Items.DECORATED_POT, WHITE_DECORATED_POT, LIGHT_GRAY_DECORATED_POT, GRAY_DECORATED_POT, BLACK_DECORATED_POT, BROWN_DECORATED_POT, RED_DECORATED_POT, ORANGE_DECORATED_POT, YELLOW_DECORATED_POT, LIME_DECORATED_POT, GREEN_DECORATED_POT, CYAN_DECORATED_POT, LIGHT_BLUE_DECORATED_POT, BLUE_DECORATED_POT, PURPLE_DECORATED_POT, MAGENTA_DECORATED_POT, PINK_DECORATED_POT)
 				.predicate(event -> event.getTabKey() == FUNCTIONAL_BLOCKS && ClayworksConfig.COMMON.kiln.get())

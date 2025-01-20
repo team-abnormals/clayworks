@@ -14,6 +14,8 @@ public class ClayworksConfig {
 		public final BooleanValue chiseledBricks;
 		@ConfigKey("glazed_terracotta")
 		public final BooleanValue glazedTerracotta;
+		@ConfigKey("concrete")
+		public final BooleanValue concrete;
 		@ConfigKey("terracotta_variants")
 		public final BooleanValue terracottaVariants;
 		@ConfigKey("terracotta_bricks")
@@ -28,6 +30,7 @@ public class ClayworksConfig {
 			this.kiln = builder.define("Kiln", true);
 			this.chiseledBricks = builder.define("Chiseled bricks", true);
 			this.glazedTerracotta = builder.define("Glazed terracotta", true);
+			this.concrete = builder.define("Concrete", true);
 			this.terracottaVariants = builder.define("Terracotta slabs, stairs, and walls", true);
 			this.terracottaBricks = builder.define("Terracotta bricks", true);
 			builder.push("decorated_pot");

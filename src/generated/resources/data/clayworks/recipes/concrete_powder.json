@@ -1,0 +1,48 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "clayworks:config",
+          "value": "concrete"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shapeless",
+        "category": "building",
+        "group": "concrete_powder",
+        "ingredients": [
+          {
+            "item": "minecraft:sand"
+          },
+          {
+            "item": "minecraft:sand"
+          },
+          {
+            "item": "minecraft:sand"
+          },
+          {
+            "item": "minecraft:sand"
+          },
+          {
+            "item": "minecraft:gravel"
+          },
+          {
+            "item": "minecraft:gravel"
+          },
+          {
+            "item": "minecraft:gravel"
+          },
+          {
+            "item": "minecraft:gravel"
+          }
+        ],
+        "result": {
+          "count": 8,
+          "item": "clayworks:concrete_powder"
+        }
+      }
+    }
+  ]
+}

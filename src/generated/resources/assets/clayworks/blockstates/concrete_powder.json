@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "clayworks:block/concrete_powder"
+      },
+      {
+        "model": "clayworks:block/concrete_powder",
+        "y": 90
+      },
+      {
+        "model": "clayworks:block/concrete_powder",
+        "y": 180
+      },
+      {
+        "model": "clayworks:block/concrete_powder",
+        "y": 270
+      }
+    ]
+  }
+}

@@ -38,6 +38,7 @@ public class ClayworksRecipeProvider extends BlueprintRecipeProvider {
 	public static final ConfigValueCondition GLAZED_TERRACOTTA_CONFIG = config(COMMON.glazedTerracotta, "glazed_terracotta");
 	public static final ConfigValueCondition TERRACOTTA_VARIANTS_CONFIG = config(COMMON.terracottaVariants, "terracotta_variants");
 	public static final ConfigValueCondition TERRACOTTA_BRICKS_CONFIG = config(COMMON.terracottaBricks, "terracotta_bricks");
+	public static final ConfigValueCondition CONCRETE_CONFIG = config(COMMON.concrete, "concrete");
 
 	public ClayworksRecipeProvider(PackOutput output) {
 		super(Clayworks.MOD_ID, output);
@@ -52,6 +53,24 @@ public class ClayworksRecipeProvider extends BlueprintRecipeProvider {
 		conditionalRecipe(consumer, RecipeCategory.BUILDING_BLOCKS, CHISELED_BRICKS_CONFIG, chiseledBuilder(RecipeCategory.BUILDING_BLOCKS, CHISELED_BRICKS.get(), Ingredient.of(Blocks.BRICK_SLAB)).unlockedBy(getHasName(Blocks.BRICK_SLAB), has(Blocks.BRICK_SLAB)));
 		conditionalStonecuttingRecipe(consumer, RecipeCategory.BUILDING_BLOCKS, CHISELED_BRICKS_CONFIG, CHISELED_BRICKS.get(), Blocks.BRICKS);
 		conditionalRecipe(consumer, RecipeCategory.DECORATIONS, GLAZED_TERRACOTTA_CONFIG, SimpleCookingRecipeBuilder.smelting(Ingredient.of(Blocks.TERRACOTTA), RecipeCategory.BUILDING_BLOCKS, GLAZED_TERRACOTTA.get().asItem(), 0.1F, 200).unlockedBy("has_terracotta", has(Blocks.TERRACOTTA)));
+
+		conditionalRecipe(consumer, RecipeCategory.BUILDING_BLOCKS, CONCRETE_CONFIG, ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, CONCRETE_POWDER.get(), 8).requires(Blocks.SAND, 4).requires(Blocks.GRAVEL, 4).group("concrete_powder").unlockedBy("has_sand", has(Blocks.SAND)).unlockedBy("has_gravel", has(Blocks.GRAVEL)));
+		coloredConcreteFromConcreteAndDye(consumer, Blocks.BLACK_CONCRETE, Blocks.BLACK_CONCRETE_POWDER, Items.BLACK_DYE);
+		coloredConcreteFromConcreteAndDye(consumer, Blocks.BLUE_CONCRETE, Blocks.BLUE_CONCRETE_POWDER, Items.BLUE_DYE);
+		coloredConcreteFromConcreteAndDye(consumer, Blocks.BROWN_CONCRETE, Blocks.BROWN_CONCRETE_POWDER, Items.BROWN_DYE);
+		coloredConcreteFromConcreteAndDye(consumer, Blocks.CYAN_CONCRETE, Blocks.CYAN_CONCRETE_POWDER, Items.CYAN_DYE);
+		coloredConcreteFromConcreteAndDye(consumer, Blocks.GRAY_CONCRETE, Blocks.GRAY_CONCRETE_POWDER, Items.GRAY_DYE);
+		coloredConcreteFromConcreteAndDye(consumer, Blocks.GREEN_CONCRETE, Blocks.GREEN_CONCRETE_POWDER, Items.GREEN_DYE);
+		coloredConcreteFromConcreteAndDye(consumer, Blocks.LIGHT_BLUE_CONCRETE, Blocks.LIGHT_BLUE_CONCRETE_POWDER, Items.LIGHT_BLUE_DYE);
+		coloredConcreteFromConcreteAndDye(consumer, Blocks.LIGHT_GRAY_CONCRETE, Blocks.LIGHT_GRAY_CONCRETE_POWDER, Items.LIGHT_GRAY_DYE);
+		coloredConcreteFromConcreteAndDye(consumer, Blocks.LIME_CONCRETE, Blocks.LIME_CONCRETE_POWDER, Items.LIME_DYE);
+		coloredConcreteFromConcreteAndDye(consumer, Blocks.MAGENTA_CONCRETE, Blocks.MAGENTA_CONCRETE_POWDER, Items.MAGENTA_DYE);
+		coloredConcreteFromConcreteAndDye(consumer, Blocks.ORANGE_CONCRETE, Blocks.ORANGE_CONCRETE_POWDER, Items.ORANGE_DYE);
+		coloredConcreteFromConcreteAndDye(consumer, Blocks.PINK_CONCRETE, Blocks.PINK_CONCRETE_POWDER, Items.PINK_DYE);
+		coloredConcreteFromConcreteAndDye(consumer, Blocks.PURPLE_CONCRETE, Blocks.PURPLE_CONCRETE_POWDER, Items.PURPLE_DYE);
+		coloredConcreteFromConcreteAndDye(consumer, Blocks.RED_CONCRETE, Blocks.RED_CONCRETE_POWDER, Items.RED_DYE);
+		coloredConcreteFromConcreteAndDye(consumer, Blocks.WHITE_CONCRETE, Blocks.WHITE_CONCRETE_POWDER, Items.WHITE_DYE);
+		coloredConcreteFromConcreteAndDye(consumer, Blocks.YELLOW_CONCRETE, Blocks.YELLOW_CONCRETE_POWDER, Items.YELLOW_DYE);
 
 		terracottaBricksRecipes(consumer, Blocks.TERRACOTTA, ClayworksBlockFamilies.TERRACOTTA, ClayworksBlockFamilies.TERRACOTTA_BRICKS, null);
 		terracottaBricksRecipes(consumer, Blocks.WHITE_TERRACOTTA, ClayworksBlockFamilies.WHITE_TERRACOTTA, ClayworksBlockFamilies.WHITE_TERRACOTTA_BRICKS, Items.WHITE_DYE);
@@ -165,6 +184,11 @@ public class ClayworksRecipeProvider extends BlueprintRecipeProvider {
 				conditionalRecipe(consumer, RecipeCategory.BUILDING_BLOCKS, condition, SimpleCookingRecipeBuilder.smelting(Ingredient.of(block), RecipeCategory.BUILDING_BLOCKS, output, 0.1F, 200).unlockedBy(getHasName(block), has(block)));
 			}
 		});
+	}
+
+	protected static void coloredConcreteFromConcreteAndDye(Consumer<FinishedRecipe> consumer, ItemLike concrete, ItemLike concretePowder, ItemLike dye) {
+		conditionalRecipe(consumer, RecipeCategory.BUILDING_BLOCKS, CONCRETE_CONFIG, ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, concrete, 8).define('#', CONCRETE.get()).define('X', dye).pattern("###").pattern("#X#").pattern("###").group("concrete").unlockedBy("has_concrete", has(CONCRETE.get())));
+		conditionalRecipe(consumer, RecipeCategory.BUILDING_BLOCKS, CONCRETE_CONFIG, ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, concretePowder, 8).define('#', CONCRETE_POWDER.get()).define('X', dye).pattern("###").pattern("#X#").pattern("###").group("concrete_powder").unlockedBy("has_concrete_powder", has(CONCRETE_POWDER.get())));
 	}
 
 	public static void conditionalRecipe(Consumer<FinishedRecipe> consumer, RecipeCategory category, ICondition condition, RecipeBuilder recipe) {

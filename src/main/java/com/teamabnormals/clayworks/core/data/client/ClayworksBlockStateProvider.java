@@ -10,8 +10,10 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.client.model.generators.ModelFile.ExistingModelFile;
+import net.minecraftforge.client.model.generators.ModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -31,6 +33,8 @@ public class ClayworksBlockStateProvider extends BlueprintBlockStateProvider {
 		this.furnace(KILN);
 		this.block(CHISELED_BRICKS);
 		this.glazedTerracotta(GLAZED_TERRACOTTA);
+		this.block(CONCRETE);
+		this.concretePowder(CONCRETE_POWDER);
 
 		this.blockFamily(ClayworksBlockFamilies.TERRACOTTA);
 		this.blockFamily(ClayworksBlockFamilies.WHITE_TERRACOTTA);
@@ -94,6 +98,17 @@ public class ClayworksBlockStateProvider extends BlueprintBlockStateProvider {
 	public void glazedTerracotta(RegistryObject<Block> block) {
 		this.horizontalBlock(block.get(), models().withExistingParent(name(block.get()), "template_glazed_terracotta").texture("pattern", blockTexture(block.get())), 0);
 		this.blockItem(block);
+	}
+
+	public void concretePowder(RegistryObject<Block> block) {
+		ModelFile model = models().cubeAll(name(block.get()), blockTexture(block.get()));
+		this.getVariantBuilder(block.get()).forAllStates(state ->
+				ConfiguredModel.builder()
+						.modelFile(model).nextModel()
+						.modelFile(model).rotationY(90).nextModel()
+						.modelFile(model).rotationY(180).nextModel()
+						.modelFile(model).rotationY(270).build());
+		this.simpleBlockItem(block.get(), model);
 	}
 
 	public void furnace(RegistryObject<Block> registryObject) {
