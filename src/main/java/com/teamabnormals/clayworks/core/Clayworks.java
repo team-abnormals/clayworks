@@ -17,6 +17,8 @@ import com.teamabnormals.clayworks.core.registry.*;
 import com.teamabnormals.clayworks.core.registry.ClayworksRecipes.ClayworksRecipeSerializers;
 import com.teamabnormals.clayworks.core.registry.ClayworksRecipes.ClayworksRecipeTypes;
 import com.teamabnormals.clayworks.core.registry.helper.ClayworksBlockSubRegistryHelper;
+import com.teamabnormals.gallery.core.data.client.GalleryAssetsRemolderProvider;
+import com.teamabnormals.gallery.core.data.client.GalleryItemModelProvider;
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
@@ -85,21 +87,24 @@ public class Clayworks {
 	private void dataSetup(GatherDataEvent event) {
 		DataGenerator generator = event.getGenerator();
 		PackOutput output = generator.getPackOutput();
-		CompletableFuture<Provider> lookupProvider = event.getLookupProvider();
+		CompletableFuture<Provider> provider = event.getLookupProvider();
 		ExistingFileHelper helper = event.getExistingFileHelper();
 
-		boolean includeServer = event.includeServer();
-		ClayworksBlockTagsProvider blockTags = new ClayworksBlockTagsProvider(output, lookupProvider, helper);
-		generator.addProvider(includeServer, blockTags);
-		generator.addProvider(includeServer, new ClayworksItemTagsProvider(output, lookupProvider, blockTags.contentsGetter(), helper));
-		generator.addProvider(includeServer, new ClayworksLootTableProvider(output));
-		generator.addProvider(includeServer, new ClayworksRecipeProvider(output));
-		generator.addProvider(includeServer, new ClayworksPaintingVariantTagsProvider(output, lookupProvider, helper));
-		generator.addProvider(includeServer, new ClayworksLootModifierProvider(output, lookupProvider));
+		boolean server = event.includeServer();
+		ClayworksBlockTagsProvider blockTags = new ClayworksBlockTagsProvider(output, provider, helper);
+		generator.addProvider(server, blockTags);
+		generator.addProvider(server, new ClayworksItemTagsProvider(output, provider, blockTags.contentsGetter(), helper));
+		generator.addProvider(server, new ClayworksLootTableProvider(output));
+		generator.addProvider(server, new ClayworksRecipeProvider(output));
+		generator.addProvider(server, new ClayworksPaintingVariantTagsProvider(output, provider, helper));
+		generator.addProvider(server, new ClayworksLootModifierProvider(output, provider));
 
-		boolean includeClient = event.includeClient();
-		generator.addProvider(includeClient, new ClayworksSplashProvider(output));
-		generator.addProvider(includeClient, new ClayworksBlockStateProvider(output, helper));
-		generator.addProvider(includeClient, new ClayworksLanguageProvider(output));
+		boolean client = event.includeClient();
+		generator.addProvider(client, new ClayworksSplashProvider(output));
+		generator.addProvider(client, new ClayworksBlockStateProvider(output, helper));
+		generator.addProvider(client, new ClayworksLanguageProvider(output));
+
+		generator.addProvider(client, new GalleryItemModelProvider(MOD_ID, output, helper));
+		generator.addProvider(client, new GalleryAssetsRemolderProvider(MOD_ID, output, provider));
 	}
 }
