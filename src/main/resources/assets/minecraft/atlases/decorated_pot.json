@@ -49,12 +49,7 @@
         "copper": "entity/decorated_pot_trim_palettes/copper",
         "emerald": "entity/decorated_pot_trim_palettes/emerald",
         "lapis": "entity/decorated_pot_trim_palettes/lapis",
-        "amethyst": "entity/decorated_pot_trim_palettes/amethyst",
-        "caverns_and_chasms_necromium": "caverns_and_chasms:entity/decorated_pot_trim_palettes/necromium",
-        "caverns_and_chasms_sanguine": "caverns_and_chasms:entity/decorated_pot_trim_palettes/sanguine",
-        "caverns_and_chasms_silver": "caverns_and_chasms:entity/decorated_pot_trim_palettes/silver",
-        "caverns_and_chasms_spinel": "caverns_and_chasms:entity/decorated_pot_trim_palettes/spinel",
-        "upgrade_aquatic_tooth": "upgrade_aquatic:entity/decorated_pot_trim_palettes/tooth"
+        "amethyst": "entity/decorated_pot_trim_palettes/amethyst"
       }
     }
   ]
