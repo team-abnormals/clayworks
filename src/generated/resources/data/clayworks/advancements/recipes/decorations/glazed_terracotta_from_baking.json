@@ -38,7 +38,7 @@
       },
       "conditions": [
         {
-          "type": "forge:and",
+          "type": "blueprint:and",
           "values": [
             {
               "type": "clayworks:config",

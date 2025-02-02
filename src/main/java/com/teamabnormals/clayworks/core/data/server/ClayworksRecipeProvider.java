@@ -1,6 +1,7 @@
 package com.teamabnormals.clayworks.core.data.server;
 
 import com.google.common.collect.Maps;
+import com.teamabnormals.blueprint.core.api.conditions.BlueprintAndCondition;
 import com.teamabnormals.blueprint.core.api.conditions.ConfigValueCondition;
 import com.teamabnormals.blueprint.core.data.server.BlueprintRecipeProvider;
 import com.teamabnormals.clayworks.core.Clayworks;
@@ -12,6 +13,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -22,8 +24,8 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.crafting.ConditionalRecipe;
-import net.minecraftforge.common.crafting.conditions.AndCondition;
 import net.minecraftforge.common.crafting.conditions.ICondition;
+import net.minecraftforge.common.crafting.conditions.ModLoadedCondition;
 
 import javax.annotation.Nullable;
 import java.util.function.BiFunction;
@@ -39,6 +41,7 @@ public class ClayworksRecipeProvider extends BlueprintRecipeProvider {
 	public static final ConfigValueCondition TERRACOTTA_VARIANTS_CONFIG = config(COMMON.terracottaVariants, "terracotta_variants");
 	public static final ConfigValueCondition TERRACOTTA_BRICKS_CONFIG = config(COMMON.terracottaBricks, "terracotta_bricks");
 	public static final ConfigValueCondition CONCRETE_CONFIG = config(COMMON.concrete, "concrete");
+	public static final BlueprintAndCondition KILN_COMPAT = new BlueprintAndCondition(new ModLoadedCondition(Clayworks.MOD_ID), KILN_CONFIG);
 
 	public ClayworksRecipeProvider(PackOutput output) {
 		super(Clayworks.MOD_ID, output);
@@ -92,46 +95,46 @@ public class ClayworksRecipeProvider extends BlueprintRecipeProvider {
 	}
 
 	public static void generateKilnRecipes(Consumer<FinishedRecipe> consumer) {
-		conditionalRecipe(consumer, RecipeCategory.BUILDING_BLOCKS, KILN_CONFIG, baking(Ingredient.of(ItemTags.SAND), RecipeCategory.DECORATIONS, Blocks.GLASS, 0.1F, 100).unlockedBy("has_sand", has(ItemTags.SAND)), new ResourceLocation(Clayworks.MOD_ID, "glass_from_baking"));
-		conditionalRecipe(consumer, RecipeCategory.MISC, KILN_CONFIG, baking(Ingredient.of(ItemTags.LOGS_THAT_BURN), RecipeCategory.MISC, Items.CHARCOAL, 0.15F, 100).unlockedBy("has_log", has(ItemTags.LOGS_THAT_BURN)), new ResourceLocation(Clayworks.MOD_ID, "charcoal_from_baking"));
-		baking(consumer, RecipeCategory.BUILDING_BLOCKS, Blocks.WET_SPONGE, Blocks.SPONGE, 0.15F, 100);
-		baking(consumer, RecipeCategory.MISC, Blocks.SEA_PICKLE, Items.LIME_DYE, 0.1F, 100);
-		baking(consumer, RecipeCategory.MISC, Blocks.CACTUS, Items.GREEN_DYE, 1.0F, 100);
-		baking(consumer, RecipeCategory.MISC, Items.CHORUS_FRUIT, Items.POPPED_CHORUS_FRUIT, 0.1F, 100);
+		bakingRecipe(consumer, RecipeCategory.BUILDING_BLOCKS, ItemTags.SMELTS_TO_GLASS, "has_smelts_to_glass", Blocks.GLASS, 0.1F, 100);
+		bakingRecipe(consumer, RecipeCategory.MISC, ItemTags.LOGS_THAT_BURN, "has_log", Items.CHARCOAL, 0.15F, 100);
+		bakingRecipe(consumer, RecipeCategory.BUILDING_BLOCKS, Blocks.WET_SPONGE, Blocks.SPONGE, 0.15F, 100);
+		bakingRecipe(consumer, RecipeCategory.MISC, Blocks.SEA_PICKLE, Items.LIME_DYE, 0.1F, 100);
+		bakingRecipe(consumer, RecipeCategory.MISC, Blocks.CACTUS, Items.GREEN_DYE, 1.0F, 100);
+		bakingRecipe(consumer, RecipeCategory.MISC, Items.CHORUS_FRUIT, Items.POPPED_CHORUS_FRUIT, 0.1F, 100);
 
-		baking(consumer, RecipeCategory.MISC, Items.CLAY_BALL, Items.BRICK, 0.3F, 100);
-		baking(consumer, RecipeCategory.BUILDING_BLOCKS, Blocks.CLAY, Blocks.TERRACOTTA, 0.35F, 100);
-		baking(consumer, RecipeCategory.MISC, Blocks.NETHERRACK, Items.NETHER_BRICK, 0.1F, 100);
-		baking(consumer, RecipeCategory.BUILDING_BLOCKS, Blocks.COBBLESTONE, Blocks.STONE, 0.1F, 100);
-		baking(consumer, RecipeCategory.BUILDING_BLOCKS, Blocks.COBBLED_DEEPSLATE, Blocks.DEEPSLATE, 0.1F, 100);
-		baking(consumer, RecipeCategory.BUILDING_BLOCKS, Blocks.STONE, Blocks.SMOOTH_STONE, 0.1F, 100);
-		baking(consumer, RecipeCategory.BUILDING_BLOCKS, Blocks.SANDSTONE, Blocks.SMOOTH_SANDSTONE, 0.1F, 100);
-		baking(consumer, RecipeCategory.BUILDING_BLOCKS, Blocks.RED_SANDSTONE, Blocks.SMOOTH_RED_SANDSTONE, 0.1F, 100);
-		baking(consumer, RecipeCategory.BUILDING_BLOCKS, Blocks.QUARTZ_BLOCK, Blocks.SMOOTH_QUARTZ, 0.1F, 100);
-		baking(consumer, RecipeCategory.BUILDING_BLOCKS, Blocks.BASALT, Blocks.SMOOTH_BASALT, 0.1F, 100);
-		baking(consumer, RecipeCategory.BUILDING_BLOCKS, Blocks.STONE_BRICKS, Blocks.CRACKED_STONE_BRICKS, 0.1F, 100);
-		baking(consumer, RecipeCategory.BUILDING_BLOCKS, Blocks.POLISHED_BLACKSTONE_BRICKS, Blocks.CRACKED_POLISHED_BLACKSTONE_BRICKS, 0.1F, 100);
-		baking(consumer, RecipeCategory.BUILDING_BLOCKS, Blocks.NETHER_BRICKS, Blocks.CRACKED_NETHER_BRICKS, 0.1F, 100);
-		baking(consumer, RecipeCategory.BUILDING_BLOCKS, Blocks.DEEPSLATE_BRICKS, Blocks.CRACKED_DEEPSLATE_BRICKS, 0.1F, 100);
-		baking(consumer, RecipeCategory.BUILDING_BLOCKS, Blocks.DEEPSLATE_TILES, Blocks.CRACKED_DEEPSLATE_TILES, 0.1F, 100);
+		bakingRecipe(consumer, RecipeCategory.MISC, Items.CLAY_BALL, Items.BRICK, 0.3F, 100);
+		bakingRecipe(consumer, RecipeCategory.BUILDING_BLOCKS, Blocks.CLAY, Blocks.TERRACOTTA, 0.35F, 100);
+		bakingRecipe(consumer, RecipeCategory.MISC, Blocks.NETHERRACK, Items.NETHER_BRICK, 0.1F, 100);
+		bakingRecipe(consumer, RecipeCategory.BUILDING_BLOCKS, Blocks.COBBLESTONE, Blocks.STONE, 0.1F, 100);
+		bakingRecipe(consumer, RecipeCategory.BUILDING_BLOCKS, Blocks.COBBLED_DEEPSLATE, Blocks.DEEPSLATE, 0.1F, 100);
+		bakingRecipe(consumer, RecipeCategory.BUILDING_BLOCKS, Blocks.STONE, Blocks.SMOOTH_STONE, 0.1F, 100);
+		bakingRecipe(consumer, RecipeCategory.BUILDING_BLOCKS, Blocks.SANDSTONE, Blocks.SMOOTH_SANDSTONE, 0.1F, 100);
+		bakingRecipe(consumer, RecipeCategory.BUILDING_BLOCKS, Blocks.RED_SANDSTONE, Blocks.SMOOTH_RED_SANDSTONE, 0.1F, 100);
+		bakingRecipe(consumer, RecipeCategory.BUILDING_BLOCKS, Blocks.QUARTZ_BLOCK, Blocks.SMOOTH_QUARTZ, 0.1F, 100);
+		bakingRecipe(consumer, RecipeCategory.BUILDING_BLOCKS, Blocks.BASALT, Blocks.SMOOTH_BASALT, 0.1F, 100);
+		bakingRecipe(consumer, RecipeCategory.BUILDING_BLOCKS, Blocks.STONE_BRICKS, Blocks.CRACKED_STONE_BRICKS, 0.1F, 100);
+		bakingRecipe(consumer, RecipeCategory.BUILDING_BLOCKS, Blocks.POLISHED_BLACKSTONE_BRICKS, Blocks.CRACKED_POLISHED_BLACKSTONE_BRICKS, 0.1F, 100);
+		bakingRecipe(consumer, RecipeCategory.BUILDING_BLOCKS, Blocks.NETHER_BRICKS, Blocks.CRACKED_NETHER_BRICKS, 0.1F, 100);
+		bakingRecipe(consumer, RecipeCategory.BUILDING_BLOCKS, Blocks.DEEPSLATE_BRICKS, Blocks.CRACKED_DEEPSLATE_BRICKS, 0.1F, 100);
+		bakingRecipe(consumer, RecipeCategory.BUILDING_BLOCKS, Blocks.DEEPSLATE_TILES, Blocks.CRACKED_DEEPSLATE_TILES, 0.1F, 100);
 
-		conditionalRecipe(consumer, RecipeCategory.DECORATIONS, new AndCondition(KILN_CONFIG, GLAZED_TERRACOTTA_CONFIG), baking(Ingredient.of(Blocks.TERRACOTTA), RecipeCategory.BUILDING_BLOCKS, GLAZED_TERRACOTTA.get(), 0.1F, 100).unlockedBy(getHasName(Blocks.TERRACOTTA), has(Blocks.TERRACOTTA)), new ResourceLocation(Clayworks.MOD_ID, getItemName(GLAZED_TERRACOTTA.get()) + "_from_baking"));
-		baking(consumer, RecipeCategory.DECORATIONS, Blocks.BLACK_TERRACOTTA, Blocks.BLACK_GLAZED_TERRACOTTA, 0.1F, 100);
-		baking(consumer, RecipeCategory.DECORATIONS, Blocks.BLUE_TERRACOTTA, Blocks.BLUE_GLAZED_TERRACOTTA, 0.1F, 100);
-		baking(consumer, RecipeCategory.DECORATIONS, Blocks.BROWN_TERRACOTTA, Blocks.BROWN_GLAZED_TERRACOTTA, 0.1F, 100);
-		baking(consumer, RecipeCategory.DECORATIONS, Blocks.CYAN_TERRACOTTA, Blocks.CYAN_GLAZED_TERRACOTTA, 0.1F, 100);
-		baking(consumer, RecipeCategory.DECORATIONS, Blocks.GRAY_TERRACOTTA, Blocks.GRAY_GLAZED_TERRACOTTA, 0.1F, 100);
-		baking(consumer, RecipeCategory.DECORATIONS, Blocks.GREEN_TERRACOTTA, Blocks.GREEN_GLAZED_TERRACOTTA, 0.1F, 100);
-		baking(consumer, RecipeCategory.DECORATIONS, Blocks.LIGHT_BLUE_TERRACOTTA, Blocks.LIGHT_BLUE_GLAZED_TERRACOTTA, 0.1F, 100);
-		baking(consumer, RecipeCategory.DECORATIONS, Blocks.LIGHT_GRAY_TERRACOTTA, Blocks.LIGHT_GRAY_GLAZED_TERRACOTTA, 0.1F, 100);
-		baking(consumer, RecipeCategory.DECORATIONS, Blocks.LIME_TERRACOTTA, Blocks.LIME_GLAZED_TERRACOTTA, 0.1F, 100);
-		baking(consumer, RecipeCategory.DECORATIONS, Blocks.MAGENTA_TERRACOTTA, Blocks.MAGENTA_GLAZED_TERRACOTTA, 0.1F, 100);
-		baking(consumer, RecipeCategory.DECORATIONS, Blocks.ORANGE_TERRACOTTA, Blocks.ORANGE_GLAZED_TERRACOTTA, 0.1F, 100);
-		baking(consumer, RecipeCategory.DECORATIONS, Blocks.PINK_TERRACOTTA, Blocks.PINK_GLAZED_TERRACOTTA, 0.1F, 100);
-		baking(consumer, RecipeCategory.DECORATIONS, Blocks.PURPLE_TERRACOTTA, Blocks.PURPLE_GLAZED_TERRACOTTA, 0.1F, 100);
-		baking(consumer, RecipeCategory.DECORATIONS, Blocks.RED_TERRACOTTA, Blocks.RED_GLAZED_TERRACOTTA, 0.1F, 100);
-		baking(consumer, RecipeCategory.DECORATIONS, Blocks.WHITE_TERRACOTTA, Blocks.WHITE_GLAZED_TERRACOTTA, 0.1F, 100);
-		baking(consumer, RecipeCategory.DECORATIONS, Blocks.YELLOW_TERRACOTTA, Blocks.YELLOW_GLAZED_TERRACOTTA, 0.1F, 100);
+		bakingRecipe(consumer, new BlueprintAndCondition(KILN_CONFIG, GLAZED_TERRACOTTA_CONFIG), RecipeCategory.DECORATIONS, Blocks.TERRACOTTA, GLAZED_TERRACOTTA.get(), 0.1F, 100, Clayworks.MOD_ID);
+		bakingRecipe(consumer, RecipeCategory.DECORATIONS, Blocks.BLACK_TERRACOTTA, Blocks.BLACK_GLAZED_TERRACOTTA, 0.1F, 100);
+		bakingRecipe(consumer, RecipeCategory.DECORATIONS, Blocks.BLUE_TERRACOTTA, Blocks.BLUE_GLAZED_TERRACOTTA, 0.1F, 100);
+		bakingRecipe(consumer, RecipeCategory.DECORATIONS, Blocks.BROWN_TERRACOTTA, Blocks.BROWN_GLAZED_TERRACOTTA, 0.1F, 100);
+		bakingRecipe(consumer, RecipeCategory.DECORATIONS, Blocks.CYAN_TERRACOTTA, Blocks.CYAN_GLAZED_TERRACOTTA, 0.1F, 100);
+		bakingRecipe(consumer, RecipeCategory.DECORATIONS, Blocks.GRAY_TERRACOTTA, Blocks.GRAY_GLAZED_TERRACOTTA, 0.1F, 100);
+		bakingRecipe(consumer, RecipeCategory.DECORATIONS, Blocks.GREEN_TERRACOTTA, Blocks.GREEN_GLAZED_TERRACOTTA, 0.1F, 100);
+		bakingRecipe(consumer, RecipeCategory.DECORATIONS, Blocks.LIGHT_BLUE_TERRACOTTA, Blocks.LIGHT_BLUE_GLAZED_TERRACOTTA, 0.1F, 100);
+		bakingRecipe(consumer, RecipeCategory.DECORATIONS, Blocks.LIGHT_GRAY_TERRACOTTA, Blocks.LIGHT_GRAY_GLAZED_TERRACOTTA, 0.1F, 100);
+		bakingRecipe(consumer, RecipeCategory.DECORATIONS, Blocks.LIME_TERRACOTTA, Blocks.LIME_GLAZED_TERRACOTTA, 0.1F, 100);
+		bakingRecipe(consumer, RecipeCategory.DECORATIONS, Blocks.MAGENTA_TERRACOTTA, Blocks.MAGENTA_GLAZED_TERRACOTTA, 0.1F, 100);
+		bakingRecipe(consumer, RecipeCategory.DECORATIONS, Blocks.ORANGE_TERRACOTTA, Blocks.ORANGE_GLAZED_TERRACOTTA, 0.1F, 100);
+		bakingRecipe(consumer, RecipeCategory.DECORATIONS, Blocks.PINK_TERRACOTTA, Blocks.PINK_GLAZED_TERRACOTTA, 0.1F, 100);
+		bakingRecipe(consumer, RecipeCategory.DECORATIONS, Blocks.PURPLE_TERRACOTTA, Blocks.PURPLE_GLAZED_TERRACOTTA, 0.1F, 100);
+		bakingRecipe(consumer, RecipeCategory.DECORATIONS, Blocks.RED_TERRACOTTA, Blocks.RED_GLAZED_TERRACOTTA, 0.1F, 100);
+		bakingRecipe(consumer, RecipeCategory.DECORATIONS, Blocks.WHITE_TERRACOTTA, Blocks.WHITE_GLAZED_TERRACOTTA, 0.1F, 100);
+		bakingRecipe(consumer, RecipeCategory.DECORATIONS, Blocks.YELLOW_TERRACOTTA, Blocks.YELLOW_GLAZED_TERRACOTTA, 0.1F, 100);
 	}
 
 	private static void terracottaBricksRecipes(Consumer<FinishedRecipe> consumer, Block terracotta, BlockFamily family, BlockFamily bricksFamily, @Nullable Item dye) {
@@ -160,8 +163,28 @@ public class ClayworksRecipeProvider extends BlueprintRecipeProvider {
 		return new SimpleCookingRecipeBuilder(category, result.asItem() instanceof BlockItem ? CookingBookCategory.BLOCKS : CookingBookCategory.MISC, result, ingredient, experience, cookingTime, ClayworksRecipeSerializers.BAKING_RECIPE.get());
 	}
 
-	protected static void baking(Consumer<FinishedRecipe> consumer, RecipeCategory category, ItemLike ingredient, ItemLike result, float experience, int cookingTime) {
-		conditionalRecipe(consumer, category, KILN_CONFIG, baking(Ingredient.of(ingredient), category, result, experience, cookingTime).unlockedBy(getHasName(ingredient), has(ingredient)), new ResourceLocation(Clayworks.MOD_ID, getItemName(result) + "_from_baking"));
+	public static void bakingRecipe(Consumer<FinishedRecipe> consumer, RecipeCategory category, TagKey<Item> ingredient, String hasIngredient, ItemLike result, float experience, int cookingTime) {
+		bakingRecipe(consumer, category, ingredient, hasIngredient, result, experience, cookingTime, Clayworks.MOD_ID);
+	}
+
+	public static void bakingRecipe(Consumer<FinishedRecipe> consumer, RecipeCategory category, ItemLike ingredient, ItemLike result, float experience, int cookingTime) {
+		bakingRecipe(consumer, category, ingredient, result, experience, cookingTime, Clayworks.MOD_ID);
+	}
+
+	public static void bakingRecipe(Consumer<FinishedRecipe> consumer, RecipeCategory category, TagKey<Item> ingredient, String hasIngredient, ItemLike result, float experience, int cookingTime, String modid) {
+		bakingRecipe(consumer, modid.equals(Clayworks.MOD_ID) ? KILN_CONFIG : KILN_COMPAT, category, ingredient, hasIngredient, result, experience, cookingTime, modid);
+	}
+
+	public static void bakingRecipe(Consumer<FinishedRecipe> consumer, RecipeCategory category, ItemLike ingredient, ItemLike result, float experience, int cookingTime, String modid) {
+		bakingRecipe(consumer, modid.equals(Clayworks.MOD_ID) ? KILN_CONFIG : KILN_COMPAT, category, ingredient, result, experience, cookingTime, modid);
+	}
+
+	public static void bakingRecipe(Consumer<FinishedRecipe> consumer, ICondition condition, RecipeCategory category, TagKey<Item> ingredient, String hasIngredient, ItemLike result, float experience, int cookingTime, String modid) {
+		conditionalRecipe(consumer, category, condition, baking(Ingredient.of(ingredient), category, result, experience, cookingTime).unlockedBy(hasIngredient, has(ingredient)), new ResourceLocation(modid, getItemName(result) + "_from_baking"));
+	}
+
+	public static void bakingRecipe(Consumer<FinishedRecipe> consumer, ICondition condition, RecipeCategory category, ItemLike ingredient, ItemLike result, float experience, int cookingTime, String modid) {
+		conditionalRecipe(consumer, category, condition, baking(Ingredient.of(ingredient), category, result, experience, cookingTime).unlockedBy(getHasName(ingredient), has(ingredient)), new ResourceLocation(modid, getItemName(result) + "_from_baking"));
 	}
 
 	protected static void generateConditionalRecipes(Consumer<FinishedRecipe> consumer, BlockFamily family, ICondition condition) {
