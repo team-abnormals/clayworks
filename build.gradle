@@ -108,3 +108,18 @@ jar {
         ])
     }
 }
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            artifact jar
+        }
+    }
+    repositories {
+        maven {
+            name = "abnormals"
+            url = "https://maven.teamabnormals.com"
+            credentials(PasswordCredentials)
+        }
+    }
+}

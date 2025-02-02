@@ -1,0 +1,56 @@
+{
+  "sources": [
+    {
+      "type": "blueprint:paletted_permutations",
+      "palette_key": "clayworks:entity/decorated_pot_color_palettes/decorated_pot_palette",
+      "permutations": {
+        "black": "clayworks:entity/decorated_pot_color_palettes/black",
+        "blue": "clayworks:entity/decorated_pot_color_palettes/blue",
+        "brown": "clayworks:entity/decorated_pot_color_palettes/brown",
+        "cyan": "clayworks:entity/decorated_pot_color_palettes/cyan",
+        "gray": "clayworks:entity/decorated_pot_color_palettes/gray",
+        "green": "clayworks:entity/decorated_pot_color_palettes/green",
+        "light_blue": "clayworks:entity/decorated_pot_color_palettes/light_blue",
+        "light_gray": "clayworks:entity/decorated_pot_color_palettes/light_gray",
+        "lime": "clayworks:entity/decorated_pot_color_palettes/lime",
+        "magenta": "clayworks:entity/decorated_pot_color_palettes/magenta",
+        "orange": "clayworks:entity/decorated_pot_color_palettes/orange",
+        "pink": "clayworks:entity/decorated_pot_color_palettes/pink",
+        "purple": "clayworks:entity/decorated_pot_color_palettes/purple",
+        "red": "clayworks:entity/decorated_pot_color_palettes/red",
+        "white": "clayworks:entity/decorated_pot_color_palettes/white",
+        "yellow": "clayworks:entity/decorated_pot_color_palettes/yellow"
+      },
+      "sources": [
+        {
+          "type": "minecraft:directory",
+          "prefix": "entity/decorated_pot/",
+          "source": "entity/decorated_pot"
+        }
+      ]
+    },
+    {
+      "type": "blueprint:paletted_permutations",
+      "palette_key": "clayworks:entity/decorated_pot_trim_palettes/trim_palette",
+      "permutations": {
+        "amethyst": "clayworks:entity/decorated_pot_trim_palettes/amethyst",
+        "copper": "clayworks:entity/decorated_pot_trim_palettes/copper",
+        "diamond": "clayworks:entity/decorated_pot_trim_palettes/diamond",
+        "emerald": "clayworks:entity/decorated_pot_trim_palettes/emerald",
+        "gold": "clayworks:entity/decorated_pot_trim_palettes/gold",
+        "iron": "clayworks:entity/decorated_pot_trim_palettes/iron",
+        "lapis": "clayworks:entity/decorated_pot_trim_palettes/lapis",
+        "netherite": "clayworks:entity/decorated_pot_trim_palettes/netherite",
+        "quartz": "clayworks:entity/decorated_pot_trim_palettes/quartz",
+        "redstone": "clayworks:entity/decorated_pot_trim_palettes/redstone"
+      },
+      "sources": [
+        {
+          "type": "minecraft:directory",
+          "prefix": "entity/decorated_pot_trim_patterns/",
+          "source": "entity/decorated_pot_trim_patterns"
+        }
+      ]
+    }
+  ]
+}

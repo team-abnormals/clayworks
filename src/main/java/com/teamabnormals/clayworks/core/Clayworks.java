@@ -6,6 +6,7 @@ import com.teamabnormals.clayworks.client.splashes.WoodworksSplash;
 import com.teamabnormals.clayworks.core.data.client.ClayworksBlockStateProvider;
 import com.teamabnormals.clayworks.core.data.client.ClayworksLanguageProvider;
 import com.teamabnormals.clayworks.core.data.client.ClayworksSplashProvider;
+import com.teamabnormals.clayworks.core.data.client.ClayworksSpriteSourceProvider;
 import com.teamabnormals.clayworks.core.data.server.ClayworksLootTableProvider;
 import com.teamabnormals.clayworks.core.data.server.ClayworksRecipeProvider;
 import com.teamabnormals.clayworks.core.data.server.modifiers.ClayworksLootModifierProvider;
@@ -103,6 +104,7 @@ public class Clayworks {
 		generator.addProvider(client, new ClayworksSplashProvider(output));
 		generator.addProvider(client, new ClayworksBlockStateProvider(output, helper));
 		generator.addProvider(client, new ClayworksLanguageProvider(output));
+		generator.addProvider(client, new ClayworksSpriteSourceProvider(output, helper));
 
 		generator.addProvider(client, new GalleryItemModelProvider(MOD_ID, output, helper));
 		generator.addProvider(client, new GalleryAssetsRemolderProvider(MOD_ID, output, provider));
