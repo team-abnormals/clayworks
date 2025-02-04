@@ -42,7 +42,11 @@
         "lapis": "clayworks:entity/decorated_pot_trim_palettes/lapis",
         "netherite": "clayworks:entity/decorated_pot_trim_palettes/netherite",
         "quartz": "clayworks:entity/decorated_pot_trim_palettes/quartz",
-        "redstone": "clayworks:entity/decorated_pot_trim_palettes/redstone"
+        "redstone": "clayworks:entity/decorated_pot_trim_palettes/redstone",
+        "caverns_and_chasms_necromium": "clayworks:entity/decorated_pot_trim_palettes/necromium",
+        "caverns_and_chasms_sanguine": "clayworks:entity/decorated_pot_trim_palettes/sanguine",
+        "caverns_and_chasms_silver": "clayworks:entity/decorated_pot_trim_palettes/silver",
+        "caverns_and_chasms_spinel": "clayworks:entity/decorated_pot_trim_palettes/spinel"
       },
       "sources": [
         {
