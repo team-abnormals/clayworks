@@ -18,8 +18,7 @@ import com.teamabnormals.clayworks.core.registry.*;
 import com.teamabnormals.clayworks.core.registry.ClayworksRecipes.ClayworksRecipeSerializers;
 import com.teamabnormals.clayworks.core.registry.ClayworksRecipes.ClayworksRecipeTypes;
 import com.teamabnormals.clayworks.core.registry.helper.ClayworksBlockSubRegistryHelper;
-import com.teamabnormals.gallery.core.data.client.GalleryAssetsRemolderProvider;
-import com.teamabnormals.gallery.core.data.client.GalleryItemModelProvider;
+import com.teamabnormals.clayworks.integration.gallery.ClayworksPaintingIcons;
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
@@ -106,7 +105,6 @@ public class Clayworks {
 		generator.addProvider(client, new ClayworksLanguageProvider(output));
 		generator.addProvider(client, new ClayworksSpriteSourceProvider(output, helper));
 
-		generator.addProvider(client, new GalleryItemModelProvider(MOD_ID, output, helper));
-		generator.addProvider(client, new GalleryAssetsRemolderProvider(MOD_ID, output, provider));
+		ClayworksPaintingIcons.addGalleryProviders(event);
 	}
 }
