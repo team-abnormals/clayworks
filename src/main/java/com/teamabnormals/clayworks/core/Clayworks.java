@@ -18,7 +18,8 @@ import com.teamabnormals.clayworks.core.registry.*;
 import com.teamabnormals.clayworks.core.registry.ClayworksRecipes.ClayworksRecipeSerializers;
 import com.teamabnormals.clayworks.core.registry.ClayworksRecipes.ClayworksRecipeTypes;
 import com.teamabnormals.clayworks.core.registry.helper.ClayworksBlockSubRegistryHelper;
-import com.teamabnormals.clayworks.integration.gallery.ClayworksPaintingIcons;
+import com.teamabnormals.gallery.core.data.client.GalleryAssetsRemolderProvider;
+import com.teamabnormals.gallery.core.data.client.GalleryItemModelProvider;
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
@@ -30,6 +31,7 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
@@ -105,6 +107,9 @@ public class Clayworks {
 		generator.addProvider(client, new ClayworksLanguageProvider(output));
 		generator.addProvider(client, new ClayworksSpriteSourceProvider(output, helper));
 
-		ClayworksPaintingIcons.addGalleryProviders(event);
+		if (ModList.get().isLoaded("gallery")) {
+			generator.addProvider(client, new GalleryItemModelProvider(Clayworks.MOD_ID, output, helper));
+			generator.addProvider(client, new GalleryAssetsRemolderProvider(Clayworks.MOD_ID, output, provider));
+		}
 	}
 }
