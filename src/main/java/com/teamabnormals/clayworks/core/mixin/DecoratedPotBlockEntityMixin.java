@@ -1,7 +1,7 @@
 package com.teamabnormals.clayworks.core.mixin;
 
+import com.teamabnormals.clayworks.common.DecoratedPotTrimPattern;
 import com.teamabnormals.clayworks.common.block.TrimmedPot;
-import com.teamabnormals.clayworks.core.Clayworks;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
@@ -21,7 +21,7 @@ public class DecoratedPotBlockEntityMixin implements TrimmedPot {
 	private ResourceLocation clayworks$trim = new ResourceLocation("air");
 
 	@Unique
-	private ResourceLocation clayworks$trimPattern = new ResourceLocation(Clayworks.MOD_ID, "base");
+	private ResourceLocation clayworks$trimPattern = DecoratedPotTrimPattern.BASE.location();
 
 	@Override
 	@Nullable
@@ -42,13 +42,17 @@ public class DecoratedPotBlockEntityMixin implements TrimmedPot {
 
 	@Override
 	public void setTrimPattern(ResourceLocation name) {
-		this.clayworks$trimPattern = name != null ? name : new ResourceLocation(Clayworks.MOD_ID, "base");
+		this.clayworks$trimPattern = name != null ? name : DecoratedPotTrimPattern.BASE.location();
 	}
 
 	@Inject(method = "saveAdditional", at = @At("TAIL"))
 	private void saveAdditional(CompoundTag tag, CallbackInfo ci) {
-		tag.putString("trim", this.clayworks$trim.toString());
-		tag.putString("trim_pattern", this.clayworks$trimPattern.toString());
+		if (this.clayworks$trim != null) {
+			tag.putString("trim", this.clayworks$trim.toString());
+		}
+		if (this.clayworks$trimPattern != null) {
+			tag.putString("trim_pattern", this.clayworks$trimPattern.toString());
+		}
 	}
 
 	@Inject(method = "load", at = @At("TAIL"))

@@ -7,6 +7,7 @@ import com.teamabnormals.clayworks.core.data.client.ClayworksBlockStateProvider;
 import com.teamabnormals.clayworks.core.data.client.ClayworksLanguageProvider;
 import com.teamabnormals.clayworks.core.data.client.ClayworksSplashProvider;
 import com.teamabnormals.clayworks.core.data.client.ClayworksSpriteSourceProvider;
+import com.teamabnormals.clayworks.core.data.server.ClayworksDatapackBuiltinEntriesProvider;
 import com.teamabnormals.clayworks.core.data.server.ClayworksLootTableProvider;
 import com.teamabnormals.clayworks.core.data.server.ClayworksRecipeProvider;
 import com.teamabnormals.clayworks.core.data.server.modifiers.ClayworksLootModifierProvider;
@@ -62,6 +63,8 @@ public class Clayworks {
 		ClayworksParticleTypes.PARTICLE_TYPES.register(bus);
 		ClayworksPaintingVariants.PAINTING_VARIANTS.register(bus);
 
+		bus.addListener(ClayworksRegistries::registerRegistries);
+
 		bus.addListener(this::commonSetup);
 		bus.addListener(this::clientSetup);
 		bus.addListener(this::dataSetup);
@@ -93,6 +96,10 @@ public class Clayworks {
 		ExistingFileHelper helper = event.getExistingFileHelper();
 
 		boolean server = event.includeServer();
+		ClayworksDatapackBuiltinEntriesProvider datapackEntries = new ClayworksDatapackBuiltinEntriesProvider(output, provider);
+		generator.addProvider(server, datapackEntries);
+		provider = datapackEntries.getRegistryProvider();
+
 		ClayworksBlockTagsProvider blockTags = new ClayworksBlockTagsProvider(output, provider, helper);
 		generator.addProvider(server, blockTags);
 		generator.addProvider(server, new ClayworksItemTagsProvider(output, provider, blockTags.contentsGetter(), helper));

@@ -7,6 +7,8 @@ import com.teamabnormals.clayworks.core.Clayworks;
 import com.teamabnormals.clayworks.core.ClayworksConfig;
 import com.teamabnormals.clayworks.core.registry.ClayworksBlocks;
 import com.teamabnormals.clayworks.core.registry.ClayworksMaterials;
+import com.teamabnormals.clayworks.core.registry.ClayworksRegistries;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -88,7 +90,9 @@ public abstract class DecoratedPotRendererMixin {
 
 			if (entity instanceof TrimmedPot trimmedPot && trimmedPot.getTrim() != null && !trimmedPot.getTrim().equals(new ResourceLocation("air"))) {
 				ResourceLocation trimKey = trimmedPot.getTrim();
-				Material trimMaterial = ClayworksMaterials.createTrimMaterial(trimmedPot.getTrimPattern(), (trimKey.getNamespace() + "_" + trimKey.getPath()).replace("minecraft_", ""));
+
+				ResourceLocation trimPattern = Minecraft.getInstance().level.registryAccess().registryOrThrow(ClayworksRegistries.DECORATED_POT_TRIM_PATTERN).get(trimmedPot.getTrimPattern()).texture();
+				Material trimMaterial = ClayworksMaterials.createTrimMaterial(trimPattern, (trimKey.getNamespace() + "_" + trimKey.getPath()).replace("minecraft_", ""));
 				this.frontSide.render(poseStack, trimMaterial.buffer(buffer, RenderType::entityCutout), p_273407_, p_273059_);
 				this.backSide.render(poseStack, trimMaterial.buffer(buffer, RenderType::entityCutout), p_273407_, p_273059_);
 				this.leftSide.render(poseStack, trimMaterial.buffer(buffer, RenderType::entityCutout), p_273407_, p_273059_);

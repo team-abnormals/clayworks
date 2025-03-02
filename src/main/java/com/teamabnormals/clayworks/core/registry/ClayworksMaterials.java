@@ -34,7 +34,7 @@ public class ClayworksMaterials {
 	}
 
 	public static Material createTrimMaterial(ResourceLocation location, String trimMaterial) {
-		return new Material(Sheets.DECORATED_POT_SHEET, location.withPrefix("entity/decorated_pot_trim_patterns/").withSuffix("_" + trimMaterial));
+		return new Material(Sheets.DECORATED_POT_SHEET, location.withSuffix("_" + trimMaterial));
 	}
 
 	@Nullable
