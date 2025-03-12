@@ -1,5 +1,7 @@
 package com.teamabnormals.clayworks.core.mixin;
 
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.teamabnormals.clayworks.common.DecoratedPotTrim;
 import com.teamabnormals.clayworks.common.block.TrimmedPot;
 import com.teamabnormals.clayworks.core.registry.ClayworksDataComponents;
@@ -7,6 +9,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.core.component.DataComponentMap.Builder;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.DecoratedPotBlockEntity;
@@ -63,5 +67,10 @@ public abstract class DecoratedPotBlockEntityMixin extends BlockEntity implement
 	@Inject(method = "removeComponentsFromTag", at = @At("TAIL"))
 	private void removeComponentsFromTag(CompoundTag tag, CallbackInfo ci) {
 		tag.remove("trim");
+	}
+
+	@WrapOperation(method = "getPotAsItem", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/Item;getDefaultInstance()Lnet/minecraft/world/item/ItemStack;"))
+	private ItemStack getPotAsItem(Item item, Operation<ItemStack> original) {
+		return new ItemStack(this.getBlockState().getBlock().asItem());
 	}
 }
