@@ -1,0 +1,38 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "clayworks:config",
+      "value": "terracotta_bricks"
+    }
+  ],
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_pink_terracotta_bricks": {
+      "conditions": {
+        "items": [
+          {
+            "items": "clayworks:pink_terracotta_bricks"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "clayworks:pink_terracotta_brick_slab_from_pink_terracotta_bricks_stonecutting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_pink_terracotta_bricks"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "clayworks:pink_terracotta_brick_slab_from_pink_terracotta_bricks_stonecutting"
+    ]
+  }
+}

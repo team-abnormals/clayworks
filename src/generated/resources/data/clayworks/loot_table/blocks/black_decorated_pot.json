@@ -1,0 +1,63 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:dynamic",
+          "conditions": [
+            {
+              "block": "clayworks:black_decorated_pot",
+              "condition": "minecraft:block_state_property",
+              "properties": {
+                "cracked": "true"
+              }
+            }
+          ],
+          "name": "clayworks:trim"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:alternatives",
+          "children": [
+            {
+              "type": "minecraft:dynamic",
+              "conditions": [
+                {
+                  "block": "clayworks:black_decorated_pot",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "cracked": "true"
+                  }
+                }
+              ],
+              "name": "minecraft:sherds"
+            },
+            {
+              "type": "minecraft:item",
+              "functions": [
+                {
+                  "function": "minecraft:copy_components",
+                  "include": [
+                    "minecraft:pot_decorations",
+                    "clayworks:pot_trims"
+                  ],
+                  "source": "block_entity"
+                }
+              ],
+              "name": "clayworks:black_decorated_pot"
+            }
+          ]
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "clayworks:blocks/black_decorated_pot"
+}

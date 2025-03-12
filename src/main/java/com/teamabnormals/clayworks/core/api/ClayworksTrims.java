@@ -13,10 +13,10 @@ import java.util.HashMap;
 import java.util.List;
 
 public class ClayworksTrims {
-	public static final ResourceLocation DECORATED_POT_ATLAS = new ResourceLocation("decorated_pot");
+	public static final ResourceLocation DECORATED_POT_ATLAS = ResourceLocation.withDefaultNamespace("decorated_pot");
 
-	public static final ResourceLocation COLOR_PALETTE_KEY = new ResourceLocation(Clayworks.MOD_ID, "entity/decorated_pot_color_palettes/decorated_pot_palette");
-	public static final ResourceLocation TRIM_PALETTE_KEY = new ResourceLocation(Clayworks.MOD_ID, "entity/decorated_pot_trim_palettes/trim_palette");
+	public static final ResourceLocation COLOR_PALETTE_KEY = Clayworks.location("entity/decorated_pot_color_palettes/decorated_pot_palette");
+	public static final ResourceLocation TRIM_PALETTE_KEY = Clayworks.location("entity/decorated_pot_trim_palettes/trim_palette");
 
 	public static BlueprintPalettedPermutations colorPermutations() {
 		return new BlueprintPalettedPermutations(Either.left(List.of(
@@ -28,7 +28,7 @@ public class ClayworksTrims {
 		HashMap<String, ResourceLocation> permutations = new HashMap<>();
 		for (DyeColor key : DyeColor.values()) {
 			String name = key.getName();
-			permutations.put(name, new ResourceLocation(Clayworks.MOD_ID, "entity/decorated_pot_color_palettes/" + name));
+			permutations.put(name, Clayworks.location("entity/decorated_pot_color_palettes/" + name));
 		}
 		return permutations;
 	}
@@ -49,7 +49,7 @@ public class ClayworksTrims {
 
 			if (location.getNamespace().equals("minecraft")) {
 				name = location.getPath();
-				location = new ResourceLocation(Clayworks.MOD_ID, name);
+				location = Clayworks.location(name);
 			}
 
 			permutations.put(name, location.withPath(string -> "entity/decorated_pot_trim_palettes/" + string));

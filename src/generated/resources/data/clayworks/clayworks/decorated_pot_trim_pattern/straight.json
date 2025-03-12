@@ -1,5 +1,6 @@
 {
   "asset_id": "clayworks:entity/decorated_pot_trim_patterns/straight",
+  "decal": false,
   "description": {
     "translate": "decorated_pot_trim_pattern.clayworks.straight"
   }

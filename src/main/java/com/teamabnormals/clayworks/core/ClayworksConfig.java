@@ -1,8 +1,8 @@
 package com.teamabnormals.clayworks.core;
 
 import com.teamabnormals.blueprint.core.annotations.ConfigKey;
-import net.minecraftforge.common.ForgeConfigSpec;
-import net.minecraftforge.common.ForgeConfigSpec.BooleanValue;
+import net.neoforged.neoforge.common.ModConfigSpec;
+import net.neoforged.neoforge.common.ModConfigSpec.BooleanValue;
 import org.apache.commons.lang3.tuple.Pair;
 
 public class ClayworksConfig {
@@ -25,7 +25,7 @@ public class ClayworksConfig {
 		@ConfigKey("decorated_pot_trims")
 		public final BooleanValue decoratedPotTrims;
 
-		public Common(ForgeConfigSpec.Builder builder) {
+		public Common(ModConfigSpec.Builder builder) {
 			builder.push("blocks");
 			this.kiln = builder.define("Kiln", true);
 			this.chiseledBricks = builder.define("Chiseled bricks", true);
@@ -41,11 +41,11 @@ public class ClayworksConfig {
 		}
 	}
 
-	public static final ForgeConfigSpec COMMON_SPEC;
+	public static final ModConfigSpec COMMON_SPEC;
 	public static final Common COMMON;
 
 	static {
-		Pair<Common, ForgeConfigSpec> commonSpecPair = new ForgeConfigSpec.Builder().configure(Common::new);
+		Pair<Common, ModConfigSpec> commonSpecPair = new ModConfigSpec.Builder().configure(Common::new);
 		COMMON_SPEC = commonSpecPair.getRight();
 		COMMON = commonSpecPair.getLeft();
 	}

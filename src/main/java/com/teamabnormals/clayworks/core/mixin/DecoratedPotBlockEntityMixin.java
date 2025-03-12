@@ -1,12 +1,16 @@
 package com.teamabnormals.clayworks.core.mixin;
 
-import com.teamabnormals.clayworks.common.DecoratedPotTrimPattern;
+import com.teamabnormals.clayworks.common.DecoratedPotTrim;
 import com.teamabnormals.clayworks.common.block.TrimmedPot;
+import com.teamabnormals.clayworks.core.registry.ClayworksDataComponents;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup.Provider;
+import net.minecraft.core.component.DataComponentMap.Builder;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.DecoratedPotBlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -14,69 +18,50 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import javax.annotation.Nullable;
+import java.util.Optional;
 
 @Mixin(DecoratedPotBlockEntity.class)
-public class DecoratedPotBlockEntityMixin implements TrimmedPot {
+public abstract class DecoratedPotBlockEntityMixin extends BlockEntity implements TrimmedPot {
 	@Unique
-	private ResourceLocation clayworks$trim = new ResourceLocation("air");
+	private Optional<DecoratedPotTrim> clayworks$trim = Optional.empty();
 
-	@Unique
-	private ResourceLocation clayworks$trimPattern = DecoratedPotTrimPattern.BASE.location();
+	public DecoratedPotBlockEntityMixin(BlockEntityType<?> type, BlockPos pos, BlockState blockState) {
+		super(type, pos, blockState);
+	}
 
 	@Override
 	@Nullable
-	public ResourceLocation getTrim() {
+	public Optional<DecoratedPotTrim> getTrim() {
 		return this.clayworks$trim;
 	}
 
 	@Override
-	public void setTrim(ResourceLocation name) {
-		this.clayworks$trim = name != null ? name : new ResourceLocation("air");
-	}
-
-	@Override
-	@Nullable
-	public ResourceLocation getTrimPattern() {
-		return this.clayworks$trimPattern;
-	}
-
-	@Override
-	public void setTrimPattern(ResourceLocation name) {
-		this.clayworks$trimPattern = name != null ? name : DecoratedPotTrimPattern.BASE.location();
+	public void setTrim(DecoratedPotTrim trim) {
+		this.clayworks$trim = trim != null ? Optional.of(trim) : Optional.empty();
 	}
 
 	@Inject(method = "saveAdditional", at = @At("TAIL"))
-	private void saveAdditional(CompoundTag tag, CallbackInfo ci) {
-		if (this.clayworks$trim != null) {
-			tag.putString("trim", this.clayworks$trim.toString());
-		}
-		if (this.clayworks$trimPattern != null) {
-			tag.putString("trim_pattern", this.clayworks$trimPattern.toString());
-		}
+	private void saveAdditional(CompoundTag tag, Provider registries, CallbackInfo ci) {
+		this.clayworks$trim.ifPresent(trim -> trim.save(registries, tag));
 	}
 
-	@Inject(method = "load", at = @At("TAIL"))
-	private void load(CompoundTag tag, CallbackInfo ci) {
-		this.setTag(tag);
+	@Inject(method = "loadAdditional", at = @At("TAIL"))
+	private void loadAdditional(CompoundTag tag, Provider registries, CallbackInfo ci) {
+		this.clayworks$trim = DecoratedPotTrim.load(registries, tag);
 	}
 
-	@Inject(method = "setFromItem", at = @At("TAIL"))
-	private void setFromItem(ItemStack stack, CallbackInfo ci) {
-		this.setTag(BlockItem.getBlockEntityData(stack));
+	@Inject(method = "collectImplicitComponents", at = @At("TAIL"))
+	private void collectImplicitComponents(Builder components, CallbackInfo ci) {
+		this.clayworks$trim.ifPresent(trim -> components.set(ClayworksDataComponents.POT_TRIM, trim));
 	}
 
-	@Unique
-	private void setTag(CompoundTag tag) {
-		if (tag != null && tag.contains("trim")) {
-			this.setTrim(new ResourceLocation(tag.getString("trim")));
-		} else {
-			this.setTrim(null);
-		}
+	@Inject(method = "applyImplicitComponents", at = @At("TAIL"))
+	private void applyImplicitComponents(DataComponentInput componentInput, CallbackInfo ci) {
+		this.clayworks$trim = Optional.ofNullable(componentInput.get(ClayworksDataComponents.POT_TRIM));
+	}
 
-		if (tag != null && tag.contains("trim_pattern")) {
-			this.setTrimPattern(new ResourceLocation(tag.getString("trim_pattern")));
-		} else {
-			this.setTrimPattern(null);
-		}
+	@Inject(method = "removeComponentsFromTag", at = @At("TAIL"))
+	private void removeComponentsFromTag(CompoundTag tag, CallbackInfo ci) {
+		tag.remove("trim");
 	}
 }

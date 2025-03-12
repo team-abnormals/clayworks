@@ -1,0 +1,16 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "clayworks:config",
+      "value": "chiseled_bricks"
+    }
+  ],
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "minecraft:bricks"
+  },
+  "result": {
+    "count": 1,
+    "id": "clayworks:chiseled_bricks"
+  }
+}

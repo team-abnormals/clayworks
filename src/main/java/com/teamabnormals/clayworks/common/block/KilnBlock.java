@@ -1,5 +1,6 @@
 package com.teamabnormals.clayworks.common.block;
 
+import com.mojang.serialization.MapCodec;
 import com.teamabnormals.clayworks.common.block.entity.KilnBlockEntity;
 import com.teamabnormals.clayworks.core.registry.ClayworksBlockEntityTypes;
 import com.teamabnormals.clayworks.core.registry.ClayworksParticleTypes;
@@ -17,8 +18,8 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 
 import javax.annotation.Nullable;
 
@@ -28,8 +29,13 @@ public class KilnBlock extends AbstractFurnaceBlock {
 	}
 
 	@Override
+	protected MapCodec<? extends AbstractFurnaceBlock> codec() {
+		return null;
+	}
+
+	@Override
 	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-		return new KilnBlockEntity(pos, state);
+		return ClayworksBlockEntityTypes.KILN.get().create(pos, state);
 	}
 
 	@Nullable

@@ -1,0 +1,28 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "blueprint:and",
+      "values": [
+        {
+          "type": "clayworks:config",
+          "value": "kiln"
+        },
+        {
+          "type": "clayworks:config",
+          "value": "glazed_terracotta"
+        }
+      ]
+    }
+  ],
+  "type": "clayworks:baking",
+  "category": "blocks",
+  "cookingtime": 100,
+  "experience": 0.1,
+  "ingredient": {
+    "item": "minecraft:terracotta"
+  },
+  "result": {
+    "count": 1,
+    "id": "clayworks:glazed_terracotta"
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "clayworks:config",
+      "value": "terracotta_bricks"
+    }
+  ],
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_green_terracotta_bricks": {
+      "conditions": {
+        "items": [
+          {
+            "items": "clayworks:green_terracotta_bricks"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "clayworks:green_terracotta_brick_stairs"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_green_terracotta_bricks"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "clayworks:green_terracotta_brick_stairs"
+    ]
+  }
+}

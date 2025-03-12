@@ -1,136 +1,107 @@
 package com.teamabnormals.clayworks.integration.jei;
 
+import com.mojang.serialization.Codec;
 import com.teamabnormals.clayworks.common.item.crafting.BakingRecipe;
 import com.teamabnormals.clayworks.core.Clayworks;
 import com.teamabnormals.clayworks.core.registry.ClayworksBlocks;
 import com.teamabnormals.clayworks.core.registry.ClayworksRecipes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
-import mezz.jei.api.gui.drawable.IDrawable;
-import mezz.jei.api.gui.drawable.IDrawableAnimated;
-import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
+import mezz.jei.api.gui.placement.HorizontalAlignment;
+import mezz.jei.api.gui.placement.VerticalAlignment;
 import mezz.jei.api.gui.widgets.IRecipeExtrasBuilder;
-import mezz.jei.api.gui.widgets.IRecipeWidget;
+import mezz.jei.api.helpers.ICodecHelper;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
-import mezz.jei.api.recipe.RecipeType;
-import mezz.jei.api.recipe.category.IRecipeCategory;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
+import mezz.jei.api.recipe.IRecipeManager;
+import mezz.jei.api.recipe.RecipeIngredientRole;
+import mezz.jei.api.recipe.category.AbstractRecipeCategory;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.crafting.RecipeHolder;
 
-import static mezz.jei.api.recipe.RecipeIngredientRole.*;
-
-public class BakingCategory implements IRecipeCategory<BakingRecipe> {
+public class BakingCategory extends AbstractRecipeCategory<RecipeHolder<BakingRecipe>> {
 	public static final String TRANSLATION = "gui." + Clayworks.MOD_ID + ".category.baking";
 
-	private final IDrawable background;
-	private final IDrawable icon;
-	private final Component localizedName;
-	protected final IGuiHelper guiHelper;
-	protected final int regularCookTime;
-	protected final IDrawableAnimated animatedFlame;
+	protected final int regularCookTime = 100;
 
 	public BakingCategory(IGuiHelper guiHelper) {
-		this(guiHelper, TRANSLATION, 100, 82, 54);
-	}
-
-	public BakingCategory(IGuiHelper guiHelper, String translationKey, int regularCookTime, int width, int height) {
-		this.background = guiHelper.createBlankDrawable(width, height);
-		this.regularCookTime = regularCookTime;
-		this.icon = guiHelper.createDrawableItemLike(ClayworksBlocks.KILN.get());
-		this.localizedName = Component.translatable(translationKey);
-		this.guiHelper = guiHelper;
-		this.animatedFlame = guiHelper.createAnimatedRecipeFlame(300);
+		super(ClayworksPlugin.BAKING, Component.translatable(TRANSLATION), guiHelper.createDrawableItemLike(ClayworksBlocks.KILN.get()), 82, 54);
 	}
 
 	@Override
-	public IDrawable getBackground() {
-		return background;
-	}
+	public void setRecipe(IRecipeLayoutBuilder builder, RecipeHolder<BakingRecipe> recipeHolder, IFocusGroup focuses) {
+		BakingRecipe recipe = recipeHolder.value();
 
-	@Override
-	public IDrawable getIcon() {
-		return icon;
-	}
-
-	@Override
-	public void draw(BakingRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
-		animatedFlame.draw(guiGraphics, 1, 20);
-		drawExperience(recipe, guiGraphics, 0);
-		drawCookTime(recipe, guiGraphics, 45);
-	}
-
-	protected void drawExperience(BakingRecipe recipe, GuiGraphics guiGraphics, int y) {
-		float experience = recipe.getExperience();
-		if (experience > 0) {
-			Component experienceString = Component.translatable("gui.jei.category.smelting.experience", experience);
-			Minecraft minecraft = Minecraft.getInstance();
-			Font fontRenderer = minecraft.font;
-			int stringWidth = fontRenderer.width(experienceString);
-			guiGraphics.drawString(fontRenderer, experienceString, getWidth() - stringWidth, y, 0xFF808080, false);
-		}
-	}
-
-	protected void drawCookTime(BakingRecipe recipe, GuiGraphics guiGraphics, int y) {
-		int cookTime = recipe.getCookingTime();
-		if (cookTime > 0) {
-			int cookTimeSeconds = cookTime / 20;
-			Component timeString = Component.translatable("gui.jei.category.smelting.time.seconds", cookTimeSeconds);
-			Minecraft minecraft = Minecraft.getInstance();
-			Font fontRenderer = minecraft.font;
-			int stringWidth = fontRenderer.width(timeString);
-			guiGraphics.drawString(fontRenderer, timeString, getWidth() - stringWidth, y, 0xFF808080, false);
-		}
-	}
-
-
-	@Override
-	public void setRecipe(IRecipeLayoutBuilder builder, BakingRecipe recipe, IFocusGroup focuses) {
-		builder.addSlot(INPUT, 1, 1)
+		builder.addInputSlot(1, 1)
 				.setStandardSlotBackground()
-				.addIngredients(recipe.getIngredients().get(0));
+				.addIngredients(recipe.getIngredients().getFirst());
 
-		builder.addSlot(RENDER_ONLY, 1, 37)
+		builder.addSlot(RecipeIngredientRole.RENDER_ONLY, 1, 37)
 				.setStandardSlotBackground();
 
-		builder.addSlot(OUTPUT, 61, 19)
+		builder.addOutputSlot(61, 19)
 				.setOutputSlotBackground()
 				.addItemStack(ClayworksRecipes.getResultItem(recipe));
 	}
 
 	@Override
-	public void createRecipeExtras(IRecipeExtrasBuilder acceptor, BakingRecipe recipe, IFocusGroup focuses) {
-		acceptor.addWidget(createCookingArrowWidget(recipe, 26, 17));
-	}
-
-	@Override
-	public boolean isHandled(BakingRecipe recipe) {
-		return !recipe.isSpecial();
-	}
-
-	@Override
-	public RecipeType<BakingRecipe> getRecipeType() {
-		return ClayworksPlugin.BAKING;
-	}
-
-	@Override
-	public Component getTitle() {
-		return this.localizedName;
-	}
-
-	@Override
-	public ResourceLocation getRegistryName(BakingRecipe recipe) {
-		return recipe.getId();
-	}
-
-	protected IRecipeWidget createCookingArrowWidget(BakingRecipe recipe, int x, int y) {
+	public void createRecipeExtras(IRecipeExtrasBuilder builder, RecipeHolder<BakingRecipe> recipeHolder, IFocusGroup focuses) {
+		BakingRecipe recipe = recipeHolder.value();
 		int cookTime = recipe.getCookingTime();
 		if (cookTime <= 0) {
 			cookTime = regularCookTime;
 		}
-		IDrawableAnimated recipeArrow = guiHelper.createAnimatedRecipeArrow(cookTime);
-		return guiHelper.createWidgetFromDrawable(recipeArrow, x, y);
+		builder.addAnimatedRecipeArrow(cookTime)
+				.setPosition(26, 17);
+		builder.addAnimatedRecipeFlame(300)
+				.setPosition(1, 20);
+
+		addExperience(builder, recipeHolder);
+		addCookTime(builder, recipeHolder);
+	}
+
+	protected void addExperience(IRecipeExtrasBuilder builder, RecipeHolder<BakingRecipe> recipeHolder) {
+		BakingRecipe recipe = recipeHolder.value();
+		float experience = recipe.getExperience();
+		if (experience > 0) {
+			Component experienceString = Component.translatable("gui.jei.category.smelting.experience", experience);
+			builder.addText(experienceString, getWidth() - 20, 10)
+					.setPosition(0, 0, getWidth(), getHeight(), HorizontalAlignment.RIGHT, VerticalAlignment.TOP)
+					.setTextAlignment(HorizontalAlignment.RIGHT)
+					.setColor(0xFF808080);
+		}
+	}
+
+	protected void addCookTime(IRecipeExtrasBuilder builder, RecipeHolder<BakingRecipe> recipeHolder) {
+		BakingRecipe recipe = recipeHolder.value();
+		int cookTime = recipe.getCookingTime();
+		if (cookTime <= 0) {
+			cookTime = regularCookTime;
+		}
+		if (cookTime > 0) {
+			int cookTimeSeconds = cookTime / 20;
+			Component timeString = Component.translatable("gui.jei.category.smelting.time.seconds", cookTimeSeconds);
+			builder.addText(timeString, getWidth() - 20, 10)
+					.setPosition(0, 0, getWidth(), getHeight(), HorizontalAlignment.RIGHT, VerticalAlignment.BOTTOM)
+					.setTextAlignment(HorizontalAlignment.RIGHT)
+					.setTextAlignment(VerticalAlignment.BOTTOM)
+					.setColor(0xFF808080);
+		}
+	}
+
+	@Override
+	public boolean isHandled(RecipeHolder<BakingRecipe> recipeHolder) {
+		BakingRecipe recipe = recipeHolder.value();
+		return !recipe.isSpecial();
+	}
+
+	@Override
+	public ResourceLocation getRegistryName(RecipeHolder<BakingRecipe> recipe) {
+		return recipe.id();
+	}
+
+	@Override
+	public Codec<RecipeHolder<BakingRecipe>> getCodec(ICodecHelper codecHelper, IRecipeManager recipeManager) {
+		return codecHelper.getRecipeHolderCodec();
 	}
 }

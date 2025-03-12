@@ -1,0 +1,80 @@
+{
+  "molding": "json",
+  "remolder": {
+    "type": "replace",
+    "target": "pools",
+    "value": [
+      {
+        "bonus_rolls": 0.0,
+        "entries": [
+          {
+            "type": "minecraft:dynamic",
+            "conditions": [
+              {
+                "block": "minecraft:decorated_pot",
+                "condition": "minecraft:block_state_property",
+                "properties": {
+                  "cracked": "true"
+                }
+              }
+            ],
+            "name": "clayworks:trim"
+          }
+        ],
+        "name": "decorated_pot_trim",
+        "rolls": 1.0
+      },
+      {
+        "bonus_rolls": 0.0,
+        "entries": [
+          {
+            "type": "minecraft:alternatives",
+            "children": [
+              {
+                "type": "minecraft:dynamic",
+                "conditions": [
+                  {
+                    "block": "minecraft:decorated_pot",
+                    "condition": "minecraft:block_state_property",
+                    "properties": {
+                      "cracked": "true"
+                    }
+                  }
+                ],
+                "name": "minecraft:sherds"
+              },
+              {
+                "type": "minecraft:item",
+                "functions": [
+                  {
+                    "function": "minecraft:copy_components",
+                    "include": [
+                      "minecraft:pot_decorations",
+                      "clayworks:pot_trims"
+                    ],
+                    "source": "block_entity"
+                  }
+                ],
+                "name": "minecraft:decorated_pot"
+              }
+            ]
+          }
+        ],
+        "name": "decorated_pot",
+        "rolls": 1.0
+      }
+    ]
+  },
+  "selector": {
+    "type": "names",
+    "conditions": [
+      {
+        "type": "clayworks:config",
+        "value": "decorated_pot_trims"
+      }
+    ],
+    "config": [
+      "minecraft:loot_table/blocks/decorated_pot"
+    ]
+  }
+}

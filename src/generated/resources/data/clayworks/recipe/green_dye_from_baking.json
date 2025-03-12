@@ -1,0 +1,19 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "clayworks:config",
+      "value": "kiln"
+    }
+  ],
+  "type": "clayworks:baking",
+  "category": "misc",
+  "cookingtime": 100,
+  "experience": 1.0,
+  "ingredient": {
+    "item": "minecraft:cactus"
+  },
+  "result": {
+    "count": 1,
+    "id": "minecraft:green_dye"
+  }
+}

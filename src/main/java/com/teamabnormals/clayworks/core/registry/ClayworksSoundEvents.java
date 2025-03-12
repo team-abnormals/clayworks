@@ -3,12 +3,10 @@ package com.teamabnormals.clayworks.core.registry;
 import com.teamabnormals.blueprint.core.util.registry.SoundSubRegistryHelper;
 import com.teamabnormals.clayworks.core.Clayworks;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.registries.DeferredHolder;
 
-@EventBusSubscriber(modid = Clayworks.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
 public class ClayworksSoundEvents {
 	public static final SoundSubRegistryHelper HELPER = Clayworks.REGISTRY_HELPER.getSoundSubHelper();
 
-	public static final RegistryObject<SoundEvent> KILN_SMOKE = HELPER.createSoundEvent("block.kiln.smoke");
+	public static final DeferredHolder<SoundEvent, SoundEvent> KILN_SMOKE = HELPER.createSoundEvent("block.kiln.smoke");
 }

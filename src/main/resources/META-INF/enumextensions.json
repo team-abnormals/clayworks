@@ -1,0 +1,37 @@
+{
+  "entries": [
+    {
+      "enum": "net/minecraft/world/inventory/RecipeBookType",
+      "name": "CLAYWORKS_BAKING",
+      "constructor": "()V",
+      "parameters": []
+    },
+    {
+      "enum": "net/minecraft/client/RecipeBookCategories",
+      "name": "CLAYWORKS_KILN_SEARCH",
+      "constructor": "(Ljava/util/function/Supplier;)V",
+      "parameters": {
+        "class": "com/teamabnormals/clayworks/core/other/ClayworksEnums",
+        "field": "KILN_SEARCH"
+      }
+    },
+    {
+      "enum": "net/minecraft/client/RecipeBookCategories",
+      "name": "CLAYWORKS_KILN_BLOCKS",
+      "constructor": "(Ljava/util/function/Supplier;)V",
+      "parameters": {
+        "class": "com/teamabnormals/clayworks/core/other/ClayworksEnums",
+        "field": "KILN_BLOCKS"
+      }
+    },
+    {
+      "enum": "net/minecraft/client/RecipeBookCategories",
+      "name": "CLAYWORKS_KILN_MISC",
+      "constructor": "(Ljava/util/function/Supplier;)V",
+      "parameters": {
+        "class": "com/teamabnormals/clayworks/core/other/ClayworksEnums",
+        "field": "KILN_MISC"
+      }
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+modLoader = "javafml"
+loaderVersion = "[1,)"
+issueTrackerURL = "https://github.com/team-abnormals/clayworks/issues"
+license = "https://github.com/team-abnormals/clayworks/blob/main/LICENSE.txt"
+
+[[mixins]]
+    config = "clayworks.mixins.json"
+
+[[mods]]
+    modId = "clayworks"
+    version = "${mod_version}"
+    logoFile = "logo.png"
+    enumExtensions = "META-INF/enumextensions.json"
+    itemIcon = "clayworks:kiln"
+    configBackground = "clayworks:textures/block/terracotta_bricks.png"
+    authors = "Team Abnormals"
+    credits = "bageldotjpg, hatsondogs, five"
+    displayURL = "https://www.teamabnormals.com/mods/clayworks"
+    displayName = "Clayworks"
+    description = '''
+    Introduces a new furnace type and several building blocks!
+    '''
+
+[[dependencies.clayworks]]
+    modId = "minecraft"
+    type = "required"
+    versionRange = "[${mc_version}]"
+    ordering = "AFTER"
+    side = "BOTH"
+
+[[dependencies.clayworks]]
+    modId = "neoforge"
+    type = "required"
+    versionRange = "[${neoforge},)"
+    ordering = "AFTER"
+    side = "BOTH"
+
+[[dependencies.clayworks]]
+    modId = "blueprint"
+    type = "required"
+    versionRange = "[${blueprint},)"
+    ordering = "AFTER"
+    side = "BOTH"

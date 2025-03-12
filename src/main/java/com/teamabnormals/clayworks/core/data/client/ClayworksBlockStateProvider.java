@@ -3,6 +3,7 @@ package com.teamabnormals.clayworks.core.data.client;
 import com.teamabnormals.blueprint.core.data.client.BlueprintBlockStateProvider;
 import com.teamabnormals.clayworks.core.Clayworks;
 import com.teamabnormals.clayworks.core.other.ClayworksBlockFamilies;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.BlockFamily;
 import net.minecraft.data.BlockFamily.Variant;
 import net.minecraft.data.PackOutput;
@@ -10,13 +11,11 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraftforge.client.model.generators.ConfiguredModel;
-import net.minecraftforge.client.model.generators.ModelFile;
-import net.minecraftforge.client.model.generators.ModelFile.ExistingModelFile;
-import net.minecraftforge.client.model.generators.ModelProvider;
-import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
+import net.neoforged.neoforge.client.model.generators.ModelFile;
+import net.neoforged.neoforge.client.model.generators.ModelFile.ExistingModelFile;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.registries.DeferredBlock;
 
 import java.util.Map;
 
@@ -90,17 +89,17 @@ public class ClayworksBlockStateProvider extends BlueprintBlockStateProvider {
 		this.decoratedPot(BLACK_DECORATED_POT, Blocks.BLACK_TERRACOTTA);
 	}
 
-	public void decoratedPot(RegistryObject<Block> block, Block parent) {
+	public void decoratedPot(DeferredBlock<Block> block, Block parent) {
 		this.simpleBlock(block.get(), particle(block, blockTexture(parent)));
-		this.itemModels().getBuilder(name(block.get())).parent(new ExistingModelFile(new ResourceLocation("item/decorated_pot"), this.models().existingFileHelper));
+		this.itemModels().getBuilder(name(block.get())).parent(new ExistingModelFile(ResourceLocation.withDefaultNamespace("item/decorated_pot"), this.models().existingFileHelper));
 	}
 
-	public void glazedTerracotta(RegistryObject<Block> block) {
+	public void glazedTerracotta(DeferredBlock<Block> block) {
 		this.horizontalBlock(block.get(), models().withExistingParent(name(block.get()), "template_glazed_terracotta").texture("pattern", blockTexture(block.get())), 0);
 		this.blockItem(block);
 	}
 
-	public void concretePowder(RegistryObject<Block> block) {
+	public void concretePowder(DeferredBlock<Block> block) {
 		ModelFile model = models().cubeAll(name(block.get()), blockTexture(block.get()));
 		this.getVariantBuilder(block.get()).forAllStates(state ->
 				ConfiguredModel.builder()
@@ -111,8 +110,8 @@ public class ClayworksBlockStateProvider extends BlueprintBlockStateProvider {
 		this.simpleBlockItem(block.get(), model);
 	}
 
-	public void furnace(RegistryObject<Block> registryObject) {
-		Block block = registryObject.get();
+	public void furnace(DeferredBlock<Block> DeferredBlock) {
+		Block block = DeferredBlock.get();
 		ModelFile furnace = models().cube(name(block), suffix(blockTexture(block), "_bottom"), suffix(blockTexture(block), "_top"), suffix(blockTexture(block), "_front"), suffix(blockTexture(block), "_back"), suffix(blockTexture(block), "_left"), suffix(blockTexture(block), "_right")).texture("particle", suffix(blockTexture(block), "_back"));
 		ModelFile furnaceOn = models().cube(name(block) + "_on", suffix(blockTexture(block), "_bottom"), suffix(blockTexture(block), "_top_on"), suffix(blockTexture(block), "_front_on"), suffix(blockTexture(block), "_back"), suffix(blockTexture(block), "_left"), suffix(blockTexture(block), "_right")).texture("particle", suffix(blockTexture(block), "_back"));
 		this.horizontalBlock(block, (state -> state.getValue(BlockStateProperties.LIT) ? furnaceOn : furnace));
@@ -130,7 +129,7 @@ public class ClayworksBlockStateProvider extends BlueprintBlockStateProvider {
 
 	@Override
 	public void baseBlocks(Block block, Block stairs, Block slab, Block wall) {
-		if (!ForgeRegistries.BLOCKS.getKey(block).getNamespace().equals("minecraft"))
+		if (!BuiltInRegistries.BLOCK.getKey(block).getNamespace().equals("minecraft"))
 			this.block(block);
 		this.stairsBlock(block, stairs);
 		this.slabBlock(block, slab);

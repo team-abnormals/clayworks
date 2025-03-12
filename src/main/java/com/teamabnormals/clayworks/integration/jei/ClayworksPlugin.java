@@ -15,14 +15,15 @@ import mezz.jei.api.registration.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeHolder;
 
 @JeiPlugin
 public class ClayworksPlugin implements IModPlugin {
-	public static final RecipeType<BakingRecipe> BAKING = RecipeType.create(Clayworks.MOD_ID, "baking", BakingRecipe.class);
+	public static final RecipeType<RecipeHolder<BakingRecipe>> BAKING = RecipeType.createRecipeHolderType(Clayworks.location("baking"));
 
 	@Override
 	public ResourceLocation getPluginUid() {
-		return new ResourceLocation(Clayworks.MOD_ID, Clayworks.MOD_ID);
+		return Clayworks.location(Clayworks.MOD_ID);
 	}
 
 	@Override
@@ -32,7 +33,7 @@ public class ClayworksPlugin implements IModPlugin {
 
 	@Override
 	public void registerRecipes(IRecipeRegistration registration) {
-		registration.addRecipes(BAKING, Minecraft.getInstance().level.getRecipeManager().getAllRecipesFor(ClayworksRecipeTypes.BAKING.get()));
+		registration.addRecipes(BAKING, Minecraft.getInstance().level.getRecipeManager().getAllRecipesFor(ClayworksRecipeTypes.BAKING.get()).stream().toList());
 	}
 
 	@Override
