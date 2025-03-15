@@ -11,6 +11,7 @@ import com.teamabnormals.clayworks.core.other.ClayworksBlockFamilies;
 import com.teamabnormals.clayworks.core.registry.ClayworksConditions;
 import com.teamabnormals.clayworks.core.registry.ClayworksRecipes.ClayworksRecipeSerializers;
 import net.minecraft.core.HolderLookup.Provider;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.BlockFamily;
 import net.minecraft.data.BlockFamily.Variant;
 import net.minecraft.data.PackOutput;
@@ -207,8 +208,8 @@ public class ClayworksRecipeProvider extends BlueprintRecipeProvider {
 	}
 
 	protected static void coloredConcreteFromConcreteAndDye(RecipeOutput output, ItemLike concrete, ItemLike concretePowder, ItemLike dye) {
-		ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, concrete, 8).define('#', CONCRETE.get()).define('X', dye).pattern("###").pattern("#X#").pattern("###").group("concrete").unlockedBy("has_concrete", has(CONCRETE.get())).save(output.withConditions(CONCRETE_CONFIG));
-		ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, concretePowder, 8).define('#', CONCRETE_POWDER.get()).define('X', dye).pattern("###").pattern("#X#").pattern("###").group("concrete_powder").unlockedBy("has_concrete_powder", has(CONCRETE_POWDER.get())).save(output.withConditions(CONCRETE_CONFIG));
+		ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, concrete, 8).define('#', CONCRETE.get()).define('X', dye).pattern("###").pattern("#X#").pattern("###").group("concrete").unlockedBy("has_concrete", has(CONCRETE.get())).save(output.withConditions(CONCRETE_CONFIG), Clayworks.location(BuiltInRegistries.ITEM.getKey(concrete.asItem()).getPath()));
+		ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, concretePowder, 8).define('#', CONCRETE_POWDER.get()).define('X', dye).pattern("###").pattern("#X#").pattern("###").group("concrete_powder").unlockedBy("has_concrete_powder", has(CONCRETE_POWDER.get())).save(output.withConditions(CONCRETE_CONFIG), Clayworks.location(BuiltInRegistries.ITEM.getKey(concretePowder.asItem()).getPath()));
 	}
 
 	public static void conditionalStonecuttingRecipe(RecipeOutput output, RecipeCategory category, ICondition condition, ItemLike result, ItemLike input, int count) {
