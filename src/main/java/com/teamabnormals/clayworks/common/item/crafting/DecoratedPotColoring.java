@@ -2,6 +2,7 @@ package com.teamabnormals.clayworks.common.item.crafting;
 
 import com.teamabnormals.clayworks.common.DecoratedPotTrim;
 import com.teamabnormals.clayworks.common.DecoratedPotTrimPattern;
+import com.teamabnormals.clayworks.core.ClayworksConfig;
 import com.teamabnormals.clayworks.core.registry.ClayworksBlocks;
 import com.teamabnormals.clayworks.core.registry.ClayworksDataComponents;
 import com.teamabnormals.clayworks.core.registry.ClayworksRecipes.ClayworksRecipeSerializers;
@@ -55,12 +56,12 @@ public class DecoratedPotColoring extends CustomRecipe {
 		for (int slot = 0; slot < input.size(); ++slot) {
 			ItemStack stack = input.getItem(slot);
 			if (!stack.isEmpty()) {
-				if (stack.is(Tags.Items.DYES)) {
+				if (stack.is(Tags.Items.DYES) && ClayworksConfig.COMMON.decoratedPotColors.get()) {
 					++dyeCount;
 					if (DyeColor.getColor(stack) == ClayworksBlocks.getDyeColorFromPot(Block.byItem(pot.getItem()))) {
 						return false;
 					}
-				} else if (stack.is(ItemTags.TRIM_MATERIALS)) {
+				} else if (stack.is(ItemTags.TRIM_MATERIALS) && ClayworksConfig.COMMON.decoratedPotTrims.get()) {
 					++trimCount;
 					if (pot.getComponents().get(ClayworksDataComponents.POT_TRIM.get()) != null) {
 						return false;

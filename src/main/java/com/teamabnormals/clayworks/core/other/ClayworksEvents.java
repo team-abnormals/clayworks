@@ -46,30 +46,8 @@ public class ClayworksEvents {
 		Player player = event.getEntity();
 		ItemStack stack = event.getItemStack();
 
-		if (state.getBlock() instanceof DecoratedPotBlock potBlock && !player.isSecondaryUseActive()) {
-			if (stack.getItem() instanceof DyeItem dyeItem && ClayworksConfig.COMMON.decoratedPotColors.get()) {
-				DyeColor itemColor = dyeItem.getDyeColor();
-				DyeColor blockColor = ClayworksBlocks.getDyeColorFromPot(potBlock);
-				if (itemColor != blockColor) {
-					level.playSound(null, pos, SoundEvents.DYE_USE, SoundSource.BLOCKS, 1.0F, 1.0F);
-					if (!player.isCreative()) {
-						stack.shrink(1);
-					}
-
-					BlockEntity blockEntity = level.getBlockEntity(pos);
-					if (blockEntity != null) {
-						CompoundTag tag = blockEntity.saveCustomAndMetadata(level.registryAccess());
-						level.setBlockAndUpdate(pos, BlockUtil.transferAllBlockStates(state, ClayworksBlocks.getPotFromDyeColor(itemColor).defaultBlockState()));
-						blockEntity = level.getBlockEntity(pos);
-						if (blockEntity != null) {
-							blockEntity.loadWithComponents(tag, level.registryAccess());
-						}
-					}
-
-					event.setCancellationResult(InteractionResult.sidedSuccess(level.isClientSide()));
-					event.setCanceled(true);
-				}
-			} else if (stack.is(ItemTags.TRIM_MATERIALS) && ClayworksConfig.COMMON.decoratedPotTrims.get()) {
+		if (state.getBlock() instanceof DecoratedPotBlock && player.isSecondaryUseActive()) {
+			if (stack.is(ItemTags.TRIM_MATERIALS) && ClayworksConfig.COMMON.decoratedPotTrims.get()) {
 				BlockEntity blockEntity = level.getBlockEntity(pos);
 				if (blockEntity instanceof TrimmedPot trimmedPot) {
 					RegistryAccess registryAccess = level.registryAccess();
