@@ -24,13 +24,15 @@ import net.neoforged.api.distmarker.OnlyIn;
 import javax.annotation.Nullable;
 
 public class KilnBlock extends AbstractFurnaceBlock {
+	public static final MapCodec<KilnBlock> CODEC = simpleCodec(KilnBlock::new);
+
 	public KilnBlock(Properties properties) {
 		super(properties);
 	}
 
 	@Override
 	protected MapCodec<? extends AbstractFurnaceBlock> codec() {
-		return null;
+		return CODEC;
 	}
 
 	@Override

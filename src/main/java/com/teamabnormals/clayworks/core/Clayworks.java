@@ -3,6 +3,7 @@ package com.teamabnormals.clayworks.core;
 import com.teamabnormals.blueprint.client.screen.splash.SplashSerializers;
 import com.teamabnormals.blueprint.core.util.registry.RegistryHelper;
 import com.teamabnormals.clayworks.client.gui.screens.inventory.KilnScreen;
+import com.teamabnormals.clayworks.client.gui.screens.inventory.PotteryScreen;
 import com.teamabnormals.clayworks.client.splashes.WoodworksSplash;
 import com.teamabnormals.clayworks.core.data.client.ClayworksBlockStateProvider;
 import com.teamabnormals.clayworks.core.data.client.ClayworksLanguageProvider;
@@ -112,6 +113,7 @@ public class Clayworks {
 
 	private void registerScreens(RegisterMenuScreensEvent event) {
 		event.register(ClayworksMenuTypes.KILN.get(), KilnScreen::new);
+		event.register(ClayworksMenuTypes.POTTERY.get(), PotteryScreen::new);
 	}
 
 	public static ResourceLocation location(String path) {

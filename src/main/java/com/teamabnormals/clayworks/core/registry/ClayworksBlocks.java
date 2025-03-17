@@ -2,6 +2,7 @@ package com.teamabnormals.clayworks.core.registry;
 
 import com.teamabnormals.blueprint.core.util.item.CreativeModeTabContentsPopulator;
 import com.teamabnormals.clayworks.common.block.KilnBlock;
+import com.teamabnormals.clayworks.common.block.PotteryTableBlock;
 import com.teamabnormals.clayworks.core.Clayworks;
 import com.teamabnormals.clayworks.core.ClayworksConfig;
 import com.teamabnormals.clayworks.core.registry.helper.ClayworksBlockSubRegistryHelper;
@@ -24,7 +25,7 @@ public class ClayworksBlocks {
 	public static final ClayworksBlockSubRegistryHelper HELPER = Clayworks.REGISTRY_HELPER.getBlockSubHelper();
 
 	public static final DeferredBlock<Block> KILN = HELPER.createBlock("kiln", () -> new KilnBlock(ClayworksBlockProperties.KILN));
-	public static final DeferredBlock<Block> POTTERY_TABLE = HELPER.createBlock("pottery_table", () -> new FletchingTableBlock(ClayworksBlockProperties.POTTERY_TABLE));
+	public static final DeferredBlock<Block> POTTERY_TABLE = HELPER.createBlock("pottery_table", () -> new PotteryTableBlock(ClayworksBlockProperties.POTTERY_TABLE));
 
 	public static final DeferredBlock<Block> CHISELED_BRICKS = HELPER.createBlock("chiseled_bricks", () -> new Block(ClayworksBlockProperties.BRICKS));
 	public static final DeferredBlock<Block> GLAZED_TERRACOTTA = HELPER.createBlock("glazed_terracotta", () -> new GlazedTerracottaBlock(ClayworksBlockProperties.GLAZED_TERRACOTTA));

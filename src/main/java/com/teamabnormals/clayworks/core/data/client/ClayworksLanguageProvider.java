@@ -2,6 +2,7 @@ package com.teamabnormals.clayworks.core.data.client;
 
 import com.teamabnormals.blueprint.core.data.client.BlueprintLanguageProvider;
 import com.teamabnormals.clayworks.client.gui.screens.recipebook.BakingRecipeBookComponent;
+import com.teamabnormals.clayworks.common.block.PotteryTableBlock;
 import com.teamabnormals.clayworks.common.block.entity.KilnBlockEntity;
 import com.teamabnormals.clayworks.core.Clayworks;
 import com.teamabnormals.clayworks.core.registry.ClayworksBlocks;
@@ -20,7 +21,8 @@ public class ClayworksLanguageProvider extends BlueprintLanguageProvider {
 
 	@Override
 	public void addTranslations() {
-		this.add(KilnBlockEntity.TRANSLATION.getString(), "Kiln");
+		this.add(KilnBlockEntity.CONTAINER_TITLE.getString(), "Kiln");
+		this.add(PotteryTableBlock.CONTAINER_TITLE.getString(), "Pottery Table");
 		this.add(BakingCategory.TRANSLATION, "Baking");
 		this.add("subtitles." + Clayworks.MOD_ID + ".block.kiln.smoke", "Kiln smokes");
 		this.add(BakingRecipeBookComponent.FILTER_NAME, "Showing Bakeable");

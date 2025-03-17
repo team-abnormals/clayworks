@@ -6,7 +6,6 @@ import com.teamabnormals.clayworks.core.registry.ClayworksBlockEntityTypes;
 import com.teamabnormals.clayworks.core.registry.ClayworksRecipes.ClayworksRecipeTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
@@ -14,14 +13,14 @@ import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class KilnBlockEntity extends AbstractFurnaceBlockEntity {
-	public static final MutableComponent TRANSLATION = Component.translatable("container." + Clayworks.MOD_ID + ".kiln");
+	public static final Component CONTAINER_TITLE = Component.translatable("container." + Clayworks.MOD_ID + ".kiln");
 
 	public KilnBlockEntity(BlockPos pos, BlockState state) {
 		super(ClayworksBlockEntityTypes.KILN.get(), pos, state, ClayworksRecipeTypes.BAKING.get());
 	}
 
 	protected Component getDefaultName() {
-		return TRANSLATION;
+		return CONTAINER_TITLE;
 	}
 
 	protected int getBurnDuration(ItemStack fuel) {

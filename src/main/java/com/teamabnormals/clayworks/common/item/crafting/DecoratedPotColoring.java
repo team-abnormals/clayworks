@@ -89,8 +89,7 @@ public class DecoratedPotColoring extends CustomRecipe {
 			if (!stack.isEmpty()) {
 				Item item = stack.getItem();
 				if (Block.byItem(item) instanceof DecoratedPotBlock block) {
-					output = stack.copy();
-					output.setCount(1);
+					output = stack.copyWithCount(1);
 					color = ClayworksBlocks.getDyeColorFromPot(block);
 					break;
 				}
