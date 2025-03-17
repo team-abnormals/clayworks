@@ -5,11 +5,13 @@ import com.teamabnormals.blueprint.core.util.registry.BlockSubRegistryHelper;
 import com.teamabnormals.blueprint.core.util.registry.RegistryHelper;
 import com.teamabnormals.clayworks.client.DecoratedPotBlockEntityWithoutLevelRenderer;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Item.Properties;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.DecoratedPotBlockEntity;
+import net.minecraft.world.level.block.entity.PotDecorations;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.fml.loading.FMLEnvironment;
@@ -27,7 +29,7 @@ public class ClayworksBlockSubRegistryHelper extends BlockSubRegistryHelper {
 
 	public <B extends Block> DeferredBlock<B> createdDecoratedPotBlock(String name, Supplier<? extends B> supplier) {
 		DeferredBlock<B> block = this.deferredRegister.register(name, supplier);
-		DeferredHolder<Item, BlockItem> item = this.itemRegister.register(name, () -> new BlockItem(block.get(), new Properties().stacksTo(1)));
+		DeferredHolder<Item, BlockItem> item = this.itemRegister.register(name, () -> new BlockItem(block.get(), new Properties().component(DataComponents.POT_DECORATIONS, PotDecorations.EMPTY)));
 		if (FMLEnvironment.dist == Dist.CLIENT) {
 			this.clientItemExtensions.put(item, decoratedPotBEWLR(block));
 		}
