@@ -30,6 +30,7 @@ public class ClayworksBlockStateProvider extends BlueprintBlockStateProvider {
 	@Override
 	protected void registerStatesAndModels() {
 		this.furnace(KILN);
+		this.craftingTable(POTTERY_TABLE);
 		this.block(CHISELED_BRICKS);
 		this.glazedTerracotta(GLAZED_TERRACOTTA);
 		this.block(CONCRETE);
@@ -115,6 +116,21 @@ public class ClayworksBlockStateProvider extends BlueprintBlockStateProvider {
 		ModelFile furnace = models().cube(name(block), suffix(blockTexture(block), "_bottom"), suffix(blockTexture(block), "_top"), suffix(blockTexture(block), "_front"), suffix(blockTexture(block), "_back"), suffix(blockTexture(block), "_left"), suffix(blockTexture(block), "_right")).texture("particle", suffix(blockTexture(block), "_back"));
 		ModelFile furnaceOn = models().cube(name(block) + "_on", suffix(blockTexture(block), "_bottom"), suffix(blockTexture(block), "_top_on"), suffix(blockTexture(block), "_front_on"), suffix(blockTexture(block), "_back"), suffix(blockTexture(block), "_left"), suffix(blockTexture(block), "_right")).texture("particle", suffix(blockTexture(block), "_back"));
 		this.horizontalBlock(block, (state -> state.getValue(BlockStateProperties.LIT) ? furnaceOn : furnace));
+		this.blockItem(block);
+	}
+
+	public void craftingTable(DeferredBlock<Block> registryObject) {
+		Block block = registryObject.get();
+		ResourceLocation texture = suffix(blockTexture(block), "_");
+		this.simpleBlock(registryObject.get(), models()
+				.cube(name(block),
+						suffix(texture, "bottom"),
+						suffix(texture, "top"),
+						suffix(texture, "front"),
+						suffix(texture, "front"),
+						suffix(texture, "side"),
+						suffix(texture, "side")
+				).texture("particle", suffix(texture, "front")));
 		this.blockItem(block);
 	}
 

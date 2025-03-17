@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "clayworks:block/pottery_table_bottom",
+    "east": "clayworks:block/pottery_table_side",
+    "north": "clayworks:block/pottery_table_front",
+    "particle": "clayworks:block/pottery_table_front",
+    "south": "clayworks:block/pottery_table_front",
+    "up": "clayworks:block/pottery_table_top",
+    "west": "clayworks:block/pottery_table_side"
+  }
+}

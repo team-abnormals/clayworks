@@ -1,0 +1,38 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "clayworks:config",
+      "value": "pottery_table"
+    }
+  ],
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_brick": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:brick"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "clayworks:pottery_table"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_brick"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "clayworks:pottery_table"
+    ]
+  }
+}

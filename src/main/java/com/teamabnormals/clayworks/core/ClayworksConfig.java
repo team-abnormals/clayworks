@@ -8,6 +8,8 @@ import org.apache.commons.lang3.tuple.Pair;
 public class ClayworksConfig {
 
 	public static class Common {
+		@ConfigKey("pottery_table")
+		public final BooleanValue potteryTable;
 		@ConfigKey("kiln")
 		public final BooleanValue kiln;
 		@ConfigKey("chiseled_bricks")
@@ -27,6 +29,7 @@ public class ClayworksConfig {
 
 		public Common(ModConfigSpec.Builder builder) {
 			builder.push("blocks");
+			this.potteryTable = builder.define("Pottery Table", true);
 			this.kiln = builder.define("Kiln", true);
 			this.chiseledBricks = builder.define("Chiseled bricks", true);
 			this.glazedTerracotta = builder.define("Glazed terracotta", true);

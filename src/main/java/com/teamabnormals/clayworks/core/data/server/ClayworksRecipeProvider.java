@@ -39,6 +39,8 @@ import static com.teamabnormals.clayworks.core.registry.ClayworksBlocks.*;
 
 public class ClayworksRecipeProvider extends BlueprintRecipeProvider {
 	public static final ConfigValueCondition KILN_CONFIG = config(COMMON.kiln, "kiln");
+	public static final ConfigValueCondition POTTERY_TABLE_CONFIG = config(COMMON.potteryTable, "pottery_table");
+
 	public static final ConfigValueCondition CHISELED_BRICKS_CONFIG = config(COMMON.chiseledBricks, "chiseled_bricks");
 	public static final ConfigValueCondition GLAZED_TERRACOTTA_CONFIG = config(COMMON.glazedTerracotta, "glazed_terracotta");
 	public static final ConfigValueCondition TERRACOTTA_VARIANTS_CONFIG = config(COMMON.terracottaVariants, "terracotta_variants");
@@ -53,6 +55,7 @@ public class ClayworksRecipeProvider extends BlueprintRecipeProvider {
 	@Override
 	public void buildRecipes(RecipeOutput output) {
 		ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, KILN.get()).define('#', ItemTags.STONE_CRAFTING_MATERIALS).define('X', Blocks.FURNACE).define('B', Blocks.MUD_BRICKS).pattern("###").pattern("#X#").pattern("BBB").unlockedBy("has_cobblestone", has(ItemTags.STONE_CRAFTING_MATERIALS)).save(output.withConditions(KILN_CONFIG));		generateKilnRecipes(output);
+		ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, POTTERY_TABLE.get()).define('#', ItemTags.PLANKS).define('@', Items.BRICK).pattern("@@").pattern("##").pattern("##").unlockedBy("has_brick", has(Items.BRICK)).save(output.withConditions(POTTERY_TABLE_CONFIG));
 		SpecialRecipeBuilder.special(DecoratedPotColoring::new).save(output, Clayworks.MOD_ID + ":decorated_pot_coloring");
 
 		chiseledBuilder(RecipeCategory.BUILDING_BLOCKS, CHISELED_BRICKS.get(), Ingredient.of(Blocks.BRICK_SLAB)).unlockedBy(getHasName(Blocks.BRICK_SLAB), has(Blocks.BRICK_SLAB)).save(output.withConditions(CHISELED_BRICKS_CONFIG));

@@ -26,9 +26,11 @@ public class ClayworksBlockTagsProvider extends BlockTagsProvider {
 		IntrinsicTagAppender<Block> walls = this.tag(BlockTags.WALLS);
 
 		this.tag(BlockTags.MINEABLE_WITH_SHOVEL).add(ClayworksBlocks.CONCRETE_POWDER.get());
+		this.tag(BlockTags.MINEABLE_WITH_AXE).add(ClayworksBlocks.POTTERY_TABLE.get());
+
 		ClayworksBlocks.HELPER.getDeferredRegister().getEntries().forEach((registryObject -> {
 			Block block = registryObject.get();
-			if (!(block instanceof DecoratedPotBlock || block instanceof ConcretePowderBlock)) {
+			if (!(block instanceof DecoratedPotBlock || block instanceof ConcretePowderBlock || block == ClayworksBlocks.POTTERY_TABLE.get())) {
 				mineable.add(block);
 			}
 			if (block instanceof SlabBlock) {

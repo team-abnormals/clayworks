@@ -1,0 +1,27 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "clayworks:config",
+      "value": "pottery_table"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "tag": "minecraft:planks"
+    },
+    "@": {
+      "item": "minecraft:brick"
+    }
+  },
+  "pattern": [
+    "@@",
+    "##",
+    "##"
+  ],
+  "result": {
+    "count": 1,
+    "id": "clayworks:pottery_table"
+  }
+}
