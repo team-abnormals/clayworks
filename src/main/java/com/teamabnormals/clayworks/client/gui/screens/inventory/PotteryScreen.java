@@ -240,7 +240,7 @@ public class PotteryScreen extends AbstractContainerScreen<PotteryMenu> {
 		if (!ItemStack.matches(pot, this.decoratedPotStack)
 				|| !ItemStack.matches(dye, this.dyeStack)
 				|| !ItemStack.matches(trimMaterial, this.trimMaterialStack)) {
-			this.displayPatterns = !pot.isEmpty() && !trimMaterial.isEmpty() && !this.menu.getSelectablePatterns().isEmpty();
+			this.displayPatterns = !pot.isEmpty() && !this.menu.getSelectablePatterns().isEmpty();
 		}
 
 		if (this.startRow >= this.totalRowCount()) {

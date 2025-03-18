@@ -21,6 +21,7 @@ import net.minecraft.world.inventory.DataSlot;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.DyeItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.armortrim.TrimMaterial;
 import net.minecraft.world.item.armortrim.TrimMaterials;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.DecoratedPotBlock;
@@ -30,11 +31,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class PotteryMenu extends AbstractContainerMenu {
-	private static final int PATTERN_NOT_SET = -1;
-	private static final int INV_SLOT_START = 4;
-	private static final int INV_SLOT_END = 31;
-	private static final int USE_ROW_SLOT_START = 31;
-	private static final int USE_ROW_SLOT_END = 40;
 	private final ContainerLevelAccess access;
 	final DataSlot selectedBannerPatternIndex = DataSlot.standalone();
 	private List<Holder<DecoratedPotTrimPattern>> selectablePatterns = List.of();
@@ -165,16 +161,27 @@ public class PotteryMenu extends AbstractContainerMenu {
 		ItemStack potItem = this.decoratedPotSlot.getItem();
 		ItemStack dyeItem = this.dyeSlot.getItem();
 		ItemStack trimItem = this.trimMaterialSlot.getItem();
-		if (!potItem.isEmpty() && (!dyeItem.isEmpty() || !trimItem.isEmpty())) {
-			int i = this.selectedBannerPatternIndex.get();
-			boolean flag = this.isValidPatternIndex(i);
+
+		DecoratedPotTrim trim = potItem.get(ClayworksDataComponents.POT_TRIM);
+
+		int i = this.selectedBannerPatternIndex.get();
+		boolean valid = this.isValidPatternIndex(i);
+
+		boolean canDye = dyeItem.isEmpty() || ((DyeItem) dyeItem.getItem()).getDyeColor() != ClayworksBlocks.getDyeColorFromPot(Block.byItem(potItem.getItem()));
+
+		if (!potItem.isEmpty() && (trim == null && !trimItem.isEmpty()) || (trimItem.isEmpty()) && canDye) {
 			List<Holder<DecoratedPotTrimPattern>> list = this.selectablePatterns;
-			this.selectablePatterns = this.getSelectablePatterns(trimItem);
+			if (trimItem.isEmpty() && trim == null) {
+				this.selectablePatterns = List.of();
+			} else {
+				this.selectablePatterns = this.getSelectablePatterns(potItem);
+			}
 			Holder<DecoratedPotTrimPattern> holder;
+
 			if (this.selectablePatterns.size() == 1) {
 				this.selectedBannerPatternIndex.set(0);
 				holder = this.selectablePatterns.getFirst();
-			} else if (!flag) {
+			} else if (!valid) {
 				this.selectedBannerPatternIndex.set(-1);
 				holder = null;
 			} else {
@@ -289,15 +296,20 @@ public class PotteryMenu extends AbstractContainerMenu {
 				output = output.transmuteCopy(ClayworksBlocks.getPotFromDyeColor(((DyeItem) dyeItem.getItem()).getDyeColor()));
 			}
 
-			if (!trimItem.isEmpty() && pattern != null) {
-				output.set(
-						ClayworksDataComponents.POT_TRIM.get(),
-						new DecoratedPotTrim(
-								TrimMaterials.getFromIngredient(this.registryAccess, trimItem).get(),
-								pattern,
-								false
-						)
-				);
+			DecoratedPotTrim trim = potItem.get(ClayworksDataComponents.POT_TRIM);
+			if (pattern != null) {
+				Holder<TrimMaterial> material = null;
+				if (trim == null && !trimItem.isEmpty()) {
+					material = TrimMaterials.getFromIngredient(this.registryAccess, trimItem).get();
+				} else if (trim != null) {
+					material = trim.material();
+				}
+
+				if (material != null) {
+					output.set(ClayworksDataComponents.POT_TRIM.get(), new DecoratedPotTrim(material, pattern, true));
+				}
+			} else if (!trimItem.isEmpty()) {
+				return ItemStack.EMPTY;
 			}
 		}
 
@@ -306,7 +318,7 @@ public class PotteryMenu extends AbstractContainerMenu {
 
 	private void setupResultSlot(@Nullable Holder<DecoratedPotTrimPattern> pattern) {
 		ItemStack output = this.getResultStack(pattern);
-		if (!ItemStack.matches(output, this.resultSlot.getItem())) {
+		if (!ItemStack.matches(output, this.decoratedPotSlot.getItem().copyWithCount(1))) {
 			this.resultSlot.set(output);
 		} else {
 			this.resultSlot.set(ItemStack.EMPTY);
