@@ -282,7 +282,7 @@ public class PotteryMenu extends AbstractContainerMenu {
 	/**
 	 * Creates an output banner ItemStack based on the patterns, dyes, etc. in the loom.
 	 */
-	private void setupResultSlot(Holder<DecoratedPotTrimPattern> pattern) {
+	public ItemStack getResultStack(Holder<DecoratedPotTrimPattern> pattern) {
 		ItemStack potItem = this.decoratedPotSlot.getItem();
 		ItemStack dyeItem = this.dyeSlot.getItem();
 		ItemStack trimItem = this.trimMaterialSlot.getItem();
@@ -305,6 +305,11 @@ public class PotteryMenu extends AbstractContainerMenu {
 			}
 		}
 
+		return output;
+	}
+
+	private void setupResultSlot(Holder<DecoratedPotTrimPattern> pattern) {
+		ItemStack output = this.getResultStack(pattern);
 		if (!ItemStack.matches(output, this.resultSlot.getItem())) {
 			this.resultSlot.set(output);
 		}

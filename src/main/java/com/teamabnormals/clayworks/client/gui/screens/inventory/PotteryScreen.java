@@ -4,19 +4,38 @@ import com.mojang.blaze3d.platform.Lighting;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.teamabnormals.clayworks.common.DecoratedPotTrimPattern;
 import com.teamabnormals.clayworks.common.inventory.PotteryMenu;
+import com.teamabnormals.clayworks.core.Clayworks;
+import com.teamabnormals.clayworks.core.registry.ClayworksBlocks;
+import com.teamabnormals.clayworks.core.registry.ClayworksMaterials;
+import com.teamabnormals.clayworks.core.registry.ClayworksRegistries;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.client.model.geom.ModelLayers;
+import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.Sheets;
+import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.client.resources.model.Material;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.core.Holder;
+import net.minecraft.core.component.DataComponentType;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.armortrim.TrimMaterial;
+import net.minecraft.world.item.armortrim.TrimMaterials;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BannerPatternLayers;
+import net.minecraft.world.level.block.entity.DecoratedPotPatterns;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
@@ -53,6 +72,7 @@ public class PotteryScreen extends AbstractContainerScreen<PotteryMenu> {
 	private float scrollOffs;
 	private boolean scrolling;
 	private int startRow;
+	private ModelPart pot;
 
 	public PotteryScreen(PotteryMenu menu, Inventory playerInventory, Component title) {
 		super(menu, playerInventory, title);
@@ -63,7 +83,7 @@ public class PotteryScreen extends AbstractContainerScreen<PotteryMenu> {
 	@Override
 	protected void init() {
 		super.init();
-		// this.flag = this.minecraft.getEntityModels().bakeLayer(ModelLayers.BANNER).getChild("flag");
+		this.pot = this.minecraft.getEntityModels().bakeLayer(ModelLayers.DECORATED_POT_SIDES).getChild("left");
 	}
 
 	/**
@@ -174,24 +194,35 @@ public class PotteryScreen extends AbstractContainerScreen<PotteryMenu> {
 		PoseStack posestack = new PoseStack();
 		posestack.pushPose();
 		posestack.translate((float) x + 0.5F, (float) (y + 16), 0.0F);
-		posestack.scale(6.0F, -6.0F, 1.0F);
+		posestack.scale(16.0F, -16.0F, 1.0F);
 		posestack.translate(0.5F, 0.5F, 0.0F);
 		posestack.translate(0.5F, 0.5F, 0.5F);
 		float f = 0.6666667F;
 		posestack.scale(0.6666667F, -0.6666667F, -0.6666667F);
+		this.pot.xRot = 0.0F;
+		this.pot.yRot = 0.0F;
+		this.pot.zRot = 0.0F;
 
-//		BannerPatternLayers bannerpatternlayers = new BannerPatternLayers.Builder().add(pattern, DyeColor.WHITE).build();
-//		BannerRenderer.renderPatterns(
-//				posestack,
-//				guiGraphics.bufferSource(),
-//				15728880,
-//				OverlayTexture.NO_OVERLAY,
-//				this.flag,
-//				ModelBakery.BANNER_BASE,
-//				true,
-//				DyeColor.GRAY,
-//				bannerpatternlayers
-//		);
+		this.pot.x = -21.0F;
+		this.pot.y = 2.5F;
+
+		DyeColor dye = DyeColor.getColor(this.menu.getDyeSlot().getItem());
+		if (dye == null) {
+			ClayworksBlocks.getDyeColorFromPot(Block.byItem(this.menu.getDecoratedPotSlot().getItem().getItem()));
+		}
+		Material material = ClayworksMaterials.createTrimMaterial(Clayworks.location("decorated_pot_trim_base"), dye);
+		Holder<TrimMaterial> potMaterial = TrimMaterials.getFromIngredient(this.minecraft.level.registryAccess(), this.menu.getTrimMaterialSlot().getItem()).get();
+		ResourceLocation trimPattern = Minecraft.getInstance().level.registryAccess().registryOrThrow(ClayworksRegistries.DECORATED_POT_TRIM_PATTERN).get(pattern.getKey()).assetId();
+		Material trimMaterial = ClayworksMaterials.createTrimMaterial(trimPattern, (potMaterial.getKey().location().getNamespace() + "_" + potMaterial.getKey().location().getPath()).replace("minecraft_", ""));
+
+		Item item = this.menu.getDecoratedPotSlot().getItem().get(DataComponents.POT_DECORATIONS).front().orElse(Items.BRICK);
+		Material baseMaterial = Sheets.getDecoratedPotMaterial(DecoratedPotPatterns.getPatternFromItem(item));
+		baseMaterial = ClayworksMaterials.getDecoratedPotMaterial(DecoratedPotPatterns.getPatternFromItem(baseMaterial == null ? Items.BRICK : item), dye);
+
+		this.pot.render(posestack, baseMaterial.buffer(guiGraphics.bufferSource(), RenderType::entityCutout), 15728880, OverlayTexture.NO_OVERLAY);
+		this.pot.render(posestack, material.buffer(guiGraphics.bufferSource(), RenderType::entityCutout), 15728880, OverlayTexture.NO_OVERLAY);
+		this.pot.render(posestack, trimMaterial.buffer(guiGraphics.bufferSource(), RenderType::entityCutout), 15728880, OverlayTexture.NO_OVERLAY);
+
 		posestack.popPose();
 		guiGraphics.flush();
 	}
