@@ -12,7 +12,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.ComponentSerialization;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.resources.RegistryFileCodec;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.armortrim.TrimMaterial;
@@ -20,12 +19,20 @@ import net.minecraft.world.item.armortrim.TrimMaterial;
 public record DecoratedPotTrimPattern(ResourceLocation assetId, Component description, boolean decal) {
 	public static final ResourceKey<DecoratedPotTrimPattern> BASE = createKey("base");
 	public static final ResourceKey<DecoratedPotTrimPattern> STRAIGHT = createKey("straight");
-	public static final ResourceKey<DecoratedPotTrimPattern> WAVY = createKey("wavy");
+	public static final ResourceKey<DecoratedPotTrimPattern> RIPPLE = createKey("ripple");
+	public static final ResourceKey<DecoratedPotTrimPattern> STUDDED = createKey("studded");
+	public static final ResourceKey<DecoratedPotTrimPattern> ZIG = createKey("zig");
+	public static final ResourceKey<DecoratedPotTrimPattern> ZAG = createKey("zag");
+	public static final ResourceKey<DecoratedPotTrimPattern> WAVE = createKey("wave");
 
 	public static void bootstrap(BootstrapContext<DecoratedPotTrimPattern> context) {
 		register(context, BASE);
 		register(context, STRAIGHT);
-		register(context, WAVY);
+		register(context, RIPPLE);
+		register(context, STUDDED);
+		register(context, ZIG);
+		register(context, ZAG);
+		register(context, WAVE);
 	}
 
 	public static void register(BootstrapContext<DecoratedPotTrimPattern> context, ResourceKey<DecoratedPotTrimPattern> key) {
@@ -55,7 +62,6 @@ public record DecoratedPotTrimPattern(ResourceLocation assetId, Component descri
 			DecoratedPotTrimPattern::new
 	);
 
-	public static final Codec<Holder<DecoratedPotTrimPattern>> CODEC = RegistryFileCodec.create(ClayworksRegistries.DECORATED_POT_TRIM_PATTERN, DIRECT_CODEC);
 	public static final StreamCodec<RegistryFriendlyByteBuf, Holder<DecoratedPotTrimPattern>> STREAM_CODEC = ByteBufCodecs.holder(
 			ClayworksRegistries.DECORATED_POT_TRIM_PATTERN, DIRECT_STREAM_CODEC
 	);
