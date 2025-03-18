@@ -1,78 +1,50 @@
 package com.teamabnormals.clayworks.client.gui.screens.inventory;
 
 import com.mojang.blaze3d.platform.Lighting;
-import com.mojang.blaze3d.vertex.PoseStack;
 import com.teamabnormals.clayworks.common.DecoratedPotTrimPattern;
 import com.teamabnormals.clayworks.common.inventory.PotteryMenu;
 import com.teamabnormals.clayworks.core.Clayworks;
-import com.teamabnormals.clayworks.core.registry.ClayworksBlocks;
-import com.teamabnormals.clayworks.core.registry.ClayworksMaterials;
-import com.teamabnormals.clayworks.core.registry.ClayworksRegistries;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
-import net.minecraft.client.model.geom.ModelLayers;
-import net.minecraft.client.model.geom.ModelPart;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.Sheets;
-import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.client.resources.model.Material;
+import net.minecraft.client.gui.screens.inventory.CyclingSlotBackground;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.core.Holder;
-import net.minecraft.core.component.DataComponentType;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.Slot;
-import net.minecraft.world.item.DyeColor;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.armortrim.TrimMaterial;
-import net.minecraft.world.item.armortrim.TrimMaterials;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.entity.BannerPatternLayers;
-import net.minecraft.world.level.block.entity.DecoratedPotPatterns;
+import net.minecraft.world.item.SmithingTemplateItem;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
-import javax.annotation.Nullable;
 import java.util.List;
 
 @OnlyIn(Dist.CLIENT)
 public class PotteryScreen extends AbstractContainerScreen<PotteryMenu> {
 	private static final ResourceLocation BANNER_SLOT_SPRITE = ResourceLocation.withDefaultNamespace("container/loom/banner_slot");
 	private static final ResourceLocation DYE_SLOT_SPRITE = ResourceLocation.withDefaultNamespace("container/loom/dye_slot");
-	private static final ResourceLocation PATTERN_SLOT_SPRITE = ResourceLocation.withDefaultNamespace("container/loom/pattern_slot");
-	private static final ResourceLocation SCROLLER_SPRITE = ResourceLocation.withDefaultNamespace("container/loom/scroller");
-	private static final ResourceLocation SCROLLER_DISABLED_SPRITE = ResourceLocation.withDefaultNamespace("container/loom/scroller_disabled");
-	private static final ResourceLocation PATTERN_SELECTED_SPRITE = ResourceLocation.withDefaultNamespace("container/loom/pattern_selected");
-	private static final ResourceLocation PATTERN_HIGHLIGHTED_SPRITE = ResourceLocation.withDefaultNamespace("container/loom/pattern_highlighted");
-	private static final ResourceLocation PATTERN_SPRITE = ResourceLocation.withDefaultNamespace("container/loom/pattern");
-	private static final ResourceLocation ERROR_SPRITE = ResourceLocation.withDefaultNamespace("container/loom/error");
-	private static final ResourceLocation BG_LOCATION = ResourceLocation.withDefaultNamespace("textures/gui/container/loom.png");
-	private static final int PATTERN_COLUMNS = 4;
-	private static final int PATTERN_ROWS = 4;
-	private static final int SCROLLER_WIDTH = 12;
-	private static final int SCROLLER_HEIGHT = 15;
-	private static final int PATTERN_IMAGE_SIZE = 14;
-	private static final int SCROLLER_FULL_HEIGHT = 56;
-	private static final int PATTERNS_X = 60;
-	private static final int PATTERNS_Y = 13;
-	@Nullable
-	private BannerPatternLayers resultBannerPatterns;
+	private static final ResourceLocation SCROLLER_SPRITE = ResourceLocation.withDefaultNamespace("container/stonecutter/scroller");
+	private static final ResourceLocation SCROLLER_DISABLED_SPRITE = ResourceLocation.withDefaultNamespace("container/stonecutter/scroller_disabled");
+	private static final ResourceLocation PATTERN_SELECTED_SPRITE = ResourceLocation.withDefaultNamespace("container/stonecutter/recipe_selected");
+	private static final ResourceLocation PATTERN_HIGHLIGHTED_SPRITE = ResourceLocation.withDefaultNamespace("container/stonecutter/recipe_highlighted");
+	private static final ResourceLocation PATTERN_SPRITE = ResourceLocation.withDefaultNamespace("container/stonecutter/recipe");
+
+	private static final ResourceLocation BG_LOCATION = Clayworks.location("textures/gui/container/pottery_table.png");
+
 	private ItemStack decoratedPotStack = ItemStack.EMPTY;
 	private ItemStack dyeStack = ItemStack.EMPTY;
 	private ItemStack trimMaterialStack = ItemStack.EMPTY;
+
 	private boolean displayPatterns;
-	private boolean hasMaxPatterns;
 	private float scrollOffs;
 	private boolean scrolling;
 	private int startRow;
-	private ModelPart pot;
+
+	private final CyclingSlotBackground additionalIcon = new CyclingSlotBackground(2);
 
 	public PotteryScreen(PotteryMenu menu, Inventory playerInventory, Component title) {
 		super(menu, playerInventory, title);
@@ -83,7 +55,6 @@ public class PotteryScreen extends AbstractContainerScreen<PotteryMenu> {
 	@Override
 	protected void init() {
 		super.init();
-		this.pot = this.minecraft.getEntityModels().bakeLayer(ModelLayers.DECORATED_POT_SIDES).getChild("left");
 	}
 
 	/**
@@ -98,6 +69,12 @@ public class PotteryScreen extends AbstractContainerScreen<PotteryMenu> {
 	public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
 		super.render(guiGraphics, mouseX, mouseY, partialTick);
 		this.renderTooltip(guiGraphics, mouseX, mouseY);
+	}
+
+	@Override
+	public void containerTick() {
+		super.containerTick();
+		this.additionalIcon.tick(SmithingTemplateItem.createTrimmableMaterialIconList());
 	}
 
 	private int totalRowCount() {
@@ -122,42 +99,17 @@ public class PotteryScreen extends AbstractContainerScreen<PotteryMenu> {
 		}
 
 		if (!slot2.hasItem()) {
-			guiGraphics.blitSprite(PATTERN_SLOT_SPRITE, i + slot2.x, j + slot2.y, 16, 16);
+			this.additionalIcon.render(this.menu, guiGraphics, partialTick, i, j);
 		}
 
 		int k = (int) (41.0F * this.scrollOffs);
 		ResourceLocation resourcelocation = this.displayPatterns ? SCROLLER_SPRITE : SCROLLER_DISABLED_SPRITE;
-		guiGraphics.blitSprite(resourcelocation, i + 119, j + 13 + k, 12, 15);
+		guiGraphics.blitSprite(resourcelocation, i + 119, j + 15 + k, 12, 15);
 		Lighting.setupForFlatItems();
-		if (this.resultBannerPatterns != null && !this.hasMaxPatterns) {
-			guiGraphics.pose().pushPose();
-			guiGraphics.pose().translate((float) (i + 139), (float) (j + 52), 0.0F);
-			guiGraphics.pose().scale(24.0F, 24.0F, 1.0F);
-			guiGraphics.pose().translate(0.5F, -0.5F, 0.5F);
-			float f = 0.6666667F;
-			guiGraphics.pose().scale(0.6666667F, 0.6666667F, -0.6666667F);
-
-//			DyeColor dyecolor = ((BannerItem) slot3.getItem().getItem()).getColor();
-//			BannerRenderer.renderPatterns(
-//					guiGraphics.pose(),
-//					guiGraphics.bufferSource(),
-//					15728880,
-//					OverlayTexture.NO_OVERLAY,
-//					this.flag,
-//					ModelBakery.BANNER_BASE,
-//					true,
-//					dyecolor,
-//					this.resultBannerPatterns
-//			);
-			guiGraphics.pose().popPose();
-			guiGraphics.flush();
-		} else if (this.hasMaxPatterns) {
-			guiGraphics.blitSprite(ERROR_SPRITE, i + slot3.x - 5, j + slot3.y - 5, 26, 26);
-		}
 
 		if (this.displayPatterns) {
-			int j2 = i + 60;
-			int k2 = j + 13;
+			int j2 = i + 52;
+			int k2 = j + 14;
 			List<Holder<DecoratedPotTrimPattern>> list = this.menu.getSelectablePatterns();
 
 			label64:
@@ -169,9 +121,9 @@ public class PotteryScreen extends AbstractContainerScreen<PotteryMenu> {
 						break label64;
 					}
 
-					int l1 = j2 + i1 * 14;
-					int i2 = k2 + l * 14;
-					boolean flag = mouseX >= l1 && mouseY >= i2 && mouseX < l1 + 14 && mouseY < i2 + 14;
+					int l1 = j2 + i1 * 16;
+					int i2 = k2 + l * 18;
+					boolean flag = mouseX >= l1 && mouseY >= i2 && mouseX < l1 + 16 && mouseY < i2 + 18;
 					ResourceLocation resourcelocation1;
 					if (k1 == this.menu.getSelectedBannerPatternIndex()) {
 						resourcelocation1 = PATTERN_SELECTED_SPRITE;
@@ -181,8 +133,8 @@ public class PotteryScreen extends AbstractContainerScreen<PotteryMenu> {
 						resourcelocation1 = PATTERN_SPRITE;
 					}
 
-					guiGraphics.blitSprite(resourcelocation1, l1, i2, 14, 14);
-					this.renderPattern(guiGraphics, list.get(k1), l1, i2);
+					guiGraphics.blitSprite(resourcelocation1, l1, i2 + 1, 16, 18);
+					this.renderPattern(guiGraphics, list.get(k1), l1, i2 + 2);
 				}
 			}
 		}
@@ -191,40 +143,7 @@ public class PotteryScreen extends AbstractContainerScreen<PotteryMenu> {
 	}
 
 	private void renderPattern(GuiGraphics guiGraphics, Holder<DecoratedPotTrimPattern> pattern, int x, int y) {
-		PoseStack posestack = new PoseStack();
-		posestack.pushPose();
-		posestack.translate((float) x + 0.5F, (float) (y + 16), 0.0F);
-		posestack.scale(16.0F, -16.0F, 1.0F);
-		posestack.translate(0.5F, 0.5F, 0.0F);
-		posestack.translate(0.5F, 0.5F, 0.5F);
-		float f = 0.6666667F;
-		posestack.scale(0.6666667F, -0.6666667F, -0.6666667F);
-		this.pot.xRot = 0.0F;
-		this.pot.yRot = 0.0F;
-		this.pot.zRot = 0.0F;
-
-		this.pot.x = -21.0F;
-		this.pot.y = 2.5F;
-
-		DyeColor dye = DyeColor.getColor(this.menu.getDyeSlot().getItem());
-		if (dye == null) {
-			ClayworksBlocks.getDyeColorFromPot(Block.byItem(this.menu.getDecoratedPotSlot().getItem().getItem()));
-		}
-		Material material = ClayworksMaterials.createTrimMaterial(Clayworks.location("decorated_pot_trim_base"), dye);
-		Holder<TrimMaterial> potMaterial = TrimMaterials.getFromIngredient(this.minecraft.level.registryAccess(), this.menu.getTrimMaterialSlot().getItem()).get();
-		ResourceLocation trimPattern = Minecraft.getInstance().level.registryAccess().registryOrThrow(ClayworksRegistries.DECORATED_POT_TRIM_PATTERN).get(pattern.getKey()).assetId();
-		Material trimMaterial = ClayworksMaterials.createTrimMaterial(trimPattern, (potMaterial.getKey().location().getNamespace() + "_" + potMaterial.getKey().location().getPath()).replace("minecraft_", ""));
-
-		Item item = this.menu.getDecoratedPotSlot().getItem().get(DataComponents.POT_DECORATIONS).front().orElse(Items.BRICK);
-		Material baseMaterial = Sheets.getDecoratedPotMaterial(DecoratedPotPatterns.getPatternFromItem(item));
-		baseMaterial = ClayworksMaterials.getDecoratedPotMaterial(DecoratedPotPatterns.getPatternFromItem(baseMaterial == null ? Items.BRICK : item), dye);
-
-		this.pot.render(posestack, baseMaterial.buffer(guiGraphics.bufferSource(), RenderType::entityCutout), 15728880, OverlayTexture.NO_OVERLAY);
-		this.pot.render(posestack, material.buffer(guiGraphics.bufferSource(), RenderType::entityCutout), 15728880, OverlayTexture.NO_OVERLAY);
-		this.pot.render(posestack, trimMaterial.buffer(guiGraphics.bufferSource(), RenderType::entityCutout), 15728880, OverlayTexture.NO_OVERLAY);
-
-		posestack.popPose();
-		guiGraphics.flush();
+		guiGraphics.renderItem(this.menu.getResultStack(pattern), x, y);
 	}
 
 	/**
@@ -240,16 +159,16 @@ public class PotteryScreen extends AbstractContainerScreen<PotteryMenu> {
 	public boolean mouseClicked(double mouseX, double mouseY, int button) {
 		this.scrolling = false;
 		if (this.displayPatterns) {
-			int i = this.leftPos + 60;
-			int j = this.topPos + 13;
+			int i = this.leftPos + 52;
+			int j = this.topPos + 14;
 
 			for (int k = 0; k < 4; k++) {
 				for (int l = 0; l < 4; l++) {
-					double d0 = mouseX - (double) (i + l * 14);
-					double d1 = mouseY - (double) (j + k * 14);
+					double d0 = mouseX - (double) (i + l * 16);
+					double d1 = mouseY - (double) (j + k * 18);
 					int i1 = k + this.startRow;
 					int j1 = i1 * 4 + l;
-					if (d0 >= 0.0 && d1 >= 0.0 && d0 < 14.0 && d1 < 14.0 && this.menu.clickMenuButton(this.minecraft.player, j1)) {
+					if (d0 >= 0.0 && d1 >= 0.0 && d0 < 16.0 && d1 < 18.0 && this.menu.clickMenuButton(this.minecraft.player, j1)) {
 						Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.UI_LOOM_SELECT_PATTERN, 1.0F));
 						this.minecraft.gameMode.handleInventoryButtonClick(this.menu.containerId, j1);
 						return true;
@@ -259,7 +178,7 @@ public class PotteryScreen extends AbstractContainerScreen<PotteryMenu> {
 
 			i = this.leftPos + 119;
 			j = this.topPos + 9;
-			if (mouseX >= (double) i && mouseX < (double) (i + 12) && mouseY >= (double) j && mouseY < (double) (j + 56)) {
+			if (mouseX >= (double) i && mouseX < (double) (i + 12) && mouseY >= (double) j && mouseY < (double) (j + 54)) {
 				this.scrolling = true;
 			}
 		}
@@ -282,8 +201,8 @@ public class PotteryScreen extends AbstractContainerScreen<PotteryMenu> {
 	public boolean mouseDragged(double mouseX, double mouseY, int button, double dragX, double dragY) {
 		int i = this.totalRowCount() - 4;
 		if (this.scrolling && this.displayPatterns && i > 0) {
-			int j = this.topPos + 13;
-			int k = j + 56;
+			int j = this.topPos + 14;
+			int k = j + 54;
 			this.scrollOffs = ((float) mouseY - (float) j - 7.5F) / ((float) (k - j) - 15.0F);
 			this.scrollOffs = Mth.clamp(this.scrollOffs, 0.0F, 1.0F);
 			this.startRow = Math.max((int) ((double) (this.scrollOffs * (float) i) + 0.5), 0);
@@ -314,8 +233,6 @@ public class PotteryScreen extends AbstractContainerScreen<PotteryMenu> {
 	}
 
 	private void containerChanged() {
-		ItemStack itemstack = this.menu.getResultSlot().getItem();
-
 		ItemStack pot = this.menu.getDecoratedPotSlot().getItem();
 		ItemStack dye = this.menu.getDyeSlot().getItem();
 		ItemStack trimMaterial = this.menu.getTrimMaterialSlot().getItem();
@@ -323,7 +240,7 @@ public class PotteryScreen extends AbstractContainerScreen<PotteryMenu> {
 		if (!ItemStack.matches(pot, this.decoratedPotStack)
 				|| !ItemStack.matches(dye, this.dyeStack)
 				|| !ItemStack.matches(trimMaterial, this.trimMaterialStack)) {
-			this.displayPatterns = !pot.isEmpty() && !trimMaterial.isEmpty() && !this.hasMaxPatterns && !this.menu.getSelectablePatterns().isEmpty();
+			this.displayPatterns = !pot.isEmpty() && !trimMaterial.isEmpty() && !this.menu.getSelectablePatterns().isEmpty();
 		}
 
 		if (this.startRow >= this.totalRowCount()) {

@@ -25,6 +25,7 @@ import net.minecraft.world.item.armortrim.TrimMaterials;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.DecoratedPotBlock;
 
+import javax.annotation.Nullable;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -68,25 +69,25 @@ public class PotteryMenu extends AbstractContainerMenu {
 	public PotteryMenu(int containerId, Inventory playerInventory, final ContainerLevelAccess access) {
 		super(ClayworksMenuTypes.POTTERY.get(), containerId);
 		this.access = access;
-		this.decoratedPotSlot = this.addSlot(new Slot(this.inputContainer, 0, 13, 26) {
+		this.decoratedPotSlot = this.addSlot(new Slot(this.inputContainer, 0, 9, 26) {
 			@Override
 			public boolean mayPlace(ItemStack stack) {
 				return Block.byItem(stack.getItem()) instanceof DecoratedPotBlock;
 			}
 		});
-		this.dyeSlot = this.addSlot(new Slot(this.inputContainer, 1, 33, 26) {
+		this.dyeSlot = this.addSlot(new Slot(this.inputContainer, 1, 19, 45) {
 			@Override
 			public boolean mayPlace(ItemStack stack) {
 				return stack.getItem() instanceof DyeItem;
 			}
 		});
-		this.trimMaterialSlot = this.addSlot(new Slot(this.inputContainer, 2, 23, 45) {
+		this.trimMaterialSlot = this.addSlot(new Slot(this.inputContainer, 2, 29, 26) {
 			@Override
 			public boolean mayPlace(ItemStack stack) {
 				return stack.is(ItemTags.TRIM_MATERIALS);
 			}
 		});
-		this.resultSlot = this.addSlot(new Slot(this.outputContainer, 0, 143, 57) {
+		this.resultSlot = this.addSlot(new Slot(this.outputContainer, 0, 143, 33) {
 			/**
 			 * Check if the stack is allowed to be placed in this slot, used for armor slots as well as furnace fuel.
 			 */
@@ -188,12 +189,7 @@ public class PotteryMenu extends AbstractContainerMenu {
 				}
 			}
 
-			if (holder != null) {
-				this.setupResultSlot(holder);
-			} else {
-				this.resultSlot.set(ItemStack.EMPTY);
-			}
-
+			this.setupResultSlot(holder);
 			this.broadcastChanges();
 		} else {
 			this.resultSlot.set(ItemStack.EMPTY);
@@ -282,7 +278,7 @@ public class PotteryMenu extends AbstractContainerMenu {
 	/**
 	 * Creates an output banner ItemStack based on the patterns, dyes, etc. in the loom.
 	 */
-	public ItemStack getResultStack(Holder<DecoratedPotTrimPattern> pattern) {
+	public ItemStack getResultStack(@Nullable Holder<DecoratedPotTrimPattern> pattern) {
 		ItemStack potItem = this.decoratedPotSlot.getItem();
 		ItemStack dyeItem = this.dyeSlot.getItem();
 		ItemStack trimItem = this.trimMaterialSlot.getItem();
@@ -293,7 +289,7 @@ public class PotteryMenu extends AbstractContainerMenu {
 				output = output.transmuteCopy(ClayworksBlocks.getPotFromDyeColor(((DyeItem) dyeItem.getItem()).getDyeColor()));
 			}
 
-			if (!trimItem.isEmpty()) {
+			if (!trimItem.isEmpty() && pattern != null) {
 				output.set(
 						ClayworksDataComponents.POT_TRIM.get(),
 						new DecoratedPotTrim(
@@ -308,10 +304,12 @@ public class PotteryMenu extends AbstractContainerMenu {
 		return output;
 	}
 
-	private void setupResultSlot(Holder<DecoratedPotTrimPattern> pattern) {
+	private void setupResultSlot(@Nullable Holder<DecoratedPotTrimPattern> pattern) {
 		ItemStack output = this.getResultStack(pattern);
 		if (!ItemStack.matches(output, this.resultSlot.getItem())) {
 			this.resultSlot.set(output);
+		} else {
+			this.resultSlot.set(ItemStack.EMPTY);
 		}
 	}
 
