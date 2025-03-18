@@ -25,13 +25,13 @@ import java.util.List;
 
 @OnlyIn(Dist.CLIENT)
 public class PotteryScreen extends AbstractContainerScreen<PotteryMenu> {
-	private static final ResourceLocation BANNER_SLOT_SPRITE = ResourceLocation.withDefaultNamespace("container/loom/banner_slot");
-	private static final ResourceLocation DYE_SLOT_SPRITE = ResourceLocation.withDefaultNamespace("container/loom/dye_slot");
-	private static final ResourceLocation SCROLLER_SPRITE = ResourceLocation.withDefaultNamespace("container/stonecutter/scroller");
-	private static final ResourceLocation SCROLLER_DISABLED_SPRITE = ResourceLocation.withDefaultNamespace("container/stonecutter/scroller_disabled");
-	private static final ResourceLocation PATTERN_SELECTED_SPRITE = ResourceLocation.withDefaultNamespace("container/stonecutter/recipe_selected");
-	private static final ResourceLocation PATTERN_HIGHLIGHTED_SPRITE = ResourceLocation.withDefaultNamespace("container/stonecutter/recipe_highlighted");
-	private static final ResourceLocation PATTERN_SPRITE = ResourceLocation.withDefaultNamespace("container/stonecutter/recipe");
+	private static final ResourceLocation POT_SLOT_SPRITE = Clayworks.location("container/pottery_table/pot_slot");
+	private static final ResourceLocation DYE_SLOT_SPRITE = Clayworks.location("container/pottery_table/dye_slot");
+	private static final ResourceLocation SCROLLER_SPRITE = Clayworks.location("container/pottery_table/scroller");
+	private static final ResourceLocation SCROLLER_DISABLED_SPRITE = Clayworks.location("container/pottery_table/scroller_disabled");
+	private static final ResourceLocation PATTERN_SELECTED_SPRITE = Clayworks.location("container/pottery_table/pattern_selected");
+	private static final ResourceLocation PATTERN_HIGHLIGHTED_SPRITE = Clayworks.location("container/pottery_table/pattern_highlighted");
+	private static final ResourceLocation PATTERN_SPRITE = Clayworks.location("container/pottery_table/pattern");
 
 	private static final ResourceLocation BG_LOCATION = Clayworks.location("textures/gui/container/pottery_table.png");
 
@@ -91,7 +91,7 @@ public class PotteryScreen extends AbstractContainerScreen<PotteryMenu> {
 		Slot slot2 = this.menu.getTrimMaterialSlot();
 		Slot slot3 = this.menu.getResultSlot();
 		if (!slot.hasItem()) {
-			guiGraphics.blitSprite(BANNER_SLOT_SPRITE, i + slot.x, j + slot.y, 16, 16);
+			guiGraphics.blitSprite(POT_SLOT_SPRITE, i + slot.x, j + slot.y, 16, 16);
 		}
 
 		if (!slot1.hasItem()) {

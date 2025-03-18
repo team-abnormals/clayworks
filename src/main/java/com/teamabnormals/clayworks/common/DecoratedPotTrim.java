@@ -2,7 +2,10 @@ package com.teamabnormals.clayworks.common;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import com.teamabnormals.clayworks.core.Clayworks;
 import com.teamabnormals.clayworks.core.registry.ClayworksRegistries;
+import net.minecraft.ChatFormatting;
+import net.minecraft.Util;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.core.registries.Registries;
@@ -14,6 +17,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.RegistryFixedCodec;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.armortrim.TrimMaterial;
@@ -54,9 +58,13 @@ public record DecoratedPotTrim(Holder<TrimMaterial> material, Holder<DecoratedPo
 		return 31 * i + (this.showInTooltip() ? 1 : 0);
 	}
 
+	public static final String DESIGN_TITLE = Util.makeDescriptionId("item", Clayworks.location("decorated_pot.design"));
+	public static final Component DESIGN_COMPONENT = Component.translatable(DESIGN_TITLE).withStyle(ChatFormatting.GRAY);
+
 	@Override
 	public void addToTooltip(Item.TooltipContext context, Consumer<Component> tooltipAdder, TooltipFlag tooltipFlag) {
 		if (this.showInTooltip()) {
+			tooltipAdder.accept(DESIGN_COMPONENT);
 			tooltipAdder.accept(CommonComponents.space().append(this.pattern.value().copyWithStyle(this.material)));
 			tooltipAdder.accept(CommonComponents.space().append(this.material.value().description()));
 		}

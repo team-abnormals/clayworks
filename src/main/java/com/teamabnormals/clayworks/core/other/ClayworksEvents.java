@@ -55,7 +55,7 @@ public class ClayworksEvents {
 					Optional<Reference<TrimMaterial>> material = TrimMaterials.getFromIngredient(registryAccess, stack);
 					Optional<Reference<DecoratedPotTrimPattern>> pattern = level.registryAccess().registryOrThrow(ClayworksRegistries.DECORATED_POT_TRIM_PATTERN).getHolder(DecoratedPotTrimPattern.BASE);
 					if (item.isEmpty() && material.isPresent() && pattern.isPresent()) {
-						trimmedPot.setTrim(new DecoratedPotTrim(material.get(), pattern.get(), false));
+						trimmedPot.setTrim(new DecoratedPotTrim(material.get(), pattern.get(), true));
 
 						level.playSound(null, pos, SoundEvents.COPPER_PLACE, SoundSource.BLOCKS, 1.0F, 1.0F);
 						if (!player.isCreative()) {

@@ -71,13 +71,13 @@ public class PotteryMenu extends AbstractContainerMenu {
 				return Block.byItem(stack.getItem()) instanceof DecoratedPotBlock;
 			}
 		});
-		this.dyeSlot = this.addSlot(new Slot(this.inputContainer, 1, 19, 45) {
+		this.dyeSlot = this.addSlot(new Slot(this.inputContainer, 1, 29, 26) {
 			@Override
 			public boolean mayPlace(ItemStack stack) {
 				return stack.getItem() instanceof DyeItem;
 			}
 		});
-		this.trimMaterialSlot = this.addSlot(new Slot(this.inputContainer, 2, 29, 26) {
+		this.trimMaterialSlot = this.addSlot(new Slot(this.inputContainer, 2, 19, 45) {
 			@Override
 			public boolean mayPlace(ItemStack stack) {
 				return stack.is(ItemTags.TRIM_MATERIALS);

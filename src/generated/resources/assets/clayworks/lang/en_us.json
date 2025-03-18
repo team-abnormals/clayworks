@@ -159,8 +159,12 @@
   "block.clayworks.yellow_terracotta_wall": "Yellow Terracotta Wall",
   "container.clayworks.kiln": "Kiln",
   "container.clayworks.pottery_table": "Pottery Table",
+  "decorated_pot_trim_pattern.clayworks.base": "Base Trim",
+  "decorated_pot_trim_pattern.clayworks.straight": "Straight Trim",
+  "decorated_pot_trim_pattern.clayworks.wavy": "Wavy Trim",
   "gui.clayworks.category.baking": "Baking",
   "gui.clayworks.recipebook.toggleRecipes.bakeable": "Showing Bakeable",
+  "item.clayworks.decorated_pot.design": "Design: ",
   "painting.clayworks.baked.author": "five",
   "painting.clayworks.baked.title": "Baked",
   "subtitles.clayworks.block.kiln.smoke": "Kiln smokes"
