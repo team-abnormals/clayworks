@@ -16,6 +16,7 @@ import com.teamabnormals.clayworks.core.data.server.ClayworksRecipeProvider;
 import com.teamabnormals.clayworks.core.data.server.tags.ClayworksBlockTagsProvider;
 import com.teamabnormals.clayworks.core.data.server.tags.ClayworksItemTagsProvider;
 import com.teamabnormals.clayworks.core.data.server.tags.ClayworksPaintingVariantTagsProvider;
+import com.teamabnormals.clayworks.core.other.ClayworksClientCompat;
 import com.teamabnormals.clayworks.core.other.ClayworksCompat;
 import com.teamabnormals.clayworks.core.registry.*;
 import com.teamabnormals.clayworks.core.registry.ClayworksConditions.ClayworksLootConditions;
@@ -80,6 +81,7 @@ public class Clayworks {
 
 	private void clientSetup(FMLClientSetupEvent event) {
 		event.enqueueWork(() -> {
+			ClayworksClientCompat.registerClientCompat();
 		});
 	}
 

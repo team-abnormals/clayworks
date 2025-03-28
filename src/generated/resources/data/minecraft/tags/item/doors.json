@@ -1,0 +1,21 @@
+{
+  "values": [
+    "clayworks:glass_door",
+    "clayworks:white_stained_glass_door",
+    "clayworks:orange_stained_glass_door",
+    "clayworks:magenta_stained_glass_door",
+    "clayworks:light_blue_stained_glass_door",
+    "clayworks:yellow_stained_glass_door",
+    "clayworks:lime_stained_glass_door",
+    "clayworks:pink_stained_glass_door",
+    "clayworks:gray_stained_glass_door",
+    "clayworks:light_gray_stained_glass_door",
+    "clayworks:cyan_stained_glass_door",
+    "clayworks:purple_stained_glass_door",
+    "clayworks:blue_stained_glass_door",
+    "clayworks:brown_stained_glass_door",
+    "clayworks:green_stained_glass_door",
+    "clayworks:red_stained_glass_door",
+    "clayworks:black_stained_glass_door"
+  ]
+}
