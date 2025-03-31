@@ -18,7 +18,6 @@ import com.teamabnormals.clayworks.core.data.server.tags.ClayworksItemTagsProvid
 import com.teamabnormals.clayworks.core.data.server.tags.ClayworksPaintingVariantTagsProvider;
 import com.teamabnormals.clayworks.core.other.ClayworksCompat;
 import com.teamabnormals.clayworks.core.registry.*;
-import com.teamabnormals.clayworks.core.registry.ClayworksConditions.ClayworksLootConditions;
 import com.teamabnormals.clayworks.core.registry.ClayworksRecipes.ClayworksRecipeSerializers;
 import com.teamabnormals.clayworks.core.registry.ClayworksRecipes.ClayworksRecipeTypes;
 import com.teamabnormals.clayworks.core.registry.helper.ClayworksBlockSubRegistryHelper;
@@ -50,7 +49,6 @@ public class Clayworks {
 	public Clayworks(IEventBus bus, ModContainer container) {
 		REGISTRY_HELPER.register(bus);
 		ClayworksConditions.CONDITION_SERIALIZERS.register(bus);
-		ClayworksLootConditions.LOOT_ITEM_CONDITIONS.register(bus);
 		ClayworksMenuTypes.MENU_TYPES.register(bus);
 		ClayworksRecipeSerializers.RECIPE_SERIALIZERS.register(bus);
 		ClayworksRecipeTypes.RECIPE_TYPES.register(bus);

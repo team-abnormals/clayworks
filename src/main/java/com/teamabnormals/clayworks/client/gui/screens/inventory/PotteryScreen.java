@@ -113,7 +113,7 @@ public class PotteryScreen extends AbstractContainerScreen<PotteryMenu> {
 			List<Holder<DecoratedPotTrimPattern>> list = this.menu.getSelectablePatterns();
 
 			label64:
-			for (int l = 0; l < 4; l++) {
+			for (int l = 0; l < 3; l++) {
 				for (int i1 = 0; i1 < 4; i1++) {
 					int j1 = l + this.startRow;
 					int k1 = j1 * 4 + i1;
@@ -162,7 +162,7 @@ public class PotteryScreen extends AbstractContainerScreen<PotteryMenu> {
 			int i = this.leftPos + 52;
 			int j = this.topPos + 14;
 
-			for (int k = 0; k < 4; k++) {
+			for (int k = 0; k < 3; k++) {
 				for (int l = 0; l < 4; l++) {
 					double d0 = mouseX - (double) (i + l * 16);
 					double d1 = mouseY - (double) (j + k * 18);
@@ -199,7 +199,7 @@ public class PotteryScreen extends AbstractContainerScreen<PotteryMenu> {
 	 */
 	@Override
 	public boolean mouseDragged(double mouseX, double mouseY, int button, double dragX, double dragY) {
-		int i = this.totalRowCount() - 4;
+		int i = this.totalRowCount() - 3;
 		if (this.scrolling && this.displayPatterns && i > 0) {
 			int j = this.topPos + 14;
 			int k = j + 54;
@@ -214,7 +214,7 @@ public class PotteryScreen extends AbstractContainerScreen<PotteryMenu> {
 
 	@Override
 	public boolean mouseScrolled(double mouseX, double mouseY, double scrollX, double scrollY) {
-		int i = this.totalRowCount() - 4;
+		int i = this.totalRowCount() - 3;
 		if (this.displayPatterns && i > 0) {
 			float f = (float) scrollY / (float) i;
 			this.scrollOffs = Mth.clamp(this.scrollOffs - f, 0.0F, 1.0F);
