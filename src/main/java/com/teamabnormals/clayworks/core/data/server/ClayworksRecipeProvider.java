@@ -28,7 +28,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.ModConfigSpec;
 import net.neoforged.neoforge.common.conditions.ICondition;
 import net.neoforged.neoforge.common.conditions.ModLoadedCondition;
-import org.checkerframework.checker.units.qual.C;
 
 import javax.annotation.Nullable;
 import java.util.concurrent.CompletableFuture;
@@ -48,13 +47,16 @@ public class ClayworksRecipeProvider extends BlueprintRecipeProvider {
 	public static final ConfigValueCondition CONCRETE_CONFIG = config(COMMON.concrete, "concrete");
 	public static final BlueprintAndCondition KILN_COMPAT = new BlueprintAndCondition(new ModLoadedCondition(Clayworks.MOD_ID), KILN_CONFIG);
 
+	public static final ConfigValueCondition GLASS_DOORS = config(COMMON.glassDoors, "glass_doors");
+
 	public ClayworksRecipeProvider(PackOutput result, CompletableFuture<Provider> provider) {
 		super(Clayworks.MOD_ID, result, provider);
 	}
 
 	@Override
 	public void buildRecipes(RecipeOutput output) {
-		ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, KILN.get()).define('#', ItemTags.STONE_CRAFTING_MATERIALS).define('X', Blocks.FURNACE).define('B', Blocks.MUD_BRICKS).pattern("###").pattern("#X#").pattern("BBB").unlockedBy("has_cobblestone", has(ItemTags.STONE_CRAFTING_MATERIALS)).save(output.withConditions(KILN_CONFIG));		generateKilnRecipes(output);
+		ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, KILN.get()).define('#', ItemTags.STONE_CRAFTING_MATERIALS).define('X', Blocks.FURNACE).define('B', Blocks.MUD_BRICKS).pattern("###").pattern("#X#").pattern("BBB").unlockedBy("has_cobblestone", has(ItemTags.STONE_CRAFTING_MATERIALS)).save(output.withConditions(KILN_CONFIG));
+		generateKilnRecipes(output);
 		ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, POTTERY_TABLE.get()).define('#', ItemTags.PLANKS).define('@', Items.BRICK).pattern("@@").pattern("##").pattern("##").unlockedBy("has_brick", has(Items.BRICK)).save(output.withConditions(POTTERY_TABLE_CONFIG));
 		SpecialRecipeBuilder.special(DecoratedPotColoring::new).save(output, Clayworks.MOD_ID + ":decorated_pot_coloring");
 
@@ -97,6 +99,24 @@ public class ClayworksRecipeProvider extends BlueprintRecipeProvider {
 		terracottaBricksRecipes(output, Blocks.GREEN_TERRACOTTA, ClayworksBlockFamilies.GREEN_TERRACOTTA, ClayworksBlockFamilies.GREEN_TERRACOTTA_BRICKS, Items.GREEN_DYE);
 		terracottaBricksRecipes(output, Blocks.RED_TERRACOTTA, ClayworksBlockFamilies.RED_TERRACOTTA, ClayworksBlockFamilies.RED_TERRACOTTA_BRICKS, Items.RED_DYE);
 		terracottaBricksRecipes(output, Blocks.BLACK_TERRACOTTA, ClayworksBlockFamilies.BLACK_TERRACOTTA, ClayworksBlockFamilies.BLACK_TERRACOTTA_BRICKS, Items.BLACK_DYE);
+
+		generateConditionalRecipes(output, ClayworksBlockFamilies.GLASS, GLASS_DOORS);
+		generateGlassDoorRecipes(output, ClayworksBlockFamilies.WHITE_STAINED_GLASS, Items.WHITE_DYE);
+		generateGlassDoorRecipes(output, ClayworksBlockFamilies.ORANGE_STAINED_GLASS, Items.ORANGE_DYE);
+		generateGlassDoorRecipes(output, ClayworksBlockFamilies.MAGENTA_STAINED_GLASS, Items.MAGENTA_DYE);
+		generateGlassDoorRecipes(output, ClayworksBlockFamilies.LIGHT_BLUE_STAINED_GLASS, Items.LIGHT_BLUE_DYE);
+		generateGlassDoorRecipes(output, ClayworksBlockFamilies.YELLOW_STAINED_GLASS, Items.YELLOW_DYE);
+		generateGlassDoorRecipes(output, ClayworksBlockFamilies.LIME_STAINED_GLASS, Items.LIME_DYE);
+		generateGlassDoorRecipes(output, ClayworksBlockFamilies.PINK_STAINED_GLASS, Items.PINK_DYE);
+		generateGlassDoorRecipes(output, ClayworksBlockFamilies.GRAY_STAINED_GLASS, Items.GRAY_DYE);
+		generateGlassDoorRecipes(output, ClayworksBlockFamilies.LIGHT_GRAY_STAINED_GLASS, Items.LIGHT_GRAY_DYE);
+		generateGlassDoorRecipes(output, ClayworksBlockFamilies.CYAN_STAINED_GLASS, Items.CYAN_DYE);
+		generateGlassDoorRecipes(output, ClayworksBlockFamilies.PURPLE_STAINED_GLASS, Items.PURPLE_DYE);
+		generateGlassDoorRecipes(output, ClayworksBlockFamilies.BLUE_STAINED_GLASS, Items.BLUE_DYE);
+		generateGlassDoorRecipes(output, ClayworksBlockFamilies.BROWN_STAINED_GLASS, Items.BROWN_DYE);
+		generateGlassDoorRecipes(output, ClayworksBlockFamilies.GREEN_STAINED_GLASS, Items.GREEN_DYE);
+		generateGlassDoorRecipes(output, ClayworksBlockFamilies.RED_STAINED_GLASS, Items.RED_DYE);
+		generateGlassDoorRecipes(output, ClayworksBlockFamilies.BLACK_STAINED_GLASS, Items.BLACK_DYE);
 	}
 
 	public static void generateKilnRecipes(RecipeOutput output) {
@@ -208,6 +228,16 @@ public class ClayworksRecipeProvider extends BlueprintRecipeProvider {
 				SimpleCookingRecipeBuilder.smelting(Ingredient.of(block), RecipeCategory.BUILDING_BLOCKS, result, 0.1F, 200).unlockedBy(getHasName(block), has(block)).save(output.withConditions(condition).withConditions(condition));
 			}
 		});
+	}
+
+	protected void stainedGlassDoorFromDye(RecipeOutput output, ItemLike input, ItemLike door, ItemLike dye, String group) {
+		ShapelessRecipeBuilder.shapeless(RecipeCategory.REDSTONE, door).requires(input).requires(dye).group(group).unlockedBy(getHasName(input), has(input)).save(output.withConditions(GLASS_DOORS), getModConversionRecipeName(door, dye));
+	}
+
+	public void generateGlassDoorRecipes(RecipeOutput output, BlockFamily family, ItemLike dye) {
+		generateConditionalRecipes(output, family, GLASS_DOORS);
+		stainedGlassDoorFromDye(output, GLASS_DOOR, family.get(Variant.DOOR), dye, "stained_glass_door");
+		stainedGlassDoorFromDye(output, GLASS_TRAPDOOR, family.get(Variant.TRAPDOOR), dye, "stained_glass_trapdoor");
 	}
 
 	protected static void coloredConcreteFromConcreteAndDye(RecipeOutput output, ItemLike concrete, ItemLike concretePowder, ItemLike dye) {

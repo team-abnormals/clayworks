@@ -3,6 +3,8 @@ package com.teamabnormals.clayworks.core.registry;
 import com.teamabnormals.blueprint.core.api.BlockSetTypeRegistryHelper;
 import com.teamabnormals.blueprint.core.util.PropertyUtil;
 import com.teamabnormals.blueprint.core.util.item.CreativeModeTabContentsPopulator;
+import com.teamabnormals.clayworks.common.block.GlassDoorBlock;
+import com.teamabnormals.clayworks.common.block.GlassTrapDoorBlock;
 import com.teamabnormals.clayworks.common.block.KilnBlock;
 import com.teamabnormals.clayworks.common.block.PotteryTableBlock;
 import com.teamabnormals.clayworks.core.Clayworks;
@@ -180,41 +182,41 @@ public class ClayworksBlocks {
 	public static final DeferredBlock<Block> CHISELED_RED_TERRACOTTA_BRICKS = HELPER.createBlock("chiseled_red_terracotta_bricks", () -> new Block(ClayworksProperties.RED_TERRACOTTA));
 	public static final DeferredBlock<Block> CHISELED_BLACK_TERRACOTTA_BRICKS = HELPER.createBlock("chiseled_black_terracotta_bricks", () -> new Block(ClayworksProperties.BLACK_TERRACOTTA));
 
-	public static final DeferredBlock<Block> GLASS_DOOR = HELPER.createBlock("glass_door", () -> new DoorBlock(ClayworksProperties.GLASS_BLOCK_SET, ClayworksProperties.GLASS));
-	public static final DeferredBlock<Block> WHITE_STAINED_GLASS_DOOR = HELPER.createBlock("white_stained_glass_door", () -> new DoorBlock(ClayworksProperties.GLASS_BLOCK_SET, ClayworksProperties.stainedGlass(DyeColor.WHITE)));
-	public static final DeferredBlock<Block> ORANGE_STAINED_GLASS_DOOR = HELPER.createBlock("orange_stained_glass_door", () -> new DoorBlock(ClayworksProperties.GLASS_BLOCK_SET, ClayworksProperties.stainedGlass(DyeColor.ORANGE)));
-	public static final DeferredBlock<Block> MAGENTA_STAINED_GLASS_DOOR = HELPER.createBlock("magenta_stained_glass_door", () -> new DoorBlock(ClayworksProperties.GLASS_BLOCK_SET, ClayworksProperties.stainedGlass(DyeColor.MAGENTA)));
-	public static final DeferredBlock<Block> LIGHT_BLUE_STAINED_GLASS_DOOR = HELPER.createBlock("light_blue_stained_glass_door", () -> new DoorBlock(ClayworksProperties.GLASS_BLOCK_SET, ClayworksProperties.stainedGlass(DyeColor.LIGHT_BLUE)));
-	public static final DeferredBlock<Block> YELLOW_STAINED_GLASS_DOOR = HELPER.createBlock("yellow_stained_glass_door", () -> new DoorBlock(ClayworksProperties.GLASS_BLOCK_SET, ClayworksProperties.stainedGlass(DyeColor.YELLOW)));
-	public static final DeferredBlock<Block> LIME_STAINED_GLASS_DOOR = HELPER.createBlock("lime_stained_glass_door", () -> new DoorBlock(ClayworksProperties.GLASS_BLOCK_SET, ClayworksProperties.stainedGlass(DyeColor.LIME)));
-	public static final DeferredBlock<Block> PINK_STAINED_GLASS_DOOR = HELPER.createBlock("pink_stained_glass_door", () -> new DoorBlock(ClayworksProperties.GLASS_BLOCK_SET, ClayworksProperties.stainedGlass(DyeColor.PINK)));
-	public static final DeferredBlock<Block> GRAY_STAINED_GLASS_DOOR = HELPER.createBlock("gray_stained_glass_door", () -> new DoorBlock(ClayworksProperties.GLASS_BLOCK_SET, ClayworksProperties.stainedGlass(DyeColor.GRAY)));
-	public static final DeferredBlock<Block> LIGHT_GRAY_STAINED_GLASS_DOOR = HELPER.createBlock("light_gray_stained_glass_door", () -> new DoorBlock(ClayworksProperties.GLASS_BLOCK_SET, ClayworksProperties.stainedGlass(DyeColor.LIGHT_GRAY)));
-	public static final DeferredBlock<Block> CYAN_STAINED_GLASS_DOOR = HELPER.createBlock("cyan_stained_glass_door", () -> new DoorBlock(ClayworksProperties.GLASS_BLOCK_SET, ClayworksProperties.stainedGlass(DyeColor.CYAN)));
-	public static final DeferredBlock<Block> PURPLE_STAINED_GLASS_DOOR = HELPER.createBlock("purple_stained_glass_door", () -> new DoorBlock(ClayworksProperties.GLASS_BLOCK_SET, ClayworksProperties.stainedGlass(DyeColor.PURPLE)));
-	public static final DeferredBlock<Block> BLUE_STAINED_GLASS_DOOR = HELPER.createBlock("blue_stained_glass_door", () -> new DoorBlock(ClayworksProperties.GLASS_BLOCK_SET, ClayworksProperties.stainedGlass(DyeColor.BLUE)));
-	public static final DeferredBlock<Block> BROWN_STAINED_GLASS_DOOR = HELPER.createBlock("brown_stained_glass_door", () -> new DoorBlock(ClayworksProperties.GLASS_BLOCK_SET, ClayworksProperties.stainedGlass(DyeColor.BROWN)));
-	public static final DeferredBlock<Block> GREEN_STAINED_GLASS_DOOR = HELPER.createBlock("green_stained_glass_door", () -> new DoorBlock(ClayworksProperties.GLASS_BLOCK_SET, ClayworksProperties.stainedGlass(DyeColor.GREEN)));
-	public static final DeferredBlock<Block> RED_STAINED_GLASS_DOOR = HELPER.createBlock("red_stained_glass_door", () -> new DoorBlock(ClayworksProperties.GLASS_BLOCK_SET, ClayworksProperties.stainedGlass(DyeColor.RED)));
-	public static final DeferredBlock<Block> BLACK_STAINED_GLASS_DOOR = HELPER.createBlock("black_stained_glass_door", () -> new DoorBlock(ClayworksProperties.GLASS_BLOCK_SET, ClayworksProperties.stainedGlass(DyeColor.BLACK)));
+	public static final DeferredBlock<Block> GLASS_DOOR = HELPER.createBlock("glass_door", GlassDoorBlock::new);
+	public static final DeferredBlock<Block> WHITE_STAINED_GLASS_DOOR = HELPER.createBlock("white_stained_glass_door", () -> new GlassDoorBlock(DyeColor.WHITE));
+	public static final DeferredBlock<Block> ORANGE_STAINED_GLASS_DOOR = HELPER.createBlock("orange_stained_glass_door", () -> new GlassDoorBlock(DyeColor.ORANGE));
+	public static final DeferredBlock<Block> MAGENTA_STAINED_GLASS_DOOR = HELPER.createBlock("magenta_stained_glass_door", () -> new GlassDoorBlock(DyeColor.MAGENTA));
+	public static final DeferredBlock<Block> LIGHT_BLUE_STAINED_GLASS_DOOR = HELPER.createBlock("light_blue_stained_glass_door", () -> new GlassDoorBlock(DyeColor.LIGHT_BLUE));
+	public static final DeferredBlock<Block> YELLOW_STAINED_GLASS_DOOR = HELPER.createBlock("yellow_stained_glass_door", () -> new GlassDoorBlock(DyeColor.YELLOW));
+	public static final DeferredBlock<Block> LIME_STAINED_GLASS_DOOR = HELPER.createBlock("lime_stained_glass_door", () -> new GlassDoorBlock(DyeColor.LIME));
+	public static final DeferredBlock<Block> PINK_STAINED_GLASS_DOOR = HELPER.createBlock("pink_stained_glass_door", () -> new GlassDoorBlock(DyeColor.PINK));
+	public static final DeferredBlock<Block> GRAY_STAINED_GLASS_DOOR = HELPER.createBlock("gray_stained_glass_door", () -> new GlassDoorBlock(DyeColor.GRAY));
+	public static final DeferredBlock<Block> LIGHT_GRAY_STAINED_GLASS_DOOR = HELPER.createBlock("light_gray_stained_glass_door", () -> new GlassDoorBlock(DyeColor.LIGHT_GRAY));
+	public static final DeferredBlock<Block> CYAN_STAINED_GLASS_DOOR = HELPER.createBlock("cyan_stained_glass_door", () -> new GlassDoorBlock(DyeColor.CYAN));
+	public static final DeferredBlock<Block> PURPLE_STAINED_GLASS_DOOR = HELPER.createBlock("purple_stained_glass_door", () -> new GlassDoorBlock(DyeColor.PURPLE));
+	public static final DeferredBlock<Block> BLUE_STAINED_GLASS_DOOR = HELPER.createBlock("blue_stained_glass_door", () -> new GlassDoorBlock(DyeColor.BLUE));
+	public static final DeferredBlock<Block> BROWN_STAINED_GLASS_DOOR = HELPER.createBlock("brown_stained_glass_door", () -> new GlassDoorBlock(DyeColor.BROWN));
+	public static final DeferredBlock<Block> GREEN_STAINED_GLASS_DOOR = HELPER.createBlock("green_stained_glass_door", () -> new GlassDoorBlock(DyeColor.GREEN));
+	public static final DeferredBlock<Block> RED_STAINED_GLASS_DOOR = HELPER.createBlock("red_stained_glass_door", () -> new GlassDoorBlock(DyeColor.RED));
+	public static final DeferredBlock<Block> BLACK_STAINED_GLASS_DOOR = HELPER.createBlock("black_stained_glass_door", () -> new GlassDoorBlock(DyeColor.BLACK));
 
-	public static final DeferredBlock<Block> GLASS_TRAPDOOR = HELPER.createBlock("glass_trapdoor", () -> new TrapDoorBlock(ClayworksProperties.GLASS_BLOCK_SET, ClayworksProperties.GLASS));
-	public static final DeferredBlock<Block> WHITE_STAINED_GLASS_TRAPDOOR = HELPER.createBlock("white_stained_glass_trapdoor", () -> new TrapDoorBlock(ClayworksProperties.GLASS_BLOCK_SET, ClayworksProperties.stainedGlass(DyeColor.WHITE)));
-	public static final DeferredBlock<Block> ORANGE_STAINED_GLASS_TRAPDOOR = HELPER.createBlock("orange_stained_glass_trapdoor", () -> new TrapDoorBlock(ClayworksProperties.GLASS_BLOCK_SET, ClayworksProperties.stainedGlass(DyeColor.ORANGE)));
-	public static final DeferredBlock<Block> MAGENTA_STAINED_GLASS_TRAPDOOR = HELPER.createBlock("magenta_stained_glass_trapdoor", () -> new TrapDoorBlock(ClayworksProperties.GLASS_BLOCK_SET, ClayworksProperties.stainedGlass(DyeColor.MAGENTA)));
-	public static final DeferredBlock<Block> LIGHT_BLUE_STAINED_GLASS_TRAPDOOR = HELPER.createBlock("light_blue_stained_glass_trapdoor", () -> new TrapDoorBlock(ClayworksProperties.GLASS_BLOCK_SET, ClayworksProperties.stainedGlass(DyeColor.LIGHT_BLUE)));
-	public static final DeferredBlock<Block> YELLOW_STAINED_GLASS_TRAPDOOR = HELPER.createBlock("yellow_stained_glass_trapdoor", () -> new TrapDoorBlock(ClayworksProperties.GLASS_BLOCK_SET, ClayworksProperties.stainedGlass(DyeColor.YELLOW)));
-	public static final DeferredBlock<Block> LIME_STAINED_GLASS_TRAPDOOR = HELPER.createBlock("lime_stained_glass_trapdoor", () -> new TrapDoorBlock(ClayworksProperties.GLASS_BLOCK_SET, ClayworksProperties.stainedGlass(DyeColor.LIME)));
-	public static final DeferredBlock<Block> PINK_STAINED_GLASS_TRAPDOOR = HELPER.createBlock("pink_stained_glass_trapdoor", () -> new TrapDoorBlock(ClayworksProperties.GLASS_BLOCK_SET, ClayworksProperties.stainedGlass(DyeColor.PINK)));
-	public static final DeferredBlock<Block> GRAY_STAINED_GLASS_TRAPDOOR = HELPER.createBlock("gray_stained_glass_trapdoor", () -> new TrapDoorBlock(ClayworksProperties.GLASS_BLOCK_SET, ClayworksProperties.stainedGlass(DyeColor.GRAY)));
-	public static final DeferredBlock<Block> LIGHT_GRAY_STAINED_GLASS_TRAPDOOR = HELPER.createBlock("light_gray_stained_glass_trapdoor", () -> new TrapDoorBlock(ClayworksProperties.GLASS_BLOCK_SET, ClayworksProperties.stainedGlass(DyeColor.LIGHT_GRAY)));
-	public static final DeferredBlock<Block> CYAN_STAINED_GLASS_TRAPDOOR = HELPER.createBlock("cyan_stained_glass_trapdoor", () -> new TrapDoorBlock(ClayworksProperties.GLASS_BLOCK_SET, ClayworksProperties.stainedGlass(DyeColor.CYAN)));
-	public static final DeferredBlock<Block> PURPLE_STAINED_GLASS_TRAPDOOR = HELPER.createBlock("purple_stained_glass_trapdoor", () -> new TrapDoorBlock(ClayworksProperties.GLASS_BLOCK_SET, ClayworksProperties.stainedGlass(DyeColor.PURPLE)));
-	public static final DeferredBlock<Block> BLUE_STAINED_GLASS_TRAPDOOR = HELPER.createBlock("blue_stained_glass_trapdoor", () -> new TrapDoorBlock(ClayworksProperties.GLASS_BLOCK_SET, ClayworksProperties.stainedGlass(DyeColor.BLUE)));
-	public static final DeferredBlock<Block> BROWN_STAINED_GLASS_TRAPDOOR = HELPER.createBlock("brown_stained_glass_trapdoor", () -> new TrapDoorBlock(ClayworksProperties.GLASS_BLOCK_SET, ClayworksProperties.stainedGlass(DyeColor.BROWN)));
-	public static final DeferredBlock<Block> GREEN_STAINED_GLASS_TRAPDOOR = HELPER.createBlock("green_stained_glass_trapdoor", () -> new TrapDoorBlock(ClayworksProperties.GLASS_BLOCK_SET, ClayworksProperties.stainedGlass(DyeColor.GREEN)));
-	public static final DeferredBlock<Block> RED_STAINED_GLASS_TRAPDOOR = HELPER.createBlock("red_stained_glass_trapdoor", () -> new TrapDoorBlock(ClayworksProperties.GLASS_BLOCK_SET, ClayworksProperties.stainedGlass(DyeColor.RED)));
-	public static final DeferredBlock<Block> BLACK_STAINED_GLASS_TRAPDOOR = HELPER.createBlock("black_stained_glass_trapdoor", () -> new TrapDoorBlock(ClayworksProperties.GLASS_BLOCK_SET, ClayworksProperties.stainedGlass(DyeColor.BLACK)));
+	public static final DeferredBlock<Block> GLASS_TRAPDOOR = HELPER.createBlock("glass_trapdoor", GlassTrapDoorBlock::new);
+	public static final DeferredBlock<Block> WHITE_STAINED_GLASS_TRAPDOOR = HELPER.createBlock("white_stained_glass_trapdoor", () -> new GlassTrapDoorBlock(DyeColor.WHITE));
+	public static final DeferredBlock<Block> ORANGE_STAINED_GLASS_TRAPDOOR = HELPER.createBlock("orange_stained_glass_trapdoor", () -> new GlassTrapDoorBlock(DyeColor.ORANGE));
+	public static final DeferredBlock<Block> MAGENTA_STAINED_GLASS_TRAPDOOR = HELPER.createBlock("magenta_stained_glass_trapdoor", () -> new GlassTrapDoorBlock(DyeColor.MAGENTA));
+	public static final DeferredBlock<Block> LIGHT_BLUE_STAINED_GLASS_TRAPDOOR = HELPER.createBlock("light_blue_stained_glass_trapdoor", () -> new GlassTrapDoorBlock(DyeColor.LIGHT_BLUE));
+	public static final DeferredBlock<Block> YELLOW_STAINED_GLASS_TRAPDOOR = HELPER.createBlock("yellow_stained_glass_trapdoor", () -> new GlassTrapDoorBlock(DyeColor.YELLOW));
+	public static final DeferredBlock<Block> LIME_STAINED_GLASS_TRAPDOOR = HELPER.createBlock("lime_stained_glass_trapdoor", () -> new GlassTrapDoorBlock(DyeColor.LIME));
+	public static final DeferredBlock<Block> PINK_STAINED_GLASS_TRAPDOOR = HELPER.createBlock("pink_stained_glass_trapdoor", () -> new GlassTrapDoorBlock(DyeColor.PINK));
+	public static final DeferredBlock<Block> GRAY_STAINED_GLASS_TRAPDOOR = HELPER.createBlock("gray_stained_glass_trapdoor", () -> new GlassTrapDoorBlock(DyeColor.GRAY));
+	public static final DeferredBlock<Block> LIGHT_GRAY_STAINED_GLASS_TRAPDOOR = HELPER.createBlock("light_gray_stained_glass_trapdoor", () -> new GlassTrapDoorBlock(DyeColor.LIGHT_GRAY));
+	public static final DeferredBlock<Block> CYAN_STAINED_GLASS_TRAPDOOR = HELPER.createBlock("cyan_stained_glass_trapdoor", () -> new GlassTrapDoorBlock(DyeColor.CYAN));
+	public static final DeferredBlock<Block> PURPLE_STAINED_GLASS_TRAPDOOR = HELPER.createBlock("purple_stained_glass_trapdoor", () -> new GlassTrapDoorBlock(DyeColor.PURPLE));
+	public static final DeferredBlock<Block> BLUE_STAINED_GLASS_TRAPDOOR = HELPER.createBlock("blue_stained_glass_trapdoor", () -> new GlassTrapDoorBlock(DyeColor.BLUE));
+	public static final DeferredBlock<Block> BROWN_STAINED_GLASS_TRAPDOOR = HELPER.createBlock("brown_stained_glass_trapdoor", () -> new GlassTrapDoorBlock(DyeColor.BROWN));
+	public static final DeferredBlock<Block> GREEN_STAINED_GLASS_TRAPDOOR = HELPER.createBlock("green_stained_glass_trapdoor", () -> new GlassTrapDoorBlock(DyeColor.GREEN));
+	public static final DeferredBlock<Block> RED_STAINED_GLASS_TRAPDOOR = HELPER.createBlock("red_stained_glass_trapdoor", () -> new GlassTrapDoorBlock(DyeColor.RED));
+	public static final DeferredBlock<Block> BLACK_STAINED_GLASS_TRAPDOOR = HELPER.createBlock("black_stained_glass_trapdoor", () -> new GlassTrapDoorBlock(DyeColor.BLACK));
 
 	public static final DeferredBlock<Block> WHITE_DECORATED_POT = HELPER.createdDecoratedPotBlock("white_decorated_pot", () -> new DecoratedPotBlock(ClayworksProperties.decoratedPot(MapColor.TERRACOTTA_WHITE)));
 	public static final DeferredBlock<Block> ORANGE_DECORATED_POT = HELPER.createdDecoratedPotBlock("orange_decorated_pot", () -> new DecoratedPotBlock(ClayworksProperties.decoratedPot(MapColor.TERRACOTTA_ORANGE)));
@@ -312,8 +314,8 @@ public class ClayworksBlocks {
 		}
 
 		public static final Block.Properties GLASS = BlockBehaviour.Properties.of().instrument(NoteBlockInstrument.HAT).strength(0.3F).sound(SoundType.GLASS).noOcclusion().isValidSpawn(Blocks::never).isRedstoneConductor(PropertyUtil::never).isSuffocating(PropertyUtil::never).isViewBlocking(PropertyUtil::never);
-		
-		private static BlockBehaviour.Properties stainedGlass(DyeColor color) {
+
+		public static BlockBehaviour.Properties stainedGlass(DyeColor color) {
 			return BlockBehaviour.Properties.of().mapColor(color).instrument(NoteBlockInstrument.HAT).strength(0.3F).sound(SoundType.GLASS).noOcclusion().isValidSpawn(Blocks::never).isRedstoneConductor(PropertyUtil::never).isSuffocating(PropertyUtil::never).isViewBlocking(PropertyUtil::never);
 		}
 
@@ -342,17 +344,21 @@ public class ClayworksBlocks {
 				)
 				.predicate(event -> event.getTabKey() == COLORED_BLOCKS && ClayworksConfig.COMMON.glazedTerracotta.get())
 				.addItemsBefore(of(Items.WHITE_GLAZED_TERRACOTTA), GLAZED_TERRACOTTA)
+
 				.predicate(event -> event.getTabKey() == COLORED_BLOCKS && ClayworksConfig.COMMON.concrete.get())
 				.addItemsBefore(of(Items.WHITE_CONCRETE), CONCRETE)
 				.addItemsBefore(of(Items.WHITE_CONCRETE_POWDER), CONCRETE_POWDER)
+
 				.predicate(event -> event.getTabKey() == COLORED_BLOCKS && ClayworksConfig.COMMON.glassDoors.get())
-				.addItemsBefore(of(Items.SHULKER_BOX), GLASS_DOOR, WHITE_STAINED_GLASS_DOOR, LIGHT_GRAY_STAINED_GLASS_DOOR, GRAY_STAINED_GLASS_DOOR, BLACK_STAINED_GLASS_DOOR, BROWN_STAINED_GLASS_DOOR, RED_STAINED_GLASS_DOOR, ORANGE_STAINED_GLASS_DOOR, YELLOW_STAINED_GLASS_DOOR, LIME_STAINED_GLASS_DOOR, GREEN_STAINED_GLASS_DOOR, CYAN_STAINED_GLASS_DOOR, LIGHT_BLUE_STAINED_GLASS_DOOR, BLUE_STAINED_GLASS_DOOR, PURPLE_STAINED_GLASS_DOOR, MAGENTA_STAINED_GLASS_DOOR, PINK_STAINED_GLASS_DOOR)
-				.predicate(event -> event.getTabKey() == COLORED_BLOCKS && ClayworksConfig.COMMON.glassTrapdoors.get())
-				.addItemsBefore(of(Items.SHULKER_BOX), GLASS_TRAPDOOR, WHITE_STAINED_GLASS_TRAPDOOR, LIGHT_GRAY_STAINED_GLASS_TRAPDOOR, GRAY_STAINED_GLASS_TRAPDOOR, BLACK_STAINED_GLASS_TRAPDOOR, BROWN_STAINED_GLASS_TRAPDOOR, RED_STAINED_GLASS_TRAPDOOR, ORANGE_STAINED_GLASS_TRAPDOOR, YELLOW_STAINED_GLASS_TRAPDOOR, LIME_STAINED_GLASS_TRAPDOOR, GREEN_STAINED_GLASS_TRAPDOOR, CYAN_STAINED_GLASS_TRAPDOOR, LIGHT_BLUE_STAINED_GLASS_TRAPDOOR, BLUE_STAINED_GLASS_TRAPDOOR, PURPLE_STAINED_GLASS_TRAPDOOR, MAGENTA_STAINED_GLASS_TRAPDOOR, PINK_STAINED_GLASS_TRAPDOOR)
+				.addItemsBefore(of(Items.SHULKER_BOX), GLASS_DOOR, WHITE_STAINED_GLASS_DOOR, LIGHT_GRAY_STAINED_GLASS_DOOR, GRAY_STAINED_GLASS_DOOR, BLACK_STAINED_GLASS_DOOR, BROWN_STAINED_GLASS_DOOR, RED_STAINED_GLASS_DOOR, ORANGE_STAINED_GLASS_DOOR, YELLOW_STAINED_GLASS_DOOR, LIME_STAINED_GLASS_DOOR, GREEN_STAINED_GLASS_DOOR, CYAN_STAINED_GLASS_DOOR, LIGHT_BLUE_STAINED_GLASS_DOOR, BLUE_STAINED_GLASS_DOOR, PURPLE_STAINED_GLASS_DOOR, MAGENTA_STAINED_GLASS_DOOR, PINK_STAINED_GLASS_DOOR,
+						GLASS_TRAPDOOR, WHITE_STAINED_GLASS_TRAPDOOR, LIGHT_GRAY_STAINED_GLASS_TRAPDOOR, GRAY_STAINED_GLASS_TRAPDOOR, BLACK_STAINED_GLASS_TRAPDOOR, BROWN_STAINED_GLASS_TRAPDOOR, RED_STAINED_GLASS_TRAPDOOR, ORANGE_STAINED_GLASS_TRAPDOOR, YELLOW_STAINED_GLASS_TRAPDOOR, LIME_STAINED_GLASS_TRAPDOOR, GREEN_STAINED_GLASS_TRAPDOOR, CYAN_STAINED_GLASS_TRAPDOOR, LIGHT_BLUE_STAINED_GLASS_TRAPDOOR, BLUE_STAINED_GLASS_TRAPDOOR, PURPLE_STAINED_GLASS_TRAPDOOR, MAGENTA_STAINED_GLASS_TRAPDOOR, PINK_STAINED_GLASS_TRAPDOOR)
+
 				.predicate(event -> event.getTabKey() == COLORED_BLOCKS && ClayworksConfig.COMMON.decoratedPotColors.get())
 				.addItems(() -> Items.DECORATED_POT, WHITE_DECORATED_POT, LIGHT_GRAY_DECORATED_POT, GRAY_DECORATED_POT, BLACK_DECORATED_POT, BROWN_DECORATED_POT, RED_DECORATED_POT, ORANGE_DECORATED_POT, YELLOW_DECORATED_POT, LIME_DECORATED_POT, GREEN_DECORATED_POT, CYAN_DECORATED_POT, LIGHT_BLUE_DECORATED_POT, BLUE_DECORATED_POT, PURPLE_DECORATED_POT, MAGENTA_DECORATED_POT, PINK_DECORATED_POT)
+
 				.predicate(event -> event.getTabKey() == FUNCTIONAL_BLOCKS && ClayworksConfig.COMMON.kiln.get())
 				.addItemsAfter(of(Items.SMOKER), KILN)
+
 				.predicate(event -> event.getTabKey() == FUNCTIONAL_BLOCKS && ClayworksConfig.COMMON.potteryTable.get())
 				.addItemsAfter(of(Items.LOOM), POTTERY_TABLE);
 	}

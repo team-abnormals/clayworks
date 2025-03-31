@@ -1,0 +1,38 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "clayworks:config",
+      "value": "glass_doors"
+    }
+  ],
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_glass_door": {
+      "conditions": {
+        "items": [
+          {
+            "items": "clayworks:glass_door"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "clayworks:brown_stained_glass_door_from_brown_dye"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_glass_door"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "clayworks:brown_stained_glass_door_from_brown_dye"
+    ]
+  }
+}

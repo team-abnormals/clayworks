@@ -24,8 +24,6 @@ public class ClayworksConfig {
 		public final BooleanValue terracottaBricks;
 		@ConfigKey("glass_doors")
 		public final BooleanValue glassDoors;
-		@ConfigKey("glass_trapdoors")
-		public final BooleanValue glassTrapdoors;
 		@ConfigKey("decorated_pot_colors")
 		public final BooleanValue decoratedPotColors;
 		@ConfigKey("decorated_pot_trims")
@@ -41,7 +39,6 @@ public class ClayworksConfig {
 			this.terracottaVariants = builder.define("Terracotta slabs, stairs, and walls", true);
 			this.terracottaBricks = builder.define("Terracotta bricks", true);
 			this.glassDoors = builder.define("Glass doors", true);
-			this.glassTrapdoors = builder.define("Glass trapdoors", true);
 			builder.push("decorated_pot");
 			this.decoratedPotColors = builder.define("Decorated pot colors", true);
 			this.decoratedPotTrims = builder.define("Decorated pot trims", true);

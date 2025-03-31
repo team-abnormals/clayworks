@@ -1,0 +1,38 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "clayworks:config",
+      "value": "glass_doors"
+    }
+  ],
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_black_stained_glass": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:black_stained_glass"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "clayworks:black_stained_glass_trapdoor"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_black_stained_glass"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "clayworks:black_stained_glass_trapdoor"
+    ]
+  }
+}

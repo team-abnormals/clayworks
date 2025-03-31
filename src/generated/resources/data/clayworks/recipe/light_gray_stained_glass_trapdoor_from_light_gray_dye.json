@@ -1,0 +1,23 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "clayworks:config",
+      "value": "glass_doors"
+    }
+  ],
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "group": "stained_glass_trapdoor",
+  "ingredients": [
+    {
+      "item": "clayworks:glass_trapdoor"
+    },
+    {
+      "item": "minecraft:light_gray_dye"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "clayworks:light_gray_stained_glass_trapdoor"
+  }
+}

@@ -42,4 +42,22 @@ public class ClayworksBlockFamilies {
 	public static final BlockFamily GREEN_TERRACOTTA_BRICKS = new BlockFamily.Builder(ClayworksBlocks.GREEN_TERRACOTTA_BRICKS.get()).slab(GREEN_TERRACOTTA_BRICK_SLAB.get()).stairs(GREEN_TERRACOTTA_BRICK_STAIRS.get()).wall(GREEN_TERRACOTTA_BRICK_WALL.get()).chiseled(CHISELED_GREEN_TERRACOTTA_BRICKS.get()).getFamily();
 	public static final BlockFamily RED_TERRACOTTA_BRICKS = new BlockFamily.Builder(ClayworksBlocks.RED_TERRACOTTA_BRICKS.get()).slab(RED_TERRACOTTA_BRICK_SLAB.get()).stairs(RED_TERRACOTTA_BRICK_STAIRS.get()).wall(RED_TERRACOTTA_BRICK_WALL.get()).chiseled(CHISELED_RED_TERRACOTTA_BRICKS.get()).getFamily();
 	public static final BlockFamily BLACK_TERRACOTTA_BRICKS = new BlockFamily.Builder(ClayworksBlocks.BLACK_TERRACOTTA_BRICKS.get()).slab(BLACK_TERRACOTTA_BRICK_SLAB.get()).stairs(BLACK_TERRACOTTA_BRICK_STAIRS.get()).wall(BLACK_TERRACOTTA_BRICK_WALL.get()).chiseled(CHISELED_BLACK_TERRACOTTA_BRICKS.get()).getFamily();
+
+	public static final BlockFamily GLASS = new BlockFamily.Builder(Blocks.GLASS).door(GLASS_DOOR.get()).trapdoor(GLASS_TRAPDOOR.get()).getFamily();
+	public static final BlockFamily WHITE_STAINED_GLASS = new BlockFamily.Builder(Blocks.WHITE_STAINED_GLASS).door(WHITE_STAINED_GLASS_DOOR.get()).trapdoor(WHITE_STAINED_GLASS_TRAPDOOR.get()).getFamily();
+	public static final BlockFamily ORANGE_STAINED_GLASS = new BlockFamily.Builder(Blocks.ORANGE_STAINED_GLASS).door(ORANGE_STAINED_GLASS_DOOR.get()).trapdoor(ORANGE_STAINED_GLASS_TRAPDOOR.get()).getFamily();
+	public static final BlockFamily MAGENTA_STAINED_GLASS = new BlockFamily.Builder(Blocks.MAGENTA_STAINED_GLASS).door(MAGENTA_STAINED_GLASS_DOOR.get()).trapdoor(MAGENTA_STAINED_GLASS_TRAPDOOR.get()).getFamily();
+	public static final BlockFamily LIGHT_BLUE_STAINED_GLASS = new BlockFamily.Builder(Blocks.LIGHT_BLUE_STAINED_GLASS).door(LIGHT_BLUE_STAINED_GLASS_DOOR.get()).trapdoor(LIGHT_BLUE_STAINED_GLASS_TRAPDOOR.get()).getFamily();
+	public static final BlockFamily YELLOW_STAINED_GLASS = new BlockFamily.Builder(Blocks.YELLOW_STAINED_GLASS).door(YELLOW_STAINED_GLASS_DOOR.get()).trapdoor(YELLOW_STAINED_GLASS_TRAPDOOR.get()).getFamily();
+	public static final BlockFamily LIME_STAINED_GLASS = new BlockFamily.Builder(Blocks.LIME_STAINED_GLASS).door(LIME_STAINED_GLASS_DOOR.get()).trapdoor(LIME_STAINED_GLASS_TRAPDOOR.get()).getFamily();
+	public static final BlockFamily PINK_STAINED_GLASS = new BlockFamily.Builder(Blocks.PINK_STAINED_GLASS).door(PINK_STAINED_GLASS_DOOR.get()).trapdoor(PINK_STAINED_GLASS_TRAPDOOR.get()).getFamily();
+	public static final BlockFamily GRAY_STAINED_GLASS = new BlockFamily.Builder(Blocks.GRAY_STAINED_GLASS).door(GRAY_STAINED_GLASS_DOOR.get()).trapdoor(GRAY_STAINED_GLASS_TRAPDOOR.get()).getFamily();
+	public static final BlockFamily LIGHT_GRAY_STAINED_GLASS = new BlockFamily.Builder(Blocks.LIGHT_GRAY_STAINED_GLASS).door(LIGHT_GRAY_STAINED_GLASS_DOOR.get()).trapdoor(LIGHT_GRAY_STAINED_GLASS_TRAPDOOR.get()).getFamily();
+	public static final BlockFamily CYAN_STAINED_GLASS = new BlockFamily.Builder(Blocks.CYAN_STAINED_GLASS).door(CYAN_STAINED_GLASS_DOOR.get()).trapdoor(CYAN_STAINED_GLASS_TRAPDOOR.get()).getFamily();
+	public static final BlockFamily PURPLE_STAINED_GLASS = new BlockFamily.Builder(Blocks.PURPLE_STAINED_GLASS).door(PURPLE_STAINED_GLASS_DOOR.get()).trapdoor(PURPLE_STAINED_GLASS_TRAPDOOR.get()).getFamily();
+	public static final BlockFamily BLUE_STAINED_GLASS = new BlockFamily.Builder(Blocks.BLUE_STAINED_GLASS).door(BLUE_STAINED_GLASS_DOOR.get()).trapdoor(BLUE_STAINED_GLASS_TRAPDOOR.get()).getFamily();
+	public static final BlockFamily BROWN_STAINED_GLASS = new BlockFamily.Builder(Blocks.BROWN_STAINED_GLASS).door(BROWN_STAINED_GLASS_DOOR.get()).trapdoor(BROWN_STAINED_GLASS_TRAPDOOR.get()).getFamily();
+	public static final BlockFamily GREEN_STAINED_GLASS = new BlockFamily.Builder(Blocks.GREEN_STAINED_GLASS).door(GREEN_STAINED_GLASS_DOOR.get()).trapdoor(GREEN_STAINED_GLASS_TRAPDOOR.get()).getFamily();
+	public static final BlockFamily RED_STAINED_GLASS = new BlockFamily.Builder(Blocks.RED_STAINED_GLASS).door(RED_STAINED_GLASS_DOOR.get()).trapdoor(RED_STAINED_GLASS_TRAPDOOR.get()).getFamily();
+	public static final BlockFamily BLACK_STAINED_GLASS = new BlockFamily.Builder(Blocks.BLACK_STAINED_GLASS).door(BLACK_STAINED_GLASS_DOOR.get()).trapdoor(BLACK_STAINED_GLASS_TRAPDOOR.get()).getFamily();
 }
