@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_bottom_right",
+  "textures": {
+    "bottom": "clayworks:block/magenta_stained_glass_door_bottom",
+    "top": "clayworks:block/magenta_stained_glass_door_top"
+  }
+}

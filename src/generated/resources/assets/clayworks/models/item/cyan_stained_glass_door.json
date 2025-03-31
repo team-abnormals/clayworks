@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "clayworks:item/cyan_stained_glass_door"
+  }
+}

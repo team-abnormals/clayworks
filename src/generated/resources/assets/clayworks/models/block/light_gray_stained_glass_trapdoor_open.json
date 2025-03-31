@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/template_orientable_trapdoor_open",
+  "textures": {
+    "texture": "clayworks:block/light_gray_stained_glass_trapdoor"
+  }
+}

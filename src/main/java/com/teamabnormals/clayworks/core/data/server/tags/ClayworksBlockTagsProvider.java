@@ -24,13 +24,15 @@ public class ClayworksBlockTagsProvider extends BlockTagsProvider {
 		IntrinsicTagAppender<Block> stairs = this.tag(BlockTags.STAIRS);
 		IntrinsicTagAppender<Block> slabs = this.tag(BlockTags.SLABS);
 		IntrinsicTagAppender<Block> walls = this.tag(BlockTags.WALLS);
+		IntrinsicTagAppender<Block> doors = this.tag(BlockTags.DOORS);
+		IntrinsicTagAppender<Block> trapdoors = this.tag(BlockTags.TRAPDOORS);
 
 		this.tag(BlockTags.MINEABLE_WITH_SHOVEL).add(ClayworksBlocks.CONCRETE_POWDER.get());
 		this.tag(BlockTags.MINEABLE_WITH_AXE).add(ClayworksBlocks.POTTERY_TABLE.get());
 
 		ClayworksBlocks.HELPER.getDeferredRegister().getEntries().forEach((registryObject -> {
 			Block block = registryObject.get();
-			if (!(block instanceof DecoratedPotBlock || block instanceof ConcretePowderBlock || block == ClayworksBlocks.POTTERY_TABLE.get())) {
+			if (!(block instanceof DecoratedPotBlock || block instanceof ConcretePowderBlock || block instanceof DoorBlock || block instanceof TrapDoorBlock || block == ClayworksBlocks.POTTERY_TABLE.get())) {
 				mineable.add(block);
 			}
 			if (block instanceof SlabBlock) {
@@ -39,6 +41,10 @@ public class ClayworksBlockTagsProvider extends BlockTagsProvider {
 				stairs.add(block);
 			} else if (block instanceof WallBlock) {
 				walls.add(block);
+			} else if (block instanceof DoorBlock) {
+				doors.add(block);
+			} else if (block instanceof TrapDoorBlock) {
+				trapdoors.add(block);
 			}
 		}));
 	}

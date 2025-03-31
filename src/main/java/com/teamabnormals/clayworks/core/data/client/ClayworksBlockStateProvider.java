@@ -88,6 +88,24 @@ public class ClayworksBlockStateProvider extends BlueprintBlockStateProvider {
 		this.decoratedPot(GREEN_DECORATED_POT, Blocks.GREEN_TERRACOTTA);
 		this.decoratedPot(RED_DECORATED_POT, Blocks.RED_TERRACOTTA);
 		this.decoratedPot(BLACK_DECORATED_POT, Blocks.BLACK_TERRACOTTA);
+		
+		this.doorBlocks(GLASS_DOOR.get(), GLASS_TRAPDOOR.get());
+		this.doorBlocks(WHITE_STAINED_GLASS_DOOR.get(), WHITE_STAINED_GLASS_TRAPDOOR.get());
+		this.doorBlocks(ORANGE_STAINED_GLASS_DOOR.get(), ORANGE_STAINED_GLASS_TRAPDOOR.get());
+		this.doorBlocks(MAGENTA_STAINED_GLASS_DOOR.get(), MAGENTA_STAINED_GLASS_TRAPDOOR.get());
+		this.doorBlocks(LIGHT_BLUE_STAINED_GLASS_DOOR.get(), LIGHT_BLUE_STAINED_GLASS_TRAPDOOR.get());
+		this.doorBlocks(YELLOW_STAINED_GLASS_DOOR.get(), YELLOW_STAINED_GLASS_TRAPDOOR.get());
+		this.doorBlocks(LIME_STAINED_GLASS_DOOR.get(), LIME_STAINED_GLASS_TRAPDOOR.get());
+		this.doorBlocks(PINK_STAINED_GLASS_DOOR.get(), PINK_STAINED_GLASS_TRAPDOOR.get());
+		this.doorBlocks(GRAY_STAINED_GLASS_DOOR.get(), GRAY_STAINED_GLASS_TRAPDOOR.get());
+		this.doorBlocks(LIGHT_GRAY_STAINED_GLASS_DOOR.get(), LIGHT_GRAY_STAINED_GLASS_TRAPDOOR.get());
+		this.doorBlocks(CYAN_STAINED_GLASS_DOOR.get(), CYAN_STAINED_GLASS_TRAPDOOR.get());
+		this.doorBlocks(PURPLE_STAINED_GLASS_DOOR.get(), PURPLE_STAINED_GLASS_TRAPDOOR.get());
+		this.doorBlocks(BLUE_STAINED_GLASS_DOOR.get(), BLUE_STAINED_GLASS_TRAPDOOR.get());
+		this.doorBlocks(BROWN_STAINED_GLASS_DOOR.get(), BROWN_STAINED_GLASS_TRAPDOOR.get());
+		this.doorBlocks(GREEN_STAINED_GLASS_DOOR.get(), GREEN_STAINED_GLASS_TRAPDOOR.get());
+		this.doorBlocks(RED_STAINED_GLASS_DOOR.get(), RED_STAINED_GLASS_TRAPDOOR.get());
+		this.doorBlocks(BLACK_STAINED_GLASS_DOOR.get(), BLACK_STAINED_GLASS_TRAPDOOR.get());
 	}
 
 	public void decoratedPot(DeferredBlock<Block> block, Block parent) {
