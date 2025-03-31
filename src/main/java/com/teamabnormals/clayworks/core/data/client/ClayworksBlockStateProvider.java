@@ -88,7 +88,7 @@ public class ClayworksBlockStateProvider extends BlueprintBlockStateProvider {
 		this.decoratedPot(GREEN_DECORATED_POT, Blocks.GREEN_TERRACOTTA);
 		this.decoratedPot(RED_DECORATED_POT, Blocks.RED_TERRACOTTA);
 		this.decoratedPot(BLACK_DECORATED_POT, Blocks.BLACK_TERRACOTTA);
-		
+
 		this.doorBlocks(GLASS_DOOR.get(), GLASS_TRAPDOOR.get());
 		this.doorBlocks(WHITE_STAINED_GLASS_DOOR.get(), WHITE_STAINED_GLASS_TRAPDOOR.get());
 		this.doorBlocks(ORANGE_STAINED_GLASS_DOOR.get(), ORANGE_STAINED_GLASS_TRAPDOOR.get());
