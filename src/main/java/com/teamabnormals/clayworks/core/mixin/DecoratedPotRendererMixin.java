@@ -8,7 +8,7 @@ import com.teamabnormals.clayworks.common.block.TrimmedPot;
 import com.teamabnormals.clayworks.core.Clayworks;
 import com.teamabnormals.clayworks.core.ClayworksConfig;
 import com.teamabnormals.clayworks.core.registry.ClayworksBlocks;
-import com.teamabnormals.clayworks.core.registry.ClayworksMaterials;
+import com.teamabnormals.clayworks.core.other.ClayworksMaterials;
 import com.teamabnormals.clayworks.core.registry.ClayworksRegistries;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.geom.ModelPart;

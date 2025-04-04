@@ -17,7 +17,7 @@ import java.util.HashSet;
 
 public class ClayworksCompat {
 
-	public static void registerCompat() {
+	public static void register() {
 		addDecoratedPotBlockEntityTypes();
 		registerCauldronInteractions();
 	}
@@ -25,12 +25,12 @@ public class ClayworksCompat {
 	public static void addDecoratedPotBlockEntityTypes() {
 		HashSet<Block> blocks = Sets.newHashSet();
 		blocks.addAll(BlockEntityType.DECORATED_POT.validBlocks);
-		blocks.addAll(ClayworksBlocks.HELPER.getDeferredRegister().getEntries().stream().filter(registryObject -> registryObject.get() instanceof DecoratedPotBlock).map(DeferredHolder::get).toList());
+		blocks.addAll(ClayworksBlocks.BLOCKS.getDeferredRegister().getEntries().stream().filter(registryObject -> registryObject.get() instanceof DecoratedPotBlock).map(DeferredHolder::get).toList());
 		BlockEntityType.DECORATED_POT.validBlocks = ImmutableSet.copyOf(blocks);
 	}
 
 	public static void registerCauldronInteractions() {
-		ClayworksBlocks.HELPER.getDeferredRegister().getEntries().stream().filter(block -> block.get() instanceof DecoratedPotBlock).forEach(block -> {
+		ClayworksBlocks.BLOCKS.getDeferredRegister().getEntries().stream().filter(block -> block.get() instanceof DecoratedPotBlock).forEach(block -> {
 			CauldronInteraction.WATER.map().put(block.get().asItem(), DECORATED_POT);
 		});
 	}

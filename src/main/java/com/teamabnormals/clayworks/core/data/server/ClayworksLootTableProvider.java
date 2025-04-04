@@ -57,7 +57,7 @@ public class ClayworksLootTableProvider extends LootTableProvider {
 
 		@Override
 		public void generate() {
-			ClayworksBlocks.HELPER.getDeferredRegister().getEntries().forEach((registryObject -> {
+			ClayworksBlocks.BLOCKS.getDeferredRegister().getEntries().forEach((registryObject -> {
 				Block block = registryObject.get();
 				if (block instanceof KilnBlock) {
 					this.add(block, this::createNameableBlockEntityTable);

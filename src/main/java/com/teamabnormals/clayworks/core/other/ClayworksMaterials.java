@@ -1,4 +1,4 @@
-package com.teamabnormals.clayworks.core.registry;
+package com.teamabnormals.clayworks.core.other;
 
 import com.google.common.collect.Maps;
 import com.mojang.datafixers.util.Pair;

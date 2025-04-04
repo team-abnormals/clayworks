@@ -2,8 +2,6 @@ package com.teamabnormals.clayworks.core;
 
 import com.teamabnormals.blueprint.client.screen.splash.SplashSerializers;
 import com.teamabnormals.blueprint.core.util.registry.RegistryHelper;
-import com.teamabnormals.clayworks.client.gui.screens.inventory.KilnScreen;
-import com.teamabnormals.clayworks.client.gui.screens.inventory.PotteryScreen;
 import com.teamabnormals.clayworks.client.splashes.WoodworksSplash;
 import com.teamabnormals.clayworks.core.data.client.ClayworksBlockStateProvider;
 import com.teamabnormals.clayworks.core.data.client.ClayworksLanguageProvider;
@@ -36,7 +34,6 @@ import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.fml.loading.FMLEnvironment;
-import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 
@@ -48,7 +45,10 @@ public class Clayworks {
 	public static final RegistryHelper REGISTRY_HELPER = RegistryHelper.create(MOD_ID, helper -> helper.putSubHelper(Registries.BLOCK, new ClayworksBlockSubRegistryHelper(helper)));
 
 	public Clayworks(IEventBus bus, ModContainer container) {
-		REGISTRY_HELPER.register(bus);
+		ClayworksBlocks.BLOCKS.register(bus);
+		ClayworksBlocks.ITEMS.register(bus);
+		ClayworksBlockEntityTypes.BLOCK_ENTITY_TYPES.register(bus);
+		ClayworksSoundEvents.SOUND_EVENTS.register(bus);
 		ClayworksConditions.CONDITION_SERIALIZERS.register(bus);
 		ClayworksMenuTypes.MENU_TYPES.register(bus);
 		ClayworksRecipeSerializers.RECIPE_SERIALIZERS.register(bus);
@@ -63,8 +63,6 @@ public class Clayworks {
 		bus.addListener(this::dataSetup);
 
 		if (FMLEnvironment.dist == Dist.CLIENT) {
-			bus.addListener(this::registerScreens);
-			ClayworksBlocks.setupTabEditors();
 			SplashSerializers.register(location("woodworks"), WoodworksSplash.CODEC);
 		}
 
@@ -72,15 +70,11 @@ public class Clayworks {
 	}
 
 	private void commonSetup(FMLCommonSetupEvent event) {
-		event.enqueueWork(() -> {
-			ClayworksCompat.registerCompat();
-		});
+		event.enqueueWork(ClayworksCompat::register);
 	}
 
 	private void clientSetup(FMLClientSetupEvent event) {
-		event.enqueueWork(() -> {
-			ClayworksClientCompat.registerClientCompat();
-		});
+		event.enqueueWork(ClayworksClientCompat::register);
 	}
 
 	private void dataSetup(GatherDataEvent event) {
@@ -109,11 +103,6 @@ public class Clayworks {
 		generator.addProvider(client, new ClayworksSpriteSourceProvider(output, provider, helper));
 
 		generator.addProvider(client, new GalleryItemModelProvider(MOD_ID, output, helper, provider));
-	}
-
-	private void registerScreens(RegisterMenuScreensEvent event) {
-		event.register(ClayworksMenuTypes.KILN.get(), KilnScreen::new);
-		event.register(ClayworksMenuTypes.POTTERY.get(), PotteryScreen::new);
 	}
 
 	public static ResourceLocation location(String path) {

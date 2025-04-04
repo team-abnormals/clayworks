@@ -33,7 +33,7 @@ public class ClayworksLanguageProvider extends BlueprintLanguageProvider {
 		this.add("subtitles." + Clayworks.MOD_ID + ".block.kiln.smoke", "Kiln smokes");
 		this.add(BakingRecipeBookComponent.FILTER_NAME, "Showing Bakeable");
 		this.add(ClayworksPaintingVariants.BAKED, "Baked", "five");
-		ClayworksBlocks.HELPER.getDeferredRegister().getEntries().forEach(block -> this.add(block.get()));
+		ClayworksBlocks.BLOCKS.getDeferredRegister().getEntries().forEach(block -> this.add(block.get()));
 
 		this.addDecoratedPotTrimPatterns();
 	}

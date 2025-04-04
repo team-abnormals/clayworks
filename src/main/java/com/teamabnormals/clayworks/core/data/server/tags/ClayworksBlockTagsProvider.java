@@ -7,10 +7,13 @@ import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.*;
+import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 import java.util.concurrent.CompletableFuture;
+
+import static com.teamabnormals.clayworks.core.registry.ClayworksBlocks.*;
 
 public class ClayworksBlockTagsProvider extends BlockTagsProvider {
 
@@ -27,10 +30,13 @@ public class ClayworksBlockTagsProvider extends BlockTagsProvider {
 		IntrinsicTagAppender<Block> doors = this.tag(BlockTags.DOORS);
 		IntrinsicTagAppender<Block> trapdoors = this.tag(BlockTags.TRAPDOORS);
 
-		this.tag(BlockTags.MINEABLE_WITH_SHOVEL).add(ClayworksBlocks.CONCRETE_POWDER.get());
-		this.tag(BlockTags.MINEABLE_WITH_AXE).add(ClayworksBlocks.POTTERY_TABLE.get());
+		this.tag(BlockTags.MINEABLE_WITH_SHOVEL).add(CONCRETE_POWDER.get());
+		this.tag(BlockTags.MINEABLE_WITH_AXE).add(POTTERY_TABLE.get());
 
-		ClayworksBlocks.HELPER.getDeferredRegister().getEntries().forEach((registryObject -> {
+		this.tag(Tags.Blocks.CONCRETES).add(CONCRETE.get());
+		this.tag(BlockTags.CONCRETE_POWDER).add(CONCRETE_POWDER.get());
+
+		ClayworksBlocks.BLOCKS.getDeferredRegister().getEntries().forEach((registryObject -> {
 			Block block = registryObject.get();
 			if (!(block instanceof DecoratedPotBlock || block instanceof ConcretePowderBlock || block instanceof DoorBlock || block instanceof TrapDoorBlock || block == ClayworksBlocks.POTTERY_TABLE.get())) {
 				mineable.add(block);

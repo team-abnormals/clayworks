@@ -1,5 +1,6 @@
 package com.teamabnormals.clayworks.core.other;
 
+import com.teamabnormals.clayworks.core.registry.ClayworksBlocks;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 
@@ -7,7 +8,8 @@ import static com.teamabnormals.clayworks.core.registry.ClayworksBlocks.*;
 
 public class ClayworksClientCompat {
 
-	public static void registerClientCompat() {
+	public static void register() {
+		ClayworksBlocks.setupTabEditors();
 		registerRenderLayers();
 	}
 
