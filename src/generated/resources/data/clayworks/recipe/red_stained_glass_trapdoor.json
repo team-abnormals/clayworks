@@ -13,11 +13,11 @@
     }
   },
   "pattern": [
-    "###",
-    "###"
+    "##",
+    "##"
   ],
   "result": {
-    "count": 2,
+    "count": 1,
     "id": "clayworks:red_stained_glass_trapdoor"
   }
 }
