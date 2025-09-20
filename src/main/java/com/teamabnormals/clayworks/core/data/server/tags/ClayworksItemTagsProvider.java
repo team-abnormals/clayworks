@@ -1,16 +1,21 @@
 package com.teamabnormals.clayworks.core.data.server.tags;
 
 import com.teamabnormals.clayworks.core.Clayworks;
+import com.teamabnormals.clayworks.core.registry.ClayworksBlocks;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 public class ClayworksItemTagsProvider extends ItemTagsProvider {
@@ -29,5 +34,15 @@ public class ClayworksItemTagsProvider extends ItemTagsProvider {
 
 		this.copy(Tags.Blocks.CONCRETES, Tags.Items.CONCRETES);
 		this.copy(BlockTags.CONCRETE_POWDER, Tags.Items.CONCRETE_POWDERS);
+
+		List<String> colors = Arrays.stream(DyeColor.values()).map(DyeColor::getName).toList();
+		ClayworksBlocks.ITEMS.getDeferredRegister().getEntries().forEach(holder -> {
+			for (String color : colors) {
+				if (holder.getRegisteredName().contains(color)) {
+					this.tag(ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "dyed/" + color))).add(holder.get());
+					break;
+				}
+			}
+		});
 	}
 }
