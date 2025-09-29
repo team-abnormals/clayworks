@@ -41,6 +41,7 @@ public class ClayworksBlockTagsProvider extends BlockTagsProvider {
 		this.collect(BlockTags.SLABS, block -> block instanceof SlabBlock);
 		this.collect(BlockTags.WALLS, block -> block instanceof WallBlock);
 		this.collect(BlockTags.DOORS, block -> block instanceof DoorBlock);
+		this.collect(BlockTags.MOB_INTERACTABLE_DOORS, block -> block instanceof DoorBlock);
 		this.collect(BlockTags.TRAPDOORS, block -> block instanceof TrapDoorBlock);
 
 		IntrinsicTagAppender<Block> mineable = this.tag(BlockTags.MINEABLE_WITH_PICKAXE);
