@@ -44,12 +44,11 @@ sourceSets.main.resources {
 
 dependencies {
     implementation "net.neoforged:neoforge:${project.neoforge}"
-    implementation("com.teamabnormals:blueprint:${project.mc_version}-${project.blueprint}")
+    implementation "com.teamabnormals:blueprint:${project.mc_version}-${project.blueprint}"
 
-    implementation("com.teamabnormals:gallery:${project.mc_version}-${project.gallery}")
+    implementation "com.teamabnormals:gallery:${project.mc_version}-${project.gallery}"
 
-    compileOnly("mezz.jei:jei-${project.mc_version}-neoforge-api:${project.jei}")
-    runtimeOnly("mezz.jei:jei-${project.mc_version}-neoforge:${project.jei}")
+    implementation "mezz.jei:jei-${project.mc_version}-neoforge:${project.jei}"
 }
 
 subsystems {
