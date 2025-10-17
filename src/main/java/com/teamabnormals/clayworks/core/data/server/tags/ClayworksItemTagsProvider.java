@@ -38,7 +38,7 @@ public class ClayworksItemTagsProvider extends ItemTagsProvider {
 		List<String> colors = Arrays.stream(DyeColor.values()).map(DyeColor::getName).toList();
 		ClayworksBlocks.ITEMS.getDeferredRegister().getEntries().forEach(holder -> {
 			for (String color : colors) {
-				if (holder.getRegisteredName().contains(color)) {
+				if (holder.getRegisteredName().contains(color) && !(!color.contains("light_") && holder.getRegisteredName().contains("light_"))) {
 					this.tag(ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "dyed/" + color))).add(holder.get());
 					break;
 				}
