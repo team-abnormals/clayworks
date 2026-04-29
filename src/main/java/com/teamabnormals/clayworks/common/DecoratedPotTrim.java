@@ -54,6 +54,9 @@ public record DecoratedPotTrim(Holder<TrimMaterial> material, Holder<DecoratedPo
 		return 31 * i + (this.showInTooltip() ? 1 : 0);
 	}
 
+	public static final String SHERDS_TITLE = Util.makeDescriptionId("item", Clayworks.location("decorated_pot.sherds"));
+	public static final Component SHERDS_COMPONENT = Component.translatable(SHERDS_TITLE).withStyle(ChatFormatting.GRAY);
+
 	public static final String DESIGN_TITLE = Util.makeDescriptionId("item", Clayworks.location("decorated_pot.design"));
 	public static final Component DESIGN_COMPONENT = Component.translatable(DESIGN_TITLE).withStyle(ChatFormatting.GRAY);
 

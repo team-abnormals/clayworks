@@ -30,6 +30,7 @@ public class ClayworksLanguageProvider extends BlueprintLanguageProvider {
 		this.add(PotteryTableBlock.CONTAINER_TITLE.getString(), "Pottery Table");
 		this.add(BakingCategory.TRANSLATION, "Baking");
 		this.add(DecoratedPotTrim.DESIGN_TITLE, "Design: ");
+		this.add(DecoratedPotTrim.SHERDS_TITLE, "Sherds: ");
 		this.add("subtitles." + Clayworks.MOD_ID + ".block.kiln.smoke", "Kiln smokes");
 		this.add(BakingRecipeBookComponent.FILTER_NAME, "Showing Bakeable");
 		this.add(ClayworksPaintingVariants.BAKED, "Baked", "five");
