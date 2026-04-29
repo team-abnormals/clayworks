@@ -36,12 +36,9 @@ public record DecoratedPotTrim(Holder<TrimMaterial> material, Holder<DecoratedPo
 					.apply(p_337943_, DecoratedPotTrim::new)
 	);
 	public static final StreamCodec<RegistryFriendlyByteBuf, DecoratedPotTrim> STREAM_CODEC = StreamCodec.composite(
-			TrimMaterial.STREAM_CODEC,
-			DecoratedPotTrim::material,
-			DecoratedPotTrimPattern.STREAM_CODEC,
-			DecoratedPotTrim::pattern,
-			ByteBufCodecs.BOOL,
-			DecoratedPotTrim::showInTooltip,
+			TrimMaterial.STREAM_CODEC, DecoratedPotTrim::material,
+			DecoratedPotTrimPattern.STREAM_CODEC, DecoratedPotTrim::pattern,
+			ByteBufCodecs.BOOL, DecoratedPotTrim::showInTooltip,
 			DecoratedPotTrim::new
 	);
 
