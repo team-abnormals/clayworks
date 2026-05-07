@@ -46,22 +46,17 @@ public class DecoratedPotBlockMixin {
 
 	@Inject(method = "appendHoverText", at = @At("HEAD"), cancellable = true)
 	private void appendHoverText(ItemStack stack, TooltipContext context, List<Component> component, TooltipFlag flag, CallbackInfo ci) {
-		PotDecorations sherds = stack.getOrDefault(DataComponents.POT_DECORATIONS, PotDecorations.EMPTY);
-		boolean empty = sherds.equals(PotDecorations.EMPTY);
-
-		if (!empty) {
-			component.add(DecoratedPotTrim.SHERDS_COMPONENT);
-			sherds.ordered().forEach(optional -> component.add(CommonComponents.space().append(optional.getDefaultInstance().getHoverName().plainCopy().withStyle(ChatFormatting.GRAY))));
-		}
-
 		if (ClayworksConfig.COMMON.decoratedPotTrims.get()) {
 			DecoratedPotTrim trim = stack.get(ClayworksDataComponents.POT_TRIM);
 			if (trim != null) {
-				if (!empty) {
-					component.add(CommonComponents.EMPTY);
-				}
 				trim.addToTooltip(context, component::add, flag);
 			}
+		}
+
+		PotDecorations sherds = stack.getOrDefault(DataComponents.POT_DECORATIONS, PotDecorations.EMPTY);
+		if (!sherds.equals(PotDecorations.EMPTY)) {
+			component.add(DecoratedPotTrim.DECORATIONS_COMPONENT);
+			sherds.ordered().forEach(optional -> component.add(CommonComponents.space().append(optional.getDefaultInstance().getHoverName().plainCopy().withStyle(ChatFormatting.GRAY))));
 		}
 
 		ci.cancel();
