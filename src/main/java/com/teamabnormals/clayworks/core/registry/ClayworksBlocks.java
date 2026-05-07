@@ -12,7 +12,9 @@ import com.teamabnormals.clayworks.core.Clayworks;
 import com.teamabnormals.clayworks.core.ClayworksConfig;
 import com.teamabnormals.clayworks.core.registry.helper.ClayworksBlockSubRegistryHelper;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.item.CreativeModeTab.TabVisibility;
 import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -356,7 +358,11 @@ public class ClayworksBlocks {
 						GLASS_TRAPDOOR, WHITE_STAINED_GLASS_TRAPDOOR, LIGHT_GRAY_STAINED_GLASS_TRAPDOOR, GRAY_STAINED_GLASS_TRAPDOOR, BLACK_STAINED_GLASS_TRAPDOOR, BROWN_STAINED_GLASS_TRAPDOOR, RED_STAINED_GLASS_TRAPDOOR, ORANGE_STAINED_GLASS_TRAPDOOR, YELLOW_STAINED_GLASS_TRAPDOOR, LIME_STAINED_GLASS_TRAPDOOR, GREEN_STAINED_GLASS_TRAPDOOR, CYAN_STAINED_GLASS_TRAPDOOR, LIGHT_BLUE_STAINED_GLASS_TRAPDOOR, BLUE_STAINED_GLASS_TRAPDOOR, PURPLE_STAINED_GLASS_TRAPDOOR, MAGENTA_STAINED_GLASS_TRAPDOOR, PINK_STAINED_GLASS_TRAPDOOR)
 
 				.predicate(event -> event.getTabKey() == COLORED_BLOCKS && ClayworksConfig.COMMON.decoratedPotColors.get())
+				.editor(event -> event.remove(new ItemStack(Items.DECORATED_POT), TabVisibility.PARENT_AND_SEARCH_TABS))
 				.addItems(() -> Items.DECORATED_POT, WHITE_DECORATED_POT, LIGHT_GRAY_DECORATED_POT, GRAY_DECORATED_POT, BLACK_DECORATED_POT, BROWN_DECORATED_POT, RED_DECORATED_POT, ORANGE_DECORATED_POT, YELLOW_DECORATED_POT, LIME_DECORATED_POT, GREEN_DECORATED_POT, CYAN_DECORATED_POT, LIGHT_BLUE_DECORATED_POT, BLUE_DECORATED_POT, PURPLE_DECORATED_POT, MAGENTA_DECORATED_POT, PINK_DECORATED_POT)
+
+				.predicate(event -> event.getTabKey() == FUNCTIONAL_BLOCKS && ClayworksConfig.COMMON.decoratedPotColors.get())
+				.addItemsAfter(of(Items.DECORATED_POT), WHITE_DECORATED_POT, LIGHT_GRAY_DECORATED_POT, GRAY_DECORATED_POT, BLACK_DECORATED_POT, BROWN_DECORATED_POT, RED_DECORATED_POT, ORANGE_DECORATED_POT, YELLOW_DECORATED_POT, LIME_DECORATED_POT, GREEN_DECORATED_POT, CYAN_DECORATED_POT, LIGHT_BLUE_DECORATED_POT, BLUE_DECORATED_POT, PURPLE_DECORATED_POT, MAGENTA_DECORATED_POT, PINK_DECORATED_POT)
 
 				.predicate(event -> event.getTabKey() == FUNCTIONAL_BLOCKS && ClayworksConfig.COMMON.kiln.get())
 				.addItemsAfter(of(Items.SMOKER), KILN)
