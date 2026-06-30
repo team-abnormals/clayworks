@@ -15,6 +15,7 @@ import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.registries.DeferredHolder;
+import com.teamabnormals.clayworks.core.data.server.tags.ClayworksTags;
 
 import java.util.Arrays;
 import java.util.List;
